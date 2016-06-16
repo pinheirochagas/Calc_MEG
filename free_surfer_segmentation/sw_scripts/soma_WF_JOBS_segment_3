@@ -1,0 +1,84 @@
+{
+    "jobs": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4
+    ], 
+    "name": null, 
+    "serialized_jobs": {
+        "1": {
+            "name": "mk150295.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/mk150295.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "0": {
+            "name": "bc150339.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/bc150339.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "3": {
+            "name": "hb140194.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/hb140194.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "2": {
+            "name": "jf140150.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/jf140150.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "4": {
+            "name": "cd130323.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/cd130323.py"
+            ], 
+            "disposal_timeout": 168
+        }
+    }, 
+    "serialized_file_transfers": {}, 
+    "serialized_groups": {}, 
+    "dependencies": [], 
+    "groups": [], 
+    "serialized_shared_res_paths": {}, 
+    "root_group": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4
+    ]
+}

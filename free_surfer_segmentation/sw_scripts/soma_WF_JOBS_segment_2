@@ -1,0 +1,114 @@
+{
+    "jobs": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6
+    ], 
+    "name": null, 
+    "serialized_temporary_paths": {}, 
+    "serialized_barriers": {}, 
+    "serialized_jobs": {
+        "1": {
+            "name": "jm100109.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/jm100109.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "0": {
+            "name": "cs150099.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/cs150099.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "3": {
+            "name": "mn150194.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/mn150194.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "2": {
+            "name": "dp150209.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/dp150209.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "5": {
+            "name": "sl140280.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/sl140280.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "4": {
+            "name": "jm100042.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/jm100042.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "6": {
+            "name": "ts150275.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/ts150275.py"
+            ], 
+            "disposal_timeout": 168
+        }
+    }, 
+    "serialized_file_transfers": {}, 
+    "serialized_groups": {}, 
+    "dependencies": [], 
+    "groups": [], 
+    "serialized_shared_res_paths": {}, 
+    "root_group": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6
+    ]
+}

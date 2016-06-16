@@ -1,0 +1,30 @@
+{
+    "jobs": [
+        0
+    ], 
+    "name": null, 
+    "serialized_temporary_paths": {}, 
+    "serialized_barriers": {}, 
+    "serialized_jobs": {
+        "0": {
+            "name": "./jobs/calc_decode_cluster_PresResult_regression.py", 
+            "parallel_job_info": null, 
+            "native_specification": "-l nodes=10:ppn=5", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/cluster/jobs/calc_decode_cluster_PresResult_regression.py"
+            ], 
+            "disposal_timeout": 168
+        }
+    }, 
+    "serialized_file_transfers": {}, 
+    "serialized_groups": {}, 
+    "dependencies": [], 
+    "groups": [], 
+    "serialized_shared_res_paths": {}, 
+    "root_group": [
+        0
+    ]
+}

@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar 18 09:42:48 2016
+
+@author: id983365
+"""
+
+import os, sys, glob
+from soma_workflow.client import Job, Workflow, Helper
+
+if len(sys.argv)==1:
+    list_scripts = glob.glob("./jobs/*.py")
+else:
+    list_scripts= sys.argv[1:]
+
+jobs = []
+for b in list_scripts:
+    jobs.append(Job(command=["python", os.path.abspath(b)], name=b, native_specification="-l nodes=10:ppn=5"))
+
+workflow=Workflow(jobs)
+
+Helper.serialize('jobs_list.somawf', workflow)

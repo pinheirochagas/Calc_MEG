@@ -1,0 +1,8 @@
+ems_singlesubject_CALC('s01', 'data_left_click', 'data_rigth_click')
+ems_singlesubject_CALC('s01', 'data_left_arrow', 'data_rigth_arrow')
+ems_singlesubject_CALC('s01', 'data_add', 'data_sub')
+
+
+ems_singlesubject_CALC('s02', 'data_left_click', 'data_rigth_click')
+ems_singlesubject_CALC('s02', 'data_left_arrow', 'data_rigth_arrow')
+ems_singlesubject_CALC('s02', 'data_add', 'data_sub')

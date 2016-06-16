@@ -1,0 +1,33 @@
+
+
+
+trigger_bh_reshape = reshape(trigger_bh,6,43)
+
+for i=1:43
+    idxNonZeros = trigger_bh_reshape(:,i) ~= 0;
+    trigger_bh_trial{i} = trigger_bh_reshape(idxNonZeros,i);    
+end
+
+1:6:43
+
+for i=1:43
+    indexTrialMEG(i).index = strfind(alltrig(:,2)', trigger_bh_trial{i}');
+    indexTrialMEG(i).size = length(trigger_bh_trial{i}');
+end
+
+indexTrialMEG(i).index
+
+correctTrialidx = unique(horzcat(indexTrialMEG{:}));
+
+for i=correctTrialidx
+    alltrigNew{i} = alltrig(i:i+5,:);
+end
+
+alltrigNew = alltrigNew(~cellfun(@isempty,alltrigNew));
+
+for i=1:length(alltrigNew)
+    if alltrigNew{i}(end,2) < 1000
+        alltrigNew{i}(end,:) = [];
+    else
+    end
+end

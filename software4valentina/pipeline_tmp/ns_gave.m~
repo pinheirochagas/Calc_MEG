@@ -1,0 +1,20 @@
+function [gav,gtr] = ns_gave(subj,trlval,trllabel)
+
+% par.avdir
+avdir='/neurospin/meg/meg_tmp/2010_auditorygaze_Lukasz/mAgaze/ft_data/av_data/';
+
+for n=1:length(subj)
+    if subj(n)<10 
+        subjprefix = 's0';
+    else
+       subjprefix = 's';
+    end;
+    data_loc=load([avdir subjprefix num2str(subj(n)) '_av.mat'],trllabel);
+    data{n}=data_loc.condition;
+end;
+
+gav=ft_timelockgrandaverage([],c{:});
+
+cfg=[];
+cfg.keepindividual = 'yes';
+gtr=ft_timelockgrandaverage(cfg,c{:});

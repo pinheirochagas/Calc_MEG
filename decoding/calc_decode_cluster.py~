@@ -1,0 +1,152 @@
+
+# coding: utf-8
+
+# In[ ]:
+
+# Function to decode operation
+
+
+# In[1]:
+
+import mne
+from mne.datasets import spm_face
+from mne.decoding import GeneralizationAcrossTime
+import sys
+import os.path as op
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.io as sio
+import pandas as pd
+from scipy import stats
+#Add personal functions to python path
+sys.path.append('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/')
+#sys.path.append('/Volumes/NeuroSpin2T/Calculation_Pedro_2014/scripts/decoding/')
+from fldtrp2mne import fldtrp2mne
+from calc_ClassifyTwoCond import calc_ClassifyTwoCond
+from calc_twoClassClassify import calc_twoClassClassify
+from sklearn import svm
+from sklearn.cross_validation import cross_val_score, StratifiedShuffleSplit
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.pipeline import make_pipeline
+from sklearn.cross_validation import StratifiedKFold
+
+
+# In[2]:
+
+#Directories
+data_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/'
+result_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/decoding/'
+#data_path = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/mat/'
+#result_path = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/decoding/'
+
+#Subjects
+#subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 
+            #'s11', 's12', 's13', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
+
+subjects = ['s06']
+
+
+#General parameters
+baseline = (-0.5, -0.05)
+
+downsmpDec = 4
+
+#Decoding
+trainset = 'addop2'
+testset = 'addop2'
+decCond = ['0', '1', '2', '3']
+
+params = {'baseline': baseline, 'downsmpDec': downsmpDec, 
+'Classification': decCond, 'trainset': trainset, 'testset': testset}
+
+#Results initialization
+all_scores = []
+all_diagonals = []
+
+
+# In[ ]:
+
+for sub in subjects:
+    fname = op.join(data_path, sub + '_calc.mat') 
+    epoch = fldtrp2mne(fname, 'data')
+
+    #Baseline-correct & filter data
+    print('Baseline-correcting data for subject: ' + sub)
+    epoch.apply_baseline(baseline)
+    
+    #Load condition/behavior info
+    matfile = sio.loadmat(fname)
+    print('Loading trialinfo for subject: ' + sub)   
+    trialinfo = matfile['data']['trialinfo']   
+    
+    run = trialinfo[0][0][0][0][0].T
+    operand1 = trialinfo[0][0][0][0][1].T
+    operator = trialinfo[0][0][0][0][2].T
+    operand2 = trialinfo[0][0][0][0][3].T
+    preResult = trialinfo[0][0][0][0][4].T
+    delay = trialinfo[0][0][0][0][5].T
+    corrResult = trialinfo[0][0][0][0][6].T
+    deviant = trialinfo[0][0][0][0][7].T
+    absdeviant = trialinfo[0][0][0][0][8].T
+    rt = trialinfo[0][0][0][0][9].T
+    respSide = trialinfo[0][0][0][0][10].T
+
+    
+    # Merge back and define conditions
+    info = pd.DataFrame(data = np.concatenate((run, operand1, operator, operand2, preResult, delay, corrResult, deviant, absdeviant, rt, respSide), axis = 1), 
+                        columns = ['run', 'operand1', 'operator', 'operand2', 'preResult', 'delay', 'corrResult', 'deviant', 'absdeviant', 'rt', 'respSide'])
+
+    #info['absdeviant'][info['absdeviant'] != 0] = 1  
+    trainSet = (info['operand2'] >= 0) & (info['operand2'] <= 3) & (info['operator'] == 1) 
+    testSet = (info['operand2'] >= 0) & (info['operand2'] <= 3) & (info['operator'] == 1)  
+
+    # Make train and test same size
+    #op13456 = op13456[0:len(res3456)]
+    
+    # Decoding
+    X_train = epoch[trainSet] #
+    info_train = info[trainSet]    #
+    y_train = np.array(info_train['operand2']) #
+    y_train = y_train.astype(numpy.float64)
+    # Downsampling for decoding
+    X_train.decimate(downsmpDec)
+    
+    # Decoding
+    X_test = epoch[testSet] #
+    info_test = info[testSet]    #
+    y_test = np.array(info_test['operand2']) #
+    y_test = y_test.astype(numpy.float64)
+    # Downsampling for decoding
+    X_test.decimate(downsmpDec)
+    
+    print('Decoding subject: ' + sub)
+    
+    gat, score, diagonal = calc_twoClassClassify(X_train, y_train, [], [], params)
+    #gat, score, diagonal = calc_ClassifyTwoCond(X_train, y_train, X_test, y_test, params)
+    gat.plot()
+    gat.plot_diagonal()  # plot decoding across time (correspond to GAT diagonal)
+
+    #Store scores of different subjects in the same list
+    all_scores.append(score)
+    all_diagonals.append(diagonal)
+    
+#Transform into a numpy array   
+all_scores = np.array(all_scores)
+all_diagonals = np.array(all_diagonals)
+
+# Save individual results
+fname = op.join(result_path, 'Classification_ ' + decCond[0] + '_vs_' + 
+                decCond[1] + '_vs_' + decCond[2] + '_vs_' + decCond[3] + '_Trainset_' + trainset + '_Testset_' + testset) 
+np.save(fname, all_scores)
+
+# Compute group averages
+group_scores = np.mean(all_scores, 0)
+sem_group_scores = stats.sem(all_scores, 0)
+
+group_diagonal = np.mean(all_diagonals, 0)
+sem_group_diagonal = stats.sem(all_diagonals, 0)    
+
+
+

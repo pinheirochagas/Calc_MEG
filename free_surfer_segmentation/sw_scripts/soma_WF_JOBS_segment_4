@@ -1,0 +1,114 @@
+{
+    "jobs": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6
+    ], 
+    "name": null, 
+    "serialized_temporary_paths": {}, 
+    "serialized_barriers": {}, 
+    "serialized_jobs": {
+        "1": {
+            "name": "db150361.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/db150361.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "0": {
+            "name": "ag150338.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/ag150338.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "3": {
+            "name": "mp150285.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/mp150285.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "2": {
+            "name": "ej130467.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/ej130467.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "5": {
+            "name": "tc120199.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/tc120199.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "4": {
+            "name": "ps150333.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/ps150333.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "6": {
+            "name": "sl130503.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/free_surfer_segmentation/sw_scripts/sl130503.py"
+            ], 
+            "disposal_timeout": 168
+        }
+    }, 
+    "serialized_file_transfers": {}, 
+    "serialized_groups": {}, 
+    "dependencies": [], 
+    "groups": [], 
+    "serialized_shared_res_paths": {}, 
+    "root_group": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6
+    ]
+}

@@ -1,0 +1,424 @@
+Subject 1  - rm_080030
+
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/rm_080030/150209/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s01/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/empty_room/150209/er_s1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/raw_data/MEG/ml090321/emptyroom.fif
+
+
+
+Subject 2  - ml_090321
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ml_090321/150217/empyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s02/emptyroom.fif
+
+
+
+Subject 3  - cs_150099
+
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cs_150099/150702/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/150702/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s03/emptyroom.fif
+
+
+
+Subject 4  - jm_100109
+
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100109/150709/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/150709/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s04/emptyroom.fif
+
+
+Subject 5  - dp_150209
+
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dp_150209/150720/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/150720/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s05/emptyroom.fif
+
+
+Subject 6  - mm_150194 correct nip of this subject: mn_150194
+
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mm_150194/150722/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/150722/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s06/emptyroom.fif
+
+
+Subject 7  - jm_100042
+
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jm_100042/150723/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/150723/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s07/emptyroom.fif
+
+
+
+Subject 9  - ts_150275
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/vsa9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ts_150275/150730/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/vsa4.fif
+
+Empty room from dysbrain
+ln -s /neurospin/acquisition/neuromag/data/dysbrain/empty_room/150730/empty_raw.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s09/emptyroom.fif
+
+
+Subject 10 -  bc150339
+
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc77.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/bc_150339/151012/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151012/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s10/emptyroom.fif
+
+
+Subject 11 -  mk_150295
+
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mk_150295/151012/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151012/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s11/emptyroom.fif
+
+Subject 12 -  jf_140150
+
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/jf_140150/151013/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151013/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s12/emptyroom.fif
+
+Subject 13 -  hb_140194
+
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/hb_140194/151014/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151014/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s13/emptyroom.fif
+
+Subject 14 -  cd_130323
+
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/cd_130323/151019/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151019/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s14/emptyroom.fif
+
+
+Subject 15 - ag_150338
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ag_150338/151020/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151020/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s15/emptyroom.fif
+
+
+Subject 16 -  dg_150361, but the correct nip is db_150361
+
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc33.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/dg_150361/151022/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151022/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s16/emptyroom.fif
+
+
+Subject 17 -  ej_130467
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ej_130467/151022/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151022/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s17/emptyroom.fif
+
+
+Subject 18 -  mp_150285
+
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/mp_150285/151028/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151028/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s18/emptyroom.fif
+
+
+Subject 19 -  sl_130503
+
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/sl_130503/151029/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/vsa4.fif
+
+Empty room from dysbrain
+ln -s /neurospin/acquisition/neuromag/data/dysbrain/empty_room/151029/empty_raw.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s19/emptyroom.fif
+
+
+
+Subject 21 - tc_120199
+
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/tc_120199/151103/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151103/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/emptyroom.fif
+
+
+Subject 22 - ps_150333
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc4.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc5.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc5.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc6.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc6.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc7.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc7.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc8.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc8.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc9.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc9.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/calc10.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/calc10.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/vsa1.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/vsa1.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/vsa2.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/vsa2.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/vsa3.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/vsa3.fif
+ln -s /neurospin/acquisition/neuromag/data/calc/ps_150333/151104/vsa4.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/vsa4.fif
+
+ln -s /neurospin/acquisition/neuromag/data/calc/no_name/151104/emptyroom.fif /neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s22/emptyroom.fif
+
+

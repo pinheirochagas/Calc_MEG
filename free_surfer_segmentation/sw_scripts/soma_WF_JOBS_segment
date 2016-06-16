@@ -1,0 +1,42 @@
+{
+    "jobs": [
+        0, 
+        1
+    ], 
+    "name": null, 
+    "serialized_jobs": {
+        "1": {
+            "name": "rm080030.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/rm080030.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "0": {
+            "name": "ml090321.py", 
+            "parallel_job_info": null, 
+            "native_specification": null, 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/sw_scripts/ml090321.py"
+            ], 
+            "disposal_timeout": 168
+        }
+    }, 
+    "serialized_file_transfers": {}, 
+    "serialized_groups": {}, 
+    "dependencies": [], 
+    "groups": [], 
+    "serialized_shared_res_paths": {}, 
+    "root_group": [
+        0, 
+        1
+    ]
+}
