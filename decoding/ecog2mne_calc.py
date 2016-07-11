@@ -28,8 +28,9 @@ def ecog2mne_calc(filename, var):
     #Add all necessary info
     sfreq = float(ft_data.fsample) #sampling frequency
     #lpFilter = float(ft_data.cfg.lpfreq)
-    time = ft_data.time[0];
-    coi = range(106) #channels of interest
+    time = ft_data.time[0]; # probably need to change that to ft_data.time only
+    coi = range(n_chans) #channels of interest 
+    # ALSO NEED TO CHANGE THAT! According to each subject
     data = data[:, coi, :]
     #chan_names = [l.encode('ascii') for l in ft_data.label[coi]] #this always appends the letter b before the actual filename?
     chan_names = ft_data.label.tolist()
