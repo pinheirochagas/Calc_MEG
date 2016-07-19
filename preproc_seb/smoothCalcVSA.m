@@ -30,8 +30,8 @@ for trial = 1:length(data.trial)
             dataAVGwin{timewin} = repmat(mean(datatoAVG(avgwindows(timewin): avgwindows(timewin+1))),window,1);
         end
         dataAVG{trial}(chan,:) = vertcat(dataAVGwin{:})';
-%         dataSmooth{trial}(chan,:) = AdjConv(datatoAVG,'Gauss',times, tOutLims, opts);
-%         timeSmooth{trial}(chan,:) = AdjConv(times,'Gauss',times, tOutLims, opts);
+        dataSmooth{trial}(chan,:) = AdjConv(datatoAVG,'Gauss',times, tOutLims, opts);
+        timeSmooth{trial}(chan,:) = AdjConv(times,'Gauss',times, tOutLims, opts);
     end
 end
 
@@ -44,11 +44,14 @@ save([datadir subName '_' task '_avg.mat'], data)
 
 
 % % Some plotting to compare avg window and smoothing
-% hold on
-% plot(times,datatoAVG, 'm-')
-% plot(times(1:end-1), dataAVG, 'b-', 'LineWidth', 3)
-% plot(times(avgwindows(1:end-1)), dataAVG(avgwindows(1:end-1)),'k.', 'MarkerSize', 30)
-% plot(timeSmooth,dataSmooth, 'y-','LineWidth', 3)   
+dataAVG = dataAVG{1}(1,:)
+dataSmooth = dataSmooth{1}(1,:)
+timeSmooth = timeSmooth{1}(1,:)
+hold on
+plot(times,datatoAVG, 'm-')
+plot(times(1:length(dataAVG)), dataAVG, 'b-', 'LineWidth', 3)
+plot(times(avgwindows(1:end-1)), dataAVG(avgwindows(1:end-1)),'k.', 'MarkerSize', 30)
+plot(timeSmooth,dataSmooth, 'y-','LineWidth', 3)   
 
 end
 
