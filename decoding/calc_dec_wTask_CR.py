@@ -73,6 +73,19 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		epoch_calc_resplock = mne.epochs.concatenate_epochs([epoch_calc_delay,epoch_calc_nodelay])	
 		info_calc_resplock = pd.concat([info_calc_delay, info_calc_nodelay])
 
+		# Create the big decoder with operand1, operand2 and presented result 
+		# Epochs will have 900 ms, -100 to 800.
+
+		# Epochs Operand1
+		epoch_calc_Op1 = epoch_calc
+		epoch_calc_Op1.crop(-1,0.8)
+		epoch_calc_Op1.times = time_calc_crop
+
+		epoch_calc_Op2 = epoch_calc
+
+
+
+
 		#Baseline correction
 		epoch_calc.apply_baseline(baseline)
 
