@@ -54,8 +54,11 @@ def ecog2mne_calc(filename, var):
     operator = trialinfo[0][0][0][0][2].T
     isCalc = trialinfo[0][0][0][0][3].T
     preResult = trialinfo[0][0][0][0][4].T
-    
-    info = pd.DataFrame(data = np.concatenate((operand1, operand2, operator, isCalc, preResult), axis = 1), 
-                        columns = ['operand1', 'operand2', 'operator', 'isCalc', 'preResult'])
+    corResult = trialinfo[0][0][0][0][5].T
+    deviant = trialinfo[0][0][0][0][6].T
+    run = trialinfo[0][0][0][0][7].T
+
+    info = pd.DataFrame(data = np.concatenate((operand1, operand2, operator, isCalc, preResult, corResult, deviant, run), axis = 1), 
+                        columns = ['operand1', 'operand2', 'operator', 'isCalc', 'preResult', 'corResult', 'deviant', 'run'])
     
     return epochs, info
