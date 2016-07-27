@@ -5,8 +5,8 @@ function smoothCalcVSA(subName, task)
 % subName = 's01'
 % task = 'calc' or 'VSA'
 
-datadir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/mat/';
-%datadir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/';
+%datadir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/mat/';
+datadir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/';
 
 load([datadir subName '_' task '.mat'])
 
