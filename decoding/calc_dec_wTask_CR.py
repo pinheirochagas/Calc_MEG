@@ -74,14 +74,21 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		info_calc_resplock = pd.concat([info_calc_delay, info_calc_nodelay])
 
 		# Create the big decoder with operand1, operand2 and presented result 
-		# Epochs will have 900 ms, -100 to 800.
+		# Epochs will have 900 ms, -100 to 800. 
 
 		# Epochs Operand1
-		epoch_calc_Op1 = epoch_calc
-		epoch_calc_Op1.crop(-1,0.8)
-		epoch_calc_Op1.times = time_calc_crop
+		# idx_operand1 = info_calc['delay'] == 1
 
-		epoch_calc_Op2 = epoch_calc
+		# epoch_calc_Op1 = epoch_calc
+		# epoch_calc_Op1.crop(-1,0.8)
+		# epoch_calc_Op1.times = time_calc_crop
+
+		# epoch_calc_Op2 = epoch_calc
+		# epoch_calc_Op2.crop(0.7, 1.6)
+		# epoch_calc_nodelay.times = time_calc_crop
+
+
+
 
 
 
