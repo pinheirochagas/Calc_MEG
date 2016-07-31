@@ -13,6 +13,11 @@ stimMatricesdir = ['/Volumes/NeuroSpin2T/Calculation_Pedro_2014/stimuli_analises
 %% Load dissimilarity matrices
 % load([stimMatricesdir '/stimDissimilarityMatrices.mat'])
 
+%% List conditions
+conditions = {'operand1', 'operand2', 'presRestul'}; % conditions to average
+
+
+
 %% Loop across subjects
 for sub = 1:length(subName)
     % Load subject data
