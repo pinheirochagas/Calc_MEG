@@ -91,6 +91,12 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		epoch_calc_Op2.times = time_calc_crop
 		info_calc_Op2 = info_calc[info_calc['operand1'] < 100]
 		info_calc_Op2['operand'] = info_calc_Op2['operand2'] # add another column 'operand' for the big decoder
+		
+		# Baseline correct
+		epoch_calc_Op1.apply_baseline(baseline)
+		epoch_calc_Op2.apply_baseline(baseline)
+		epoch_calc_delay.apply_baseline(baseline)
+		epoch_calc_nodelay.apply_baseline(baseline)
 		# Concatenate
 		epoch_calc_bigdec = mne.epochs.concatenate_epochs([epoch_calc_Op1,epoch_calc_Op2,epoch_calc_delay,epoch_calc_nodelay])	
 		info_calc_bigdec = pd.concat([info_calc_Op1,info_calc_Op2,info_calc_delay, info_calc_nodelay])

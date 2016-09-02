@@ -13,7 +13,7 @@ script_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding'
 
 #############################################################################################
 #Preprocessing
-baseline = (-0.5, -0.05) #time for the baseline period
+baseline = (-0.1, -0.05) #time for the baseline period
 downsampling = 0 #downsampling factor (input at 250Hz)
 
 ########################################################################
