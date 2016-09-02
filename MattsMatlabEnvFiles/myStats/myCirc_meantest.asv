@@ -1,0 +1,17 @@
+function pval=myCirc_meantest(alpha, TestMean)
+%
+%Note- this assumes the inputs in alpha are in units of DEGREES...
+
+alpha=alpha*pi/180;
+
+if size(alpha,2) > size(alpha,1)
+	alpha = alpha';
+end
+
+n = length(alpha);
+
+stde=circ_std(alpha) ./ sqrt(n);
+sampmn=circ_
+
+% compute deviation from samp mean and TestMean  
+d = circ_dist(sampkn   alpha,md);

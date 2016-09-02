@@ -1,0 +1,61 @@
+function Err = DataSeriesNonParamErr(Dat,Type,alpha)
+%function Err = DataSeriesNonParamErr(Dat,Type,'alpha)
+%
+% Calculate non-parametric error bars at every point in the input array 
+% Dat, based on Type. If Type is 0, the program will calculate the standard
+% error of the mean. If Type is 1 it will calculate (conservative) 
+% confidence intervals based on the Vysochanskij–Petunin inequality using
+% the standard error of the mean. 
+%
+% Inputs:   Dat-    Input data series (nSamp x nTimePoints). An error
+%                   estimate is given for each time point. NaNs in the input.
+%           Type-   What type of an error estimate to use. Options are 0
+%                   (default) for the standard error of the mean, 1 for
+%                   Vysochanskij–Petunin confidence intervals, or 2 for
+%                   Chebyshev confidence intervals.
+%           alpha-  The alpha level used for the confidence intervals. This
+%                   value is ignored if plotting the standard error of the
+%                   mean.
+%
+% Outputs:  CHi-    A 2 x nTimePoints array of error estimates, where the
+%                   first row stores the High error estimate, and the 
+%                   second row stored the Low error estimate.
+%
+% According to: http://en.wikipedia.org/wiki/Vysochanski%C3%AF-Petunin_inequality 
+% the Vysochanskij–Petunin inequality is like the Chebyshev inequality, but
+% can be slightly less conservative because of an assumption that the 
+% underlying distribution is unimodal.
+%
+% 100322 by Matthew Nelson 
+% nelsonmj@caltech.edu
+
+if nargin<3 || isempty(alpha);      alpha = 0.05;       end
+if nargin<2 || isempty(Type);       Type = 0;       end
+
+switch Type
+
+Err= nanstd(Dat,1) ./ sqrt( sum(~isnan(Dat,1)) ) * lam;
+
+if Type>0
+    if Type==1  %Vysochanskij–Petunin
+        lam=sqrt(4/(9*alpha));
+    elseif Type==2  %Chebyshev
+        lam=sqrt(1/alpha);
+    end
+    Err=Err*lam
+end
+    
+    
+    
+    
+    
+    
+end
+
+Err=Err
+    
+    
+    
+    
+    
+    

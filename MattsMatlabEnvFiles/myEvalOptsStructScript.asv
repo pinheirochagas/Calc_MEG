@@ -1,0 +1,16 @@
+%myEvalOptsStructScript.m
+%Evals the field of the structure Opts, and puts them into the current
+%workspace as variables
+
+fieldlist=fieldnames(SpkAnalOpts);
+for ifld=1:length(fieldlist)
+    if isstr(SpkAnalOpts.(fieldlist{ifld}))
+        eval([fieldlist{ifld} '=''' SpkAnalOpts.(fieldlist{ifld}) ''';']);
+    elseif isstruct(SpkAnalOpts.(fieldlist{ifld}))
+        eval([fieldlist{ifld} '=SpkAnalOpts.' (fieldlist{ifld}) ';'])
+    elseif length(SpkAnalOpts.(fieldlist{ifld}))>1
+        eval([fieldlist{ifld} '=[' num2str(SpkAnalOpts.(fieldlist{ifld})) '];']);
+    else
+        eval([fieldlist{ifld} '=' num2str(SpkAnalOpts.(fieldlist{ifld})) ';']);
+    end
+end

@@ -1,0 +1,18 @@
+function t = my_rmfield(s,field)
+%function t = my_rmfield(s,field)
+%
+% This function calls matlab's rmfield, but checks first to see that the
+% field name exists before doing so... (matlab's rmfield returns an error
+% if you try to remove a field that doesn't exist
+
+if iscell(field)
+    for ic=1:length(field)
+        if isfield(s, field{ic})
+
+
+        end
+    end
+else
+    if isfield(s, field)
+        
+my_rmfield

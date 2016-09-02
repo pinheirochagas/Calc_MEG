@@ -1,0 +1,80 @@
+function PostHocCohMagPlot1D(coh,f,LogFreq,TitStr,axh,fk,CLim,popts,param,value)
+% PostHocCohMagPlot1D(coh,f,LogFreq,TitStr,axh,fk,CLim,popts,param,value)
+%
+% For param and value, ex. would be 'LineWidth', and 2
+%
+% on 100214: coh can now be a 2D array for plotting multiple signals... if
+% that is the case, coh should be : [nsigs x freq]... it is assumed f
+% applies to all signals
+    
+if nargin<10 || isempty(param) || isempty(value);   
+    param='LineWidth';
+    value=0.5;  %this is the default... so essentially we're not doing anything here, but it prevents tedious cutting and pasting below (the effects of which are beginning to grow exponentially as this code gets further modified!)
+end 
+    
+if nargin<5 || isempty(axh)
+    figure;
+else
+    axes(axh);
+end
+
+if nargin<3 || isempty(LogFreq);     LogFreq=false;     end
+
+if nargin>=6 && ~isempty(fk)      
+    IncFreq=isbetween(f,fk);
+    coh=coh(:,IncFreq);
+    f=f(IncFreq);
+end
+
+[r c]=size(coh);
+if r>1 && c>1
+    %need to process # of signals
+    nsigs=r;
+    for is=1:nsigs
+        if LogFreq
+            if nargin>7 && ~isempty(popts)
+                semilogx(f,abs(coh(is,:)),popts{is},param,value);
+            else
+                semilogx( f,abs(coh(is,:)),param,value );
+            end
+        else
+            if nargin>7 && ~isempty(popts)
+                plot(f,abs(coh(is,:)),popts{is},param,value);
+            else
+                plot(f,abs(coh(is,:)),param,value);
+            end
+        end
+        hold on
+    end
+else
+    if LogFreq
+        semilogx(f,abs(coh));
+    else
+        plot(f,abs(coh));
+    end
+end
+
+box off
+if nargin>6 && ~isempty(CLim);    
+    axis([f(1) f(end) CLim(1) CLim(2)]);      
+else
+    axis tight
+end
+
+%I don't think a log trans is needed for displaying coh
+
+% numYTicks=6;
+% numXTicks=6;
+% freqind=round(linspace(1,length(f),numYTicks));
+% freqvals=round(f(freqind));
+% freqind(1)=.5;
+% set(axh,'XTickLabel',freqvals);
+% set(axh,'XTick',freqind);
+
+xlabel('Frequency (Hz)')
+ylabel('Coh Mag')
+if nargin>3 && ~isempty(TitStr)
+    title(TitStr);
+end
+
+%title(['MT Field/Field coherence mag with ' num2str(Nms) ' ms window sliding ' num2str(dnms) ' at a time.'])

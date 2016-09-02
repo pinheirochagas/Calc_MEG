@@ -21,10 +21,10 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 #conditions = [['op1', 'op1'], ['op2', 'op2'], ['pres', 'pres'],['cres', 'cres'],
 #			  ['presc', 'presc'], ['presi', 'presi'], ['op1', 'pres'], ['op1', 'cres']]
 
-#subjects = ['s19']
+subjects = ['s19']
 
 conditions = [['op1', 'presTlock'], ['op1m', 'cresm'], ['op12', 'cres2'], ['op10', 'cres0'], ['op11', 'cres1']]
-conditions = [['cres', 'cres']]
+conditions = [['opbigdec', 'opbigdec']]
 
 
 ##############################################################################################

@@ -1,0 +1,158 @@
+function [OutVals fout]=AvgAcrossFreqs(InVals,fraw,fstep,fk,f0cut,CalcType)
+%function [OutVals fout]=AvgAcrossFreqs(InVals,fraw,fstep,fk,f0cut,CalcType)
+%
+% Will Avg InVals across the freq vals give in fraw into the output
+% frequency bins separated by fstep with range given by fk, and initial bin
+% determined by f0cut.
+%
+% This could of course be applied generally to average any one value over
+% another, but was written with the intention of averaging coherence or
+% spectral power values across frequencies in a data format with multiple
+% repetitions (for example multiple subjects or experiment sessions).
+%
+% Inputs
+%   InVals:         The values to be averaged across. Could be a single 
+%                   numeric array, of dimension NReps x nRawf, or could be 
+%                   a 1D cell array of any number of such a numeric array. 
+%   fraw:           A 1D vector of length nRawf (matching the 2nd
+%                   dimension of numeric arrays of InVals) indicating the
+%                   input freequency correspnding to each val of InVals.
+%                   Assuemd to be in Hz- though any freq unit could be used
+%                   if the other inputs are consistent with that unit.
+%   fstep:          The frequency resolution (in Hz) of the output that the
+%                   InVals are averaged into. Defaults to 1/8.
+%   fk:             A 1x2 or 2x1 vector indicating the output frequency
+%                   range to use. Defaults to [0 100].
+%   f0cut:          Indicates the upper cutoff frequency used for the 
+%                   first bin. ... so the first output bin frequency will
+%                   avg InVals from fk(1) up to f0cut, and each output bin
+%                   will increase in fstep steps from there. Defaults to
+%                   fstep/2.
+%   CalcType:   Indicates how to do the averaging. This can be a
+%                   scalar, or if InVals is a cell array, a 1D vector with
+%                   each value corresponding to each cell in InVals. This
+%                   can also be a scalar if InVals is a cell array, in
+%                   which case the value will apply to all cells of InVals.
+%                   case:
+%                       1 corresponds to a basic nanmean. (for coh mags, abs
+%                       vals should be done to the input BEFORE CALLING
+%                       this function.) (This is the Default)
+%                       2: any function.
+%                       3: sum function
+%                       4: angle of the sum across frequencies
+%                       5: angle of the sum across repetitions and
+%                       frequencies. Note that this affects the size of
+%                       OutVals, by forcing it to have 1 row/rep.
+%
+% Outputs
+%   OutVals:        A numeric array or CellArray corresponding to InVals.
+%                   Each numeric array will have dimensions nReps x nfout.
+%                   (Or possible 1 x nfout if CalcType is set to 5).
+%   fout:           The output frequencies, corresponding to the center
+%                   frequency of each frequency bin in OutVals.
+%
+% Matthew Nelson 2010
+% nelsonmj@caltech.edu    http://www.its.caltech.edu/~nelsonmj/
+
+
+
+if nargin < 3 || isempty(fstep);    fstep=1/8;     end      %in Hz
+if nargin < 4 || isempty(fk);    fk=[0 100];     end      %in Hz
+if nargin < 5 || isempty(f0cut);    f0cut=fk(1)+fstep/2;     end      %in Hz  %this default ensures that fout will include all values centered on each value that are precisely multiples of fstep above fk(1)   
+if nargin < 6 || isempty(CalcType);    CalcType=1;     end
+
+
+if iscell(InVals)
+    CellFlag=1;
+    nc=length(InVals);
+    if nc>1 && length(CalcType)==1
+        CalcType=repmat(CalcType,nc,1);
+    end
+else    
+    CellFlag=0;
+end
+
+%fk=[0 100];
+%fstep=1/8; %0.25; 
+%f0cut=1/16; 
+
+
+fcut=f0cut:fstep:fk(2);
+if fcut(end)<fk(2);     fcut(end+1)=fk(2);    end
+fout=myRunAvg([fk(1) fcut],2);
+
+navgf=length(fcut);
+nrawf=length(fraw);
+nr=size(InVals,1);
+
+%initialize OutVals
+if CellFlag
+    for ic=1:nc
+        if CalcType(ic)==5
+            OutVals{ic}=repmat(0,1,navgf);
+        else
+            OutVals{ic}=repmat(0,nr,navgf);
+        end
+    end
+else
+    if CalcType==5
+        OutVals=repmat(0,1,navgf);
+    else
+        OutVals=repmat(0,nr,navgf);
+    end
+end
+
+%need to initialize irawf as the first value above fk(1)
+irawf=1;
+while irawf<=nrawf && fraw(irawf)<fk(1)
+    irawf=irawf+1;
+end
+
+for iavgf=1:navgf   %curFbn=1:nF-1
+    %assume starting at 0 for now... so first bin goes from 0 to fcut(1)
+    
+    iFst=irawf;     %this "preserves" where irawf was at the start of the cycle for this iavgf
+    while irawf<=nrawf && fraw(irawf)<=fcut(iavgf)
+        irawf=irawf+1;
+    end
+    iFe=irawf-1;    %roll irawf back one, because above we had to go just past the cutoff to get here
+    if iFe>=iFst
+        if CellFlag
+            for ic=1:nc
+                switch CalcType(ic)
+                    case 1
+                        OutVals{ic}(:,iavgf)=nanmean( InVals(:,iFst:iFe),2 );
+                    case 2
+                        OutVals{ic}(:,iavgf)=any( InVals(:,iFst:iFe),2 );
+                    case 3
+                        OutVals{ic}(:,iavgf)=nansum( InVals(:,iFst:iFe),2 );
+                    case 4
+                        OutVals{ic}(:,iavgf)=angle( sum(InVals(:,iFst:iFe),2) )*180/pi;
+                    case 5
+                        OutVals{ic}(1,iavgf)=angle( sum(sum(InVals(:,iFst:iFe),2)) )*180/pi;
+                end
+            end
+        else
+            switch CalcType
+                case 1
+                    OutVals(:,iavgf)=nanmean( InVals(:,iFst:iFe),2 );
+                case 2
+                    OutVals(:,iavgf)=any( InVals(:,iFst:iFe),2 );
+                case 3
+                    OutVals(:,iavgf)=nansum( InVals(:,iFst:iFe),2 );
+                case 4
+                    OutVals(:,iavgf)=angle( sum(InVals(:,iFst:iFe),2) )*180/pi;
+                case 5
+                    OutVals(1,iavgf)=angle( sum(sum(InVals(:,iFst:iFe),2)) )*180/pi;
+            end
+        end
+    else
+        if CellFlag
+            for ic=1:nc
+                OutVals{ic}(:,iavgf)=NaN;
+            end
+        else
+            OutVals(:,iavgf)=NaN;
+        end
+    end
+end
