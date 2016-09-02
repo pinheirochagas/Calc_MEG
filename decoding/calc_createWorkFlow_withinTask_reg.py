@@ -41,7 +41,6 @@ python_file, Listfile = [], []
 for c, condcouple in enumerate(conditions):
 	for s, subject in enumerate(subjects):
 		
-		body_class = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'class'" + ")"
 		body_reg = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'reg'" + ")"
 
 		#Use a transparent and complete job name referring to arguments of interests
@@ -51,19 +50,12 @@ for c, condcouple in enumerate(conditions):
 		# 	jobname_class = jobname + '_' + cond + '_class'
 		# 	jobname_reg = jobname + '_' + cond + '_reg'
 		
-		jobname_class = subject + '_' + condcouple[0] + '_' + condcouple[1] + '_class'
 		jobname_reg = subject + '_' + condcouple[0] + '_' + condcouple[1] + '_reg'
-		ListJobName.append(jobname_class)
 		ListJobName.append(jobname_reg) # this is done twice because each subject gets two python files.
 
 		#Write jobs in a dedicated folder
-		name_file_class = os.path.join(wkdir, ('scripts/decoding/somaWF/jobs/jobs_' + jobname_class + '.py'))
 		name_file_reg = os.path.join(wkdir, ('scripts/decoding/somaWF/jobs/jobs_' + jobname_reg + '.py'))
 
-		Listfile.append(name_file_class)
-		with open(name_file_class, 'w') as python_file:
-			python_file.write(body_class)
-		
 		Listfile.append(name_file_reg)
 		with open(name_file_reg, 'w') as python_file:
 			python_file.write(body_reg)
@@ -80,5 +72,5 @@ for i in range(len(Listfile)):
 #Save the workflow variables
 WfVar = Workflow(jobs = jobs)
 #WfVar = Workflow(jobs = jobs, dependencies = dependencies)
-somaWF_name = wkdir + '/scripts/decoding/somaWF/workflows/calc_WorkFlow_withinTask_classEreg'
+somaWF_name = wkdir + '/scripts/decoding/somaWF/workflows/calc_WorkFlow_withinTask_reg'
 Helper.serialize(somaWF_name, WfVar)

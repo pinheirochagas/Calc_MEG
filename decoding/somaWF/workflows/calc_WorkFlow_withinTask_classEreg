@@ -1,13 +1,485 @@
 {
     "jobs": [
         0, 
-        1
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6, 
+        7, 
+        8, 
+        9, 
+        10, 
+        11, 
+        12, 
+        13, 
+        14, 
+        15, 
+        16, 
+        17, 
+        18, 
+        19, 
+        20, 
+        21, 
+        22, 
+        23, 
+        24, 
+        25, 
+        26, 
+        27, 
+        28, 
+        29, 
+        30, 
+        31, 
+        32, 
+        33, 
+        34, 
+        35, 
+        36, 
+        37, 
+        38, 
+        39, 
+        40, 
+        41
     ], 
     "name": null, 
     "serialized_temporary_paths": {}, 
     "serialized_barriers": {}, 
     "serialized_jobs": {
+        "24": {
+            "name": "s13_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "25": {
+            "name": "s13_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "26": {
+            "name": "s14_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "27": {
+            "name": "s14_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "20": {
+            "name": "s11_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "21": {
+            "name": "s11_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "22": {
+            "name": "s12_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "23": {
+            "name": "s12_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "28": {
+            "name": "s15_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "29": {
+            "name": "s15_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "40": {
+            "name": "s22_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "41": {
+            "name": "s22_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
         "1": {
+            "name": "s01_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "0": {
+            "name": "s01_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "3": {
+            "name": "s02_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "2": {
+            "name": "s02_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "5": {
+            "name": "s03_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "4": {
+            "name": "s03_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "7": {
+            "name": "s04_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "6": {
+            "name": "s04_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "9": {
+            "name": "s05_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "8": {
+            "name": "s05_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "39": {
+            "name": "s21_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "12": {
+            "name": "s07_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "11": {
+            "name": "s06_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "10": {
+            "name": "s06_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "13": {
+            "name": "s07_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "38": {
+            "name": "s21_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "15": {
+            "name": "s08_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "14": {
+            "name": "s08_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "17": {
+            "name": "s09_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "16": {
+            "name": "s09_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "33": {
+            "name": "s17_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "32": {
+            "name": "s17_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "31": {
+            "name": "s16_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "30": {
+            "name": "s16_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "37": {
             "name": "s19_opbigdec_opbigdec_reg", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
@@ -19,7 +491,7 @@
             ], 
             "disposal_timeout": 168
         }, 
-        "0": {
+        "36": {
             "name": "s19_opbigdec_opbigdec_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
@@ -28,6 +500,54 @@
             "command": [
                 "python", 
                 "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "35": {
+            "name": "s18_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "34": {
+            "name": "s18_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_opbigdec_opbigdec_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "19": {
+            "name": "s10_opbigdec_opbigdec_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_opbigdec_opbigdec_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "18": {
+            "name": "s10_opbigdec_opbigdec_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_opbigdec_opbigdec_class.py"
             ], 
             "disposal_timeout": 168
         }
@@ -39,6 +559,46 @@
     "serialized_shared_res_paths": {}, 
     "root_group": [
         0, 
-        1
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6, 
+        7, 
+        8, 
+        9, 
+        10, 
+        11, 
+        12, 
+        13, 
+        14, 
+        15, 
+        16, 
+        17, 
+        18, 
+        19, 
+        20, 
+        21, 
+        22, 
+        23, 
+        24, 
+        25, 
+        26, 
+        27, 
+        28, 
+        29, 
+        30, 
+        31, 
+        32, 
+        33, 
+        34, 
+        35, 
+        36, 
+        37, 
+        38, 
+        39, 
+        40, 
+        41
     ]
 }
