@@ -20,7 +20,7 @@ KernWidth = 0.05; %%% size in sec of the std of the Gaussian kernel for smoothin
 nKernStdToInc=4;    % the number of stds of the Gaussian to include when generating the kernel    
 opts.KernWidth=KernWidth;
 opts.nKernStdToInc=nKernStdToInc;
-tOutLims=[-.1 4.1]; %? 
+tOutLims=[-.1 4.4]; %? 
 times = data.time{1};
 
 

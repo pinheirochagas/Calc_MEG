@@ -32,7 +32,7 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 #			['op1_34', 'op1_34'], ['op1_35', 'op1_35'], ['op1_36', 'op1_36'], 
 #			['op1_45', 'op1_45'], ['op1_46', 'op1_46'], ['op1_56', 'op1_56']]
 
-conditions = [['addsub', 'vsa']]
+conditions = [['opbigdec', 'opbigdec']]
 
 
 #conditions = [['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'], ['pres_45', 'pres_45'],

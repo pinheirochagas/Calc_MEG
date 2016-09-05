@@ -53,7 +53,7 @@ def calc_classification(X_train, y_train, X_test, y_test, params):
     #     scorer = scorer, n_jobs = -1)
 
     gat = GeneralizationAcrossTime(clf = clf, cv = cv,  train_times = params['trainTimes'], 
-        test_times = params['testTimes'], predict_mode = predict_mode, n_jobs = 6)      
+        test_times = params['testTimes'], predict_mode = predict_mode, n_jobs = 1)      
     #Determine whether to generalize only across time or also across conditions
     if predict_mode == 'cross-validation':
         gat.fit(X_train, y = y_train)
