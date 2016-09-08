@@ -24,7 +24,9 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 #subjects = ['s19']
 
 #conditions = [['op1', 'presTlock'], ['op1m', 'cresm'], ['op12', 'cres2'], ['op10', 'cres0'], ['op11', 'cres1']]
-conditions = [['opbigdec', 'opbigdec']]
+#conditions = [['opbigdec', 'opbigdec']]
+
+conditions = [['op1', 'op1'], ['op2', 'op2'],['cres', 'cres']]
 
 
 ##############################################################################################
@@ -74,7 +76,7 @@ jobs = []
 
 for i in range(len(Listfile)):
 	JobVar = Job(command = ['python', Listfile[i]], name = ListJobName[i],
-                 native_specification = '-l walltime=2:00:00, -l nodes=1:ppn=8')
+                 native_specification = '-l walltime=10:00:00, -l nodes=1:ppn=8')
 	jobs.append(JobVar)
 
 #Save the workflow variables

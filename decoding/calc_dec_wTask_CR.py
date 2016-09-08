@@ -102,7 +102,7 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		info_calc_bigdec = pd.concat([info_calc_Op1,info_calc_Op2,info_calc_delay, info_calc_nodelay])
 
 		#Baseline correction
-		epoch_calc.apply_baseline(baseline)
+		#epoch_calc.apply_baseline(baseline)
 
 
 		#Downsample data if needed
@@ -118,8 +118,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': -0.1, 'stop': 1.6}
-				testTimes = {'start': -0.1, 'stop': 1.6}
+				trainTimes = {'start': -0.2, 'stop': 3.6}
+				testTimes = {'start': -0.2, 'stop': 3.6}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'op2':
@@ -129,8 +129,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': 1.5, 'stop': 3.2}
-				testTimes = {'start': 1.5, 'stop': 3.2}
+				trainTimes = {'start': -0.2, 'stop': 3.6}
+				testTimes = {'start': -0.2, 'stop': 3.6}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'pres':
@@ -151,8 +151,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': 1.5, 'stop': 4.5}
-				testTimes = {'start': 1.5, 'stop': 4.5}
+				trainTimes = {'start': -0.2, 'stop': 3.6}
+				testTimes = {'start': -0.2, 'stop': 3.6}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'addsub':
