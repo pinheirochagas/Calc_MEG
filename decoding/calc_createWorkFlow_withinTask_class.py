@@ -21,7 +21,7 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 #conditions = [['op1', 'op1'], ['op2', 'op2'], ['pres', 'pres'],['cres', 'cres'],
 #			  ['presc', 'presc'], ['presi', 'presi'], ['op1', 'pres'], ['op1', 'cres']]
 
-subjects = ['s03', 's13']
+#subjects = ['s03', 's13']
 
 #conditions = [['op1', 'op1']]
 
@@ -32,7 +32,7 @@ subjects = ['s03', 's13']
 #			['op1_34', 'op1_34'], ['op1_35', 'op1_35'], ['op1_36', 'op1_36'], 
 #			['op1_45', 'op1_45'], ['op1_46', 'op1_46'], ['op1_56', 'op1_56']]
 
-conditions = [['opbigdec', 'opbigdec']]
+conditions = [['op1', 'op1']]
 
 
 #conditions = [['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'], ['pres_45', 'pres_45'],
@@ -87,7 +87,7 @@ jobs = []
 
 for i in range(len(Listfile)):
 	JobVar = Job(command = ['python', Listfile[i]], name = ListJobName[i],
-                 native_specification = '-l walltime=10:00:00, -l nodes=1:ppn=8')
+                 native_specification = '-l walltime=30:00:00, -l nodes=1:ppn=8')
 	jobs.append(JobVar)
 
 #Save the workflow variables

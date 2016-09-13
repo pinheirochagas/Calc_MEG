@@ -45,7 +45,7 @@ def calc_regression(X_train, y_train, X_test, y_test, params):
     predict_mode = params['mode']
 
     # Define scorer
-    scorer = kendall_score
+    scorer = 'r2'
     #Define scorer
 #    if params['scorer'] is 'scorer_auc':
 #        scorer = scorer_auc
@@ -55,6 +55,9 @@ def calc_regression(X_train, y_train, X_test, y_test, params):
 #       scorer = prob_accuracy
     ###Learning process###
 
+    #gat = GeneralizationAcrossTime(clf = clf, cv = cv, train_times = params['trainTimes'], 
+        #test_times = params['testTimes'], scorer = scorer, predict_mode = predict_mode, n_jobs = 6)
+        
     gat = GeneralizationAcrossTime(clf = clf, cv = cv, train_times = params['trainTimes'], 
         test_times = params['testTimes'], scorer = scorer, predict_mode = predict_mode, n_jobs = 6)
     # gat.fit(X_train, y = y_train)

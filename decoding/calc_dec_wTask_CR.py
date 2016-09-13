@@ -118,8 +118,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': -0.2, 'stop': 3.6}
-				testTimes = {'start': -0.2, 'stop': 3.6}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'op2':
@@ -129,8 +129,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': -0.2, 'stop': 3.6}
-				testTimes = {'start': -0.2, 'stop': 3.6}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'pres':
@@ -151,8 +151,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': -0.2, 'stop': 3.6}
-				testTimes = {'start': -0.2, 'stop': 3.6}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'addsub':
@@ -162,8 +162,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': 0.7, 'stop': 3.2}
-				testTimes = {'start': 0.7, 'stop': 3.2}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'presTlock':
@@ -619,11 +619,12 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		#Decode
 		if Type == 'class':
 			gat, score, diagonal = calc_classification(X_train, y_train, X_test, y_test, params)
+                scoreR = 'auc'
 			print('Decoding subject classification')
 		elif Type == 'reg':
 			gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
 			print('Decoding subject regression')
-
+                scoreR = 'r2'
 		return params, epoch_calc.times, gat, score, diagonal, y_train, y_test
 
 	params, times_calc, gat, score, diagonal, y_train, y_test = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
@@ -633,5 +634,5 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 	# do I need to save the gat? 
 
 	#Save data
-	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type
+	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type '_' scoreR
 	np.save(fname, results)
