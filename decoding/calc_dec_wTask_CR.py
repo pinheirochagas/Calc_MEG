@@ -617,22 +617,25 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		print('preparing to decode')
 		######################################################################################
 		#Decode
+ 
+              
 		if Type == 'class':
 			gat, score, diagonal = calc_classification(X_train, y_train, X_test, y_test, params)
-                scoreR = 'auc'
+			scoreR = 'auc'
 			print('Decoding subject classification')
 		elif Type == 'reg':
 			gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
 			print('Decoding subject regression')
-                scoreR = 'r2'
-		return params, epoch_calc.times, gat, score, diagonal, y_train, y_test
+			scoreR = 'r2'
+      
+		return params, epoch_calc.times, gat, score, diagonal, y_train, y_test, scoreR
 
-	params, times_calc, gat, score, diagonal, y_train, y_test = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
+	scoreR, params, times_calc, gat, score, diagonal, y_train, y_test = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
 
 	results = {'params': params, 'times_calc': times_calc, 'score': score, 'diagonal': diagonal, 'y_train': y_train, 'y_test': y_test}
 	#results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
 	# do I need to save the gat? 
 
 	#Save data
-	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type '_' scoreR
+	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type + '_' + scoreR
 	np.save(fname, results)

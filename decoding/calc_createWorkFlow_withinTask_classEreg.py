@@ -76,7 +76,7 @@ jobs = []
 
 for i in range(len(Listfile)):
 	JobVar = Job(command = ['python', Listfile[i]], name = ListJobName[i],
-                 native_specification = '-l walltime=30:00:00, -l nodes=1:ppn=8')
+                 native_specification = '-l walltime=30:00:00, -l nodes=2:ppn=8')
 	jobs.append(JobVar)
 
 #Save the workflow variables
