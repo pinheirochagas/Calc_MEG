@@ -34,7 +34,8 @@ def calc_regression(X_train, y_train, X_test, y_test, params):
     #Model
     #model = svm.SVC(C = 1, kernel = 'linear', class_weight = 'balanced')
     model = linear_model.RidgeCV()
-    
+    #model =  linear_model.LinearRegression()
+   
     #Pipeline
     clf = make_pipeline(scaler, model)
    
