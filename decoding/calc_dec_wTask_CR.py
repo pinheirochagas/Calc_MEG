@@ -50,32 +50,35 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		fname_calc = data_path + '/' + Subject + '_calc.mat' # add smoothed once corrected
 		fname_vsa = data_path + '/' + Subject + '_vsa.mat'
 		epoch_calc,info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+		times_calc = epoch_calc.times  
 		#epoch_vsa,info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
 
 		##Select data to use.
 		## Time lock to the presentation of the result
 		## This code sniped should be modularized and flexibilized
-		idx_delay = info_calc['delay'] == 1
-		idx_nodelay = info_calc['delay'] == 0
-
-		time_calc_crop = np.arange(-0.1,0.8004,0.004) 
-
-		epoch_calc_delay = epoch_calc[idx_delay]
-		epoch_calc_delay.crop(3.5,4.4)
-		epoch_calc_delay.times = time_calc_crop
-
-		epoch_calc_nodelay = epoch_calc[idx_nodelay]
-		epoch_calc_nodelay.crop(3.1,4)
-		epoch_calc_nodelay.times = time_calc_crop
-
-		info_calc_delay = info_calc[info_calc['delay'] == 1]
-		info_calc_nodelay = info_calc[info_calc['delay'] == 0]
-		info_calc_delay['operand'] = info_calc_delay['preResult'] # add another column 'operand' for the big decoder
-		info_calc_nodelay['operand'] = info_calc_nodelay['preResult'] # add another column 'operand' for the big decoder
-
-		epoch_calc_resplock = mne.epochs.concatenate_epochs([epoch_calc_delay,epoch_calc_nodelay])
-		info_calc_resplock = pd.concat([info_calc_delay, info_calc_nodelay])
-		print 'concat well'
+#		idx_delay = info_calc['delay'] == 1
+#		idx_nodelay = info_calc['delay'] == 0
+#
+#		time_calc_crop = np.arange(-0.1,0.8004,0.004) 
+#
+#		epoch_calc_delay = epoch_calc[idx_delay]
+#		epoch_calc_delay.crop(3.5,4.4)
+#		epoch_calc_delay.times = time_calc_crop
+#
+#		epoch_calc_nodelay = epoch_calc[idx_nodelay]
+#		epoch_calc_nodelay.crop(3.1,4)
+#		epoch_calc_nodelay.times = time_calc_crop
+#
+#		info_calc_delay = info_calc[info_calc['delay'] == 1]
+#		info_calc_nodelay = info_calc[info_calc['delay'] == 0]
+#		info_calc_delay['operand'] = info_calc_delay['preResult'] # add another column 'operand' for the big decoder
+#		info_calc_nodelay['operand'] = info_calc_nodelay['preResult'] # add another column 'operand' for the big decoder
+#
+#		epoch_calc_resplock = mne.epochs.concatenate_epochs([epoch_calc_delay,epoch_calc_nodelay])
+#		info_calc_resplock = pd.concat([info_calc_delay, info_calc_nodelay])
+#		print 'concat well'
+  
+              
           
            #########################################################################	
            ## Create the big decoder with operand1, operand2 and presented result ##
@@ -83,19 +86,20 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
           
 		## Epochs will have 900 ms, -100 to 800. 
 		## Epochs Operand1
-		epoch_calc_Op1 = epoch_calc[info_calc['operand1'] < 100] # have to add that otherwise it rewrites info_calc!-why?
-		epoch_calc_Op1.crop(-0.1,0.8)
-		epoch_calc_Op1.times = time_calc_crop
-		info_calc_Op1 = info_calc[info_calc['operand1'] < 100]
-		info_calc_Op1['operand'] = info_calc_Op1['operand1'] # add another column 'operand' for the big decoder
-		print epoch_calc
-		print info_calc
-		## Epochs Operand2
-		epoch_calc_Op2 = epoch_calc[info_calc['operand1'] < 100] 
-		epoch_calc_Op2.crop(0.7, 1.6)
-		epoch_calc_Op2.times = time_calc_crop
-		info_calc_Op2 = info_calc[info_calc['operand1'] < 100]
-		info_calc_Op2['operand'] = info_calc_Op2['operand2'] # add another column 'operand' for the big decoder
+          
+#		epoch_calc_Op1 = epoch_calc[info_calc['operand1'] < 100] # have to add that otherwise it rewrites info_calc!-why?
+#		epoch_calc_Op1.crop(-0.1,0.8)
+#		epoch_calc_Op1.times = time_calc_crop
+#		info_calc_Op1 = info_calc[info_calc['operand1'] < 100]
+#		info_calc_Op1['operand'] = info_calc_Op1['operand1'] # add another column 'operand' for the big decoder
+#		print epoch_calc
+#		print info_calc
+#		## Epochs Operand2
+#		epoch_calc_Op2 = epoch_calc[info_calc['operand1'] < 100] 
+#		epoch_calc_Op2.crop(0.7, 1.6)
+#		epoch_calc_Op2.times = time_calc_crop
+#		info_calc_Op2 = info_calc[info_calc['operand1'] < 100]
+#		info_calc_Op2['operand'] = info_calc_Op2['operand2'] # add another column 'operand' for the big decoder
 		
 		## Baseline correct
 		#epoch_calc_Op1.apply_baseline(baseline)
@@ -159,8 +163,6 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_test = y_train
 				trainTimes = {'start': -0.2, 'stop': 4.5}
 				testTimes = {'start': -0.2, 'stop': 4.5}
-				trainTimes = {'start': -0.2, 'stop': 2}
-				testTimes = {'start': -0.2, 'stop': 2}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'addsub':
@@ -616,9 +618,13 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				testTimes = {'start': -0.1, 'stop': 1.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
+				#params.update({'start': -0.2, 'stop': 2})
+				#params.update({'start': -0.2, 'stop': 2})
 
 
 				#################### THINK ABOUT IT!!! ########################
+            # Clen
+		del epoch_calc 
 		#import ipdb; ipdb.set_trace() # to debug... 	
 		# Update params with mode
 		params.update({'mode': mode})	
@@ -634,19 +640,22 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		elif Type == 'reg':
 			print('Decoding subject regression')
 			gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
+			y_predictive = gat.y_pred_
+			y_true = gat.y_true_
+			gat_scorer = gat.scorer
 			scoreR = 'r2'
-      
-		return params, epoch_calc.times, gat, score, diagonal, y_train, y_test, scoreR
+			del gat
+		return params, times_calc, y_predictive, y_true, score, diagonal, y_train, y_test, gat_scorer, scoreR
   
       ### DELETE OBJECTS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	scoreR, params, times_calc, gat, score, diagonal, y_train, y_test = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
+	params, times_calc, y_predictive, y_true, score, diagonal, y_train, y_test, gat_scorer, scoreR = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
 
-	results = {'params': params, 'times_calc': times_calc, 'score': score, 'diagonal': diagonal, 'y_train': y_train, 'y_test': y_test}
+	results = {'params': params, 'times_calc': times_calc, 'y_predictive': y_predictive, 'y_true': y_true, 'score': score, 'diagonal': diagonal, 'y_train': y_train, 'y_test': y_test}
 	#results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
 	# do I need to save the gat? 
-	sys.getsizeof(results)
+	print sys.getsizeof(results)
 	#Save data
-	#fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type + '_' + scoreR
-	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type
+	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type + '_' + scoreR
+	#fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type
 	np.save(fname, results)

@@ -1,0 +1,3 @@
+The measurement information indicates a low-pass frequency of 125 Hz. The decim=10 parameter will result in a sampling frequency of 25 Hz, which can cause aliasing artifacts.
+preparing to decode
+Decoding subject regression

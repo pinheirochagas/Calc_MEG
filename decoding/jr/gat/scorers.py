@@ -5,7 +5,6 @@
 import numpy as np
 import scipy.stats as stats
 
-
 def scorer_spearman(y_true, y_pred):
     from scipy.stats import spearmanr
     if y_pred.ndim > 1:
@@ -50,3 +49,8 @@ def kendall_score(y_true, y_pred):
     if np.isnan(out):
         out = 0.
     return out
+    
+def scorer_r2(y_true, y_pred):
+    from sklearn.metrics import r2_score
+    r2 = r2_score(y_true, y_pred)
+    return r2

@@ -1,0 +1,5 @@
+/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/calc_dec_wTask_CR.py:119: RuntimeWarning: The measurement information indicates a low-pass frequency of 125 Hz. The decim=100 parameter will result in a sampling frequency of 2.5 Hz, which can cause aliasing artifacts.
+  epoch_calc.decimate(downsampling)
+[Parallel(n_jobs=6)]: Done   6 out of   6 | elapsed:    1.8s finished
+[Parallel(n_jobs=6)]: Done   6 out of   6 | elapsed:    0.7s finished
+[Parallel(n_jobs=6)]: Done   6 out of   6 | elapsed:    0.0s finished

@@ -1,0 +1,16 @@
+/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/calc_dec_wTask_CR.py:119: RuntimeWarning: The measurement information indicates a low-pass frequency of 125 Hz. The decim=100 parameter will result in a sampling frequency of 2.5 Hz, which can cause aliasing artifacts.
+  epoch_calc.decimate(downsampling)
+Traceback (most recent call last):
+  File "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_cres_cres_reg.py", line 4, in <module>
+    calc_dec_wTask_CR('/neurospin/meg/meg_tmp/Calculation_Pedro_2014',['cres', 'cres'],'s01','reg')
+  File "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/calc_dec_wTask_CR.py", line 652, in calc_dec_wTask_CR
+    params, times_calc, y_predictive, y_true, score, diagonal, y_train, y_test, gat_scorer, scoreR = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
+  File "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/calc_dec_wTask_CR.py", line 642, in calc_prepDec_wTask_CR
+    gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
+  File "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/calc_regression.py", line 71, in calc_regression
+    gat.fit(X_train, y = y_train)
+  File "/home/pp242904/.local/lib/python2.7/site-packages/mne-0.12.dev0-py2.7.egg/mne/decoding/time_gen.py", line 147, in fit
+    epochs.info['sfreq'])
+  File "/home/pp242904/.local/lib/python2.7/site-packages/mne-0.12.dev0-py2.7.egg/mne/decoding/time_gen.py", line 733, in _sliding_window
+    window['stop'], times[0], times[-1]))
+ValueError: `stop` (4.50 s) outside time range [-0.50, 4.30].
