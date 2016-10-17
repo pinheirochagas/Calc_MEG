@@ -1,0 +1,27 @@
+%pseudo-code for MT cluster outline script
+
+%harder keeping track of tops of 
+
+
+%Probably the easiest would be a matlab illustrator combination...  it might be easier to j
+% -since in Illustrat
+
+lastSig=0;
+for iwin=1:nwin
+    for iF=1:nf
+        curSig= ClusVals(iwin,iF)>0;        
+        if curSig~=lastSig
+            MakeLineLeft %would
+            
+            if curSig   %these means we just found a new sigLoc
+                Make
+                
+                
+        
+    end
+        end
+
+%%%%%%%%%%%%%%%%
+function MakeLine
+
+            

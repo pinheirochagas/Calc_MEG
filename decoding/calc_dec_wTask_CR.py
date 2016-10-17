@@ -16,6 +16,7 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 	#Load necessary libraries
 	import mne
 	import os
+	import sys 
 	import os.path as op
 	import numpy as np
 	import pandas as pd
@@ -46,20 +47,17 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		'classification': Condition, 'trainset': trainset, 
 		'testset': testset, 'trainTimes': trainTimes, 'testTimes': testTimes}
 
-		fname_calc = data_path + '/' + Subject + '_calc.mat'
+		fname_calc = data_path + '/' + Subject + '_calc.mat' # add smoothed once corrected
 		fname_vsa = data_path + '/' + Subject + '_vsa.mat'
 		epoch_calc,info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
 		#epoch_vsa,info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
 
-		#Select data to use.
-		# Time lock to the presentation of the result
-		# This code sniped should be modularized and flexibilized
+		##Select data to use.
+		## Time lock to the presentation of the result
+		## This code sniped should be modularized and flexibilized
 		idx_delay = info_calc['delay'] == 1
 		idx_nodelay = info_calc['delay'] == 0
 
-		info_calc_delay = info_calc[info_calc['delay'] == 1]
-		info_calc_nodelay = info_calc[info_calc['delay'] == 0]
-		
 		time_calc_crop = np.arange(-0.1,0.8004,0.004) 
 
 		epoch_calc_delay = epoch_calc[idx_delay]
@@ -70,38 +68,52 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		epoch_calc_nodelay.crop(3.1,4)
 		epoch_calc_nodelay.times = time_calc_crop
 
-		epoch_calc_resplock = mne.epochs.concatenate_epochs([epoch_calc_delay,epoch_calc_nodelay])	
+		info_calc_delay = info_calc[info_calc['delay'] == 1]
+		info_calc_nodelay = info_calc[info_calc['delay'] == 0]
+		info_calc_delay['operand'] = info_calc_delay['preResult'] # add another column 'operand' for the big decoder
+		info_calc_nodelay['operand'] = info_calc_nodelay['preResult'] # add another column 'operand' for the big decoder
+
+		epoch_calc_resplock = mne.epochs.concatenate_epochs([epoch_calc_delay,epoch_calc_nodelay])
 		info_calc_resplock = pd.concat([info_calc_delay, info_calc_nodelay])
-
-		# Create the big decoder with operand1, operand2 and presented result 
-		# Epochs will have 900 ms, -100 to 800. 
-
-		# Epochs Operand1
-		# idx_operand1 = info_calc['delay'] == 1
-
-		# epoch_calc_Op1 = epoch_calc
-		# epoch_calc_Op1.crop(-1,0.8)
-		# epoch_calc_Op1.times = time_calc_crop
-
-		# epoch_calc_Op2 = epoch_calc
-		# epoch_calc_Op2.crop(0.7, 1.6)
-		# epoch_calc_nodelay.times = time_calc_crop
-
-
-
-
-
-
+		print 'concat well'
+          
+           #########################################################################	
+           ## Create the big decoder with operand1, operand2 and presented result ##
+           ######################################################################### 	
+          
+		## Epochs will have 900 ms, -100 to 800. 
+		## Epochs Operand1
+		epoch_calc_Op1 = epoch_calc[info_calc['operand1'] < 100] # have to add that otherwise it rewrites info_calc!-why?
+		epoch_calc_Op1.crop(-0.1,0.8)
+		epoch_calc_Op1.times = time_calc_crop
+		info_calc_Op1 = info_calc[info_calc['operand1'] < 100]
+		info_calc_Op1['operand'] = info_calc_Op1['operand1'] # add another column 'operand' for the big decoder
+		print epoch_calc
+		print info_calc
+		## Epochs Operand2
+		epoch_calc_Op2 = epoch_calc[info_calc['operand1'] < 100] 
+		epoch_calc_Op2.crop(0.7, 1.6)
+		epoch_calc_Op2.times = time_calc_crop
+		info_calc_Op2 = info_calc[info_calc['operand1'] < 100]
+		info_calc_Op2['operand'] = info_calc_Op2['operand2'] # add another column 'operand' for the big decoder
+		
+		## Baseline correct
+		#epoch_calc_Op1.apply_baseline(baseline)
+		#epoch_calc_Op2.apply_baseline(baseline)
+		#epoch_calc_delay.apply_baseline(baseline)
+		#epoch_calc_nodelay.apply_baseline(baseline)
+		## Concatenate
+		#epoch_calc_bigdec = mne.epochs.concatenate_epochs([epoch_calc_Op1,epoch_calc_Op2,epoch_calc_delay,epoch_calc_nodelay])	
+		#info_calc_bigdec = pd.concat([info_calc_Op1,info_calc_Op2,info_calc_delay, info_calc_nodelay])
 
 		#Baseline correction
-		epoch_calc.apply_baseline(baseline)
+		#epoch_calc.apply_baseline(baseline)
+
 
 		#Downsample data if needed
 		if downsampling > 0:
 			epoch_calc.decimate(downsampling)
 			#epoch_vsa.decimate(downsampling)
-
-		# Time lock to the response
 
 		if trainset[-1] == testset[-1]: #Check whether we are training and testing on the same data
 			mode = 'cross-validation'
@@ -111,8 +123,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': -0.1, 'stop': 1.6}
-				testTimes = {'start': -0.1, 'stop': 1.6}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'op2':
@@ -122,8 +134,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': 1.5, 'stop': 3.2}
-				testTimes = {'start': 1.5, 'stop': 3.2}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'pres':
@@ -138,14 +150,17 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'cres':
-				train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6)
+				#train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6)
+				train_index = info_calc['operator'] != 0
 				X_train = epoch_calc[train_index]
 				y_train = np.array(info_calc[train_index]['corrResult'])
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': 1.5, 'stop': 4.5}
-				testTimes = {'start': 1.5, 'stop': 4.5}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
+				trainTimes = {'start': -0.2, 'stop': 2}
+				testTimes = {'start': -0.2, 'stop': 2}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'addsub':
@@ -155,8 +170,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': 0.7, 'stop': 3.2}
-				testTimes = {'start': 0.7, 'stop': 3.2}
+				trainTimes = {'start': -0.2, 'stop': 4.5}
+				testTimes = {'start': -0.2, 'stop': 4.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'presTlock':
@@ -419,8 +434,7 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				params.update({'testTimes': testTimes})
 			elif trainset == 'vsa':
 				epoch_vsa,info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
-				epoch_vsa.apply_baseline(baseline)
-				
+				epoch_vsa.apply_baseline(baseline)			
 				train_index = info_vsa['congruency'] == 1
 				X_train = epoch_vsa[train_index]
 				y_train = np.array(info_vsa[train_index]['cue'])
@@ -431,6 +445,17 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				testTimes = {'start': -0.1, 'stop': 1.5}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
+			elif trainset == 'opbigdec':
+				train_index = info_calc_bigdec['operator'] != 0
+				X_train = epoch_calc_bigdec[train_index]
+				y_train = np.array(info_calc_bigdec[train_index]['operand'])
+				y_train = y_train.astype(np.float64)
+				X_test = X_train
+				y_test = y_train
+				trainTimes = {'start': -0.1, 'stop': 0.8}
+				testTimes = {'start': -0.1, 'stop': 0.8}
+				params.update({'trainTimes': trainTimes})
+				params.update({'testTimes': testTimes})				
 		else:
 			mode = 'mean-prediction'
 			if (trainset == 'op1') & (testset == 'prescdelay'):
@@ -597,24 +622,31 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 		#import ipdb; ipdb.set_trace() # to debug... 	
 		# Update params with mode
 		params.update({'mode': mode})	
-		
+		print('preparing to decode')
 		######################################################################################
 		#Decode
+ 
+              
 		if Type == 'class':
-			gat, score, diagonal = calc_classification(X_train, y_train, X_test, y_test, params)
 			print('Decoding subject classification')
+			gat, score, diagonal = calc_classification(X_train, y_train, X_test, y_test, params)
+			scoreR = 'auc'
 		elif Type == 'reg':
-			gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
 			print('Decoding subject regression')
+			gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
+			scoreR = 'r2'
+      
+		return params, epoch_calc.times, gat, score, diagonal, y_train, y_test, scoreR
+  
+      ### DELETE OBJECTS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-		return params, epoch_calc.times, gat, score, diagonal, y_train, y_test
-
-	params, times_calc, gat, score, diagonal, y_train, y_test = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
+	scoreR, params, times_calc, gat, score, diagonal, y_train, y_test = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
 
 	results = {'params': params, 'times_calc': times_calc, 'score': score, 'diagonal': diagonal, 'y_train': y_train, 'y_test': y_test}
 	#results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
 	# do I need to save the gat? 
-
+	sys.getsizeof(results)
 	#Save data
+	#fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type + '_' + scoreR
 	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type
 	np.save(fname, results)

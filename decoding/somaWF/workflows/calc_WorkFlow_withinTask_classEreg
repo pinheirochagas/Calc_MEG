@@ -41,472 +41,478 @@
         38, 
         39, 
         40, 
-        41
+        41, 
+        42, 
+        43, 
+        44, 
+        45, 
+        46, 
+        47, 
+        48, 
+        49, 
+        50, 
+        51, 
+        52, 
+        53, 
+        54, 
+        55, 
+        56, 
+        57, 
+        58, 
+        59, 
+        60, 
+        61, 
+        62, 
+        63, 
+        64, 
+        65, 
+        66, 
+        67, 
+        68, 
+        69, 
+        70, 
+        71, 
+        72, 
+        73, 
+        74, 
+        75, 
+        76, 
+        77, 
+        78, 
+        79, 
+        80, 
+        81, 
+        82, 
+        83, 
+        84, 
+        85, 
+        86, 
+        87, 
+        88, 
+        89, 
+        90, 
+        91, 
+        92, 
+        93, 
+        94, 
+        95, 
+        96, 
+        97, 
+        98, 
+        99, 
+        100, 
+        101, 
+        102, 
+        103, 
+        104, 
+        105, 
+        106, 
+        107, 
+        108, 
+        109, 
+        110, 
+        111, 
+        112, 
+        113, 
+        114, 
+        115, 
+        116, 
+        117, 
+        118, 
+        119, 
+        120, 
+        121, 
+        122, 
+        123, 
+        124, 
+        125, 
+        126, 
+        127, 
+        128, 
+        129, 
+        130, 
+        131, 
+        132, 
+        133, 
+        134, 
+        135, 
+        136, 
+        137, 
+        138, 
+        139, 
+        140, 
+        141, 
+        142, 
+        143, 
+        144, 
+        145, 
+        146, 
+        147, 
+        148, 
+        149, 
+        150, 
+        151, 
+        152, 
+        153, 
+        154, 
+        155, 
+        156, 
+        157, 
+        158, 
+        159, 
+        160, 
+        161, 
+        162, 
+        163, 
+        164, 
+        165, 
+        166, 
+        167
     ], 
     "name": null, 
     "serialized_temporary_paths": {}, 
     "serialized_barriers": {}, 
     "serialized_jobs": {
-        "24": {
-            "name": "s13_cres_cres_class", 
+        "165": {
+            "name": "s21_addsub_addsub_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "133": {
+            "name": "s04_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "132": {
+            "name": "s04_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "131": {
+            "name": "s03_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "130": {
+            "name": "s03_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "137": {
+            "name": "s06_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "136": {
+            "name": "s06_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "135": {
+            "name": "s05_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "134": {
+            "name": "s05_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "139": {
+            "name": "s07_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "138": {
+            "name": "s07_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "166": {
+            "name": "s22_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "24": {
+            "name": "s13_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "25": {
-            "name": "s13_cres_cres_reg", 
+            "name": "s13_op1_op1_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_op1_op1_reg.py"
             ], 
             "disposal_timeout": 168
         }, 
         "26": {
-            "name": "s14_cres_cres_class", 
+            "name": "s14_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "27": {
-            "name": "s14_cres_cres_reg", 
+            "name": "s14_op1_op1_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_op1_op1_reg.py"
             ], 
             "disposal_timeout": 168
         }, 
         "20": {
-            "name": "s11_cres_cres_class", 
+            "name": "s11_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "21": {
-            "name": "s11_cres_cres_reg", 
+            "name": "s11_op1_op1_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_op1_op1_reg.py"
             ], 
             "disposal_timeout": 168
         }, 
         "22": {
-            "name": "s12_cres_cres_class", 
+            "name": "s12_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "23": {
-            "name": "s12_cres_cres_reg", 
+            "name": "s12_op1_op1_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "160": {
+            "name": "s18_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_addsub_addsub_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "28": {
-            "name": "s15_cres_cres_class", 
+            "name": "s15_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "29": {
-            "name": "s15_cres_cres_reg", 
+            "name": "s15_op1_op1_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_op1_op1_reg.py"
             ], 
             "disposal_timeout": 168
         }, 
-        "40": {
-            "name": "s22_cres_cres_class", 
+        "161": {
+            "name": "s18_addsub_addsub_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "41": {
-            "name": "s22_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "1": {
-            "name": "s01_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_addsub_addsub_reg.py"
             ], 
             "disposal_timeout": 168
         }, 
         "0": {
-            "name": "s01_cres_cres_class", 
+            "name": "s01_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "3": {
-            "name": "s02_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "2": {
-            "name": "s02_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "5": {
-            "name": "s03_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "4": {
-            "name": "s03_cres_cres_class", 
+            "name": "s03_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "7": {
-            "name": "s04_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "6": {
-            "name": "s04_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "9": {
-            "name": "s05_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "8": {
-            "name": "s05_cres_cres_class", 
+            "name": "s05_op1_op1_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_op1_op1_class.py"
             ], 
             "disposal_timeout": 168
         }, 
-        "39": {
-            "name": "s21_cres_cres_reg", 
+        "163": {
+            "name": "s19_addsub_addsub_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_cres_cres_reg.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_addsub_addsub_reg.py"
             ], 
             "disposal_timeout": 168
         }, 
-        "38": {
-            "name": "s21_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "11": {
-            "name": "s06_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "10": {
-            "name": "s06_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "13": {
-            "name": "s07_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "12": {
-            "name": "s07_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "15": {
-            "name": "s08_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "14": {
-            "name": "s08_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "17": {
-            "name": "s09_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "16": {
-            "name": "s09_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "19": {
-            "name": "s10_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "32": {
-            "name": "s17_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "31": {
-            "name": "s16_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "30": {
-            "name": "s16_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "37": {
-            "name": "s19_cres_cres_reg", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_cres_cres_reg.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "36": {
-            "name": "s19_cres_cres_class", 
-            "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
-            "priority": 0, 
-            "join_stderrout": false, 
-            "command": [
-                "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_cres_cres_class.py"
-            ], 
-            "disposal_timeout": 168
-        }, 
-        "35": {
+        "119": {
             "name": "s18_cres_cres_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
@@ -515,10 +521,130 @@
             ], 
             "disposal_timeout": 168
         }, 
-        "34": {
+        "120": {
+            "name": "s19_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "121": {
+            "name": "s19_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "122": {
+            "name": "s21_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "123": {
+            "name": "s21_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "124": {
+            "name": "s22_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "125": {
+            "name": "s22_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "126": {
+            "name": "s01_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "127": {
+            "name": "s01_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "128": {
+            "name": "s02_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "129": {
+            "name": "s02_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "118": {
             "name": "s18_cres_cres_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
@@ -527,10 +653,1006 @@
             ], 
             "disposal_timeout": 168
         }, 
+        "59": {
+            "name": "s09_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "58": {
+            "name": "s09_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "55": {
+            "name": "s07_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "54": {
+            "name": "s07_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "57": {
+            "name": "s08_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "56": {
+            "name": "s08_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "51": {
+            "name": "s05_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "50": {
+            "name": "s05_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "53": {
+            "name": "s06_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "52": {
+            "name": "s06_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "164": {
+            "name": "s21_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "115": {
+            "name": "s16_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "114": {
+            "name": "s16_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "88": {
+            "name": "s03_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "89": {
+            "name": "s03_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "111": {
+            "name": "s14_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "110": {
+            "name": "s14_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "113": {
+            "name": "s15_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "112": {
+            "name": "s15_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "82": {
+            "name": "s22_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "83": {
+            "name": "s22_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "80": {
+            "name": "s21_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "81": {
+            "name": "s21_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "86": {
+            "name": "s02_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "87": {
+            "name": "s02_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "84": {
+            "name": "s01_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "85": {
+            "name": "s01_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "3": {
+            "name": "s02_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "7": {
+            "name": "s04_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "108": {
+            "name": "s13_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "109": {
+            "name": "s13_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "102": {
+            "name": "s10_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "103": {
+            "name": "s10_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "167": {
+            "name": "s22_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "101": {
+            "name": "s09_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "106": {
+            "name": "s12_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "107": {
+            "name": "s12_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "104": {
+            "name": "s11_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "105": {
+            "name": "s11_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "39": {
+            "name": "s21_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "38": {
+            "name": "s21_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
         "33": {
+            "name": "s17_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "32": {
+            "name": "s17_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "31": {
+            "name": "s16_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "30": {
+            "name": "s16_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "37": {
+            "name": "s19_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "36": {
+            "name": "s19_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "35": {
+            "name": "s18_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "34": {
+            "name": "s18_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "60": {
+            "name": "s10_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "61": {
+            "name": "s10_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "62": {
+            "name": "s11_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "63": {
+            "name": "s11_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "64": {
+            "name": "s12_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "65": {
+            "name": "s12_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "66": {
+            "name": "s13_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "67": {
+            "name": "s13_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "68": {
+            "name": "s14_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "69": {
+            "name": "s14_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "100": {
+            "name": "s09_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "2": {
+            "name": "s02_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "162": {
+            "name": "s19_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "6": {
+            "name": "s04_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "99": {
+            "name": "s08_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "98": {
+            "name": "s08_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "91": {
+            "name": "s04_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "90": {
+            "name": "s04_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "93": {
+            "name": "s05_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "92": {
+            "name": "s05_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "95": {
+            "name": "s06_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "94": {
+            "name": "s06_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "97": {
+            "name": "s07_cres_cres_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_cres_cres_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "96": {
+            "name": "s07_cres_cres_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "11": {
+            "name": "s06_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "10": {
+            "name": "s06_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "13": {
+            "name": "s07_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "12": {
+            "name": "s07_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "15": {
+            "name": "s08_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "14": {
+            "name": "s08_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "17": {
+            "name": "s09_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "16": {
+            "name": "s09_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "19": {
+            "name": "s10_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "18": {
+            "name": "s10_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "117": {
             "name": "s17_cres_cres_reg", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
@@ -539,15 +1661,531 @@
             ], 
             "disposal_timeout": 168
         }, 
-        "18": {
-            "name": "s10_cres_cres_class", 
+        "116": {
+            "name": "s17_cres_cres_class", 
             "parallel_job_info": null, 
-            "native_specification": "-l walltime=2:00:00, -l nodes=1:ppn=8", 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_cres_cres_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_cres_cres_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "151": {
+            "name": "s13_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "150": {
+            "name": "s13_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "153": {
+            "name": "s14_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "152": {
+            "name": "s14_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "155": {
+            "name": "s15_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "154": {
+            "name": "s15_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "157": {
+            "name": "s16_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "156": {
+            "name": "s16_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "159": {
+            "name": "s17_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "158": {
+            "name": "s17_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "48": {
+            "name": "s04_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "49": {
+            "name": "s04_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "46": {
+            "name": "s03_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "47": {
+            "name": "s03_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "44": {
+            "name": "s02_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "45": {
+            "name": "s02_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "42": {
+            "name": "s01_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "43": {
+            "name": "s01_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "40": {
+            "name": "s22_op1_op1_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_op1_op1_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "41": {
+            "name": "s22_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "1": {
+            "name": "s01_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s01_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "5": {
+            "name": "s03_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "9": {
+            "name": "s05_op1_op1_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_op1_op1_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "146": {
+            "name": "s11_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "147": {
+            "name": "s11_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "144": {
+            "name": "s10_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "145": {
+            "name": "s10_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "142": {
+            "name": "s09_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "143": {
+            "name": "s09_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "140": {
+            "name": "s08_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "141": {
+            "name": "s08_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "148": {
+            "name": "s12_addsub_addsub_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_addsub_addsub_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "149": {
+            "name": "s12_addsub_addsub_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_addsub_addsub_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "77": {
+            "name": "s18_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "76": {
+            "name": "s18_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "75": {
+            "name": "s17_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "74": {
+            "name": "s17_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "73": {
+            "name": "s16_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "72": {
+            "name": "s16_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "71": {
+            "name": "s15_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "70": {
+            "name": "s15_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_op2_op2_class.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "79": {
+            "name": "s19_op2_op2_reg", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_op2_op2_reg.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "78": {
+            "name": "s19_op2_op2_class", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=10:00:00, -l nodes=1:ppn=8", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_op2_op2_class.py"
             ], 
             "disposal_timeout": 168
         }
@@ -599,6 +2237,132 @@
         38, 
         39, 
         40, 
-        41
+        41, 
+        42, 
+        43, 
+        44, 
+        45, 
+        46, 
+        47, 
+        48, 
+        49, 
+        50, 
+        51, 
+        52, 
+        53, 
+        54, 
+        55, 
+        56, 
+        57, 
+        58, 
+        59, 
+        60, 
+        61, 
+        62, 
+        63, 
+        64, 
+        65, 
+        66, 
+        67, 
+        68, 
+        69, 
+        70, 
+        71, 
+        72, 
+        73, 
+        74, 
+        75, 
+        76, 
+        77, 
+        78, 
+        79, 
+        80, 
+        81, 
+        82, 
+        83, 
+        84, 
+        85, 
+        86, 
+        87, 
+        88, 
+        89, 
+        90, 
+        91, 
+        92, 
+        93, 
+        94, 
+        95, 
+        96, 
+        97, 
+        98, 
+        99, 
+        100, 
+        101, 
+        102, 
+        103, 
+        104, 
+        105, 
+        106, 
+        107, 
+        108, 
+        109, 
+        110, 
+        111, 
+        112, 
+        113, 
+        114, 
+        115, 
+        116, 
+        117, 
+        118, 
+        119, 
+        120, 
+        121, 
+        122, 
+        123, 
+        124, 
+        125, 
+        126, 
+        127, 
+        128, 
+        129, 
+        130, 
+        131, 
+        132, 
+        133, 
+        134, 
+        135, 
+        136, 
+        137, 
+        138, 
+        139, 
+        140, 
+        141, 
+        142, 
+        143, 
+        144, 
+        145, 
+        146, 
+        147, 
+        148, 
+        149, 
+        150, 
+        151, 
+        152, 
+        153, 
+        154, 
+        155, 
+        156, 
+        157, 
+        158, 
+        159, 
+        160, 
+        161, 
+        162, 
+        163, 
+        164, 
+        165, 
+        166, 
+        167
     ]
 }

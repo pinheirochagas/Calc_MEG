@@ -1,0 +1,136 @@
+function Plot2DSigRegions( SigMat,axh,sigt,sigf,plott,plotf,OutlineCol,LW,VOffset,HOffset,VExtraLen,HExtraLen ) 
+%function Plot2DSigRegions( SigMat,axh,sigt,sigf,plott,plotf,OutlineCol,LW,VOffset,HOffset,VExtraLen,HExtraLen ) 
+%
+% Add black outlines around the significant regions of MT time-frequency 
+% spectral plots. Thus would ideally be called after creating the plot
+% using imagesc.
+%
+% INPUTS
+%   SigMat:         A [Time x Freq] matrix of 0's and 1's (or anything 
+%                   greater than 1!), 0's referring tocwherever the region 
+%                   tested for significance was not significant, and 1 
+%                   referring to when it was.
+%   axh:            The handle of the axes to add the significance region
+%                   plots too. Defaults to the current axes.
+%   sigt:           A vector of the overall time values that sigMat refers
+%                   to. Defaults to just 1 to the corresponding size of 
+%                   SigMat.
+%   sigf:           A vector of the overall freq values that sigMat refers
+%                   to. Defaults to just 1 to the corresponding size of 
+%                   SigMat.
+%   plott:          A vector of the overall time values on the plot the sig
+%                   regions are being added to. This is not necessarily the
+%                   same thing as sigt, if for instance the plot includes
+%                   more time values than what was tested (and referred to
+%                   in SigMat). Defaults to just 1 to the corresponding 
+%                   size of SigMat (assuming that the whole plot was 
+%                   tested)
+%   plotf:          The same as plott above, but for frequency values.
+%   OutlineCol:     A string indicating the color to used for the 2D 
+%                   SigRegion outline. Called by the matlab function plot.
+%                   (Actually, teh user could input any plot options used
+%                   by the matlab plot functions, to use say a dashed
+%                   outline for example...) Defaults to 'k'.
+%
+%   LW:             Line Width of the lines around the SigRegions. Defaults
+%                   to 3.
+%   VOffset:        How much of a vertical offset relative to the center of
+%                   the current image cell to adjust the current horizontal 
+%                   line indicating the SigRegion. Defaults to 0.7.
+%   HOffset:        How much of a horizontal offset relative to the center 
+%                   of the current image cell to adjust the current 
+%                   vertical line indicating the SigRegion. Defaults to 
+%                   0.7.
+%   VExtraLen:      The amount (in terms of fraction of a cell height) to 
+%                   increase a given SigRegion border's vertical line so 
+%                   that it wraps around a cell, rather then just touching 
+%                   the cell's edge. Defaults to 0.07.
+%   HExtraLen:      The amount (in terms of fraction of a cell width) to 
+%                   increase a given SigRegion border's horizontal line so 
+%                   that it wraps around a cell, rather then just touching 
+%                   the cell's edge. Defaults to 0.07.
+%
+%   NOTE- Right now it is intended that for a given plotting application,
+%   (for a particular number of rows and columns) the user must manually
+%   adjust the last 5 input variables (LW, V and H Offset, and V and H
+%   ExtraLen) to whatever they think looks good for the given application. 
+%   I don't think that there is any one particular combination of values 
+%   that looks good for all values, but if that's wrong usage should reveal
+%   it to be the case. If that's right, I'm sure it's possible to work out
+%   a set of rules for detemrining what looks good for an arbitrary array
+%   size, but I don't feel like doing that...
+%
+% Created on 100507 by MJN
+
+[nSt nSf]=size(SigMat);
+SigMat=SigMat'>0; %we transpose here b/c by our convention, coherence is usually transposed before calling imagesc   
+                  %we also find where SigMat>0 to allow inputs of multiple significant clusters at one time, with the clusters numbered by their values in SigMat... (and thus allow direct input to this fxn from teh output of the MT CluSHuffStat programs...                     
+if nargin<12 || isempty(HExtraLen);    HExtraLen=0.07;    end
+if nargin<11 || isempty(VExtraLen);    VExtraLen=0.07;    end
+if nargin<10 || isempty(HOffset);    HOffset=0.7;    end
+if nargin<9 || isempty(VOffset);    VOffset=0.7;    end
+if nargin<8 || isempty(LW);    LW=3;    end
+
+if nargin<7 || isempty(OutlineCol);    OutlineCol='k';    end
+if nargin<6 || isempty(plotf);    plotf=1:nSf;    end
+if nargin<5 || isempty(plott);    plott=1:nSt;    end
+if nargin<4 || isempty(sigf);    sigf=1:nSf;    end
+if nargin<3 || isempty(sigt);    sigt=1:nSt;    end
+if nargin<2 || isempty(axh);    axh=gca;    end
+
+axes(axh)
+hold on
+
+% Below works out mapping of sigt and sigf to plott and plotf...
+% Essentially just check the first values of sigt and sigft, and see where these match with plott and plotf...   
+TAdj=find( sigt(1)==plott )-1;
+FAdj=find( sigf(1)==plotf )-1;
+
+%add zeros around SigMat so borders will be drawn around Sigpoints at the edge of the plot     
+SigMat=[repmat(0,nSf,1) SigMat repmat(0,nSf,1)];
+SigMat=[repmat(0,1,nSt+2); SigMat; repmat(0,1,nSt+2)];
+
+%note- this assumes axis xy has been already done to the plot before calling this fxn...    
+%although- to switch this I think the only thing that would be needed to be done is change whether VOffset is added to or subtracted from teh y-position    
+%first plot horz lines 
+HdSigMat=diff(SigMat); 
+
+%first plot the Horz Lines below the Sig Edge
+%because we surrounded SigMat with zeros before the diff function, the indices of the diff'ed dimensnion below directly correspond to the appropriate indices on the plot   
+%BUT- in the non-diff'ed dimensino, we DO need to account for this...
+[HLinIndsY HLinIndsX]=find( HdSigMat==1 );  %these will serve as the cells with 
+for iL=1:length(HLinIndsX)
+    tmpy=max(HLinIndsY(iL)-VOffset,VOffset)+FAdj;    %the limit is needed for the limiting case of the first row, so that the line is created off the limits of the axis... instead it is drawn as if it were "going the other way" for the row below it...     
+    plot( [HLinIndsX(iL)-0.5-HExtraLen HLinIndsX(iL)+0.5+HExtraLen]-1+TAdj,[tmpy tmpy],OutlineCol,'LineWidth',LW )    %the extra -1 is to account for the zeros added around SigMat   
+    
+    %plot( [tmpy tmpy],[HLinIndsX(iL)-0.5-HExtraLen HLinIndsX(iL)+0.5+HExtraLen]-1+FAdj,'k','LineWidth',LW )    %the extra -1 is to account for the zeros added around SigMat   
+    %above for debugging
+end
+
+[HLinIndsY HLinIndsX]=find( HdSigMat==-1 );  %these will serve as the cells with 
+for iL=1:length(HLinIndsX)
+    %here we do need to account for the added edge zeros in the diffed dimension too  
+    tmpy=min(HLinIndsY(iL)+VOffset-1, length(plotf)+1-VOffset)+FAdj;    %the limit is needed for the limiting case of the first row, so that the line is created off teh limits of the axis... instead it is drawn as if it were "going the other way" for the row below it...     
+    plot( [HLinIndsX(iL)-0.5-HExtraLen HLinIndsX(iL)+0.5+HExtraLen]-1+TAdj,[tmpy tmpy],OutlineCol,'LineWidth',LW )    
+end
+
+
+%now plot vert lines 
+VdSigMat=diff(SigMat,[],2); 
+
+%first plot the vert Lines to the left of the Sig Edge
+%because we surrounded SigMat with zeros before the diff function, the indicess below directly correspond to the appropriate indices on the plot   
+[VLinIndsY VLinIndsX]=find( VdSigMat==1 );  %these will serve as the cells with 
+for iL=1:length(VLinIndsX)
+    tmpx=max(VLinIndsX(iL)-HOffset,HOffset)+TAdj;    %the limit is needed for the limiting case of the first row, so that the line is created off teh limits of the axis... instead it is drawn as if it were :going the other way" for the row below it...     
+    plot( [tmpx tmpx],[VLinIndsY(iL)-0.5-VExtraLen VLinIndsY(iL)+0.5+VExtraLen]-1+FAdj,OutlineCol,'LineWidth',LW )    
+end
+
+[VLinIndsY VLinIndsX]=find( VdSigMat==-1 );  %these will serve as the cells with 
+for iL=1:length(VLinIndsX)
+    %here we do need to account for the added edge zeros in the diffed dimension too     
+    tmpx=min(VLinIndsX(iL)+HOffset-1,length(plott)+1-HOffset)+TAdj;    %the limit is needed for the limiting case of the first row, so that the line is created off teh limits of the axis... instead it is drawn as if it were :going the other way" for the row below it...     
+    plot( [tmpx tmpx],[VLinIndsY(iL)-0.5-VExtraLen VLinIndsY(iL)+0.5+VExtraLen]-1+FAdj,OutlineCol,'LineWidth',LW )    
+end
+
+

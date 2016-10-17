@@ -1,4 +1,4 @@
-function [data, time] = smoothCalcVSA(subName, task)
+function smoothCalcVSA(subName, task)
 % This function smooths and/or average in a sliding window of XXms the
 % signal of the Calculation experiment (for decoding analysis mostly)
 % Smooth MEG data
@@ -6,8 +6,8 @@ function [data, time] = smoothCalcVSA(subName, task)
 % task = 'calc' or 'VSA'
 
 %datadir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/mat/';
-datadir = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/mat/';
-
+%datadir = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/mat/';
+datadir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/';
 
 load([datadir subName '_' task '.mat'])
 
@@ -20,7 +20,7 @@ KernWidth = 0.05; %%% size in sec of the std of the Gaussian kernel for smoothin
 nKernStdToInc=4;    % the number of stds of the Gaussian to include when generating the kernel    
 opts.KernWidth=KernWidth;
 opts.nKernStdToInc=nKernStdToInc;
-tOutLims=[-.1 4.1]; %? 
+tOutLims=[-.1 4.4]; %? 
 times = data.time{1};
 
 
@@ -38,12 +38,12 @@ end
 timeSmooth = AdjConv(data.time{1},'Gauss',times, tOutLims, opts);
 
 % Correct the time vector size 
-time = timeSmooth;
+data.time = timeSmooth;
 %
-data = dataSmooth;
+data.trial = dataSmooth;
 
 % Save updated data in a new file
-%save([datadir subName '_' task '_avg.mat'], data)
+save([datadir subName '_' task '_smooth.mat'], 'data')
 
 
 % % % Some plotting to compare avg window and smoothing

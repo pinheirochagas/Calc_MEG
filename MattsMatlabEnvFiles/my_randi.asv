@@ -1,0 +1,9 @@
+%function my_randi( imax,m,n )
+
+%RANDI(IMAX,M,N)
+%tmpInds=randi(nShuffs,nShuffs,1);
+
+%n=rand(m,n);
+
+n=
+round(

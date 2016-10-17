@@ -1,0 +1,28 @@
+function myboxplot(Data,Labels)
+%
+
+%AddTHplot(NSm,NSv,TrialLabels);
+
+
+
+%Find out number of columns
+ncols=length(Data);
+
+%pad labels with spaces so they are all an even number of letters
+nlets=0;
+for ic=1:ncols    nlets=max(nlets,length(Labels{ic}));  end
+for ic=1:ncols    
+    NLabels{ic}(1:nlets)=' ';
+    NLabels{ic}(1:length(Labels{ic}))=Labels{ic};
+end
+
+%Move data into one long vector, with grouping variable G
+X=[];
+G=[];
+for ic=1:ncols 
+    X=[X; Data{ic}];
+    G=[G; repmat(NLabels{ic},length(Data{ic}),1)];
+end
+
+%call matlab's boxplot function
+boxplot(X,G,'notch','on')

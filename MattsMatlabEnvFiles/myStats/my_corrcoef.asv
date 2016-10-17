@@ -1,0 +1,99 @@
+function [r,p,PreTests,rlo,rup] = my_corrcoef(x,varargin)
+% function [r,p,PreTests,rlo,rup] = my_corrcoef(x,varargin)
+%
+% Written by MJN on 080410
+%
+% The intention of this file is to perform tests of the assumptions of a 
+% Pearson correlation as I'd like to do them too be sure they aren't violated
+% too badly on a dataset before running regress (see my_anovan).
+% Essentially the only thing that's tested here is the normality of the
+% underlying data via skew and kurtosis measured, and each parameter is
+% only tested separately, which I'm saying is good enough. If any of 
+% the assumptions are violated the program will plot a histogram of the
+% each paramater separately, while displaying the values of all the n,
+% skew, and kurtosis in appropriate places. The correlation is still 
+% performed even if the assumptions are determined to be violated.
+%
+% Note- presently the parameters for the assumption Pass/Fail cutoffs are 
+% hard-coded into this program. If that becomes a problem and it's desired 
+% to make these an input to this function, I can add that later, probably 
+% by making an options structure the third input before varargin. (see 
+% CorrectData from the impedance study supplementary code)
+%
+% Also note, this doesn't deal with the independence assumption. See stats
+% notes, btu according to a northwestern website, if independence is
+% violated, the slope estimates will be unbiased, btu the variance
+% estimates will be off (which means confidence intervals and significance
+% testing will be off).
+%
+% Inputs are the same as corrcoeff(y,X,alpha)
+%
+% Outputs are the same as regress except that the third output is a
+% structure PreTests that has the following fields for each param:
+%   PreTests.n          -Sample size
+%   PreTests.Skew       -Skew statistic of resid
+%   PreTests.Kurt       -Kurtosis statistic of resid
+
+PlotFlag=0; %manually set this option
+PrintFlag=0; %manually set this option
+
+if ~isempty(varargin) && isnumeric(varargin{1})
+   y = varargin{1};
+   varargin(1) = [];
+
+   % Two inputs, convert to equivalent single input
+   x = x(:);
+   y = y(:);
+   if length(x)~=length(y)
+      error('MATLAB:corrcoef:XYmismatch', 'The lengths of X and Y must match.');
+   end
+   x = [x y];
+end
+
+%%%%% Set the parameter cutoffs
+% skewness above 1 (or below -1... i.e. test abs value of skew
+% kurtosis below 1.5 or above 5 (kurtosis of a normal dist is 3... see note below for kurtosis and matlab
+% We will also test if the squared residuals are correlated with the y-value, and
+% determine a violation
+CU.Skew=1;
+CU.Kurt=[1.5 5];
+
+%initialize
+FailTest=0;
+
+%by this point every thing is put into one matrix, x with params down each column
+np=size(x,2);
+for ip=1:np
+    PreTests.n(ip)=size(x,1);
+    PreTests.Skew(ip)=skewness(x(:,ip),0);
+    PreTests.Kurt(ip)=kurtosis(x(:,ip),0);
+end
+
+if any(abs(PreTests.Skew)>CU.Skew) || any(~isbetween(PreTests.Kurt,CU.Kurt))
+    FailTest=1;
+    if PrintFlag
+        disp('Data failed corrcoef asssumption tests.')
+        disp(['Skew: ' num2str(PreTests.Skew)])
+        disp(['Kurt: ' num2str(PreTests.Kurt)])
+    end
+    
+    %plot the distribution
+    if PlotFlag
+        cf=figure;
+        figure
+        for ip=1:np
+            subplot(np,1,ip)
+            myHist(x(:,ip),[],[],[],1);
+            title(['n: ' num2str(PreTests.n(ip)) ', skew: ' num2str(PreTests.Skew(ip)) ', kurt: ' num2str(PreTests.Kurt(ip))])
+            xlabel(['parameter values']);
+            ylabel('count')
+            AxisAlmostTight(.02,1)
+        end
+        figure(cf);
+    end
+    %If it's not normal, try transforming y or doing a non-parametric correlation
+end
+
+%the 'rows','pairwise' deals with nans left in the matrix x, and makes all the pairwise comparisons between columns using only the non-nan values         
+if isempty(varargin)        [r,p,rlo,rup] = nancorrcoef(x,'rows','pairwise');    else        [r,p,rlo,rup] = nancorrcoef(x,varargin,'rows','pairwise');   end
+PreTests.FailTest=FailTest;

@@ -1,0 +1,27 @@
+function [p,h,stat]=my_ranksum(x,varargin)
+%[p,h,stat]=my_ranksum(x,varargin)
+%
+% This is exactly like matlab's signrank, but adjusts the output of the
+% fields zval and signedranl in the output stats structure to reflect the
+% sign of the test, i.e. whether x or y is higher.... a positive value for
+% signedrank or zval indicates that x is higher than 1, or for a one smaple
+% test, is higher than 0. A neg. value indicates the opposite.
+
+switch nargin
+    case 1;     [p,h,stat]=ranksum(x);
+    case 2;     [p,h,stat]=ranksum(x,varargin{1});
+    case 3;     [p,h,stat]=ranksum(x,varargin{1},varargin{2});
+    case 4;     [p,h,stat]=ranksum(x,varargin{1},varargin{2},varargin{3});
+end
+
+%the sign of these values (zval and ranksum) coming out of ranksum seems 
+%to be erratic.... just ensure that the signs of each zval and ranksum 
+%match in the final output, regardless of the output of ranksum...
+
+if nanmedian(x)<nanmedian(varargin{1})
+    stat.zval=-abs(stat.zval);
+    stat.ranksum=-abs(stat.ranksum);
+else
+    stat.zval=abs(stat.zval);
+    stat.ranksum=abs(stat.ranksum;
+end

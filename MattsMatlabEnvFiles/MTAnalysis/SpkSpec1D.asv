@@ -1,0 +1,45 @@
+function [Sx,f,PSx,N,err,tmpdf1] = SpkSpec1D(Dat1_1D,bn,nTr,TrLen,options)
+
+%note that the bn input is needed... BUT this isn't teh same tr by tr bn
+%input as in teh other MT anal code... here it is teh start and stop of the
+%expe
+%certain fields for options will be overwritten even if the are entered in
+%in options... these are tapers, bn, and dn
+
+%note that the bn input (under options.bn) for spikes is very important... and this code won't run without it    
+
+%%%%if inputting spikes, the first time sample of the continuous function created will be assumed to exist at time zero (as it does for LFPs in Plex files) so be sure to adjust your spike times input to this function accordingly     
+
+
+%Note that for now, this assumes the use of only one taper... more tapers are possible to do, but this would require changes to the code  ..
+
+
+%TrLen will be entered in ms... this code needs to adjust it to samples based on Fs...   
+%but if Fs isn't entered (under options.sampling) then we assume it's 1000, and then TrLen is automatically in samples if it was entered in ms   
+if nargin>=5 && ~isempty(TrLen) && isfield(options,'sampling')
+    TrLen=TrLen*options.sampling/1000;
+end
+
+if nargin>=5 && isfield(options,'sampling');     curFs=options.sampling;         else        curFs=1000;     end
+if nargin<2 || isempty(bn);     bn=[min(InDat) max(InDat)];     end
+
+[Dat1 N]=Parse1DSpkIntoTrs(Dat1_1D,bn,nTr,TrLen); %N comes out of this in units of samples
+
+%convert N to seconds
+N=N/curFs;
+
+options.dn=N;
+options.tapers=[N 1/N+1e-8];
+options.bn=bn;
+
+if nargout>4
+    [Sx,f,~,PSx,N,~,~,err,tmpdf1] = SpkSpec(Dat1,options);
+elseif nargout>2
+    [Sx,f,~,PSx,N] = LFPSpec(Dat1,options);
+else
+    [Sx,f] = LFPSpec(Dat1,options);
+end
+
+%[Sx,f,tout,PSx,N,dn,nwin,err,tmpdf1] = SpkSpec(...
+%[Sx,f,tout,PSx,N,dn,nwin,err,tmpdf1] = LFPSpec(X,tapers,sampling, dn, fk, plotflag, t0, normfreqs, pad, pval, JustPartFlag,errType,ZTransFlag,ClusShuffOpts)
+%[spec,f] = LFPSpec(X,[N W],Fs, N, fk, plotflag, [], [], pad);

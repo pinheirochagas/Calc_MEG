@@ -1,0 +1,10 @@
+function OutNum=CompPhShift(InNum,PhShift,RadOrDeg)
+%OutNum=CompPhShift(InNum,PhShift,RadOrDeg)
+%
+% This shifts the phase of the complex numebr InNum by PhShift without
+% adjusting its magnitude. RadOrDeg denotes if PhShift is in radians (1- 
+% DEFAULT) or in degrees (2). PhShift shoudl be a scalar or be the same
+% size
+%
+% This is a quick small function that I'm essentially only writing in case
+% I forget how to hsift just the phase of a complex number.

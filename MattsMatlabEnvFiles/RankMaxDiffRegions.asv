@@ -1,0 +1,17 @@
+function [RegListFirstInd,DiffVals]=RankMaxDiffRegions(InDat1,InDat2,Bin)
+%
+%
+% Started for Kass Coh Project to find the freq regions with the largest
+% difference in coh. b/t Norm and Deaff data.
+%
+% 100910 Matthew Nelson
+
+nRegs=length(InDat1)- (Bin-1);
+RegListFirstInd(1:nRegs,1)=1:nRegs;
+DiffVals=repmat(NaN,nRegs,1);
+
+for ix=1:nRegs
+    DiffVals(ix)=
+    
+    
+    

@@ -1,0 +1,81 @@
+function [DataOut,Centers,Inds] = myHist2DSerial(Data,BinWidth,useZeroMin,Dim,graphflag,useCA)
+%
+% Begun on 060403 by Matt Nelson to make quick histograms a certain way
+% using parameters specified. Returns, and optionally creates a histogram
+% of the input data, with specified Binwidth
+%
+% Last modified 060404 by Matt Nelson
+%
+% INPUTS:
+%       Data: 1D matrix of data you want a histogram of
+%       Binwidth: Specificed width of bins. default is the width of the
+%               data range divided by 20
+%       useZeroMin: Set to 1 if you want to include 0 as the min. bin center in the
+%            histogram, which assumes the minimum center is the minimum 
+%            point of the data rounded to the nearest multiple of binwidth.
+%            Center of Max Bin is always set to the maximum in the data, 
+%            rounded to the nearest multiple of binwidth. Default is 0
+%       graphflag: 0 or 1 if you do or do not want a bar plot made in a new
+%           figure window. Default = 1
+%       useCA: set to 1 if you want to use current axis (defined before the
+%           function is called) in the graph this procudes, or set to 0 to  
+%           create a new figure. Default is 0.
+%
+% Outputs:
+%       DataOut: # of occurences per bin in data
+%       Centers: Centers of bins used in histogram
+%       Inds:   The indices in centers falling in each data bin
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+if nargin<5 || isempty(useCA)    useCA=0;  end
+if nargin<4 || isempty(graphflag)    graphflag=1;  end
+if nargin<3 || isempty(useZeroMin)    useZeroMin=0;    end
+DataMin=min(Data);    %NaN's are automatically ignored by matlab in these functions
+DataMax=max(Data);
+if nargin<2 || isempty(BinWidth)    BinWidth=(DataMax-DataMin)/20;    end
+
+if min(Data)==max(Data)     
+    warning(['In myHist, Can''t do hist. All values in Data are the same, and equal to: ' num2str(Data(1))])
+    BinWidth=0.05;  %done for p-value plots...
+    bar(min(Data),sum(Data==min(Data)),BinWidth)
+    return
+elseif isempty(Data)
+    warning(['In myHist, input Data is empty. Can''t do hist.'])
+    return
+end
+        
+
+%round to lowest val within BinWidth for histogram
+if useZeroMin
+    MinCenter=0;
+else
+    MinCenter =round(DataMin/BinWidth)*BinWidth;
+end
+MaxCenter =round(DataMax/BinWidth)*BinWidth;
+Centers =[MinCenter:BinWidth:MaxCenter];
+
+if graphflag
+    if ~useCA
+        figure
+    end
+    if nargout==0
+        hist(Data,Centers);    %without output arguments, it plots this automatically
+    else  
+        DataOut=hist(Data,Centers);
+        bar(Centers,DataOut);
+    end
+else
+    if nargout==0
+        disp('nargout==0 and no graphflag, so nothing presented in myHist')
+    else
+        DataOut=hist(Data,Centers);
+    end
+end
+
+if nargout>2
+    Inds=ones(size(Data));
+    for ic=2:length(Centers)    
+        Inds(Data>Centers(ic)-BinWidth/2)=ic;        
+    end    
+end

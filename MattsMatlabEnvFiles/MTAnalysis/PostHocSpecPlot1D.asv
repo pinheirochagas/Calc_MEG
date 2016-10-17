@@ -1,0 +1,79 @@
+function PostHocSpecPlot1D(S,f,LogFreq,TitStr,axh,fk,CLim,popts,param,value)
+% PostHocSpecPlot1D(S,f,LogFreq,TitStr,axh,fk,CLim,popts,param,value)
+%
+% on 100316: S can now be a 2D array for plotting multiple signals... if
+% that is the case, coh should be : [nsigs x freq]... it is assumed f
+% applies to all signals
+
+if nargin<10 || isempty(param) || isempty(value);   
+    param='LineWidth';
+    value=0.5;  %this is the default... so essentially we're not doing anything here, but it prevents tedious cutting and pasting below (the effects of which are beginning to grow exponentially as this code gets further modified!)
+end 
+
+if nargin<5 || isempty(axh)
+    figure;
+else
+    axes(axh);
+end
+
+if nargin<3 || isempty(LogFreq);     LogFreq=false;     end
+
+if nargin>=6 && ~isempty(fk)      
+    IncFreq=isbetween(f,fk);
+    S=S(:,IncFreq);
+    f=f(IncFreq);
+end
+
+
+[r c]=size(S);
+if r>1 && c>1
+    %need to process # of signals
+    nsigs=r;
+    for is=1:nsigs
+        if LogFreq
+            if nargin>7 && ~isempty(popts)
+                loglog(f,S(is,:)+1e-8,popts{is},param,value);
+            else
+                loglog( f,S(is,:)+1e-8,param,value );
+            end
+        else
+            if nargin>7 && ~isempty(popts)
+                semilogy(f,S(is,:)+1e-8,popts{is},param,value);
+            else
+                semilogy( f,S(is,:)+1e-8,param,value );                
+            end
+        end
+        hold on
+    end
+else
+    %imagesc(log10(S'+1e-8)); %add 1e-8 to avoid plotting log of zero, it happens with fake data sometimes   
+    if LogFreq
+        loglog(f,S+1e-8,param,value);
+    else
+        semilogy(f,S+1e-8,param,value);
+    end
+    set(
+end
+
+box off
+if nargin>6 && ~isempty(CLim);    
+    axis([f(1) f(end) CLim(1) CLim(2)]);      
+else
+    axis tight
+end
+
+% numYTicks=6;
+% numXTicks=6;
+% freqind=round(linspace(1,length(f),numYTicks));
+% freqvals=round(f(freqind));
+% freqind(1)=.5;
+% set(axh,'XTickLabel',freqvals);
+% set(axh,'XTick',freqind);
+
+xlabel('Frequency (Hz)')
+ylabel('log10 of Spectrum')
+if nargin>3 && ~isempty(TitStr)
+    title(TitStr)
+end
+
+%title(['MT Field/Field coherence mag with ' num2str(Nms) ' ms window sliding ' num2str(dnms) ' at a time.'])
