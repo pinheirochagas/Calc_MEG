@@ -73,8 +73,8 @@ for op = 1:length(op_names)
         clear avgERFall
         clear avgERFallGavg
     end
-%      save([resultpath 'calc_erf_' op_names{op} '.mat'], 'avgERFallGavg')
-%      clear avgERFallGavg
+     save([resultpath 'calc_erf_' op_names{op} '.mat'], 'avgERFallGavg')
+%     clear avgERFallGavg
 end
 
 
