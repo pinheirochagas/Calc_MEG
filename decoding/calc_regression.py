@@ -19,6 +19,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.cross_validation import StratifiedKFold
 # Other tools
 from jr.gat.scorers import kendall_score
+from jr.gat.scorers import scorer_r2
+
 
 def calc_regression(X_train, y_train, X_test, y_test, params):
     "This function performs a regression."
@@ -46,7 +48,7 @@ def calc_regression(X_train, y_train, X_test, y_test, params):
     predict_mode = params['mode']
 
     # Define scorer
-    scorer = 'r2'
+    scorer = scorer_r2
     #Define scorer
 #    if params['scorer'] is 'scorer_auc':
 #        scorer = scorer_auc
@@ -58,9 +60,9 @@ def calc_regression(X_train, y_train, X_test, y_test, params):
 
     #gat = GeneralizationAcrossTime(clf = clf, cv = cv, train_times = params['trainTimes'], 
         #test_times = params['testTimes'], scorer = scorer, predict_mode = predict_mode, n_jobs = 6)
-        
     gat = GeneralizationAcrossTime(clf = clf, cv = cv, train_times = params['trainTimes'], 
-        test_times = params['testTimes'], scorer = scorer, predict_mode = predict_mode, n_jobs = 6)
+        test_times = params['testTimes'], scorer = scorer, predict_mode = predict_mode, n_jobs = 32)
+        
     # gat.fit(X_train, y = y_train)
     # score = gat.score(X_train, y = y_train)
 
