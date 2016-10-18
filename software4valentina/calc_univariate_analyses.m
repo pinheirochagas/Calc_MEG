@@ -7,20 +7,37 @@ addpath '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/fiel
 addpath '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/erf/'                                                                          
 ft_defaults  
 
+% Linux
+addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/'
+addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/'                        %  pipeline scripts
+addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/bst2ft/'     
+addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/'                              % local processing scripts
+addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/'   % fieldtrip version tested with this pipeline                                                                                   
+addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/erf/'                                                                          
+ft_defaults  
+
+%% Data
+% MAC
 datapath = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/mat/';
 resultpath = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/';
 
-% In the hard drive
+% Hard drive
 datapath = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/mat/';
 resultpath = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/erf/';
 figurespath = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/data/erf/figures/';
+
+%Linux
+datapath = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/';
+resultpath = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/erf/';
+figurespath = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/erf/figures/';
+
 
 %% Grand Average
 
 subs = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15', ...
         's16','s17','s18','s19','s21','s22'};
     
-%subs = {'s01'};
+subs = {'s01'};
 
 
 % Retrieve all the conditions from an example data
@@ -30,6 +47,7 @@ conditions = defineConditionsERF(data);
 op_names = fields(conditions);
 cond_names = fields(conditions.all);
 clear data
+
 
 % op_names = {'all', 'addsub'}
 % cond_names = {'delay','operator'}
@@ -45,6 +63,8 @@ for sub = 1:length(subs)
 end
 
 
+% Check the presence of each level in each condition. 
+
 % Calculate the Grand Avarage for all conditions and save for separate
 % conditions, but with all subjects together. 
 for op = 1:length(op_names)
@@ -57,6 +77,7 @@ for op = 1:length(op_names)
                 cfg = [];
                 cfg.trials = find(filter);
                 cfg.keepindividual = 'yes';
+                cfg.keeptrials = 'yes';
                 avgERF = ft_timelockanalysis(cfg, data);
                 avgERFsubs{sub} = avgERF;
             end
@@ -69,7 +90,7 @@ for op = 1:length(op_names)
             avgERFallGavg.(op_names{op}).(cond_names{c}).([cond_names{c} num2str(conditions.(op_names{op}).(cond_names{c})(l))]).avg = squeeze(mean(avgERFallGavg.(op_names{op}).(cond_names{c}).([cond_names{c} num2str(conditions.(op_names{op}).(cond_names{c})(l))]).individual,1));
             conditions = defineConditionsERF(data); % reset conditions to their original values
         end
-        save([resultpath 'calc_erf_' op_names{op} '_' cond_names{c} '.mat'], 'avgERFallGavg')
+        save([resultpath 'calc_erf_smooth' op_names{op} '_' cond_names{c} '.mat'], 'avgERFallGavg')
         clear avgERFall
         clear avgERFallGavg
     end

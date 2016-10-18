@@ -14,6 +14,8 @@ conditions.all.respSide = unique(data.trialinfoCustom.respSide);
 conditions.comp = conditions.all;
 conditions.comp.operator = 0;
 conditions.comp.operand2 = 33;
+conditions.comp.corrResult = [3 4 5 6];
+conditions.comp.presResult = [1:9];
 
 conditions.add = conditions.all;
 conditions.add.operator = 1;
