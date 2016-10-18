@@ -161,8 +161,8 @@ def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
 				y_train = y_train.astype(np.float64)
 				X_test = X_train
 				y_test = y_train
-				trainTimes = {'start': -0.2, 'stop': 4.5}
-				testTimes = {'start': -0.2, 'stop': 4.5}
+				trainTimes = {'start': -0.2, 'stop': 2}
+				testTimes = {'start': -0.2, 'stop': 2}
 				params.update({'trainTimes': trainTimes})
 				params.update({'testTimes': testTimes})
 			elif trainset == 'addsub':
