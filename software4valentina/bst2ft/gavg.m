@@ -1,82 +1,86 @@
-%% all subjects that are ready for CLIKS
-subj=[1 3 5:8 13 16];
 
-% Click1
+subj=[3 5 8:12 14:21];
+for s=1:length(subj)
+    if subj(s)<10
+    load(['s0' num2str(subj(s))]);
+    else
+        load(['s' num2str(subj(s))]);
+    end;
+    dataavg=data;
+    clear data
+    for c=1:length(dataavg)
+        dataavg{c}=rmfield(dataavg{c},'trial');
+    end;
+    save(['s' num2str(s) '_avg'] ,'dataavg','-v7.3');
+end;
+
+cfg=[];
+cfg.keepindividual = 'yes';
+gav=cell(9,1);
+for c=1:9
+    for s=1:length(subj)
+        load(['s' num2str(s) '_avg']);
+        dataavg_loc{s}=dataavg{c};
+    end;
+    gav{c}=ft_timelockgrandaverage(cfg,dataavg_loc{:});
+    gav{c}.avg=squeeze(mean(gav{c}.individual,1));
+end;
+
+subj=[3 5 8:12 14:21];
+for s=1:length(subj)
+    if subj(s)<10
+    load(['s0' num2str(subj(s))]);
+    else
+        load(['s' num2str(subj(s))]);
+    end;
+    % number deviant +-1
+    dataavg=ns_appendftdata(data{3},data{5});  dataavg=rmfield(dataavg,'trial');     
+    save(['s' num2str(s) '_avg_dev1'] ,'dataavg','-v7.3');
+    % number deviant +-2
+    dataavg=ns_appendftdata(data{2},data{6});  dataavg=rmfield(dataavg,'trial');
+    save(['s' num2str(s) '_avg_dev2'] ,'dataavg','-v7.3');
+    % number deviant +-3
+    dataavg=ns_appendftdata(data{1},data{7});  dataavg=rmfield(dataavg,'trial');
+    save(['s' num2str(s) '_avg_dev3'] ,'dataavg','-v7.3');
+    % color deviant 
+    dataavg=ns_appendftdata(data{8},data{9});  dataavg=rmfield(dataavg,'trial');
+    save(['s' num2str(s) '_avg_devcol'] ,'dataavg','-v7.3');
+end;
+
 cfg=[];
 cfg.keepindividual = 'yes';
 for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S0' num2str(subj(s)) '\data'],'data_click1')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S' num2str(subj(s)) '\data'],'data_click1')
-    end;
-    dataavg=data_click1;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_click1  
+    load(['s' num2str(s) '_avg_dev1']);
+    dataavg_loc{s}=dataavg;
 end;
-gav_click1=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_click1.avg=squeeze(mean(gav_click1.individual,1));
+gav_dev1=ft_timelockgrandaverage(cfg,dataavg_loc{:});
+gav_dev1.avg=squeeze(mean(gav_dev1.individual,1));
 
-% Click2
-cfg=[];
-cfg.keepindividual = 'yes';
 for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S0' num2str(subj(s)) '\data'],'data_click2')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S' num2str(subj(s)) '\data'],'data_click2')
-    end;
-    dataavg=data_click2;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_click2 
+    load(['s' num2str(s) '_avg_dev2']);
+    dataavg_loc{s}=dataavg;
 end;
-gav_click2=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_click2.avg=squeeze(mean(gav_click2.individual,1));
+gav_dev2=ft_timelockgrandaverage(cfg,dataavg_loc{:});
+gav_dev2.avg=squeeze(mean(gav_dev2.individual,1));
 
-
-%% all subjects that are ready
-subj=[1 3:8 13 16];
-
-% Click1
-cfg=[];
-cfg.keepindividual = 'yes';
 for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S0' num2str(subj(s)) '\data'],'data_click1')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S' num2str(subj(s)) '\data'],'data_click1')
-    end;
-    dataavg=data_click1;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_click1  
+    load(['s' num2str(s) '_avg_dev3']);
+    dataavg_loc{s}=dataavg;
 end;
-gav_click1=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_click1.avg=squeeze(mean(gav_click1.individual,1));
+gav_dev3=ft_timelockgrandaverage(cfg,dataavg_loc{:});
+gav_dev3.avg=squeeze(mean(gav_dev3.individual,1));
 
-% Click2
-cfg=[];
-cfg.keepindividual = 'yes';
 for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S0' num2str(subj(s)) '\data'],'data_click2')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data\S' num2str(subj(s)) '\data'],'data_click2')
-    end;
-    dataavg=data_click2;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_click2 
+    load(['s' num2str(s) '_avg_devcol']);
+    dataavg_loc{s}=dataavg;
 end;
-gav_click2=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_click2.avg=squeeze(mean(gav_click2.individual,1));
+gav_devcol=ft_timelockgrandaverage(cfg,dataavg_loc{:});
+gav_devcol.avg=squeeze(mean(gav_devcol.individual,1));
 
-
-
-
-% save grand average 
-cd C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data
 save gave gav*;
-
+    
+    
+    
+    
+    
+    

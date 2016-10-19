@@ -6,35 +6,47 @@ function stat=ns_statdepregr(data1,data2,data3,data4,channel,latency)
 % latency is the time window of interest (in seconds, e.g. [0 0.5])
 %
 
+%%% add fieldtrip directory to the current path %%%
+% addpath '/neurospin/local/fieldtrip/'                 % fieldtrip
+% ft_defaults                                           % sets fieldtrip defaults and configures the minimal required path settings 
+
+% load neighbour sensors configuration (independently from channel
+% selection, the magnetometers layout is loaded, as channel position is the
+% same for the three types of sensors).
+% load('/neurospin/meg/meg_tmp/tools_tmp/pipeline_tmp/neuromag306mag_neighb.mat');
+load('C:\Users\mbuiatti\Documents\FromOmega\software\pipeline_tmp\neuromag306mag_neighb.mat');
+% select channels in the data
+% load('/neurospin/meg/meg_tmp/tools_tmp/pipeline/SensorClassification.mat');
+load('C:\Users\mbuiatti\Documents\FromOmega\software\pipeline_tmp\SensorClassification.mat');
 switch channel
     case 'mag'
-        data1 = ft_selectdata(data1,'channel',data1.typelabel.Mag2);
-        data2 = ft_selectdata(data2,'channel',data1.typelabel.Mag2);
-        data3 = ft_selectdata(data3,'channel',data1.typelabel.Mag2);
-        data4 = ft_selectdata(data4,'channel',data1.typelabel.Mag2);
+        data1 = ft_selectdata(data1,'channel',Mag2);
+        data2 = ft_selectdata(data2,'channel',Mag2);
+        data3 = ft_selectdata(data3,'channel',Mag2);
+        data4 = ft_selectdata(data4,'channel',Mag2);
     case 'grad1'
-        data1 = ft_selectdata(data1,'channel',data1.typelabel.Grad2_1);
-        data2 = ft_selectdata(data2,'channel',data1.typelabel.Grad2_1);
-        data3 = ft_selectdata(data3,'channel',data1.typelabel.Grad2_1);
-        data4 = ft_selectdata(data4,'channel',data1.typelabel.Grad2_1);
+        data1 = ft_selectdata(data1,'channel',Grad2_1);
+        data2 = ft_selectdata(data2,'channel',Grad2_1);
+        data3 = ft_selectdata(data3,'channel',Grad2_1);
+        data4 = ft_selectdata(data4,'channel',Grad2_1);
     case 'grad2'
-        data1 = ft_selectdata(data1,'channel',data1.typelabel.Grad2_2);
-        data2 = ft_selectdata(data2,'channel',data1.typelabel.Grad2_2);
-        data3 = ft_selectdata(data3,'channel',data1.typelabel.Grad2_2);
-        data4 = ft_selectdata(data4,'channel',data1.typelabel.Grad2_2);
+        data1 = ft_selectdata(data1,'channel',Grad2_2);
+        data2 = ft_selectdata(data2,'channel',Grad2_2);
+        data3 = ft_selectdata(data3,'channel',Grad2_2);
+        data4 = ft_selectdata(data4,'channel',Grad2_2);
     otherwise
         disp('Error: Incorrect channel selection!');
 end;
 
 % re-label channels to match the neighbour sensors configuration
-data1.label=data1.typelabel.Mag2;
-data2.label=data1.typelabel.Mag2;
-data3.label=data1.typelabel.Mag2;
-data4.label=data1.typelabel.Mag2;
+data1.label=Mag2;
+data2.label=Mag2;
+data3.label=Mag2;
+data4.label=Mag2;
 
 %%% Setting cfg for timelockstatistics %%%
 cfg = [];
-cfg.neighbours = data1.neighbours;
+cfg.neighbours = neighbours;
 cfg.method = 'montecarlo';       % use the Monte Carlo Method to calculate the significance probability
 cfg.statistic = 'depsamplesregrT'; % use the dependent samples T-statistic as a measure to evaluate 
                                  % the effect at the sample level
@@ -52,13 +64,13 @@ subj=size(data1.individual,1);
 nds=4;
 design = zeros(2,nds*subj);
 for i = 1:nds
-  design(1,1+(i-1)*subj:i*subj) = i*ones(1,subj);
-  design(2,1+(i-1)*subj:i*subj) = 1:subj;
+  design(1,1+(i-1)*subj:i*subj) = 1:subj;
+  design(2,1+(i-1)*subj:i*subj) = i*ones(1,subj);
 end
 
 cfg.design = design;             % design matrix
-cfg.ivar  = 1;      % the 1st row in cfg.design contains the independent variable
-cfg.uvar  = 2;      % the 2nd row in cfg.design contains the subject number (or trial number)
+cfg.uvar  = 1;
+cfg.ivar  = 2;
 
 cfg.latency = latency;   % time interval over which the experimental 
                          % conditions must be compared (in seconds)

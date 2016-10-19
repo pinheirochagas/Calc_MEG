@@ -1,6 +1,6 @@
-function ns_roierf_pedro(lat,roi,xclus,av1,av2,channel)
+function ns_roierf(roi,xclus,av1,av2,channel)
 
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+load('C:\Users\valentina.borghesani\Desktop\software4valentina\pipeline_tmp\SensorClassification.mat');
 switch channel
     case 'mag'
         av1 = ft_selectdata(av1,'channel',Mag2(roi));
@@ -29,7 +29,7 @@ plot(av1.time,mean(av2.avg,1),'color',linecolors{2},'linewidth',linewidth);
 % standard
 axis tight;
 % xlim([0 0.5]);
-xlim(lat);
+xlim([0 0.7]);
 
 % set(gca,'ytick',[-1 0 1])
 % legend('hab','dev1','dev2','dev3','Location','NorthWest');
@@ -47,6 +47,7 @@ y2=5;
 edgecolor=0.8;
 h=fill([x1 x2 x2 x1],[y1 y1 y2 y2],edgecolor*[1 1 1]);
 transparency=0.5;
+
 set(h,'EdgeColor',[1 1 1],'FaceAlpha',transparency,'EdgeAlpha',transparency);
-ylim([min([mean(av1.avg,1) mean(av2.avg,1)]) max([mean(av1.avg,1) mean(av2.avg,1)])])
 uistack(h,'bottom');
+

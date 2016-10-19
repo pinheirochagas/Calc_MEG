@@ -1,6 +1,6 @@
 function ns_roierf_depregr(roi,xclus,av1,av2,av3,av4,channel)
 
-load('C:\Users\marco.buiatti\Documents\software\pipeline_tmp\SensorClassification.mat');
+load('C:\Users\mbuiatti\Documents\FromOmega\software\pipeline_tmp\SensorClassification.mat');
 
 switch channel
     case 'mag'
@@ -59,8 +59,6 @@ legend boxoff;
 xlabel('s');
 ylabel('T');
 
-axis manual;
-
 x1=xclus(1);
 x2=xclus(2);
 y1=-3;
@@ -69,5 +67,5 @@ edgecolor=0.8;
 h=fill([x1 x2 x2 x1],[y1 y1 y2 y2],edgecolor*[1 1 1]);
 transparency=0.5;
 set(h,'EdgeColor',[1 1 1],'FaceAlpha',transparency,'EdgeAlpha',transparency);
-uistack(h,'bottom');
+
 

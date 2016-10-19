@@ -16,13 +16,6 @@ function ns_plotstat(stat,av1,av2,lat,tshw)
 %
 % Marco Buiatti, INSERM Cognitive Neuroimaging Unit, Neurospin (2011).
 %
-% backward compatibility with old sensor label convention
-if strcmp(av1.label{1},'0113')
-    disp('Old label format: MEG suffix added for layout compatibility.');
-    load /neurospin/meg/meg_tmp/tools_tmp/pipeline/SensorClassification.mat
-    av1.label = All2;
-    av2.label = All2;
-end;
 
 sensors={'mag','grad1','grad2'};
 
@@ -34,8 +27,10 @@ for s=1:length(sensors)
     cfg.layout      = 'neuromag306mag.lay';
     cfg.parameter   = 'avg';
     cfg.lat         = lat; 
-    cfg.alpha       = 0.3; % threshold of cluster visualization
+    cfg.alpha       = 0.05; % threshold of cluster visualization
     cfg.tshw        = tshw;
+    cfg.highlightsymbolseries = ['*','x','+','o','.'];  %for p < [0.01 0.05 0.1 0.2 0.3]
+    cfg.highlightsizeseries = 6*[1 1 0.5 0.5 0.5];
     cfg.sensortype  = sensors{s};
     ns_clusterplot(cfg,stat{s},av1,av2)
 end;

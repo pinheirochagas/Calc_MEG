@@ -1,4 +1,4 @@
-function [tp,t]=bn_plotsinglecluster(stat,data1,data2,sensor,cluster,tshw)
+function [tp,t]=bn_plotsinglecluster(lat,stat,data1,data2,sensor,cluster,tshw)
 % function [tp,t]=ns_plotsinglecluster(stat,av1,av2,sensor,cluster,tshw)
 % plots cluster statistics time course, topography at the peak of cluster statistics and ERFs of single clusters
 % computed with FT CRA.
@@ -68,5 +68,4 @@ ns_clusterplot(cfg,stat,av1,av2);
 % Plot ERFs of the two conditions averaged over the sensors belonging to
 % the cluster
 a=t(abs(tp)>0);
-ns_roierf_pedro(roi,[a(1) a(end)],av1,av2,sensors{sensor})
-
+ns_roierf_pedro(lat, roi,[a(1) a(end)],av1,av2,sensors{sensor})

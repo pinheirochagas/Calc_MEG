@@ -13,10 +13,10 @@ function stat=ns_statindepregr(data1,data2,data3,data4,channel,latency)
 % load neighbour sensors configuration (independently from channel
 % selection, the magnetometers layout is loaded, as channel position is the
 % same for the three types of sensors).
-load('C:\Users\marco.buiatti\Documents\software/pipeline_tmp/neuromag306mag_neighb.mat');
+load('/neurospin/meg/meg_tmp/tools_tmp/Pipeline/pipeline_tmp/neuromag306mag_neighb.mat');
 % load('D:\Documents and Settings\mbuiatti\Mes documents\FromOmega\software\pipeline\neuromag306mag_neighb.mat');
 % select channels in the data
-load('C:\Users\marco.buiatti\Documents\software/pipeline_tmp/SensorClassification.mat');
+load('/neurospin/meg/meg_tmp/tools_tmp/Pipeline/pipeline/SensorClassification.mat');
 % load('D:\Documents and Settings\mbuiatti\Mes documents\FromOmega\software\pipeline/SensorClassification.mat');
 switch channel
     case 'mag'

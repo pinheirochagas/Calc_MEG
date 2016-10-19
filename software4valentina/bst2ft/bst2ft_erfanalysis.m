@@ -1,361 +1,131 @@
-%% ========================== bst2ft_erfanalysis ========================== %%
+%% bst2ft_erfanalysis %%
 %
 % - Data export from Brainstorm to Fieldtrip.
 % - Visualization of ERFs from data preprocessed with ns_preproc.
 % - Within-subjects statistical analysis.
 % - Grand-average and across-subjects statistical analysis.
-% Uses Fieldtrip 
+% Uses Fieldtrip. 
 % Parameters 'par' are specific for each subject and experiment.
 %
 % Marco Buiatti, INSERM U992 Cognitive Neuroimaging Unit (France), 2013.
-%
-% adapt for SEMDIM by Valentina Borghesani 20/05/2015
 
 %% set path %%
+% addpath '/neurospin/local/mne/share/matlab/'                                             % MNE (needed to read and import fif data in fieldtrip 
+% addpath 'C:\Users\marco.buiatti\Documents\software\fieldtrip_testedversion\fieldtrip\'       % fieldtrip version tested with this pipeline
+addpath 'C:\Users\marco.buiatti\Documents\software\pipeline_tmp\'                                 % Neurospin pipeline scripts
+addpath 'C:\Users\marco.buiatti\Documents\software\brainstorm\bst_scripts\bst2ft\'  % local processing scripts
+addpath 'C:\Users\marco.buiatti\Documents\software\fieldtrip-20150618\'       % fieldtrip version tested with this pipeline (06/2015)
+ft_defaults                                           % sets fieldtrip defaults and configures the minimal required path settings 
 
-% addpath '/neurospin/local/mne/share/matlab/'                                                          % MNE (needed to read and import fif data in fieldtrip 
-addpath 'C:\Users\valentina.borghesani\Desktop\software4valentina\pipeline_tmp\'                        %  pipeline scripts
-addpath 'C:\Users\valentina.borghesani\Desktop\software4valentina\bst2ft\'                              % local processing scripts
-addpath 'C:\Users\valentina.borghesani\Desktop\software4valentina\fieldtrip_testedversion\fieldtrip\'   % fieldtrip version tested with this pipeline                                                                                   
-% sets fieldtrip defaults and configures the minimal required path settings 
-ft_defaults  
+%subj='s10';
+subj='s02';
 
-%% ========================== SINGLE SUBJECTS ========================== %%
-% 
-subs = {'S01','S03','S05','S06','S07','S08','S13','S14','S15','S16','S17','S18','S19'}
-for i = 1:13
-    % Subject name/directory
-    subj=subs{i}
-    mkdir(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj])
-    % Import Brainstorm data to Fieldtrip format
-    data=bst2ft_all(subj);
-    % save Fieldtrip dataset(s) - separated to save memory
-    data_animals=data{1};
-    data_tools=data{2};
-    data_big=data{3};
-    data_small=data{4};
-    data_audio=data{5};
-    data_noaudio=data{6}; 
-    data_click1=data{7};
-    data_click2=data{8};
-    clear data
-    save(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj '\data'],'data_*');
-    % % in case you need to merge conditions together
-    % dev1=ns_appendftdata(data{3},data{5});      % number deviant +-1
-    clearvars -except i subs
-end
- 
-clearvars
-clc
+% Import Brainstorm data to Fieldtrip format
+data=bst2ft_all(subj);
 
-subs = {'S04'}
-for i = 1
-    % Subject name/directory
-    subj=subs{i}
-    mkdir(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj])
-    % Import Brainstorm data to Fieldtrip format
-    data=bst2ft_all_4(subj);
-    % save Fieldtrip dataset(s) - separated to save memory
-    data_animals=data{1};
-    data_tools=data{2};
-    data_big=data{3};
-    data_small=data{4};
-    data_audio=data{5};
-    data_noaudio=data{6}; 
-    clear data
-    save(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj '\data'],'data_*');
-    % % in case you need to merge conditions together
-    % dev1=ns_appendftdata(data{3},data{5});      % number deviant +-1
-    clearvars -except i subs
-end
+% save Fieldtrip dataset
+save(['/neurospin/meg/meg_tmp/BilatNum_Marco_2010/data/bst2ft/' subj],'data');
 
-
-clearvars
-clc
-
-% all subjects that are ready for CLIKS
-subj=[1 3 5:8 13:19];
-
-% Click1
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_click1')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_click1')
-    end;
-    dataavg=data_click1;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_click1  
-end;
-gav_click1=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_click1.avg=squeeze(mean(gav_click1.individual,1));
-
-% Click2
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_click2')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_click2')
-    end;
-    dataavg=data_click2;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_click2 
-end;
-gav_click2=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_click2.avg=squeeze(mean(gav_click2.individual,1));
-
-% save grand average clicks
-cd C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7
-save gave_click gav*;
-
-clear all
-clc
-
-
-% all subjects that are ready
-subj=[1 3:8 13:19];
-
-% Audio
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_audio')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_audio')
-    end;
-    dataavg=data_audio;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_audio  
-end;
-gav_audio=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_audio.avg=squeeze(mean(gav_audio.individual,1));
-
-% No Audio
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_noaudio')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_noaudio')
-    end;
-    dataavg=data_noaudio;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_noaudio  
-end;
-gav_noaudio=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_noaudio.avg=squeeze(mean(gav_noaudio.individual,1));
-
-% Big
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_big')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_big')
-    end;
-    dataavg=data_big;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_big  
-end;
-gav_big=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_big.avg=squeeze(mean(gav_big.individual,1));
-
-% Small
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_small')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_small')
-    end;
-    dataavg=data_small;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_small  
-end;
-gav_small=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_small.avg=squeeze(mean(gav_small.individual,1));
-
-% Animals
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_animals')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_animals')
-    end;
-    dataavg=data_animals;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_animals  
-end;
-gav_animals=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_animals.avg=squeeze(mean(gav_animals.individual,1));
-
-% Tools
-cfg=[];
-cfg.keepindividual = 'yes';
-for s=1:length(subj)
-    if subj(s)<10
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S0' num2str(subj(s)) '\data'],'data_tools')
-    else
-         load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\S' num2str(subj(s)) '\data'],'data_tools')
-    end;
-    dataavg=data_tools;
-    dataavg=rmfield(dataavg,'trial');
-    dataavg_loc{s} = dataavg;
-    clear data_tools  
-end;
-gav_tools=ft_timelockgrandaverage(cfg,dataavg_loc{:});
-gav_tools.avg=squeeze(mean(gav_tools.individual,1));
-
-% save grand average 
-cd C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7
-save gave gav*;
-
-clear all
-clc
-
-
-
- 
-% ========================== ERF STATISTICAL ANALYSIS
-% Two conditions, between-trials analysis (see http://fieldtrip.fcdonders.nl/tutorial/cluster_permutation_timelock)
-
-% Temporal latency over which statistical analysis is computed (in seconds)
-    lat = [0 0.5];
-
-% 1) Compute statistical analysis separately for each type of sensor
-    % Animals vs Tools
-        clear data*
-        load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj '\data'],'data_animals','data_tools')
-        statanimalstools=ns_btstat(data_animals,data_tools,lat);
-    % Big vs Small
-        clear data*
-        load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj '\data'],'data_big','data_small')
-        statbigsmall=ns_btstat(data_big,data_small,lat);
-    % Audio vs NoAudio
-        clear data*
-        load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj '\data'],'data_audio','data_noaudio')
-        stataudionoaudio=ns_btstat(data_audio,data_noaudio,lat);
-    % Click1 vs Click2
-        clear data*
-        load(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\' subj '\data'],'data_click1','data_click2')
-        statrightleft=ns_btstat(data_click1,data_click2,lat);
-        
-% % display basic information on significant clusters for each sensor type
-probthr=0.2;
-ns_statinfo_all(statrightleft,probthr);
-
-% 3) Explore the clusters
-    % clusters from comparison of two conditions:
-    % arguments = stasts, condition A, condition B, sensor type, cluster number (- if negative), time bin
-    % fig 1 = for each time bin, sum of the t stati
-    % fig 2 = topographies of the two conditions and of their difference
-    % fig 3 = time curse of the two conditions  
-%     bn_plotsinglecluster(statanimalstools,data_animals,data_tools,2,1,0.01);
-%     bn_plotsinglecluster(statbigsmall,data_big,data_small,2,-1,0.01);
-%     bn_plotsinglecluster(stataudionoaudio,data_audio,data_noaudio,2,1,0.01);
-    
-    bn_plotsinglecluster(statrightleft,data_click1,data_click2,1,1,0.01);
-    bn_plotsinglecluster(statrightleft,data_click1,data_click2,2,1,0.01);
-    bn_plotsinglecluster(statrightleft,data_click1,data_click2,3,1,0.01);
-
-
-%% ========================== GROUP ANALYSES =========================== %%
-
-% Grand-averaged data generated with gavg.m 
-load('C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\epochs_v7\gave.mat');
-
-% ========================== ERF STATISTICAL ANALYSIS
-% Two conditions, within-subjects analysis (see http://fieldtrip.fcdonders.nl/tutorial/cluster_permutation_timelock)
-
-% Temporal latency over which statistical analysis is computed (in seconds)
-lat = [0 0.5];
-
-% 1) Compute statistical analysis separately for each type of sensor
-
-    % click effect:
-    statclick=ns_wsstat(gav_click1,gav_click2,lat);
-    % audio effect:
-    stataudio=ns_wsstat(gav_audio,gav_noaudio,lat);
-    % size effect:
-    statsize=ns_wsstat(gav_big,gav_small,lat);
-    % category effect:
-    statcategory=ns_wsstat(gav_animals,gav_tools,lat);
-
-% save stats in Fieldtrip dataset
-save(['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\data\bst2ft_data/group_stats'],'stat*','-append');
-
-% display basic information on significant clusters for each sensor type
-probthr=0.2;
-ns_statinfo_all(statclick,probthr);
-ns_statinfo_all(stataudio,probthr);
-ns_statinfo_all(statsize,probthr);
-ns_statinfo_all(statcategory,probthr);
-
-
-% explore the clusters
-bn_plotsinglecluster(statclick,gav_click1,gav_click2,1,1,0.01);
-bn_plotsinglecluster(statclick,gav_click1,gav_click2,2,1,0.01);
-bn_plotsinglecluster(statclick,gav_click1,gav_click2,3,-1,0.01);
-
-bn_plotsinglecluster(stataudio,gav_audio,gav_noaudio,3,1,0.01);
-
-bn_plotsinglecluster(statcategory,gav_animals,gav_tools,1,-1,0.01);
-
-bn_plotsinglecluster(statsize,gav_big,gav_small,2,1,0.01);  
-bn_plotsinglecluster(statsize,gav_big,gav_small,3,1,0.01);  
-
-
-
-
-
+% merge conditions together
+dev1=ns_appendftdata(data{3},data{5});      % number deviant +-1
+dev2=ns_appendftdata(data{2},data{6});      % number deviant +-2
+dev3=ns_appendftdata(data{1},data{7});      % number deviant +-3
+devcol=ns_appendftdata(data{8},data{9});    % color deviant
 
 %% =========================================================================
-% ERF PLOTS
-% Load relevant averages %%
+%% ERF PLOTS
+%% =========================================================================
+%% Load relevant averages %%
 
-% Plot ERF time courses for each sensor arranged according to their location specified in the layout.%%
+%% Plot ERF time courses for each sensor arranged according to their location specified in the layout.%%
 % 'all' for all sensors, 'mag' for magnetometers, 'grad' for gradiometers, 'grad1'('grad2') for gradiometers 1(2).
 % 1st dataset is plotted in blue, 2nd in red, 3rd in green
-ns_erf('mag',gav_click1,gav_click2);
-ns_erf('grad',gav_click1,gav_click2);
+ns_erf('mag',data{4},data{7});
+ns_erf('grad',data{4},data{7});
 
-ns_erf('mag',gav_big,gav_small);
-ns_erf('grad',gav_big,gav_small);
-
-
-
-% Plot topographies for each sensor type at specified latencies - to improve by taking avg instead of trial field
+%% Plot topographies for each sensor type at specified latencies - to improve by taking avg instead of trial field
 tlim=0.05:0.05:0.25;                   % tlim = [tmin:tstep:tmax] in seconds
 % zmax=3*10^(-12);                     % amplitude limits. If not specified, max(abs(av1,av2)) is used. 
 tshw=0.025; 
 ns_multitopoplotER(data{4},tlim,tshw,[]);  % first column: mag, second column: grad1, third column: grad2
 ns_multitopoplotER(data{7},tlim,tshw,[]);  % first column: mag, second column: grad1, third column: grad2
-
-% each row shows topography of first dataset, second dataset and 1st minus 2nd at each time interval;
+%% each row shows topography of first dataset, second dataset and 1st minus 2nd at each time interval;
 % first figure: mag, second figure: grad1, third figure: grad2
 ns_multitopoplotERdiff(data{4},data{7},tlim,tshw,[]); 
 
+%% =========================================================================
+%% ERF STATISTICAL ANALYSIS
+%% =========================================================================
 
+%% Two conditions, between-trials analysis (see http://fieldtrip.fcdonders.nl/tutorial/cluster_permutation_timelock)
 
+% temporal latency over which statistical analysis is computed (in seconds)
+lat = [0 0.5];
 
+% compute statistical analysis separately for each type of sensor
+%
+% color deviant effect:
+statdevcoldev0=ns_btstat(devcol,data{4},lat);
 
+% color category effect:
+statdevcolwa=ns_btstat(data{9},data{8},lat);
+
+% number deviant effect:
+statregrnum=ns_statindepregr_all(data{4},dev1,dev2,dev3,lat);
+
+% display basic information on significant clusters for each sensor type
+probthr=0.15;
+ns_statinfo_all(statdevcoldev0,probthr);
+ns_statinfo_all(statdevcolwa,probthr);
+ns_statinfo_all(statregrnum,probthr);
+
+% save stats in Fieldtrip dataset
+save(['/neurospin/meg/meg_tmp/BilatNum_Marco_2010/data/bst2ft/' subj],'stat*','-append');
+
+% explore the clusters
+
+% clusters from comparison of two conditions:
+bn_plotsinglecluster(statdevcoldev0,devcol,data{4},3,-1,0.01);
+
+% clusters from regression:
+bn_plotsinglecluster_depregr(statregrnum,data{4},dev1,dev2,dev3,1,1,0.01);
+
+%% GROUP ERF STATISTICAL ANALYSIS %%
+% Grand-averaged data generated with gavg.m 
+load('D:\projects\BilatNum_Marco_2010\data\bst2ft\gave.mat');
+
+%% Two conditions, within-subjects analysis (see http://fieldtrip.fcdonders.nl/tutorial/cluster_permutation_timelock)
+
+% temporal latency over which statistical analysis is computed (in seconds)
+lat = [0 0.5];
+
+% compute statistical analysis separately for each type of sensor
+%
+% color deviant effect:
+statdevcoldev0=ns_wsstat(gav_devcol,gav{4},lat);
+
+% color category effect:
+statdevcolwa=ns_wsstat(gav{9},gav{8},lat);
+
+% number deviant effect:
+statregrnum=ns_statdepregr_all(gav{4},gav_dev1,gav_dev2,gav_dev3,lat);
+
+% display basic information on significant clusters for each sensor type
+probthr=0.15;
+ns_statinfo_all(statdevcoldev0,probthr);
+ns_statinfo_all(statdevcolwa,probthr);
+ns_statinfo_all(statregrnum,probthr);
+
+% save stats in Fieldtrip dataset
+% save(['/neurospin/meg/meg_tmp/BilatNum_Marco_2010/data/bst2ft/' subj],'stat*','-append');
+
+% explore the clusters
+
+% clusters from comparison of two conditions:
+bn_plotsinglecluster(statdevcoldev0,gav_devcol,gav{4},1,-2,0.01);
+
+% clusters from regression:
+bn_plotsinglecluster_depregr(statregrnum,gav{4},gav_dev1,gav_dev2,gav_dev3,1,-1,0.01);
 
 
 %% OLD part of the script %%

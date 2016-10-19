@@ -16,14 +16,15 @@ function data=bst2ft(subj,cond)
 % Author: Marco Buiatti, 2013.
 
 %% Sensor information for Elekta MEG data imported from a standard Fieldtrip dataset %%
-load('C:\Users\valentina.borghesani\Desktop\software4valentina\bst2ft\bst2ft_default');
+% load('D:\Documents and Settings\mbuiatti\Mes documents\FromOmega\software\brainstorm\bst_scripts\bst2ft_default');
+load('C:\Users\marco.buiatti\Documents\software\brainstorm/bst_scripts/bst2ft/bst2ft_default');
 data.label=label;
 data.dimord=dimord;
 data.grad=grad;
 
 %% Data import from Brainstorm to Fieldtrip %%
 % Path definition
-data_dir=['C:\Users\valentina.borghesani\Desktop\SemDim\MEG\scripts\brainstorm\brainstorm_db\Semdim\data\'];
+data_dir=['C:\Users\marco.buiatti\Documents\software\brainstorm\imported_protocols\bilatnum\data\'];
 
 % get data bst structure
 sStudy = bst_get('StudyWithCondition', [subj '/' cond]);

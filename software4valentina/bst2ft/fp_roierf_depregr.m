@@ -4,7 +4,7 @@ function fp_roierf_depregr(lat,roi,xclus,channel,varargin)
 %
 % Author: Marco Buiatti, 2015
 
-load('/Volumes/NeuroSpin2T/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+load('SensorClassification.mat');
 
 % number of levels
 nl=length(varargin);
@@ -48,12 +48,6 @@ axis tight;
 % xlim([0 0.55]);
 xlim(lat);
 
-
-% figure erp animals
-% axis([0 0.55 -0.92 2.06]);
-% figure erp tools
-% axis([0 0.5 -0.3 1.4]);
-% axis([0 0.5 2 6]);
 
 set(gca,'ytick',[-1 0 1])
 % legend('hab','dev1','dev2','dev3','Location','NorthWest');

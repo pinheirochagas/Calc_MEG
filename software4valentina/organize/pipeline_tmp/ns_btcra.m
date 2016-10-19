@@ -36,10 +36,10 @@ end;
 % load neighbour sensors configuration (independently from channel
 % selection, the magnetometers layout is loaded, as channel position is the
 % same for the three types of sensors).
-load('/neurospin/meg/meg_tmp/tools_tmp/Pipeline/pipeline_tmp/neuromag306mag_neighb.mat');
+load('C:\Users\valentina.borghesani\Desktop\software4valentina/pipeline_tmp/neuromag306mag_neighb.mat');
 
 % select channels in the data
-load('/neurospin/meg/meg_tmp/tools_tmp/Pipeline/pipeline/SensorClassification.mat');
+load('C:\Users\valentina.borghesani\Desktop\software4valentina/pipeline_tmp/SensorClassification.mat');
 switch channel
     case 'mag'
         tl1 = ft_selectdata(tl1,'channel',Mag2);

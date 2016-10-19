@@ -36,7 +36,7 @@ if isfield(stat,'posclusterslabelmat')
                     tp=mean((stat.posclusterslabelmat==i).*stat.stat,1);
                     [mx,tmx]=max(tp);
                     roipos{i}=find(stat.posclusterslabelmat(:,tmx)==i);
-                    disp(['Latency: ' num2str(a(1)) ' - ' num2str(a(end)) '. Max stat: ' num2str(mx) ' at time point ' num2str(tmx) ' (' num2str(stat.time(tmx)) ' ms). ' 'Max size: ' num2str(max(clus(clus>0)))]);
+                    disp(['Latency: ' num2str(a(1)) ' - ' num2str(a(end)) '. Max stat: ' num2str(mx) ' at time point ' num2str(tmx) ' (' num2str(stat.time(tmx)) ' s). ' 'Max size: ' num2str(max(clus(clus>0)))]);
                 end
             end;
         end;
@@ -61,7 +61,7 @@ if isfield(stat,'negclusterslabelmat')
                     tp=mean((stat.negclusterslabelmat==i).*stat.stat,1);
                     [mx,tmx]=min(tp);
                     roineg{i}=find(stat.negclusterslabelmat(:,tmx)==i);
-                    disp(['Latency: ' num2str(a(1)) ' - ' num2str(a(end)) '. Min stat: ' num2str(mx) ' at time point ' num2str(tmx) ' (' num2str(stat.time(tmx)) ' ms). ' 'Max size: ' num2str(max(clus(clus>0)))]);
+                    disp(['Latency: ' num2str(a(1)) ' - ' num2str(a(end)) '. Min stat: ' num2str(mx) ' at time point ' num2str(tmx) ' (' num2str(stat.time(tmx)) ' s). ' 'Max size: ' num2str(max(clus(clus>0)))]);
                 end;
             end
         end

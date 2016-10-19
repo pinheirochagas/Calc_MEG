@@ -41,7 +41,7 @@ function ns_clusterplot_statregrsingle(cfg,stat,data1,data2,data3,data4,sensorty
 %% Defining initial parameters for NS data %%
 
 % select sensor type and labels
-load('C:\Users\marco.buiatti\Documents\software\pipeline_tmp\SensorClassification.mat');
+load('C:\Users\mbuiatti\Documents\FromOmega\software\pipeline_tmp\SensorClassification.mat');
 
 cfg.sensortype=sensortype;
 switch cfg.sensortype

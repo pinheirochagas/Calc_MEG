@@ -9,17 +9,9 @@ function ns_multitopoplotER(ave,tlim,tshw,zmax)
 % zmax = absolute amplitude limit (one for each sensor type, in order:
 % mag,grad1,grad2). Leave empty for 'maxmin'.
 %
-% Marco Buiatti, INSERM U992 Cognitive Neuroimaging Unit (France), 2011.
+% Marco Buiatti, 2011-2015.
 
-% load file containing labels for each of the three sensor types
-load /neurospin/meg/meg_tmp/tools_tmp/Pipeline/pipeline/SensorClassification.mat
 sensors={'mag','grad1','grad2'};
-
-% backward compatibility with old sensor label convention
-if strcmp(ave.label{1},'0113')
-    disp('Old label format: MEG suffix added for layout compatibility.');
-    ave.label = All2';
-end;
 
 cfg = [];
 % choose magnetometer layout, as it is the same for all three sensor types
@@ -29,19 +21,21 @@ cfg.marker='off';
 cfg.parameter   = 'avg';
 nframes=length(tlim);
 
+ave.dimord='chan_time';
+
 figure
 for s=1:3
     % select sensor type (labels in SensorClassification.mat)
     switch s
         case 1
-            aveloc = ft_selectdata(ave,'channel',Mag2);
+            aveloc = ft_selectdata(ave,'channel',ave.typelabel.Mag2);
         case 2
-            aveloc = ft_selectdata(ave,'channel',Grad2_1);
+            aveloc = ft_selectdata(ave,'channel',ave.typelabel.Grad2_1);
         case 3
-            aveloc = ft_selectdata(ave,'channel',Grad2_2);
+            aveloc = ft_selectdata(ave,'channel',ave.typelabel.Grad2_2);
     end;
     
-    aveloc.label=Mag2;
+    aveloc.label=ave.typelabel.Mag2;
     
     % define amplitude range
     if isempty(zmax)
