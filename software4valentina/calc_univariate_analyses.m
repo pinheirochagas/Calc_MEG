@@ -150,7 +150,7 @@ statsubop2 = fp_statdepregr_all(lat,gav_subop20,gav_subop21,gav_subop22,gav_subo
 ns_statinfo_all(statsubop2,0.3)
 %Plot
 latPlot = [1.6 2.4];
-fp_plotsinglecluster_depregr(latPlot,statsubop2,1,-2,0,gav_subop20,gav_subop21,gav_subop22,gav_subop23) 
+fp_plotsinglecluster_depregr(latPlot,statsubop2,2,1,0,gav_subop20,gav_subop21,gav_subop22,gav_subop23) 
 figure(2)
 save2pdf([figurespath 'erf_gav_sub_op2_1600-2400_mag_-2.pdf'],gcf, 600)
 figure(3)
