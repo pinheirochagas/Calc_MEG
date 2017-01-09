@@ -44,6 +44,36 @@ for sub = 1:length(subs)
             end
         end
     end
+    
+    %% Trimming
+    RTmax = data.time(end);
+    %% Math
+    RTCalc = trialinfo(:,10);
+    mean_RTCalc = mean(RTCalc); % Already excluding RT > then max
+    std_RTCalc = std(RTCalc); 
+    RTtrim = 3; % Trimming factor
+    for i = 1:length(RTCalc)
+        if RTCalc(i) >= mean_RTCalc+RTtrim*std_RTCalc || RTCalc(i) <= mean_RTCalc-RTtrim*std_RTCalc || RTCalc(i) < 100 % 
+            RTextreme(i) = 1;
+        else
+            RTextreme(i) = 0;
+        end;
+    end
+    trialinfo = trialinfo(RTextreme==0,:);
+
+    %% Plot
+    
+    %% Put together
+    % Variables to plot 
+    beh_var_num = [1 2 3 4 5 6 7 8 9 12];
+    beh_var_names = {'block', 'operand1', 'operator', 'operand2', 'presResult', 'delay', 'corrResult'
+                     'deviant', 'absDeviant','accuracy'};
+    for ss = 1:length(beh_var_num)
+        subplot(2,5,)
+        
+        boxplot(trialinfo(:,10),trialinfo(:,beh_var_num(ss)))
+
+    
         trialinfoAll{sub} = trialinfo;
         clear trialinfo
         clear data
@@ -54,15 +84,9 @@ trialinfoALL = vertcat(trialinfoAll{:})
 
 trialinfoALL = trialinfoALL(trialinfoALL(:,10)<2000,:)
 
-boxplot(trialinfoALL(:,10),trialinfoALL(:,9))
+boxplot(trialinfoALL(:,10),trialinfoALL(:,1))
 
 
 
 end
 
-
-hist(trialinfoALL(:,10))
-
-
-
-end
