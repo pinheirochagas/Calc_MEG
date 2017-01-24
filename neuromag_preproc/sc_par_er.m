@@ -170,7 +170,7 @@ switch n
         
     case 21
         par.subj       = 'emptyroom'; % Subject name
-        par.outfile    = 's20ER'; % name of output file
+        par.outfile    = 's21ER'; % name of output file
         par.badch      = '1722 1723 1732 2442 0341 0322 2343 2232 2433';
         par.rawdir      = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/s21/';                  % Raw data path
         par.hpdir       = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/hp/s21/';                   % Head position text file directory

@@ -11,7 +11,7 @@ addpath '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/neuromag_preproc/
 
 %% STEP 1: subject information %%
 % Number of the subject to be analyze
-n = 21; 
+n = 22; 
 par = sc_par_er(n);
 par
 
