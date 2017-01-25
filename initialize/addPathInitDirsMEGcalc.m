@@ -8,7 +8,9 @@ if strcmp(comp, 'MACI64') == 1
     addpath(genpath('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/'))
     fieldtrip_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/';   
     bst_db_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/brainstorm_db/'; % Brainstorm database folder
+    bst_db_data_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/brainstorm_db/calc/data/'; % Brainstorm database folder
     data_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/data/mat/';
+    data_sss_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/data/sss/';
     result_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/results/erf/';
     erf_fig_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/results/erf/figures/';   
     erf_stat_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/erf/stats/'; 
@@ -19,7 +21,9 @@ elseif strcmp(comp, 'GLNXA64') == 1
     % Folders
     fieldtrip_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/';   
     bst_db_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/brainstorm_db/'; % Brainstorm database folder
+    bst_db_data_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/brainstorm_db/calc/data/'; % Brainstorm database folder
     data_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/';
+    data_sss_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/sss/';
     result_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/';
     erf_fig_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/figures/';   
     erf_stat_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/stats/'; 
