@@ -1,4 +1,4 @@
-function trialinfo = addAccuracy(subs)
+function trialinfo = addAccuracy(subject)
 
 %% Paths
 addPathInitDirsMEGcalc
@@ -8,9 +8,9 @@ load('response_key.mat')
 
 
 %% Loop accross subjects
-for sub = 1:length(subs)
+for sub = 1:length(subject)
     %% Load data
-    load([data_dir subs{sub} '_calc.mat'])
+    load([data_dir subject '_calc.mat'])
     trialinfo_loop = cell2mat(struct2cell(data.trialinfo))'; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
     trialinfo = data.trialinfo; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
     clear data

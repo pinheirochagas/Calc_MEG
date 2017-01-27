@@ -5,7 +5,7 @@ comp = computer;
 % MAC + Hard Drive
 if strcmp(comp, 'MACI64') == 1
     % Paths
-    addpath(genpath('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/'))
+ %   addpath(genpath('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/'))
     fieldtrip_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/';   
     bst_db_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/brainstorm_db/'; % Brainstorm database folder
     bst_db_data_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/brainstorm_db/calc/data/'; % Brainstorm database folder
@@ -17,7 +17,7 @@ if strcmp(comp, 'MACI64') == 1
 % Linux
 elseif strcmp(comp, 'GLNXA64') == 1
     % Paths
-    addpath(genpath('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/'))                    
+%    addpath(genpath('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/'))                    
     % Folders
     fieldtrip_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/';   
     bst_db_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/brainstorm_db/'; % Brainstorm database folder
