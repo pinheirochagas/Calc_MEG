@@ -1,21 +1,27 @@
-function ds_z_sm_pd(subjects,conditions)
-%% Source: calculate z-score from baseline, spatial smooth and project to group analysis 
-% subjects = 's01';
-% conditions = 'addsub_opall';
-% Intra (0 - no ned for intra- or 1 - look into intra-)
+function ds_z_sm_pd(subjects,Condition,intra)
 
-%% Loop across subjects and conditions
+% subjects = 's01';
+% Condition = 'addsub_opall';
+% Intra (0 - no ned for intra- or 1 - look into intra-)
+%% Maybe remove?
+
 for cond = 1 : length(conditions);
     for subi = 1 : length(subjects);  % loop across sub
         
-        [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects{subi} '/' conditions{cond}]);
+        subjects{subi}  '/' conditions{cond}
+        
+        
+        [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects '/' Condition]);
         for i=1:length(sStudySrc.Result)
             if strfind(sStudySrc.Result(i).FileName,'average') % wMNE
                 good_index=i;
             end;
         end;
         
+        
+        
         %%
+        
         % Input files, e.g.:
         % 'link|S05/@default_study/results_wMNE_MEG_GRAD_MEG_MAG_KERNEL_150605_1307.mat|
         %      S05/click1_short/data_1024_average_150528_1733_resample.mat'
@@ -24,7 +30,7 @@ for cond = 1 : length(conditions);
         % Start a new report
         bst_report('Start', sFiles);
         
-        % Process: Z-score normalization: [-500ms,-4ms]
+        % Process: Z-score normalization: [-200ms,-4ms]
         sFiles = bst_process('CallProcess', 'process_zscore_dynamic', sFiles, [], ...
             'baseline', [-0.5, -0.004], ...
             'source_abs', 1, ...
@@ -43,43 +49,40 @@ for cond = 1 : length(conditions);
         % Save and display report
         ReportFile = bst_report('Save', sFiles);
         bst_report('Open', ReportFile);
+        
     end
-end
-
-
-end
-
-
-
-
-
-
-
-
-% if intra==0
-%     [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects '/' conditions]);
-%     for i=1:length(sStudySrc.Result)
-%         if strfind(sStudySrc.Result(i).FileName,'average') % wMNE
-%             good_index=i;
-%         end;
-%     end;
-% else
-%     % look into @intra folder.
-%     [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects '/@intra']);
-%     % find the target average file
-%     for i=1:length(sStudySrc.Data)
-%         if strfind(sStudySrc.Data(i).Comment,conditions)
-%             intra_index=i;
-%         end;
-%     end;
-%     % find indexes of source reconstructions relative to averages only
-%     average_index=[];
-%     for i=1:length(sStudySrc.Result)
-%         if strfind(sStudySrc.Result(i).FileName,'data_average')
-%             average_index=[average_index i];
-%         end
-%     end
-%     % and choose the one corresponding to the target average
-%     good_index=average_index(intra_index);
-% end;
-
+    
+    
+    
+    
+    
+    
+    
+    
+    % if intra==0
+    %     [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects '/' Condition]);
+    %     for i=1:length(sStudySrc.Result)
+    %         if strfind(sStudySrc.Result(i).FileName,'average') % wMNE
+    %             good_index=i;
+    %         end;
+    %     end;
+    % else
+    %     % look into @intra folder.
+    %     [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects '/@intra']);
+    %     % find the target average file
+    %     for i=1:length(sStudySrc.Data)
+    %         if strfind(sStudySrc.Data(i).Comment,Condition)
+    %             intra_index=i;
+    %         end;
+    %     end;
+    %     % find indexes of source reconstructions relative to averages only
+    %     average_index=[];
+    %     for i=1:length(sStudySrc.Result)
+    %         if strfind(sStudySrc.Result(i).FileName,'data_average')
+    %             average_index=[average_index i];
+    %         end
+    %     end
+    %     % and choose the one corresponding to the target average
+    %     good_index=average_index(intra_index);
+    % end;
+    

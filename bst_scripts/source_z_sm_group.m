@@ -1,4 +1,4 @@
-function ds_z_sm_pd(subjects,conditions)
+function source_z_sm_group(subjects,conditions)
 %% Source: calculate z-score from baseline, spatial smooth and project to group analysis 
 % subjects = 's01';
 % conditions = 'addsub_opall';
