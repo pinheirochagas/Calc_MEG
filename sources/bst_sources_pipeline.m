@@ -16,6 +16,7 @@ bstImportRecordings(subjects)
 
 cond_lab = {'add', 'sub', 'addsub'};
 op_lab = {'opall', 'op1_3', 'op1_4', 'op1_5', 'op1_6', 'op2_0', 'op2_1', 'op2_2', 'op2_3', 'cRes_3', 'cRes_4', 'cRes_5', 'cRes_6'};
+op_lab = {'opall'};
 
 count = 1;
 for condi = 1:length(cond_lab)
@@ -29,11 +30,11 @@ for condi = 1:length(cond_lab)
     end
 end
     
-% 
+% % 
 % cd(bst_sfw_dir)
 % brainstorm nogui;
 
-btsAVGtrialsByCond(subjects, conditions)
+% btsAVGtrialsByCond(subjects, conditions)
 
-%% Z-Score and smoothing
+%% Projection to group with spatial smoothing
 source_z_sm_group(subjects,conditions)

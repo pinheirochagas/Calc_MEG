@@ -16,11 +16,11 @@ function stat=fp_statdepregr(channel,latency,varargin)
 % load neighbour sensors configuration (independently from channel
 % selection, the magnetometers layout is loaded, as channel position is the
 % same for the three types of sensors).
-% load('/neurospin/meg/meg_tmp/tools_tmp/pipeline_tmp/neuromag306mag_neighb.mat');
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/neuromag306mag_neighb.mat');
+load('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/neuromag306mag_neighb.mat');
+%load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/neuromag306mag_neighb.mat');
 % select channels in the data
-% load('/neurospin/meg/meg_tmp/tools_tmp/pipeline/SensorClassification.mat');
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+load('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+%load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
 
 % number of levels
 nl=length(varargin);

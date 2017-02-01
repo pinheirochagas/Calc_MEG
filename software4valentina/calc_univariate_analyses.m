@@ -77,7 +77,7 @@ bn_plotsinglecluster(statdelay,gav_delay,gav_nodelay,2,1,0.01);
 
 %% Operand1 in all
 lat = [0 .8];
-gav_op1 = load('calc_erf_all_operand1');
+gav_op1 = load([resultpath 'calc_erf_all_operand1.mat']);
 gav_op13 = gav_op1.avgERFallGavg.all.operand1.operand13;
 gav_op14 = gav_op1.avgERFallGavg.all.operand1.operand14;
 gav_op15 = gav_op1.avgERFallGavg.all.operand1.operand15;
@@ -88,7 +88,7 @@ stataallop1 = fp_statdepregr_all(lat,gav_op13,gav_op14,gav_op15,gav_op16);
 % Check Stats
 ns_statinfo_all(stataallop1,probthr);
 %Plot
-fp_plotsinglecluster_depregr(lat,stataallop1,3,2,0,gav_op13,gav_op14,gav_op15,gav_op16) 
+fp_plotsinglecluster_depregr(lat,stataallop1,1,1,0,gav_op13,gav_op14,gav_op15,gav_op16) 
 
 figure(3)
 save2pdf([figurespath 'erf_gav_allop1_2.pdf'],gcf, 600)

@@ -41,7 +41,7 @@ function fp_clusterplot_statregrsingle(cfg,stat,sensortype,varargin)
 %% Defining initial parameters for NS data %%
 
 % select sensor type and labels
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+load('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
 
 cfg.sensortype=sensortype;
 % number of levels
