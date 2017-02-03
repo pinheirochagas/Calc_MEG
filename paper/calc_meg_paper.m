@@ -21,7 +21,7 @@ for sub = 1:length(subs)
 end
 
 
-%%
-
+%% Univariate analyses
+savePNG(gcf,200, ['/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/sources/' 'test1.png'])
 
 

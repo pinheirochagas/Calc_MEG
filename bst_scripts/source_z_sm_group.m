@@ -1,4 +1,4 @@
-function source_z_sm_group(subjects,conditions)
+function source_z_sm_group(subjects,conditions, method)
 %% Source: calculate z-score from baseline, spatial smooth and project to group analysis 
 % subjects = 's01';
 % conditions = 'addsub_opall';
@@ -10,7 +10,7 @@ for cond = 1 : length(conditions);
         
         [sStudySrc, iStudySrc] = bst_get('StudyWithCondition', [subjects{subi} '/' conditions{cond}]);
         for i=1:length(sStudySrc.Result)
-            if strfind(sStudySrc.Result(i).FileName,'average') % wMNE
+            if strfind(sStudySrc.Result(i).FileName,'average') & strfind(sStudySrc.Result(i).FileName,method) % MN for wMNE or dSPM
                 good_index=i;
             end;
         end;
@@ -30,13 +30,13 @@ for cond = 1 : length(conditions);
 %             'baseline', [-0.5, -0.004], ...
 %             'source_abs', 1, ...
 %             'dynamic', 1);
-        %% Spatial Smoothing
-        % Process: Spatial smoothing (10a)
-        sFiles = bst_process('CallProcess', 'process_ssmooth', sFiles, [], ...
-            'fwhm', 10, ...
-            'method', 3, ...  % Average: (euclidian distance + path length) / 2
-            'overwrite', 1, ...
-            'source_abs', 0);
+%         %% Spatial Smoothing
+%         % Process: Spatial smoothing (10a)
+%         sFiles = bst_process('CallProcess', 'process_ssmooth', sFiles, [], ...
+%             'fwhm', 10, ...
+%             'method', 3, ...  % Average: (euclidian distance + path length) / 2
+%             'overwrite', 1, ...
+%             'source_abs', 0);
         
         % Process: Project on default anatomy
         sFiles = bst_process('CallProcess', 'process_project_sources', sFiles, []);

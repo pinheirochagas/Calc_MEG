@@ -41,7 +41,7 @@ function ns_clusterplot(cfg,stat,data1,data2)
 %% Defining initial parameters for NS data %%
 
 % select sensor type and labels
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+load('neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
 
 % backward compatibility with old sensor label convention
 if strcmp(data1.label{1},'0113')

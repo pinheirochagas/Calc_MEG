@@ -27,7 +27,7 @@ function stat = ns_wscra(tl1,tl2,channel,lat)
 % backward compatibility with old sensor label convention
 if strcmp(tl1.label{1},'0113')
     disp('Old label format: MEG suffix added for layout compatibility.');
-    load /Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat
+    load /neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/SensorClassification.mat
     tl1.label = All2';
     tl2.label = All2';
 end;
@@ -36,11 +36,11 @@ end;
 % selection, the magnetometers layout is loaded, as channel position is the
 % same for the three types of sensors).
 % load('/neurospin/meg_tmp/tools_tmp/pipeline_tmp/neuromag306mag_neighb.mat');
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/neuromag306mag_neighb.mat');
+load('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/neuromag306mag_neighb.mat');
 
 % select channels in the data
 % load('/neurospin/meg_tmp/tools_tmp/pipeline/SensorClassification.mat');
-load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
+load('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/software4valentina/pipeline_tmp/SensorClassification.mat');
 
 switch channel
     case 'mag'

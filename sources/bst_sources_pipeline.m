@@ -37,4 +37,9 @@ end
 % btsAVGtrialsByCond(subjects, conditions)
 
 %% Projection to group with spatial smoothing
-source_z_sm_group(subjects,conditions)
+source_z_sm_group(subjects(1),conditions,'dSPM')
+
+source_z_sm_group({'s01'},{'addsub_opall'},'dSPM')
+
+source_z_sm_group(subjects,{'sub_opall'},'dSPM')
+

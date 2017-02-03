@@ -1,8 +1,8 @@
 function behAnalysisCalcMEG(subs)
 
 %% Paths
-addPathInitDirsMEGcalc
-figures_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/behavior/';
+InitializeDirsMEGcalc	
+figures_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/behavior/';
 
 %% Load response key
 load('response_key.mat')
@@ -10,7 +10,7 @@ load('response_key.mat')
 %% Loop accross subjects
 for sub = 1:length(subs)
     %% Load data
-    load([datapath subs{sub} '_calc.mat'])
+    load([data_dir subs{sub} '_calc.mat'])
     trialinfo = cell2mat(struct2cell(data.trialinfo))'; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
     
     %% Add accuracy
