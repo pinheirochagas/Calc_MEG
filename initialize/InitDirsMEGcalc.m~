@@ -1,0 +1,53 @@
+%% Directories
+% Get computer
+comp = computer;
+
+% MAC + Hard Drive
+if strcmp(comp, 'MACI64') == 1
+    data_root_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/';
+% Linux
+elseif strcmp(comp, 'GLNXA64') == 1
+    data_root_dir = '/Volumes/NeuroSpin4T/meg_tmp/Calculation_Pedro_2014/';
+end
+
+
+
+% Directories
+bst_db_dir = [data_root_dir 'brainstorm_db/']; % Brainstorm database folder
+bst_db_data_dir = [data_root_dir 'brainstorm_db/calc/data/']; % Brainstorm database folder
+data_dir = [data_root_dir 'data/mat/'];
+data_sss_dir = [data_root_dir 'data/sss/'];
+erf_result_dir = [data_root_dir 'results/erf/'];
+erf_fig_dir = [data_root_dir 'results/erf/figures/'];
+erf_stat_dir = [data_root_dir 'results/erf/stats/'];
+
+taf_data_dir = [data_root_dir results/erf/'];
+
+    
+
+    % Paths
+    scripts_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/';
+    addpath(genpath(scripts_dir))
+    fieldtrip_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/';   
+    addpath(genpath(fieldtrip_dir));
+    % Folders
+    bst_db_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/brainstorm_db/'; % Brainstorm database folder
+    bst_db_data_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/brainstorm_db/calc/data/'; % Brainstorm database folder
+    data_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/';
+    data_sss_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/sss/';
+    result_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/';
+    erf_fig_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/figures/';   
+    erf_stat_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/stats/'; 
+else
+    error('You can only be using your macbook or a linux workstation at neurospin')
+end
+
+
+
+
+
+    % Paths
+    scripts_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/';
+    addpath(genpath(scripts_dir))
+    fieldtrip_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/fieldtrips/fieldtrip_testedversion/';   
+    addpath(genpath(fieldtrip_dir));

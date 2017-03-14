@@ -5,11 +5,18 @@
 
 ##############################################################################################
 #Paths
-wkdir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014'
-job_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs'
-data_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat'
-result_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/decoding'
-script_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding'
+#wkdir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014'
+#job_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs'
+#data_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat'
+#result_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/decoding'
+#script_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding'
+
+
+wkdir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014'
+job_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs'
+data_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/data/mat'
+result_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/data/decoding'
+script_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/scripts/decoding'
 
 #############################################################################################
 #Preprocessing

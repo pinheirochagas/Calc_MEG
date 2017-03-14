@@ -4,115 +4,116 @@
 
 ##############################################################################################
 
-def calc_dec_wTask_CR(wkdir, Condition, Subject, Type): # Type is class or ger
-	
+def calc_dec_wTask_CR(wkdir, Condition, Subject, Type):  # Type is class or ger
+
     ##########################################################################################
-	#Test input
-	#wkdir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/'
-	#Condition = ['op1', 'op1']
-	#Subject = 's01'
-	
-	####################################################################
-	#Load necessary libraries
-	import mne
-	import os
-	import os.path as op
-	import numpy as np
-	import pandas as pd
-	import scipy.io as sio
-	from scipy import stats
-	from fldtrp2mne_calc import fldtrp2mne_calc
-	from calc_classification import calc_classification
-	from calc_regression import calc_regression
-	from calc_decoding_cfg import (result_path)
-	
-	cwd = os.path.dirname(os.path.abspath(__file__))
-	os.chdir(cwd)
+    # Test input
+    # wkdir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/'
+    # Condition = ['op1', 'op1']
+    # Subject = 's01'
 
-	##########################################################################################
-	#Subfunction
+    ####################################################################
+    # Load necessary libraries
+    import mne
+    import os
+    import os.path as op
+    import numpy as np
+    import pandas as pd
+    import scipy.io as sio
+    from scipy import stats
+    from fldtrp2mne_calc import fldtrp2mne_calc
+    from calc_classification import calc_classification
+    from calc_regression import calc_regression
+    from calc_decoding_cfg import (result_path)
 
-	def calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type):
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(cwd)
 
-		######################################################################################
-		#Basic config
+    ##########################################################################################
+    # Subfunction
 
-		from calc_decoding_cfg import (data_path, baseline, downsampling)
-		#Decoding
-		trainset = Condition[0] # and then this will be already known when calling the function
-		testset = Condition[1]
+    def calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type):
 
-		params = {'baseline': baseline, 'downsampling': downsampling,
-		'classification': Condition, 'trainset': trainset, 
-		'testset': testset}
+        ######################################################################################
+        # Basic config
 
-		fname = data_path + '/' + Subject + '_calc.mat'
-		epoch_calc,info_calc = fldtrp2mne_calc(fname, 'data', 'calc')
-		epoch_vsa,info_vsa = fldtrp2mne_calc(fname, 'data', 'vsa')
-		epoch_calc.apply_baseline(baseline)
-		epoch_vsa.apply_baseline(baseline)
+        from calc_decoding_cfg import (data_path, baseline, downsampling)
+        # Decoding
+        trainset = Condition[0]  # and then this will be already known when calling the function
+        testset = Condition[1]
 
-		#Downsample data if needed
-		if downsampling > 0:
-			epoch_calc.decimate(downsampling)
-			epoch_vsa.decimate(downsampling)
+        params = {'baseline': baseline, 'downsampling': downsampling,
+                  'classification': Condition, 'trainset': trainset,
+                  'testset': testset}
 
-		#Select data to use.
+        fname = data_path + '/' + Subject + '_calc.mat'
+        epoch_calc, info_calc = fldtrp2mne_calc(fname, 'data', 'calc')
+        epoch_vsa, info_vsa = fldtrp2mne_calc(fname, 'data', 'vsa')
+        epoch_calc.apply_baseline(baseline)
+        epoch_vsa.apply_baseline(baseline)
 
-		if trainset[-1] == testset[-1]: #Check whether we are training and testing on the same data
-		    mode = 'cross-validation'
-		    if trainset == 'op1':
-		        X_train = epoch_calc
-		        y_train = np.array(info_calc['operand1'])
-		        y_train = y_train.astype(np.float64)
-		        X_test = X_train
-		        y_test = y_train
-		    elif trainset == 'op2':
-		            X_train = epoch_calc
-		            y_train = np.array(info_calc['operand2'])
-		            y_train = y_train.astype(np.float64)
-		            X_test = X_train
-		            y_test = y_train
-		    elif trainset == 'pres':
-		            X_train = epoch_calc[(info_calc['preResult'] >= 3) & (info_calc['preResult'] <= 6)]
-		            y_train = np.array(info['preResult'])
-		            y_train = y_train.astype(np.float64)
-		            X_test = X_train
-		            y_test = y_train
-		    elif trainset == 'cres':
-		            X_train = epoch_calc[(info_calc['corrResult'] >= 3) & (info_calc['preResult'] <= 6)]
-		            y_train = np.array(info['corrResult'])
-		            y_train = y_train.astype(np.float64)
-		            X_test = X_train
-		            y_test = y_train
-		    elif trainset == 'delay_nodelay':
-		            X_train = epoch_calc
-		            y_train = np.array(info['delay'])
-		            y_train = y_train.astype(np.float64)
-		            X_test = X_train
-		            y_test = y_train
-		else:
-		    mode = 'mean-prediction'
+        # Downsample data if needed
+        if downsampling > 0:
+            epoch_calc.decimate(downsampling)
+            epoch_vsa.decimate(downsampling)
 
-		# Update params with mode
-		params.update({'mode': mode})	
-    	
-		if Type == 'class':
-			gat, score, diagonal = calc_classification(X_train, y_train, X_test, y_test, params)
-			print('Decoding subject classification')
-		elif Type == 'reg':
-			gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
-			print('Decoding subject regression')
+        # Select data to use.
 
-		return params, epoch_calc.times, epoch_vsa.times, gat, score, diagonal, gat, score, diagonal
+        if trainset[-1] == testset[-1]:  # Check whether we are training and testing on the same data
+            mode = 'cross-validation'
+            if trainset == 'op1':
+                X_train = epoch_calc
+                y_train = np.array(info_calc['operand1'])
+                y_train = y_train.astype(np.float64)
+                X_test = X_train
+                y_test = y_train
+            elif trainset == 'op2':
+                X_train = epoch_calc
+                y_train = np.array(info_calc['operand2'])
+                y_train = y_train.astype(np.float64)
+                X_test = X_train
+                y_test = y_train
+            elif trainset == 'pres':
+                X_train = epoch_calc[(info_calc['preResult'] >= 3) & (info_calc['preResult'] <= 6)]
+                y_train = np.array(info['preResult'])
+                y_train = y_train.astype(np.float64)
+                X_test = X_train
+                y_test = y_train
+            elif trainset == 'cres':
+                X_train = epoch_calc[(info_calc['corrResult'] >= 3) & (info_calc['preResult'] <= 6)]
+                y_train = np.array(info['corrResult'])
+                y_train = y_train.astype(np.float64)
+                X_test = X_train
+                y_test = y_train
+            elif trainset == 'delay_nodelay':
+                X_train = epoch_calc
+                y_train = np.array(info['delay'])
+                y_train = y_train.astype(np.float64)
+                X_test = X_train
+                y_test = y_train
+        else:
+            mode = 'mean-prediction'
 
+        # Update params with mode
+        params.update({'mode': mode})
 
-	params, times_calc, times_vsa, gat, score, diagonal, gat, score, diagonal = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
+        if Type == 'class':
+            gat, score, diagonal = calc_classification(X_train, y_train, X_test, y_test, params)
+            print('Decoding subject classification')
+        elif Type == 'reg':
+            gat, score, diagonal = calc_regression(X_train, y_train, X_test, y_test, params)
+            print('Decoding subject regression')
 
-	results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
-	results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
-	# do I need to save the gat?
+        return params, epoch_calc.times, epoch_vsa.times, gat, score, diagonal, gat, score, diagonal
 
-	#Save data
-	fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[1] + '_results_' + Type
-	np.save(fname, results)
+    params, times_calc, times_vsa, gat, score, diagonal, gat, score, diagonal = calc_prepDec_wTask_CR(wkdir, Condition,
+                                                                                                      Subject, Type)
+
+    results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
+    results = {'params': params, 'times_calc': times_calc, 'gat': gat, 'score': score, 'diagonal': diagonal}
+    # do I need to save the gat?
+
+    # Save data
+    fname = result_path + '/individual_results/' + Subject + '_' + Condition[0] + '_' + Condition[
+        1] + '_results_' + Type
+    np.save(fname, results)
