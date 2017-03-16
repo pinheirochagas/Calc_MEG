@@ -26,7 +26,7 @@ end
 
 
 %% Time-frequency
-for i = length(subs);
+for i = 1:length(subs);
     load([data_dir, subs{i}, '_calc_AICA.mat'])
     [TFR, trialinfo] = ftTFAlow(data);
     save([tfa_data_dir, subs{i}, '_TFA_low.mat'],'TFR','trialinfo','-v7.3');
