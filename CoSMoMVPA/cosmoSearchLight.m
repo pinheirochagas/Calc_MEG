@@ -4,6 +4,10 @@ function searchlight_ft_allsub = cosmoSearchLight(sub_name, conds, fq_range, spa
 %% Initialize dirs
 InitDirsMEGcalc
 
+%% Get CoSMoMVPA
+cd(cosmo_mvpa_dir)
+cosmo_set_path()
+
 % %% Searchlight specs
 % spacesphere   = 10; % 10 sensors in each sphere
 % timesphere    = 1;  % should be 1*2+1=3 time-bin, each is 40 ms
@@ -30,6 +34,7 @@ for subi = 1:length(sub_name) % loop across subjects
     
     % Convert to cosmomvpa struct
     display('Converting data to cosmo mvpa data structure')
+
     ds_tf=cosmo_meeg_dataset(TFR);
     
     % Set the target (conditions' labels)

@@ -26,13 +26,8 @@ end
 
 
 %% Time-frequency
-<<<<<<< HEAD
-for i = 1:length(subs);
-    load([data_dir, subs{i}, '_calc_AICA.mat'])
-=======
 for i = length(sub_name);
     load([data_dir, sub_name{i}, '_calc_AICA.mat'])
->>>>>>> 62c779d1413ccb5bd3a6066849f1b1477fb55f65
     [TFR, trialinfo] = ftTFAlow(data);
     save([tfa_data_dir, sub_name{i}, '_TFA_low.mat'],'TFR','trialinfo','-v7.3');
     [TFR, trialinfo] = ftTFAhigh(data);
@@ -41,7 +36,8 @@ for i = length(sub_name);
 end
 
 %% Cosmo time-frequency-space searchlight 
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low');
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low', 10, 1, 1, 5);
+
 
 
 
