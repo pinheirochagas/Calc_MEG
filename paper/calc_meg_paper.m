@@ -36,7 +36,7 @@ for i = length(sub_name);
 end
 
 %% Cosmo time-frequency-space searchlight 
-
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low');
 
 
 

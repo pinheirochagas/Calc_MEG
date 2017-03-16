@@ -16,11 +16,11 @@ TFRhann = ft_freqanalysis(cfg, data);
 cfg = [];
 cfg.baseline     = [-0.5 -0.1]; 
 cfg.baselinetype = 'absolute'; 
-cfg.zlim         = [-3e-27 3e-27];	        
+% cfg.zlim         = [-3e-27 3e-27];	        
 cfg.showlabels   = 'yes';	
 cfg.layout       = 'neuromag306mag.lay';
 figure 
-ft_multiplotTFR(cfg, TFR);
+ft_multiplotTFR(cfg, data);
 
 
 
