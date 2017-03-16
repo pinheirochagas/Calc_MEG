@@ -1,36 +1,36 @@
-function searchlight_ft_allsub = cosmoSearchLight(sub_name, conds, fq_range, spacesphere, timesphere, freqsphere, nchunks)
+function searchlight_ft_allsub = cosmoSearchLight(sub_name, conds, fq_range)
 %% Function to run a searchlight based LDA on sensors, time and frequency
 
 %% Initialize dirs
 InitDirsMEGcalc
 
-% %% Searchlight specs
-% spacesphere   = 10; % 10 sensors in each sphere
-% timesphere    = 1;  % should be 1*2+1=3 time-bin, each is 40 ms
-% freqsphere    = 1;  % should be 1*2+1=3 frequency-bin, each is 1 Hz
-% nchunks=5;          % for cross-validation
+%% Searchlight specs
+spacesphere   = 10; % 10 sensors in each sphere
+timesphere    = 100;  % should be 1*2+1=3 time-bin, each is 40 ms
+freqsphere    = 20;  % should be 1*2+1=3 frequency-bin, each is 1 Hz
+nchunks=5;          % for cross-validation
 
 %% Initialize variables
 Allsub_samples = [];
 
 %% Loop across subjects
 for subi = 1:length(sub_name) % loop across subjects
-    tic     
+        
     % Load data
-    display(['Loading TFA data of subject ' sub_name{subi}])
     load([tfa_data_dir, sub_name{subi} '_TFA_' fq_range '.mat']);
+    display(['Loading TFA data of subject ' sub_name{subi}])
     
-    % Define conditions  
-    display(['Selecting trials for ' conds])
+    % Define conditions        
     [conds_idx, labels] = selecCondsMegCalc(trialinfo, conds);
+    display(['Selecting trials for ' conds])
     
     % Filter data
     TFR.powspctrm = TFR.powspctrm(conds_idx,:,:,:);
     TFR.cumtapcnt = TFR.cumtapcnt(conds_idx,:);
     
     % Convert to cosmomvpa struct
-    display('Converting data to cosmo mvpa data structure')
     ds_tf=cosmo_meeg_dataset(TFR);
+    display('Converting data to cosmo mvpa data structure')
     
     % Set the target (conditions' labels)
     ds_tf.sa.targets = labels;
@@ -57,15 +57,14 @@ for subi = 1:length(sub_name) % loop across subjects
     chan_type='meg_combined_from_planar';
  
     % Define the neighborhood for each dimensions
-    display('Define the neighborhood for each dimensions')
     chan_nbrhood=cosmo_meeg_chan_neighborhood(ds_tf, 'count', spacesphere, 'chantype', chan_type);
     freq_nbrhood=cosmo_interval_neighborhood(ds_tf,'freq', 'radius',timesphere);
     time_nbrhood=cosmo_interval_neighborhood(ds_tf,'time', 'radius',freqsphere);
 
     % Cross neighborhoods for chan-time-freq searchlight
-    display('Cross neighborhoods for chan-time-freq searchlight')
-    nbrhood=cosmo_cross_neighborhood(ds_tf,{chan_nbrhood, freq_nbrhood, time_nbrhood});                                  
-   
+    nbrhood=cosmo_cross_neighborhood(ds_tf,{chan_nbrhood, freq_nbrhood, time_nbrhood});
+    display(['Running searchligth for subject ' sub_name{subi} ' '])
+                                        
     % Print some info
     nbrhood_nfeatures=cellfun(@numel,nbrhood.neighbors);
     fprintf('Features have on average %.1f +/- %.1f neighbors\n', mean(nbrhood_nfeatures), std(nbrhood_nfeatures));
@@ -90,40 +89,29 @@ for subi = 1:length(sub_name) % loop across subjects
     measure_args.classifier=@cosmo_classify_lda;
 
     % Run the searchlight
-    display(['Running searchligth on ', conds, ' in subject ', sub_name{subi}, ' using ' fq_range, ...
-        ' frequencies and space sphere of ', num2str(spacesphere), ', time bins of ', num2str(timesphere), ...
-        ' and frequency bins of ', num2str(freqsphere)])
     sl_tf_ds=cosmo_searchlight(ds_tf,nbrhood,measure,measure_args, 'center_ids',center_ids,'nproc',2);
-    display('Done!')   
-          
+              
     %% Save
     % Cosmo format
-    display(['Saving searchlight results for subject ' sub_name{subi} ' in cosmo format'])   
     save([searchlight_result_dir 'searchlight_cosmo_', conds '_' sub_name{subi}...
-        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_.mat'], 'sl_tf_ds');
+        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freq_radius), '_.mat'], 'sl_tf_ds');
        
     % Convert to fieldtrip and save
-    display(['Converting and saving searchlight results for subject ' sub_name{subi} ' in fieldtrip format'])   
-    all_ft = cosmo_map2meeg(sl_tf_ds);    
+    all_ft=cosmo_map2meeg(sl_tf_ds);    
     save([searchlight_result_dir 'searchlight_ft_', conds '_' sub_name{subi}...
-        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_.mat'], 'all_ft');
+        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freq_radius), '_.mat'], 'all_ft');
                 
     
     %% Store all subjs
     Allsub_samples = [Allsub_samples; sl_tf_ds.samples];
-    time_elapsed = toc;
-    display(['Searchlight of ' conds ' in subject ' sub_name{subi} 'completed in ' num2str(time_elapsed) ' seconds'])   
-
    
     %% Clean
-    clearvars -EXCEPT subi searchlight_result_dir sub_name conds fq_range spacesphere timesphere freqsphere nchunks Allsub_samples 
+    clearvars -EXCEPT searchlight_result_dir sub_name conds fq_range spacesphere timesphere freqsphere Allsub_samples subi nchunks
 
 end
-display(['Searchlight of ' conds ' in all subjects completed!'])   
 
     
 %% Average across subjects 
-display('Saving searchlight group results in cosmo format')   
 MeanSub = mean(Allsub_samples); % Average samples
 searchlight_cosmo_allsub = sl_tf_ds; % Add 
 searchlight_cosmo_allsub.samples = MeanSub;
@@ -131,15 +119,14 @@ save([searchlight_result_dir 'searchlight_ft_allsub_' conds '_lda_ch' num2str(sp
     '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '.mat'], 'searchlight_cosmo_allsub');
     
 % convert to fieldtrip and save results
-display('Saving searchlight group results in fieldtrip format')   
 searchlight_ft_allsub = cosmo_map2meeg(searchlight_cosmo_allsub);
 save([searchlight_result_dir 'searchlight_ft_allsub_' conds '_lda_ch' num2str(spacesphere)...
     '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '.mat'], 'searchlight_ft_allsub');
 
+
+
+
 end
-
-
-
 % 
 % Allsub_samples = [];
 % for subi = 1 : length(subs) % loop across subjects

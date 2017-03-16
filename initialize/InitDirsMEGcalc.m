@@ -22,3 +22,6 @@ erf_result_dir = [data_root_dir 'results/erf/'];
 erf_fig_dir = [data_root_dir 'results/erf/figures/'];
 erf_stat_dir = [data_root_dir 'results/erf/stats/'];
 tfa_data_dir = [data_root_dir 'data/TFA/'];
+searchlight_result_dir = [data_root_dir 'results/searchlight/'];
+
+
