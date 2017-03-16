@@ -27,15 +27,18 @@ for subi = 1:length(sub_name) % loop across subjects
     % Define conditions  
     display(['Selecting trials for ' conds])
     [conds_idx, labels] = selecCondsMegCalc(trialinfo, conds);
-%     labels = repmat([2 3 4 5],1,5)';
+    labels = repmat([2 3 4 5],1,5)';
     
     % Filter data
-    TFR.powspctrm = TFR.powspctrm(conds_idx,:,:,:);
-    TFR.cumtapcnt = TFR.cumtapcnt(conds_idx,:);
+%     TFR.powspctrm = TFR.powspctrm(conds_idx,:,:,:);
+%     TFR.cumtapcnt = TFR.cumtapcnt(conds_idx,:);
 
-%     TFR.powspctrm = TFR.powspctrm(1:20,:,:,1:3);
-%     TFR.time = TFR.time(1:3);
-%     TFR.cumtapcnt = TFR.cumtapcnt(1:20,:);
+
+%     TFR.powspctrm = TFR.powspctrm(1:20,:,:,:);
+    TFR.powspctrm = TFR.powspctrm(1:20,:,:,1:3);
+    TFR.time = TFR.time(1:3);
+
+    TFR.cumtapcnt = TFR.cumtapcnt(1:20,:);
     
     % Convert to cosmomvpa struct
     display('Converting data to cosmo mvpa data structure')
@@ -110,13 +113,13 @@ for subi = 1:length(sub_name) % loop across subjects
     % Cosmo format
     display(['Saving searchlight results for subject ' sub_name{subi} ' in cosmo format'])   
     save([searchlight_result_dir 'searchlight_cosmo_', conds '_' sub_name{subi}...
-        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range '_freq.mat'], 'sl_tf_ds');
+        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range 'freq_.mat'], 'sl_tf_ds');
        
     % Convert to fieldtrip and save
     display(['Converting and saving searchlight results for subject ' sub_name{subi} ' in fieldtrip format'])   
     all_ft = cosmo_map2meeg(sl_tf_ds);    
     save([searchlight_result_dir 'searchlight_ft_', conds '_' sub_name{subi}...
-        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range '_freq.mat'], 'all_ft');
+        '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range 'freq_.mat'], 'all_ft');
                 
     
     %% Store all subjs
@@ -137,14 +140,14 @@ display('Saving searchlight group results in cosmo format')
 MeanSub = mean(Allsub_samples); % Average samples
 searchlight_cosmo_allsub = sl_tf_ds; % Add 
 searchlight_cosmo_allsub.samples = MeanSub;
-save([searchlight_result_dir 'searchlight_cosmo_allsub_' conds '_lda_ch' num2str(spacesphere)...
-    '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '_' fq_range '_freq.mat'], 'searchlight_cosmo_allsub');
+save([searchlight_result_dir 'searchlight_ft_allsub_' conds '_lda_ch' num2str(spacesphere)...
+    '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '.mat'], 'searchlight_cosmo_allsub');
     
 % convert to fieldtrip and save results
 display('Saving searchlight group results in fieldtrip format')   
 searchlight_ft_allsub = cosmo_map2meeg(searchlight_cosmo_allsub);
 save([searchlight_result_dir 'searchlight_ft_allsub_' conds '_lda_ch' num2str(spacesphere)...
-    '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '_' fq_range '_freq.mat'], 'searchlight_ft_allsub');
+    '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '.mat'], 'searchlight_ft_allsub');
 
 end
 
