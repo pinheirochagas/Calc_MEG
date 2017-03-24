@@ -18,9 +18,9 @@ cfg.baseline     = [-0.5 -0.1];
 cfg.baselinetype = 'absolute'; 
 % cfg.zlim         = [-3e-27 3e-27];	        
 cfg.showlabels   = 'yes';	
-cfg.layout       = 'neuromag306mag.lay';
+cfg.layout       = 'neuromag306cmb.lay';
 figure 
-ft_multiplotTFR(cfg, data);
+ft_multiplotTFR(cfg, searchlight_ft_allsub);
 
 
 

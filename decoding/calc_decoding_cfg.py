@@ -18,10 +18,9 @@ data_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/data/mat'
 result_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/data/decoding'
 script_path = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/scripts/decoding'
 
-#############################################################################################
-#Preprocessing
-baseline = (-0.1, -0.05) #time for the baseline period
-downsampling = 0 #downsampling factor (input at 250Hz)
+# Preprocessing
+baseline = (-0.1, -0.05)  # time for the baseline period
+downsampling = 0  # downsampling factor (input at 250Hz)
 
 ########################################################################
 #Decoding
