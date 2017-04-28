@@ -52,7 +52,7 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 
 
 %% Vizualize searchlight
 
-load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/searchlight/searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat')
+load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/searchlight/searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat')
 
 cfg = [];
 cfg.showlabels   = 'yes';	
@@ -87,6 +87,9 @@ cfg.style = 'straight';
 h = subplot(1,5,4)
 ft_topoplotER(cfg, tmpA);
 colormap(cbrewer2('Reds'))
+
+
+ft_multiplotTFR(cfg, tmpA);
 
 
 p = get(h, 'pos');

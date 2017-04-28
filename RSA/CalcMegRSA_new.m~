@@ -15,7 +15,6 @@ stimMatricesdir = ['/Volumes/NeuroSpin4T/Calculation_Pedro_2014/stimuli_analises
 
 %% List conditions
 conditions = {'operand1', 'operand2', 'corrResult'}; % conditions to average
-conditions = {'corrResult'}; % conditions to average
 
 %% Smoothing parameters
 KernWidth = 0.05; %%% size in sec of the std of the Gaussian kernel for smoothing the data
@@ -25,7 +24,7 @@ opts.nKernStdToInc=nKernStdToInc;
 tOutLims=[-.5 4.5]; % check that! 
 
 
-for cond = 1%:length(conditions)
+for cond = 3%:length(conditions)
     
     %% Loop across subjects
     for sub = 1:length(subName)
@@ -48,7 +47,7 @@ for cond = 1%:length(conditions)
             end
         
         %% Smooth the data (in case its not smoothed)
-        data.trial = smoothMEG(subName{sub}, 'calc');
+        data = smoothMEG(subName{sub}, 'calc');
         
         %% Average trials for each condition
         for conds = 1:length(condStim)
@@ -87,7 +86,7 @@ for cond = 1%:length(conditions)
             CorVIS(t) = corr(neuralMatrixVZ', visualMatrixVZ','type', 'Spearman');
         end
         clear neuralMatrixVZ
-        dataTime = data.time{1};
+        dataTime = data.time;
         clear data
         
         CorMAGallsub(sub,:) = CorMAG;
@@ -156,7 +155,7 @@ xlabel('Times sec.')
 ylabel('rho')
 title('Operand 2')
 
-save2pdf([resultsdir '/RSA_testing_MEG_corrResult_smooth.pdf'], gcf, 600)
+save2pdf([resultsdir '/RSA_testing_MEG_op1-op2_smooth.pdf'], gcf, 600)
 %save2pdf([resultsDir 'RSA_testing.pdf'], gcf, 600)
 
 
@@ -164,18 +163,17 @@ save2pdf([resultsdir '/RSA_testing_MEG_corrResult_smooth.pdf'], gcf, 600)
 % Define timepoints
 for i = 1:length(RDmeasures);
     hold on
-    plot(dataTime(timePlot), RDmeasures{i}(timePlot), 'LineWidth', 2)
+    plot(data.time{1}(timePlot), RDmeasures{i}(timePlot), 'LineWidth', 2)
 end
 
 %% Make a movie of the neural matrix
 for j = 1:length(RDmeasures{1})
     imagesc(neuralMatrices(:,:,j))
-    title(['Neural matrix time: ', num2str(dataTime(j))])
-%     title(['Neural matrix time: ', num2str(data.time(timePlot(j)))])
+    title(['Neural matrix time: ', num2str(data.time(timePlot(j)))])
     set(gca, 'XTick', 1:length(neuralMatrices(:,:,j)));
     set(gca, 'YTick', 1:length(neuralMatrices(:,:,j)));
-%     set(gca, 'Xticklabels', conditions)
-%     set(gca, 'Yticklabels', conditions)
+    set(gca, 'Xticklabels', conditions)
+    set(gca, 'Yticklabels', conditions)
     set(gca, 'FontSize', 18)
     axis square
     set(gcf,'color','w');

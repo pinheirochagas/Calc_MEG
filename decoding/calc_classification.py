@@ -56,11 +56,11 @@ def calc_classification(X_train, y_train, X_test, y_test, params):
     # gat = GeneralizationAcrossTime(clf = clf, cv = cv, predict_mode = predict_mode, 
     #     scorer = scorer, n_jobs = -1)
 
-    # gat = GeneralizationAcrossTime(clf = clf, cv = cv,  train_times = params['trainTimes'],
-    # test_times = params['testTimes'],scorer = scorer, predict_mode = predict_mode, n_jobs = 8)
+    gat = GeneralizationAcrossTime(clf=clf, cv=cv,  train_times=params['trainTimes'],
+                                   test_times=params['testTimes'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
 
-    gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['trainTimes'],
-                                   test_times=params['testTimes'], predict_mode=predict_mode, n_jobs=32)
+    # gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['trainTimes'],
+                                   # test_times=params['testTimes'], predict_mode=predict_mode, n_jobs=32)
     # Determine whether to generalize only across time or also across conditions
     if predict_mode == 'cross-validation':
         gat.fit(X_train, y=y_train)
