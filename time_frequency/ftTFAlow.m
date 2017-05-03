@@ -10,7 +10,7 @@ cfg.trials       = 'all' ;
 cfg.keeptrials   ='yes';
 cfg.trackdatainfo='yes';                
 cfg.channel      = All2; 
-cfg.foi          = 2:1:34;                    % frequencies of interest [4 to 35 in steps of 1Hz]
+cfg.foi          = 2:1:34;                    % frequencies of interest [2 to 35 in steps of 1Hz]
 cfg.toi          = -0.5:0.04:4.5;             % time on which the window is centered = from -0.8s to 1.2s in steps of 0.04 s
 for i=1:length(cfg.foi)
     if cfg.foi(i)<=10

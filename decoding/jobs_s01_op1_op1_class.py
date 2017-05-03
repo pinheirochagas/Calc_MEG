@@ -1,4 +1,4 @@
 import sys 
 sys.path.append('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding')
-from calc_dec_wTask_CR import calc_dec_wTask_CR
-calc_dec_wTask_CR('/neurospin/meg/meg_tmp/Calculation_Pedro_2014',['op1', 'op1'],'s01','reg')
+from calc_decoding import calc_decoding
+calc_decoding('/neurospin/meg/meg_tmp/Calculation_Pedro_2014',['op1', 'op1'],'s01','class')

@@ -3,19 +3,9 @@ sys.path.append('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scri
 from calc_decoding_cfg import (data_path, baseline, downsampling, trainTimes, testTimes)
 from fldtrp2mne_calc import fldtrp2mne_calc
 import numpy as np
+
 import mne
 import pandas as pd
-
-
-
-
-
-
-
-
-
-
-
 
 def myproduct(a, b):
 	c = a * b

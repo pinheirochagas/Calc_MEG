@@ -76,18 +76,19 @@ cfg = [];
 cfg.showlabels   = 'no';	
 cfg.layout       = 'neuromag306all.lay'; %neuromag306all.lay neuromag306mag
 % cfg.channel = Grad;
-cfg.baseline = [-0.5 -0.02];
-cfg.baselinetype = 'db';
+cfg.baseline = [-0.5 -0.02]
+cfg.baselinetype = 'db'
+figure(2) 
 
 TFRlow = TFR
-TFRhigh = TFR
+TFRlow = TFR
 
 
 for i = length(sub_name);
     load([tfa_data_dir, sub_name{i}, '_TFA_low.mat'])
     ft_multiplotTFR(cfg, TFR);
     load([tfa_data_dir, sub_name{i}, '_TFA_high.mat'])
-    ft_multiplotTFR(cfg, TFRhigh);
+    ft_multiplotTFR(cfg, TFR);
 
 
 

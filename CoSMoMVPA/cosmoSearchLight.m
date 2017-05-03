@@ -103,7 +103,8 @@ for subi = 1:length(sub_name) % loop across subjects
     display(['Running searchligth on ', conds, ' in subject ', sub_name{subi}, ' using ' fq_range, ...
         ' frequencies and space sphere of ', num2str(spacesphere), ', time bins of ', num2str(timesphere), ...
         ' and frequency bins of ', num2str(freqsphere)])
-    sl_tf_ds=cosmo_searchlight(ds_tf,nbrhood,measure,measure_args, 'center_ids',center_ids,'nproc',2);
+    %sl_tf_ds=cosmo_searchlight(ds_tf,nbrhood,measure,measure_args, 'center_ids',center_ids,'nproc',2);
+    sl_tf_ds=cosmo_searchlight(ds_tf,nbrhood,measure,measure_args, 'center_ids',center_ids);
     display('Done!')   
           
     %% Save
