@@ -8,8 +8,27 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as col
 from matplotlib.colors import LinearSegmentedColormap
 from ..utils import logcenter
+from ..stats import median_abs_deviation
 
 RdPuBu = col.LinearSegmentedColormap.from_list('RdPuBu', ['b', 'r'])
+
+
+def alpha_cmap(cmap='RdBu_r', slope=-10, thres=.5, diverge=True, shift=0):
+    if isinstance(cmap, str):
+        cmap = plt.get_cmap(cmap)
+    if isinstance(cmap, LinearSegmentedColormap):
+        cmap._init()
+        cmap = cmap._lut[:cmap.N, :] * 255
+    if diverge:
+        logit = lambda x: \
+            np.abs(2 * (1 / (1 + np.exp(slope * (x + shift))) - .5)) - thres
+    else:
+        logit = lambda x: 1 / (1 + np.exp(slope * (x + shift))) - thres
+    logit2 = lambda x: logit(x) / logit(1.) * (logit(x) > 0)
+
+    cmap[:, -1] = [255 * logit2(ii)
+                   for ii in np.linspace(-1.0, 1.0, cmap.shape[0])]
+    return cmap
 
 
 def share_clim(axes, clim=None):
@@ -63,12 +82,15 @@ def plot_widths(xs, ys, widths, ax=None, color='b', xlim=None, ylim=None,
     return ax if fig is None else fig
 
 
-def plot_sem(x, y, **kwargs):
+def plot_sem(x, y, robust=False, **kwargs):
     """
     Parameters
     ----------
     x : list | np.array()
     y : list | np.array()
+    robust : bool
+        If False use mean + std,
+        If True median + mad
     ax
     alpha
     color
@@ -82,8 +104,12 @@ def plot_sem(x, y, **kwargs):
     Adapted from http://tonysyu.github.io/plotting-error-bars.html#.VRE9msvmvEU
     """
     x, y = np.array(x), np.array(y)
-    m = np.nanmean(y, axis=0)
-    std = np.nanstd(y, axis=0)
+    if robust:
+        m = np.nanmedian(y, axis=0)
+        std = median_abs_deviation(y, axis=0)
+    else:
+        m = np.nanmean(y, axis=0)
+        std = np.nanstd(y, axis=0)
     n = y.shape[0] - np.sum(np.isnan(y), axis=0)
 
     return plot_eb(x, m, std / np.sqrt(n), **kwargs)
@@ -149,7 +175,7 @@ def fill_betweenx_discontinuous(ax, ymin, ymax, x, freq=1, **kwargs):
         # If continuous
         if not np.any(xmax):
             xmax = [len(x) - 1]
-        print x[0], x[xmax[0]]
+        print(x[0], x[xmax[0]])
         ax.fill_betweenx((ymin, ymax), x[0], x[xmax[0]], **kwargs)
 
         # remove from list
@@ -183,7 +209,7 @@ def pcolormesh_45deg(C, ax=None, xticks=None, xticklabels=None, yticks=None,
     if xticks is not None:
         xticklabels = xticks if xticklabels is None else xticklabels
         for tick, label, in zip(xticks, xticklabels):
-            print tick, label
+            print(tick, label)
             ax.scatter(-n + tick + .5, tick + .5, marker='x', color='k')
             ax.text(-n + tick + .5, tick + .5, label,
                     horizontalalignment='right', rotation=-rotation)
@@ -238,8 +264,10 @@ def pretty_colorbar(im=None, ax=None, ticks=None, ticklabels=None, nticks=3,
             raise RuntimeError('did not find the image')
     if ticks is None:
         clim = im.get_clim()
+        # XXX bug https://github.com/matplotlib/matplotlib/issues/6352
         if None in clim:
-            plt.draw()
+            fig = ax.get_figure()
+            fig.canvas.draw()
             clim = im.get_clim()
         ticks = np.linspace(clim[0], clim[1], nticks)
     cb = plt.colorbar(im, ax=ax, ticks=ticks, **kwargs)

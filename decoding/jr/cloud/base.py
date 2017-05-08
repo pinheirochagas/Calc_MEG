@@ -1,18 +1,69 @@
 import os
 import os.path as op
+import warnings
 from mne.utils import ProgressBar
 
 
 class Client():
-    def __init__(self, server, credentials=None, bucket=None):
-        if server == 'S3':
-            self.route = S3_client(credentials, bucket)
-        elif server == 'Dropbox':
-            self.route = Dropbox_client(credentials, bucket)
-        else:
-            raise ValueError('Unknown server')
+    def __init__(self, server, credentials=None, bucket=None,
+                 client_root=None, overwrite='auto', remove_on_upload=False,
+                 multithread=True, offline=False):
+        from multiprocessing.pool import ThreadPool
+        # Default params
+        self.client_root = client_root
+        self.overwrite = overwrite
+        self.remove_on_upload = remove_on_upload
+        self.multithread = multithread
+        self.offline = offline
+        pool = ThreadPool(processes=1)
+        self._async_result = pool.apply_async(self._connect,
+                                              (server, credentials, bucket))
 
-    def download(self, f_server, f_client, overwrite='auto'):
+    def _connect(self, server, credentials, bucket):
+        # Setup server
+        route = None
+        if server == 'S3':
+            route = S3_client(credentials, bucket)
+        elif server == 'Dropbox':
+            route = Dropbox_client(credentials, bucket)
+        elif server == 'offline':
+            route = BaseClient(credentials, bucket)
+        return route
+
+    def _is_offline(self):
+        if self.offline:
+            warnings.warn('offline')
+            print('offline!')
+            return True
+        else:
+            # if online mode, wait until init is finalized
+            if not hasattr(self, 'route'):
+                print('Checking connection initialization...')
+                self.route = self._async_result.get()
+                if self.route is None:
+                    raise ValueError('Unknown server')
+            return False
+
+    def _strip_client_root(self, f_server):
+        """remove the client root path from the server file"""
+        if self.client_root is None:
+            return f_server
+        if f_server[:len(self.client_root)] == self.client_root:
+            f_server = f_server[len(self.client_root):]
+        if f_server[0] == '/':
+            f_server = f_server[1:]
+        return f_server
+
+    def download(self, f_server, f_client=None, overwrite=None):
+        if self._is_offline():
+            return
+        # get default overwrite parameter
+        if overwrite is None:
+            overwrite = self.overwrite
+        # default filenames
+        f_server = self._strip_client_root(f_server)
+        if f_client is None:
+            f_client = op.join(self.client_root, f_server)
         # connect
         self.route.connect()
         # check that file exists online
@@ -37,11 +88,35 @@ class Client():
         print('Downloaded: %s > %s' % (f_server, f_client))
         return True
 
-    def upload(self, f_client, f_server=None, overwrite='auto'):
-        if f_server is None:
-            f_server = f_client.split('/')[-1]
+    def upload(self, f_client, f_server=None, overwrite=None,
+               multithread=None, remove_on_upload=None):
+        import threading
+        if self._is_offline():
+            return
+
+        # get default params
+        if multithread is None:
+            multithread = self.multithread
+        if overwrite is None:
+            overwrite = self.overwrite
+        if remove_on_upload is None:
+            remove_on_upload = self.remove_on_upload
+
+        if multithread:
+            thread = threading.Thread(target=self._upload_thread,
+                                      args=(f_client, f_server, overwrite,
+                                            remove_on_upload))
+            thread.start()
+        else:
+            return self._upload_thread(f_client, f_server, overwrite,
+                                       remove_on_upload)
+
+    def _upload_thread(self, f_client, f_server, overwrite, remove_on_upload):
+        f_server = f_client if f_server is None else f_server
+        f_server = self._strip_client_root(f_server)
         if op.isfile(f_client):
-            return self._upload_file(f_client, f_server, overwrite=overwrite)
+            return self._upload_file(f_client, f_server, overwrite,
+                                     remove_on_upload)
         elif op.isdir(f_client):
             results = list()
             for root, dirs, files in os.walk(f_client):
@@ -51,12 +126,13 @@ class Client():
                     # upload the file
                     results.append(self._upload_file(
                         local_path,
-                        f_server + local_path.split(f_client)[-1]))
+                        f_server + local_path.split(f_client)[-1],
+                        overwrite, remove_on_upload))
             return sum(results)
         else:
             raise ValueError('File not found %s' % f_client)
 
-    def _upload_file(self, f_client, f_server, overwrite='auto'):
+    def _upload_file(self, f_client, f_server, overwrite, remove_on_upload):
         # connect
         self.route.connect()
         # check whether file exists online
@@ -78,14 +154,46 @@ class Client():
         print('Uploading %s > %s' % (f_client,
                                      op.join(self.route.bucket, f_server)))
         self.route.upload(f_client, f_server)
+
+        # remove_on_upload
+        if remove_on_upload:
+            os.remove(f_client)
         return True
 
     def metadata(self, f_server):
+        if self._is_offline():
+            return
+        f_server = self._strip_client_root(f_server)
         return self.route.metadata(f_server)
 
     def delete(self, f_server):
+        if self._is_offline():
+            return
+        f_server = self._strip_client_root(f_server)
         self.route.connect()
         return self.route.delete(f_server)
+
+
+class BaseClient():
+    def __init__(self, credentials=None, bucket=None):
+        self.credentials = credentials
+        self.bucket = bucket
+        self.client = self.connect()
+
+    def connect(self):
+        return None
+
+    def metadata(self, f_server):
+        return None
+
+    def download(self, f_server, f_client):
+        pass
+
+    def upload(self, f_client, f_server):
+        pass
+
+    def delete(self, f_server):
+        return None
 
 
 class S3_client():
@@ -263,7 +371,7 @@ class Dropbox_client():
         url = session.build_authorize_url(request_token)
         raw_input(url)
         access_token = session.obtain_access_token(request_token)
-        print access_token.key, access_token.secret
+        print(access_token.key, access_token.secret)
         session.set_token(access_token.key, access_token.secret)
         client = dropbox.client.DropboxClient(session)
-        print client.account_info()
+        print(client.account_info())

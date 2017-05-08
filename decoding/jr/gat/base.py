@@ -115,6 +115,8 @@ def subselect_ypred(gat, sel):
         gat_.y_train_ = gat_.y_train_[sel]
     except:
         gat_.y_train_ = None
+    gat_._cv_splits = [((), [ii for ii, jj in enumerate(test) if jj in sel])
+                       for _, test in gat_._cv_splits]
     return gat_
 
 
@@ -184,19 +186,19 @@ def rescale_ypred(gat, clf=None, scorer=None, keep_sign=True):
     if scorer is None:
         scorer = gat.scorer_
 
-    y_pred_r = deepcopy(gat.y_pred_)
+    y_pred_r = np.empty_like(gat.y_pred_)
     for t_train, y_pred_ in enumerate(gat.y_pred_):
         for t_test, y_pred__ in enumerate(y_pred_):
-            for train, test in gat.cv_:
+            for train, test in gat._cv_splits:
                 n = len(y_pred__)
                 X = np.reshape(y_pred__[:, 0], [n, 1])
                 clf.fit(X[train], gat.y_train_[train])
-                p = clf.predict(X[test])
+                proba = clf.predict_proba(X[test])
                 if keep_sign:
                     if scorer(gat.y_train_[train],
                               y_pred__[train].squeeze()) < .5:
-                        p[test, 0] = -p[test, 0] + 1
-                y_pred_r[t_train][t_test] = p
+                        proba[test, 0] = -proba[test, 0] + 1
+                y_pred_r[t_train][t_test][test] = proba
     return y_pred_r
 
 
@@ -437,6 +439,7 @@ class MetaGAT(object):
             gat_list.append(gat_)
 
         # gather
+        self.gat = gat_
         self.gat.train_times_ = gat_.train_times_
         self.gat.estimators_ = np.squeeze(
             [gat.estimators_ for gat in gat_list]).T.tolist()
@@ -448,3 +451,168 @@ class MetaGAT(object):
 
     def score(self, epochs=None, y=None):
         return self.gat.score(epochs, y)
+
+
+class SensorDecoding():
+    """Fit an estimator on each sensor separately across all time points"""
+    def __init__(self, clf=None, predict_method='predict', scorer=None,
+                 n_jobs=1, ch_groups=None, cv=5):
+        self.clf = clf
+        self.predict_method = predict_method
+        self.scorer = scorer
+        self.n_jobs = n_jobs
+        self.ch_groups = ch_groups
+        self.cv = cv
+
+    def fit(self, epochs, y=None):
+        from mne.decoding import TimeDecoding
+        epochs = self._prepare_data(epochs)
+        self._td = TimeDecoding(clf=self.clf, cv=self.cv,
+                                predict_method=self.predict_method,
+                                scorer=self.scorer, n_jobs=self.n_jobs,)
+        self._td.fit(epochs, y=y)
+
+    def predict(self, epochs):
+        epochs = self._prepare_data(epochs)
+        self._td.predict(epochs)
+        self.y_pred_ = self._td.y_pred_
+        return self.y_pred_
+
+    def score(self, epochs=None, y=None):
+        if not hasattr(self, 'y_pred_'):
+            self.predict(epochs)
+        self._td.score(y=y)
+        self.scores_ = self._td.scores_
+        return self.scores_
+
+    def _prepare_data(self, epochs):
+        """Swap channel and time"""
+        from mne import EpochsArray, create_info
+        # regroup channels
+        X = self._group_channels(epochs)
+        # swap time and channels
+        X = X.transpose([0, 2, 1])
+        # format for GAT
+        epochs_ = EpochsArray(
+            data=X,
+            events=epochs.events,
+            info=create_info(X.shape[1], sfreq=1, ch_types='mag'))
+        return epochs_
+
+    def _group_channels(self, epochs):
+        if self.ch_groups is None:
+            self.ch_groups = np.arange(len(epochs.ch_names))[None, :]
+        if self.ch_groups.ndim != 2:
+            raise ValueError('Channel groups must be n_group * n_chans array')
+        n_group = len(self.ch_groups)
+        n_time = len(epochs.times)
+        X = np.empty((len(epochs), n_group, self.ch_groups.shape[1] * n_time))
+        for ii, chans in enumerate(self.ch_groups):
+            X[:, ii, :] = np.hstack([epochs._data[:, ch, :] for ch in chans])
+        return X
+
+
+class TimeFrequencyDecoding():
+    """Search light across sensor in each time-frequency bin."""
+    def __init__(self,  freqs, tfr_kwargs=None, td=None, n_jobs=1):
+        from mne.decoding import TimeDecoding
+        # Search light parameters
+        self.td = TimeDecoding() if td is None else td
+        self.td.n_jobs = n_jobs
+        if not isinstance(self.td, TimeDecoding):
+            raise ValueError('`td` needs to be a `TimeDecoding` object, got '
+                             '%s instead.' % type(td))
+        if (('step' in self.td.times.keys()) or
+                ('length' in self.td.times.keys())):
+            raise ValueError("Cannot use advance `time` param")
+
+        # Time frequency decomposition parameters
+        self.tfr_kwargs = tfr_kwargs
+        if tfr_kwargs is None:
+            self.tfr_kwargs = dict()
+        self.tfr_kwargs['n_jobs'] = n_jobs
+        self.tfr_kwargs['frequencies'] = freqs
+        self.freqs = freqs
+
+    def transform(self, epochs):
+        from mne import EpochsArray
+        from mne.time_frequency import single_trial_power
+        sfreq = epochs.info['sfreq']
+
+        # Time Frequency decomposition
+        tfr = single_trial_power(epochs._data, sfreq=sfreq,
+                                 **self.tfr_kwargs)
+
+        # Consider frequencies as if it was different time points
+        n_trial, n_chan, n_freq, n_time = tfr.shape
+        tfr = np.reshape(tfr, [n_trial, n_chan, n_freq * n_time])
+
+        # Make pseudo epochs
+        sfreq = epochs.info['sfreq']
+        decim = self.tfr_kwargs.get('decim', None)
+        if isinstance(decim, slice):
+            decim = decim.step
+
+        if decim is not None and decim > 1:
+            sfreq /= decim
+        info = epochs.info.copy()
+        info['sfreq'] = sfreq
+        self._tfr_epochs = EpochsArray(data=tfr, info=info,
+                                       events=epochs.events)
+
+    def fit(self, epochs=None, y=None):
+        self._check_transform(epochs)
+        self.td.fit(self._tfr_epochs, y=y)
+        return self
+
+    def predict(self, epochs=None):
+        self._check_transform(epochs)
+        self.td.predict(self._tfr_epochs)
+
+    def y_pred_(self):
+        nT, nt, ns, np = self.td.y_pred_.shape
+        nfreq = len(self.tfr_kwargs['frequencies'])
+        return np.reshape(self.td.y_pred_, [nfreq, nT, ns, np])
+
+    def score(self, epochs=None, y=None):
+        if epochs is not None:
+            self._check_transform(epochs)
+        epochs = self._tfr_epochs
+        scores = self.td.score(epochs, y=y)
+        self.scores_ = np.reshape(scores, [len(self.freqs), -1])
+        return self.scores_
+
+    def _check_transform(self, epochs):
+        if epochs is not None:
+            self.transform(epochs)
+        if not hasattr(self, '_tfr_epochs'):
+            raise RuntimeError('You need to transform epochs first')
+
+
+def gat_to_single_pred(gat, y, cv, estimator, diagonal_only=False):
+    """Use MVPA to combine all gat.y_pred_ into single estimate per trial"""
+    from nose.tools import assert_true
+    from jr.gat import get_diagonal_ypred
+    if diagonal_only:
+        # check that diagonal is identifyiable
+        assert_true(len(gat.y_pred_) == gat.y_pred_.shape[1])
+        y_pred = np.array(get_diagonal_ypred(gat))
+        assert_true(len(gat.y_pred_) == len(y_pred))
+        # re-insert testing time dimension
+        y_pred = np.transpose(y_pred[..., None], [0, 3, 1, 2])
+    else:
+        y_pred = gat.y_pred_
+
+    # Combine diagonal prediction into single pred
+    n_train, n_test, n_trial, n_pred = y_pred.shape
+
+    # flatten gat
+    X = np.reshape(y_pred.transpose([2, 0, 1, 3]), [n_trial, -1])
+
+    # keep cross-validation
+    single_y_pred = np.empty(n_trial)
+    for train, test in cv:
+        estimator.fit(X[train], y[train])
+        estimator.predict(X[test])
+        single_y_pred[test] = estimator.predict(X[test])
+    return single_y_pred

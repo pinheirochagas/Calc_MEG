@@ -25,7 +25,8 @@ white_black = mcol.LinearSegmentedColormap(
 def plot_graph(X, directional=False, prune=None, negative_weights=True,
                weights_scale=10, iterations=1000, fixed=None, init_pos=None,
                node_size=100, node_color=None, node_alpha=.5,
-               edge_curve=False, edge_width=None, edge_color=None,
+               edge_curve=False, edge_width=None, edge_width_scale=1,
+               edge_color=None, pos=None,
                edge_alpha=.5, self_edge=False, wlim=[.1, 2], clim=None,
                ax=None, final_pos='auto', arrowstyle='-'):
     """
@@ -72,13 +73,16 @@ def plot_graph(X, directional=False, prune=None, negative_weights=True,
         # init_pos += np.random.randn(*init_pos.shape) / 1000.
     init_pos = dict(zip(range(n_nodes), init_pos.T))
     # ---- compute graph
-    pos = nx.spring_layout(G, pos=init_pos, iterations=iterations, fixed=fixed)
+    if pos is None:
+        pos = nx.spring_layout(G, pos=init_pos, iterations=iterations,
+                               fixed=fixed)
 
     # ATTRIBUTES
     # ---- nodes color
     if node_color is None:
         node_color = plt.cm.rainbow
-    if isinstance(node_color, mcol.LinearSegmentedColormap):
+    if isinstance(node_color, (mcol.LinearSegmentedColormap,
+                               mcol.ListedColormap)):
         node_color = plt.get_cmap(node_color)
         node_color = np.array([node_color(float(ii) / n_nodes)
                               for ii in range(n_nodes)])
@@ -162,6 +166,10 @@ def plot_graph(X, directional=False, prune=None, negative_weights=True,
     xy_[np.array([ii for ii in range(n_nodes) if ii not in to_remove]), :] = xy
     pos = dict(zip(range(n_nodes), xy_))
 
+    # update G nodes pos
+    for ii, xy in zip(G.nodes(), xy_):
+        G.node[ii]['pos'] = xy
+
     # plot
     if ax is None:
         fig, ax = plt.subplots(1)
@@ -178,7 +186,8 @@ def plot_graph(X, directional=False, prune=None, negative_weights=True,
     draw_net = draw_curve_network if edge_curve else nx.draw_networkx_edges
     if self_edge is True:
         self_edge = np.max(node_size)
-    edges = draw_net(G, pos, ax=ax, edge_color=edge_color, width=edge_width,
+    edges = draw_net(G, pos, ax=ax, edge_color=edge_color,
+                     width=np.array(edge_width) * edge_width_scale,
                      self_edge=self_edge, edge_alpha=edge_alpha,
                      arrowstyle=arrowstyle)
     if edge_alpha is not None and not edge_curve:

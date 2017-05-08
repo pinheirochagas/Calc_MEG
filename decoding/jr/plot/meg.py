@@ -7,7 +7,8 @@ def plot_butterfly(evoked, ax=None, sig=None, color=None, ch_type=None):
     from mne import pick_types
     if ch_type is not None:
         picks = pick_types(evoked.info, ch_type)
-        evoked = evoked.pick_types(ch_type, copy=True)
+        evoked = evoked.copy()
+        evoked = evoked.pick_types(ch_type)
         sig = sig[picks, :] if sig is not None else None
     times = evoked.times * 1e3
     data = evoked.data
@@ -27,7 +28,6 @@ def plot_butterfly(evoked, ax=None, sig=None, color=None, ch_type=None):
     xticks = np.arange(np.ceil(min(times)/1e2) * 1e2,
                        np.floor(max(times)/1e2) * 1e2 + 1e-10, 100)
     ax.set_xticks(xticks)
-    print xticks
     ax.set_xticklabels(['%i' % t if t in [xticks[0], xticks[-1], 0]
                         else '' for t in xticks])
     ax.set_yticks([np.min(data), np.max(data)])
@@ -41,7 +41,8 @@ def plot_gfp(evoked, ax=None, sig=None, color=None, ch_type='mag'):
     from mne import pick_types
     if ch_type is not None:
         picks = pick_types(evoked.info, ch_type)
-        evoked = evoked.pick_types(ch_type, copy=True)
+        evoked = evoked.copy()
+        evoked = evoked.pick_types(ch_type)
         sig = sig[picks, :] if sig is not None else None
     times = evoked.times * 1e3
     gfp = np.std(evoked.data, axis=0)

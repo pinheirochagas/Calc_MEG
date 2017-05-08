@@ -1,5 +1,33 @@
 import numpy as np
-from ..utils import tile_memory_free, product_matrix_vector
+from ..utils import product_matrix_vector
+
+
+def fast_wilcoxon(X, y=None, zero_method='wilcox', correction=False,
+                  n_jobs=-1):
+    from mne.parallel import parallel_func
+
+    if y is not None:
+        X -= y
+    dims = X.shape
+    X = X.reshape(len(X), -1)
+    parallel, p_time_gen, n_jobs = parallel_func(_loop_wilcoxon, n_jobs)
+    n_chunks = np.min([n_jobs, X.shape[1]])
+    out = parallel(p_time_gen(X[..., chunk],
+                              zero_method=zero_method, correction=correction)
+                   for chunk in np.array_split(range(X.shape[1]), n_chunks))
+    stats, p_val = map(list, zip(*out))
+    stats = np.hstack(stats).reshape(dims[1:])
+    p_val = np.hstack(p_val).reshape(dims[1:])
+    return stats, p_val
+
+
+def _loop_wilcoxon(X, zero_method, correction):
+    from scipy.stats import wilcoxon
+    p_val = np.ones(X.shape[1])
+    stats = np.ones(X.shape[1])
+    for ii, x in enumerate(X.T):
+        stats[ii], p_val[ii] = wilcoxon(x)
+    return stats, p_val
 
 
 def corr_linear_circular(X, alpha):
@@ -41,7 +69,7 @@ def corr_linear_circular(X, alpha):
 
     # tile alpha across multiple dimension without requiring memory
     if X.ndim > 1 and alpha.ndim == 1:
-        rcs = tile_memory_free(rcs, X.shape[1:])
+        rcs = rcs[:, np.newaxis]
 
     # Adapted from equation 27.47
     R = (rxc ** 2 + rxs ** 2 - 2 * rxc * rxs * rcs) / (1 - rcs ** 2)
@@ -132,10 +160,10 @@ def repeated_corr(X, y, dtype=float):
 
     Parameters
     ----------
-        y : np.array, shape (n_samples)
-            Data vector.
         X : np.array, shape (n_samples, n_measures)
             Data matrix onto which the vector is correlated.
+        y : np.array, shape (n_samples)
+            Data vector.
         dtype : type, optional
             Data type used to compute correlation values to optimize memory.
 
@@ -268,7 +296,7 @@ def robust_mean(X, axis=None, percentile=[5, 95]):
     return m
 
 
-def fast_mannwhitneyu(X, Y, use_continuity=True, n_jobs=-1):
+def fast_mannwhitneyu(Y, X, use_continuity=True, n_jobs=-1):
     from mne.parallel import parallel_func
     X = np.array(X)
     Y = np.array(Y)
@@ -284,12 +312,13 @@ def fast_mannwhitneyu(X, Y, use_continuity=True, n_jobs=-1):
                    for chunk in chunks)
     # Unpack estimators into time slices X folds list of lists.
     U, p_value = map(list, zip(*out))
-    U = np.concatenate(U, axis=1).reshape(dims[1:])
-    p_value = np.concatenate(p_value, axis=1).reshape(dims[1:])
+    U = np.hstack(U).reshape(dims[1:])
+    p_value = np.hstack(p_value).reshape(dims[1:])
     AUC = U / (nx * ny)
-    # correct directionality of U stats imposed by mannwhitneyu
-    if nx > ny:
-        AUC = 1 - AUC
+    # XXX FIXME this introduces a bug
+    # # correct directionality of U stats imposed by mannwhitneyu
+    # if nx > ny:
+    #     AUC = 1 - AUC
     return U, p_value, AUC
 
 
@@ -297,7 +326,13 @@ def _loop_mannwhitneyu(X, Y, use_continuity=True):
     n_col = X.shape[1]
     U, P = np.zeros(n_col), np.zeros(n_col)
     for ii in range(n_col):
-        U[ii], P[ii] = mannwhitneyu(X[:, ii], Y[:, ii], use_continuity)
+        try:
+            U[ii], P[ii] = mannwhitneyu(X[:, ii], Y[:, ii], use_continuity)
+        except ValueError as e:
+            if e.message == 'All numbers are identical in amannwhitneyu':
+                U[ii], P[ii] = .5 * len(X) * len(Y), 1.
+            else:
+                raise ValueError(e.message)
     return U, P
 
 
@@ -336,7 +371,7 @@ def dPrime(hits, misses, fas, crs):
 
 def mannwhitneyu(x, y, use_continuity=True):
     """Adapated from scipy.stats.mannwhitneyu but includes direction of U"""
-    from scipy.stats._rank import rankdata, tiecorrect
+    from scipy.stats import rankdata, tiecorrect
     from scipy.stats import distributions
     from numpy import asarray
     x = asarray(x)
@@ -463,9 +498,7 @@ def _default_analysis(X, y):
     # if two condition, can only return contrast
     if len(y) == 2:
         y = np.where(y == unique_y[0], 1, -1)
-        # Tile Y to across X dimension without allocating memory
-        Y = tile_memory_free(y, X.shape[1:])
-        return np.mean(X * Y, axis=0)
+        return np.mean(X * y[:, np.newaxis], axis=0)
     elif len(unique_y) == 2:
         # if two conditions but multiple trials, can return AUC
         # auc = np.zeros_like(X[0])

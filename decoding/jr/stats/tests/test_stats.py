@@ -5,11 +5,11 @@ from ..base import repeated_corr, repeated_spearman, corr_circular
 
 def test_corr_functions():
     from scipy.stats import spearmanr
-    test_corr(np.corrcoef, repeated_corr, 1)
-    test_corr(spearmanr, repeated_spearman, 0)
+    _test_corr(np.corrcoef, repeated_corr, 1)
+    _test_corr(spearmanr, repeated_spearman, 0)
 
 
-def test_corr(old_func, new_func, sel_item):
+def _test_corr(old_func, new_func, sel_item):
     from nose.tools import assert_equal, assert_raises
     n_obs = 20
     n_dims = 10
@@ -45,4 +45,4 @@ def test_corrcc():
     np.random.seed(0)
     x = np.random.rand(1000)
     y = np.random.rand(1000)
-    assert_almost_equal(corrcc(x, y), pycircstat.corrcc(x, y))
+    assert_almost_equal(corr_circular(x, y), pycircstat.corrcc(x, y))

@@ -7,8 +7,8 @@ import warnings
 import scipy.sparse as sp
 from sklearn.base import BaseEstimator
 from sklearn.svm import SVC, LinearSVC, LinearSVR
-from sklearn.linear_model import Ridge
 from sklearn.calibration import CalibratedClassifierCV
+from .scorers import scorer_angle
 
 
 class SSSLinearClassifier(object):
@@ -58,9 +58,6 @@ class SSSLinearClassifier(object):
 
 class force_predict(object):
     def __init__(self, clf, mode='predict_proba', axis=0):
-        import warnings
-        warnings.warn('Note that GeneralizationAcrossTime has now flexible' +
-                      'predict functions')
         self._mode = mode
         self._axis = axis
         self._clf = clf
@@ -70,6 +67,15 @@ class force_predict(object):
         self._copyattr()
 
     def predict(self, X):
+        return self._force(X)
+
+    def transform(self, X):
+        return self._force(X)
+
+    def fit_transform(self, X):
+        return self.fit(X).transform(X)
+
+    def _force(self, X):
         if self._mode == 'predict_proba':
             proba = self._clf.predict_proba(X)
             if self._axis == 'all':
@@ -211,7 +217,7 @@ class PolarRegression(BaseEstimator):
             self.clf_sin = copy.deepcopy(clf)
         self.independent = independent
 
-    def fit(self, X, y):
+    def fit(self, X, y, sample_weight=None):
         """
         Fit 2 regressors cos and sin of angles y
         Parameters
@@ -221,15 +227,17 @@ class PolarRegression(BaseEstimator):
         y : list | np.array (n_trials, 2)
             angle in radians and radius. If no radius is provided, takes r=1.
         """
+        sample_weight = (dict() if sample_weight is None
+                         else dict(sample_weight=sample_weight))
         if y.ndim == 1:
             y = np.vstack((y, np.ones_like(y))).T
         cos = np.cos(y[:, 0]) * y[:, 1]
         sin = np.sin(y[:, 0]) * y[:, 1]
         if self.independent:
-            self.clf_cos.fit(X, cos)
-            self.clf_sin.fit(X, sin)
+            self.clf_cos.fit(X, cos, **sample_weight)
+            self.clf_sin.fit(X, sin, **sample_weight)
         else:
-            self.clf.fit(X, np.vstack((cos, sin)).T)
+            self.clf.fit(X, np.vstack((cos, sin)).T, **sample_weight)
 
     def predict(self, X):
         """
@@ -261,6 +269,10 @@ class AngularRegression(PolarRegression):
     def predict(self, X):
         return super(AngularRegression, self).predict(X)[:, 0]
 
+    def score(self, X, y):
+        y_pred = self.predict(X)
+        return scorer_angle(y, y_pred)
+
 
 class SVR_polar(PolarRegression):  # FIXME deprecate
 
@@ -277,6 +289,119 @@ class SVR_polar(PolarRegression):  # FIXME deprecate
         super(SVR_polar, self).__init__(clf=clf, independent=True)
 
 
+class AngularClassifier(BaseEstimator):
+
+    def __init__(self, clf=None, bins=None, predict_method='predict_proba'):
+        if clf is None:
+            clf = SVC(kernel='linear',
+                      probability=predict_method == 'predict_proba')
+        self.clf = clf
+        if bins is None:
+            n_bins = 10
+            bins = np.linspace(0, 2 * np.pi, n_bins)
+        self.bins = bins
+        self.predict_method = predict_method
+
+    def fit(self, X, y, sample_weight=None):
+        sample_weight = (dict() if sample_weight is None
+                         else dict(sample_weight=sample_weight))
+        y = y % (2 * np.pi)
+        yd = np.digitize(y, bins=self.bins)
+        self.clf.fit(X, y=yd, **sample_weight)
+
+    def predict(self, X):
+        from jr.stats import circ_weighted_mean
+        if self.predict_method == 'predict_proba':
+            weights = self.clf.predict_proba(X)
+            n_bins = weights.shape[1]
+            y_pred = circ_weighted_mean(self.bins[np.newaxis, :n_bins],
+                                        weights=weights, axis=1)
+            del weights
+        else:
+            y_pred = self.bins[self.clf.predict(X)]
+        # XXX center bin?
+        return y_pred
+
+
 class SVR_angle(SVR_polar):  # FIXME deprecate
     def predict(self, X):
         return super(SVR_angle, self).predict(X)[:, 0]
+
+
+class DaisyChaining(BaseEstimator):
+    """
+    Hierarchical modeling for fitting.
+
+    In many scikit-learn models, multidimensional regressors are fitted
+    independently. For example, if ``y.shape`` is (n_sample, 3), then we aim
+    at fitting three functions f1, f2, f3 so that:
+        f1(X) = y1
+        f2(X) = y2
+        f3(X) = y3
+    Instead, we here do:
+        f(X) -> y1
+        f2(X, y1) -> y2
+        f3(X, y1, y2) -> y3
+
+    Directly adapted from Jake VanderPlas:
+    http://astrohackweek.github.io/blog/multi-output-random-forests.html
+    """
+
+    def __init__(self, clf):
+        self.clf = clf
+
+    def fit(self, X, Y):
+        from sklearn.base import clone
+        X, Y = map(np.atleast_2d, (X, Y))
+        assert X.shape[0] == Y.shape[0]
+        Ny = Y.shape[1]
+
+        self.clfs = []
+        for i in range(Ny):
+            clf = clone(self.clf)
+            Xi = np.hstack([X, Y[:, :i]])
+            yi = Y[:, i]
+            self.clfs.append(clf.fit(Xi, yi))
+
+        return self
+
+    def predict(self, X):
+        Y = np.empty([X.shape[0], len(self.clfs)])
+        for i, clf in enumerate(self.clfs):
+            Y[:, i] = clf.predict(np.hstack([X, Y[:, :i]]))
+        return Y
+
+
+class MultiPolarRegressor(BaseEstimator):
+    def __init__(self, clf=None, n=10, independent=False):
+        self.clf = clf
+        self.n = n
+        self._clfs = [PolarRegression(clf=clf, independent=independent)
+                      for ii in range(n)]
+
+    def fit(self, X, y, sample_weight=None):
+        sample_weight = (dict() if sample_weight is None
+                         else dict(sample_weight=sample_weight))
+        for clf, angle in zip(self._clfs, np.linspace(0, 2*np.pi, self.n + 1)):
+            clf.fit(X, y + angle, **sample_weight)
+
+    def predict(self, X):
+        xy = np.empty((self.n + 1, len(X), 2))
+        for ii, (clf, angle) in enumerate(zip(
+                self._clfs, np.linspace(0, 2*np.pi, self.n + 1))):
+            theta_rad = clf.predict(X)
+            theta_rad[:, 0] -= angle
+            # polar to cartesian coordinates
+            xy[ii, :, 0] = np.cos(theta_rad[:, 0]) * theta_rad[:, 1]
+            xy[ii, :, 1] = np.sin(theta_rad[:, 0]) * theta_rad[:, 1]
+        # mean prediction in cartesian coordinates
+        xy = np.mean(xy, axis=0)
+        # back to polar coordinate
+        theta = np.arctan2(xy[:, 1], xy[:, 0])
+        radius = np.sqrt(xy[:, 0] ** 2 + xy[:, 1] ** 2)
+        return np.vstack((theta, radius)).T
+
+
+class MultiAngularRegressor(MultiPolarRegressor):
+    def predict(self, X):
+        return super(MultiAngularRegressor, self).predict(X)[:, 0]
