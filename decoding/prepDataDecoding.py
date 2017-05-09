@@ -82,9 +82,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.5, 'stop': 2}
+            train_times = {'start': 1.5, 'stop': 2.4}
             test_times = train_times
-        elif trainset == 'op2':
+        elif train_set == 'op2':
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]
             y_train = np.array(info_calc[train_index]['operand2'])
@@ -93,6 +93,15 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_test = y_train
             train_times = {'start': -0.2, 'stop': 4.5}
             test_times = {'start': -0.2, 'stop': 4.5}
+        elif train_set == 'op1':
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand1'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': 1.6}
+            test_times = train_times
     else:
         mode = 'mean-prediction'
         if (train_set == 'op1') & (test_set == 'presTlock'):

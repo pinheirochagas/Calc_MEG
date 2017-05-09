@@ -35,14 +35,14 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     if scorer is 'scorer_auc':
         from jr.gat.scorers import scorer_auc
         scorer = scorer_auc
+    elif scorer is 'accuracy':
+        scorer = None
     else:
-        scorer = []
+        print('using accuracy as the scorer')
 
     # Learning process
-    # gat = GeneralizationAcrossTime(clf=clf, cv=cv,  train_times=params['train_times'],
-    #                            test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
     gat = GeneralizationAcrossTime(clf=clf, cv=cv,  train_times=params['train_times'],
-                               test_times=params['test_times'], predict_mode=predict_mode, n_jobs=8)
+                               test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
 
     # Determine whether to generalize only across time or also across conditions
     if predict_mode == 'cross-validation':
@@ -85,6 +85,10 @@ def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, param
     elif scorer is 'kendall_score':
         from jr.gat.scorers import kendall_score
         scorer = kendall_score
+    elif scorer is 'accuracy':
+        scorer = None
+    else:
+        print('using accuracy as the scorer')
 
     ###Learning process###
     gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'],

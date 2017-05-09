@@ -13,19 +13,22 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 
 
 
-params = prepDataDecoding(dirs, 'cres', 'cres', 's02', 'baseline_correct')
+#params = prepDataDecoding(dirs, 'cres', 'cres', 's02', 'baseline_correct')
 
-calcDecoding(params, 'class', 'class_score')
+params = prepDataDecoding(dirs, 'op1', 'op1', 's08', 'baseline_correct')
 
 
-results = np.load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/decoding/individual_results/s02_cres_cres_results_class_scorer_auc.npy')
+calcDecoding(params, 'reg', 'kendall_score')
+
+
+results = np.load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/decoding/individual_results/s08_op1_op1_results_reg_kendall_score.npy')
 results = results.tolist()
 
 
 from jr.plot import pretty_gat, pretty_decod
 
 scores = results['score']
-pretty_gat(scores[:,:,0])
+pretty_decod(scores)
 
 # Define conditions
 conds = ['addsub', 'addsub']

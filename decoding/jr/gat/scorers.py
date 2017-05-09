@@ -4,6 +4,7 @@
 
 from nose.tools import assert_true
 import numpy as np
+import scipy.stats as stats
 from numpy.testing import assert_array_equal
 from jr.stats import fast_mannwhitneyu
 

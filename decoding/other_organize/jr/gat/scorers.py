@@ -13,7 +13,6 @@ def scorer_spearman(y_true, y_pred):
     rho, p = spearmanr(y_true[sel], y_pred[sel])
     return rho
 
-
 def scorer_auc(y_true, y_pred):
     from sklearn.metrics import roc_auc_score
     from sklearn.preprocessing import LabelBinarizer
