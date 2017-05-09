@@ -92,15 +92,26 @@ for i = length(sub_name);
 
 
 %%
+
 % average frequencies of interest
 cfg = [];
-cfg.frequency = [5 10];
-cfg.latency = [1 1.2];
+cfg.frequency = [1 15];
 cfg.avgoverfreq = 'yes';
-tmpA = ft_selectdata(cfg,searchlight_ft_allsub);
+tmpA = ft_selectdata(cfg,operand1.searchlight_ft_allsub);
 tmpA.avg = squeeze(tmpA.powspctrm);
 tmpA.dimord = 'chan_time';
 tmpA = rmfield(tmpA,{'powspctrm','freq'});
+%plot
+figure(2);
+cfg = [];
+cfg.xlim=[0:0.05:1];
+% cfg.zlim = [0.48 0.53];
+cfg.layout       = 'neuromag306cmb.lay';
+cfg.comment = 'xlim';
+cfg.style = 'straight';
+cfg.commentpos = 'title';
+ft_topoplotER(cfg, tmpA);
+colormap(redblue)
 
 
 %plot
@@ -118,7 +129,7 @@ ft_topoplotER(cfg, tmpA);
 colormap(cbrewer2('Reds'))
 
 
-ft_multiplotTFR(cfg, operator.searchlight_ft_allsub);
+ft_multiplotTFR(cfg, corrResult.searchlight_ft_allsub);
 
 
 p = get(h, 'pos');
