@@ -32,10 +32,7 @@ conditions = [['op1', 'op1'], ['op2', 'op2'],['cres', 'cres'], ['addsub', 'addsu
 ##############################################################################################
 #Initialize job files and names
 List_python_files = []
-initbody = 'import sys \n' + "sys.path.append(" + "'" + cwd + "')\n" + \
-		   'from initDirs import dirs\n' + \
-		   'from prepDataDecoding import prepDataDecoding\n' + \
-		   'from calcDecoding import calcDecoding\n'
+initbody = 'import sys \n' + "sys.path.append(" + "'" + cwd + "')\n" + 'from calc_dec_wTask_CR import calc_dec_wTask_CR\n'
 
 
 #Write actual job files
