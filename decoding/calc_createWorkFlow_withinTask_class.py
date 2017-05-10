@@ -19,24 +19,24 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
            's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
 
 #conditions = [['op1', 'op1'], ['op2', 'op2'], ['pres', 'pres'],['cres', 'cres'],
-#			  ['presc', 'presc'], ['presi', 'presi'], ['op1', 'pres'], ['op1', 'cres']]
+#['presc', 'presc'], ['presi', 'presi'], ['op1', 'pres'], ['op1', 'cres']]
 
 subjects = ['s03', 's13']
 
 #conditions = [['op1', 'op1']]
 
 #conditions = [['op2_01', 'op2_01'], ['op2_02', 'op2_02'], ['op2_03', 'op2_03'], 
-#			['op2_12', 'op2_12'],['op2_13', 'op2_13'], ['op2_23', 'op2_23'],
-#			['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'], 
-#			['pres_45', 'pres_45'], ['pres_46', 'pres_46'], ['pres_56', 'pres_56'],
-#			['op1_34', 'op1_34'], ['op1_35', 'op1_35'], ['op1_36', 'op1_36'], 
-#			['op1_45', 'op1_45'], ['op1_46', 'op1_46'], ['op1_56', 'op1_56']]
+#['op2_12', 'op2_12'],['op2_13', 'op2_13'], ['op2_23', 'op2_23'],
+#['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'],
+#['pres_45', 'pres_45'], ['pres_46', 'pres_46'], ['pres_56', 'pres_56'],
+#['op1_34', 'op1_34'], ['op1_35', 'op1_35'], ['op1_36', 'op1_36'],
+#['op1_45', 'op1_45'], ['op1_46', 'op1_46'], ['op1_56', 'op1_56']]
 
 conditions = [['cres', 'cres']]
 
 
 #conditions = [['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'], ['pres_45', 'pres_45'],
-			 #['pres_46', 'pres_46'], ['pres_56', 'pres_56']]
+#['pres_46', 'pres_46'], ['pres_56', 'pres_56']]
 
 #conditions = [['pres_34', 'pres_34']]
 

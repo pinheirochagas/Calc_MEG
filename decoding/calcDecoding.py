@@ -11,16 +11,20 @@ import numpy as np
 # cwd = os.path.dirname(os.path.abspath(__file__))
 # os.chdir(cwd)
 
-def calcDecoding(params, type, scorer):
+def calcDecoding(params, type, scorer, gatordiag):
+    # Define firs if it' gat or only diagonal
+    if gatordiag is 'diagonal':
+        params['test_times'] = 'diagonal'
+
     if type == 'class':
         # Define scorer
-        print('Decoding classification')
+        print('Decoding classification subject ' + params['subject'])
         gat, score, diagonal = calcClassification(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     elif type == 'reg':
         # Define scorer
-        print('Decoding regression')
+        print('Decoding regression subject ' + params['subject'])
         gat, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
-    print('decoding done!')
+    print('decoding subject ' + params['subject'] + ' done!')
 
     # Organize results
     results = ({'params': params,'gat': gat, 'score': score, 'diagonal': diagonal})
@@ -29,7 +33,7 @@ def calcDecoding(params, type, scorer):
     print('saving results')
     # Save data
     fname = dirs['result'] + 'individual_results/' + params['subject'] + '_' + params['train_set'] + '_' + params['test_set'] \
-            + '_results_' + type + '_' + scorer
+            + '_results_' + type + '_' + scorer + '_' + gatordiag
     np.save(fname, results)
     print('saving done')
 
