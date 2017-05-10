@@ -8,13 +8,15 @@ InitDirsMEGcalc
 sub_name = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15', ...
         's16','s17','s18','s19','s21','s22'};
     
+sub_name = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15', ...
+        's16','s17','s18','s19','s21','s22'};    
 %% Behavior analysis
 behAnalysisCalcMEG(subs)
     
 %% ERF
     % Load all data from all subjects (needs at least 30 gb free in disk space)
 for subj = 1:length(sub_name)
-    load([datapath sub_name{subj} '_calc.mat'])
+    load([data_dir sub_name{subj} '_calc.mat'])
     data.trialinfoCustom = data.trialinfo; 
     data.trialinfo = cell2mat(struct2cell(data.trialinfo))'; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
     dataAll.(sub_name{subj}) = data;
@@ -143,5 +145,53 @@ figureDim = [0 0 1 .45];
 figure('units','normalized','outerposition',figureDim)
 
 
+%% Cosmo simple decoding
+    % Load all data from all subjects (needs at least 30 gb free in disk space)
+for subj = 2:length(sub_name)
+    load([data_dir sub_name{subj} '_calc_BR.mat'])
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMO(data);
+    % Organize trialinfo
+    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
+    data_cosmo.sa.stim = stim;
+    data_cosmo.sa.stimfull = stimfull;
+    sa = data_cosmo.sa;
+    save([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'data_cosmo', 'sa', '-v7.3');
+end
+
+%% Count number of events per subject 
+for subj = 1:length(sub_name)
+    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'sa');
+    tab_stim = tabulate(sa.stim(sa.operator ~= 0));
+    tab_stim_all(:,subj) = cell2mat(tab_stim(:,2));
+ 
+end
+
+    
+
+load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
+
+ds2 = data_cosmo
+ds = ds2
+
+% %PCA
+ds2=ds;
+ds2.samples=[];
+ds2.fa.time=[];
+ds2.fa.chan=[];
+fprintf('Computing pca')
+for t=1:length(ds.a.fdim.values{2})
+    if ~mod(t,3);fprintf('.');end;
+    maskidx = ds.fa.time==t;
+    dat = ds.samples(:,maskidx);
+    [~,datpca,~,~,explained] = pca(dat);
+    datretain = datpca(:,cumsum(explained)<=99);
+    ds2.samples = cat(2,ds2.samples,datretain);
+    ds2.fa.time = [ds2.fa.time t*ones(1,size(datretain,2))];
+    ds2.fa.chan = [ds2.fa.chan 1:size(datretain,2)];
+end
+fprintf('Done\n')
+ds=ds2;
+dsa=ds;
 
 
