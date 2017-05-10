@@ -8,8 +8,8 @@ if strcmp(comp, 'MACI64') == 1
     scripts_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/';
     addpath(genpath(scripts_dir))
     fieldtrip_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/fieldtrips/fieldtrip_testedversion/';   
-%     addpath(fieldtrip_dir)
-%     ft_defaults;
+    addpath(fieldtrip_dir)
+    ft_defaults;
 %     addpath(genpath(fieldtrip_dir));
     % Linux
 elseif strcmp(comp, 'GLNXA64') == 1
