@@ -4,4 +4,4 @@ from initDirs import dirs
 from prepDataDecoding import prepDataDecoding
 from calcDecoding import calcDecoding
 params = prepDataDecoding(dirs,'cres','cres','s02','baseline_correct')
-calcDecoding(params,'class','accuracy','diagonal')
+calcDecoding(params,'class','scorer_auc','diagonal')

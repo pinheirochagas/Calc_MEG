@@ -55,7 +55,7 @@ python_file, Listfile = [], []
 for c, condcouple in enumerate(conditions):
     for s, subject in enumerate(subjects):
         body = initbody + "params = prepDataDecoding(dirs," + "'" + condcouple[0] + "'" + "," + "'" + condcouple[1] + "'" + "," + "'" + subject + "'" "," "'baseline_correct'" + ")\n"
-        body_class = body + "calcDecoding(params," + "'class'" + "," + "'accuracy'" + "," + "'diagonal'" + ")"
+        body_class = body + "calcDecoding(params," + "'class'" + "," + "'scorer_auc'" + "," + "'diagonal'" + ")"
 
         # body_reg = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'reg'" + ")"
 

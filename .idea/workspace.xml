@@ -5,8 +5,27 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/.~lock.calc_WorkFlow_withinTask_class#" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s02_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s02_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s03_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s03_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s04_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s04_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s05_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s05_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s06_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s06_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s07_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s07_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s08_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s08_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s09_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s09_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s10_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s10_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s11_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s11_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s12_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s12_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s13_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s13_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s14_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s14_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s15_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s15_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s16_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s16_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s17_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s17_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s18_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s18_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s19_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s19_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s21_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s21_cres_cres_class.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s22_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s22_cres_cres_class.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,26 +37,6 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="job_test.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/decoding/somaWF/job_test.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="160">
-                    <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="scripts" />
@@ -47,8 +46,18 @@
       <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-300">
               <caret line="0" column="18" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="580">
+              <caret line="35" column="28" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -57,8 +66,8 @@
       <file leaf-file-name="calc_createWorkFlow_withinTask_class.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="288">
+              <caret line="57" column="83" lean-forward="false" selection-start-line="57" selection-start-column="83" selection-end-line="57" selection-end-column="83" />
               <folding>
                 <element signature="e#216#225#0" expanded="true" />
               </folding>
@@ -89,7 +98,7 @@
       <file leaf-file-name="calc_createWorkFlow_withinTask_classEreg.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-567">
+            <state relative-caret-position="660">
               <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
               <folding />
             </state>
@@ -125,10 +134,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1985" />
-    <option name="y" value="-4" />
-    <option name="width" value="1855" />
-    <option name="height" value="1204" />
+    <option name="x" value="1984" />
+    <option name="y" value="-11" />
+    <option name="width" value="1857" />
+    <option name="height" value="1212" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -148,6 +157,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -174,27 +184,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="decoding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="somaWF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -385,14 +376,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1985" y="-4" width="1855" height="1204" extended-state="6" />
+    <frame x="1984" y="-11" width="1857" height="1212" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20784964" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15588723" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3330241" sideWeight="0.18242122" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3330241" sideWeight="0.8175788" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3330241" sideWeight="0.8175788" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -415,140 +406,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py">
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="18" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/python/decoding MEG MNE example.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="37" column="38" lean-forward="true" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_copy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_op1_cres_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/READ_ME_decoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/test_before_decoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/test_decoding_before_cluster_mainak_yousera.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/test_decoding_before_cluster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/jobs_s01_op1_op1_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="67" lean-forward="false" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_dec_wTask_CR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11758">
-          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_cfg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/jr/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="e#25#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -568,10 +430,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
+    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="660">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -584,9 +446,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#216#225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py" />
+    <entry file="file://$PROJECT_DIR$/python/decoding MEG MNE example.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_classification.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_copy.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_op1_cres_class.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/READ_ME_decoding.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/test_before_decoding.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/test_decoding_before_cluster_mainak_yousera.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/test_decoding_before_cluster.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/jobs_s01_op1_op1_class.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_dec_wTask_CR.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_cfg.py" />
+    <entry file="file://$PROJECT_DIR$/decoding/jr/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-567">
+        <state relative-caret-position="660">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
           <folding />
         </state>
@@ -594,16 +495,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/somaWF/job_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
+        <state relative-caret-position="466">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/initDirs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="35" column="28" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-300">
+          <caret line="0" column="18" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="57" column="83" lean-forward="false" selection-start-line="57" selection-start-column="83" selection-end-line="57" selection-end-column="83" />
           <folding>
             <element signature="e#216#225#0" expanded="true" />
           </folding>
