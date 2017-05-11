@@ -23,7 +23,8 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     scaler = StandardScaler()
 
     # Model
-    model = svm.SVC(C=1, kernel='linear', class_weight='balanced')
+    model = svm.SVC(C=1, kernel='linear', probability='true', class_weight='balanced')
+    # probability='true' probably comes with pred label and probability
 
     # Pipeline
     clf = make_pipeline(scaler, model)
