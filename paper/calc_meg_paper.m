@@ -149,6 +149,9 @@ figure('units','normalized','outerposition',figureDim)
     % Load all data from all subjects (needs at least 30 gb free in disk space)
 for subj = 2:length(sub_name)
     load([data_dir sub_name{subj} '_calc_BR.mat'])
+    % z-score each channel for later PCA
+    
+    
     % Convert to cosmo MVPA
     data_cosmo = calcConvertCOSMO(data);
     % Organize trialinfo
@@ -164,34 +167,14 @@ for subj = 1:length(sub_name)
     load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'sa');
     tab_stim = tabulate(sa.stim(sa.operator ~= 0));
     tab_stim_all(:,subj) = cell2mat(tab_stim(:,2));
- 
 end
 
+%% Run PCA 
     
-
-load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
-
-ds2 = data_cosmo
-ds = ds2
-
-% %PCA
-ds2=ds;
-ds2.samples=[];
-ds2.fa.time=[];
-ds2.fa.chan=[];
-fprintf('Computing pca')
-for t=1:length(ds.a.fdim.values{2})
-    if ~mod(t,3);fprintf('.');end;
-    maskidx = ds.fa.time==t;
-    dat = ds.samples(:,maskidx);
-    [~,datpca,~,~,explained] = pca(dat);
-    datretain = datpca(:,cumsum(explained)<=99);
-    ds2.samples = cat(2,ds2.samples,datretain);
-    ds2.fa.time = [ds2.fa.time t*ones(1,size(datretain,2))];
-    ds2.fa.chan = [ds2.fa.chan 1:size(datretain,2)];
+for subj = 1:length(sub_name)
+    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
+    dt_cosmo_pca = PCAforcosmo(data_cosmo);
 end
-fprintf('Done\n')
-ds=ds2;
-dsa=ds;
+
 
 

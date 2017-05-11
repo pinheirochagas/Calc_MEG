@@ -38,16 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="initDirs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/initDirs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="55" lean-forward="false" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -60,14 +50,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GATclassifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="73" column="32" lean-forward="false" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="32" />
+            <state relative-caret-position="1050">
+              <caret line="70" column="27" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="27" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fldtrp2mne.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fldtrp2mne.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="38" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -555,7 +555,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/notebooks/calc_decode_plot.ipynb" />
     <entry file="file://$PROJECT_DIR$/notebooks/calc_decoding_results.ipynb" />
     <entry file="file://$PROJECT_DIR$/notebooks/test.ipynb" />
     <entry file="file://$PROJECT_DIR$/test.py" />
@@ -723,11 +722,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GATclassifiers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="73" column="32" lean-forward="false" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="32" />
+        <state relative-caret-position="1050">
+          <caret line="70" column="27" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="27" />
           <folding>
             <element signature="e#62#80#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fldtrp2mne.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="38" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
