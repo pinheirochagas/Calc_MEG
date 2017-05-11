@@ -1,0 +1,108 @@
+## On the server side - JUST WHEN NEEDED
+# 1. if server is reinitialized and then the python command will gone
+# 2. to interact with current jobs using some command lines 
+
+ssh pp242904@gabriel.intra.cea.fr
+pnrp/2bm
+
+python -m soma_workflow.start_database_server DSV_cluster_pp242904
+ctrl + Z
+bg
+
+This line indicates that cluster is running in the background
+pp242904 15354  0.6  0.0 163496 10604 pts/41   S    11:43   0:00 
+python -m soma_workflow.start_database_server DSV_cluster_pp242904
+
+
+### On the local side
+cd /neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/cluster
+python launch_scripts_python_cluster                                   # to generated the jobs
+
+soma_gui # graphic interface using the link inside ~/.bashrc
+import the jobs (jobs_list.somawf) and submit
+
+# Check the cpu usage - Baptiste example git. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## OTHER STUFF
+
+
+pp242904              <--- identifiant
+pnrp/2bm                <--- passwd (A changer dès que possible, SVP) 
+
+
+touch /home/pp242904/.soma-workflow.cfg
+
+
+ssh pp242904@gabriel.intra.cea.fr
+
+
+touch /home/pp242904/.soma-workflow.cfg
+
+
+
+
+
+
+
+
+mkdir /home/pp242904/soma-workflow
+mkdir /home/pp242904/soma-workflow/logs
+mkdir /home/pp242904/soma-workflow/soma-workflow
+mkdir /home/pp242904/soma-workflow/transfered-files
+
+
+
+ssh  -X pp242904@gabriel.intra.cea.fr
+
+
+
+
+python -m soma_workflow.start_database_server DSV_cluster_pp242904 soma_workflow_gui 
+ps -aux | grep pp242904 
+
+
+
+This line indicates that cluster is running in the background
+pp242904 15354  0.6  0.0 163496 10604 pts/41   S    11:43   0:00 python -m soma_workflow.start_database_server DSV_cluster_pp242904
+
+
+
+
+python -m soma_workflow.start_database_server DSV_cluster_pp242904
+ 
+ctrl + Z
+ 
+bg
+ 
+ps -aux | grep pp242904
+ 
+ 
+############################################################################ On the  workstation
+ 
+source /i2bm/local/Ubuntu-12.04-x86_64/brainvisa/bin/bv_env.sh
+ 
+soma_workflow_gui 
