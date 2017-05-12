@@ -1,17 +1,9 @@
-%% Magnitude
-RDM_number = zeros(10,10)
-for i  = -9:9
-    RDM_number = RDM_number + triu(ones(10,10),i)
-end
-RDM_number = abs(RDM_number - 10)
-imagesc(RDM_number)
+%% Set paths and directories
+AddPathsMEGcalc
+InitDirsMEGcalc
 
-
-allop = unique(data_cosmo.sa.stim(data_cosmo.sa.operator ~= 0));
-
-allop_inv = allop'
-
-allop{1}(1) ==
+% Load operations
+load([rsa_result_dir 'stim_matrices/allop.mat'])
 
 %% Operand 1
 RDM.op1 = zeros(32);
@@ -45,23 +37,40 @@ for i = 1:size(RDM.result,1)
     end
 end
 
+%% Save 
+save([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM')
 
 
 %% Plotting
 fieldnames_RDM = fieldnames(RDM);
-
+figureDim = [0 0 .5 1];
+figure('units','normalized','outerposition',figureDim)
 for s = 1:length(fieldnames_RDM)
     subplot(2,2,s)
     imagesc(RDM.(fieldnames_RDM{s}))
     title(fieldnames_RDM{s})
     axis square
     set(gca,'XTick',1:1:32)
-    set(gca,'XTickLabel',unique(data_cosmo.sa.stim(data_cosmo.sa.operator ~= 0)));
+    set(gca,'XTickLabel',allop);
     set(gca,'XaxisLocation','top')
     set(gca,'XTickLabelRotation',-90)
     set(gca,'YTick',1:1:32)
-    set(gca,'YTickLabel',unique(data_cosmo.sa.stim(data_cosmo.sa.operator ~= 0))); 
+    set(gca,'YTickLabel',allop); 
 end
+% Save
+savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matrices.png'])
+
+
+
+
+
+% %% Magnitude
+% RDM_number = zeros(10,10)
+% for i  = -9:9
+%     RDM_number = RDM_number + triu(ones(10,10),i)
+% end
+% RDM_number = abs(RDM_number - 10)
+% imagesc(RDM_number)
 
 
 
