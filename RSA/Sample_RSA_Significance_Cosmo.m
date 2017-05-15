@@ -1,11 +1,10 @@
-%% Sample code for Significance Tessting for RSA in Cosmo
+function RSAstats(RSA_all, model)
+%% Sample code for Significance Testing for RSA in Cosmo
 % Lina Teichmann
 % May 2017
 %**************************************************************************
 % Add CosmoMVPA to path & clear variables before running
 %**************************************************************************
-
-
 
 ds_stacked_RSA = cosmo_stack(RSA_all);
 nparticipants = size(ds_stacked_RSA.samples,1);
@@ -25,6 +24,13 @@ tfce_ds = cosmo_montecarlo_cluster_stat(ds_stacked_RSA,neighborhood,opt);
 significant_timepoints_RSA_Sample_Magnitude=tfce_ds.samples>1.6449; % one-tailed: we are only interested what is above chance. 
 timevect=ds_stacked_RSA.a.fdim.values{1};
 
+%% Save results
+save(['RSA_stats_model_', model, '.mat'])
+
+end
+
+
+
 
 %% Plot results
 colormap('lines')
@@ -35,7 +41,7 @@ f.Resize='off';
 
 % chance
 plot(ds_stacked_RSA.a.fdim.values{1},mean(ds_stacked_RSA.samples)*0,'k--')
-ylim([-0.2 0.2]);
+% ylim([-0.2 0.2]);
 hold on
 % result
 o=shadedErrorBar(timevect,mean(ds_stacked_RSA.samples),std(ds_stacked_RSA.samples)/sqrt(nparticipants));hold on

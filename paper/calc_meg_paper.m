@@ -206,12 +206,30 @@ for subj = 1:length(sub_name)
     cosmoRSA(sub_name{subj}, data_cosmo)
 end
 
+%% Calculate stats and plot
 
+% Load all data
 for p = 1:length(sub_name)
-    load([rsa_result_dir 'RSA_cosmo_' sub_name{p} '.mat'])
-    RSA_all{p}=RSA.op1;
+    load([rsa_result_dir '/RSA_cosmo_' sub_name{p} '.mat'])
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
 end
+
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
+
+% Plot results 
+for f = 1:length(fieldnames_RSA);
+    load([rsa_result_dir '/group/RSA_stats_model_', fieldnames_RSA{f}, '.mat'])
     
+    RSAplot(RSAres.ds_stacked_RSA,RSAres.timevect,RSAres.sig_tp_RSA)
+    hold on
+end
+
     
 end
 
