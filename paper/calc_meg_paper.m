@@ -105,14 +105,18 @@ tmpA.dimord = 'chan_time';
 tmpA = rmfield(tmpA,{'powspctrm','freq'});
 %plot
 figure(2);
+
+
 cfg = [];
-cfg.xlim=[0:0.05:1];
+% cfg.xlim=[0:0.05:1];
 % cfg.zlim = [0.48 0.53];
 cfg.layout       = 'neuromag306cmb.lay';
-cfg.comment = 'xlim';
-cfg.style = 'straight';
-cfg.commentpos = 'title';
-ft_topoplotER(cfg, tmpA);
+%cfg.comment = 'xlim';
+%cfg.style = 'straight';
+%cfg.commentpos = 'title';
+data3 = ft_timelockanalysis(cfg, data2)
+
+ft_topoplotER(cfg, data);
 colormap(redblue)
 
 
@@ -170,11 +174,34 @@ for subj = 1:length(sub_name)
 end
 
 %% Run PCA 
-    
 for subj = 1:length(sub_name)
     load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
     dt_cosmo_pca = PCAforcosmo(data_cosmo);
 end
 
+%% RSA cosmo
+for subj = 1:length(sub_name)
+    % Load data and convert to cosmo
+    load([data_dir sub_name{subj} '_calc_AICA.mat'])     
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMO(data);
+    % Organize trialinfo and leave only the stim field
+    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
+    % Select only the calculation trials
+    data_cosmo.samples = data_cosmo.samples(data_cosmo.sa.operator ~= 0,:);
+    stim = stim(data_cosmo.sa.operator ~= 0); 
+    data_cosmo.sa = [];
+    data_cosmo.sa.stim = stim';    
+    % Run RSA
+    cosmoRSA(sub_name{subj}, data_cosmo)
+end
 
+
+for p = 1:length(sub_name)
+    load([rsa_result_dir 'RSA_cosmo_' sub_name{p} '.mat'])
+    RSA_all{p}=RSA.op1;
+end
+    
+    
+end
 

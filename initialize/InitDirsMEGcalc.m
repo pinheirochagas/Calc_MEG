@@ -20,6 +20,7 @@ bst_db_data_dir = [data_root_dir 'brainstorm_db/calc/data/']; % Brainstorm datab
 data_dir = [data_root_dir 'data/mat/'];
 data_sss_dir = [data_root_dir 'data/sss/'];
 erf_result_dir = [data_root_dir 'results/erf/'];
+rsa_result_dir = [data_root_dir 'results/RSA/'];
 erf_fig_dir = [data_root_dir 'results/erf/figures/'];
 erf_stat_dir = [data_root_dir 'results/erf/stats/'];
 tfa_data_dir = [data_root_dir 'data/TFA/'];

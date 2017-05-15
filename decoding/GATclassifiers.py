@@ -10,6 +10,7 @@ from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.cross_validation import StratifiedKFold
+from initDirs import dirs
 
 def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
     " Multiclass classification within or across conditions "
@@ -23,7 +24,8 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     scaler = StandardScaler()
 
     # Model
-    model = svm.SVC(C=1, kernel='linear', probability='true', class_weight='balanced')
+    model = svm.SVC(C=1, kernel='linear', class_weight='balanced')
+    # model = svm.SVC(C=1, kernel='linear', probability='True', class_weight='balanced', decision_function_shape='ovo')
     # probability='true' probably comes with pred label and probability
 
     # Pipeline
@@ -42,23 +44,25 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
         print('using accuracy as the scorer')
 
     # Learning process
-    gat = GeneralizationAcrossTime(clf=clf, cv=cv,  train_times=params['train_times'],
-                               test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
+    gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'],
+                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
 
     # CHECK THIS, gave error TypeError: an integer is required
 
     # Determine whether to generalize only across time or also across conditions
     if predict_mode == 'cross-validation':
         gat.fit(X_train, y=y_train)
-        score = gat.score(X_train, y=y_train)
+        gat.score(X_train, y=y_train)
     elif predict_mode == 'mean-prediction':
         gat.fit(X_train, y=y_train)
-        score = gat.score(X_test, y=y_test)
+        gat.score(X_test, y=y_test)
 
-    score = np.array(score)
+    # Organize and save
+    score = np.array(gat.scores_)
     diagonal = np.diagonal(score)
+    y_pred = np.array(gat.y_pred_)
 
-    return gat, score, diagonal
+    return y_pred, score, diagonal
 
 
 def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
@@ -95,17 +99,26 @@ def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, param
 
     ###Learning process###
     gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'],
-                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=32)
+                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
 
     # Determine whether to generalize only across time or also across conditions
     if predict_mode == 'cross-validation':
         gat.fit(X_train, y=y_train)
-        score = gat.score(X_train, y=y_train)
+        gat.score(X_train, y=y_train)
     elif predict_mode == 'mean-prediction':
         gat.fit(X_train, y=y_train)
-        score = gat.score(X_test, y=y_test)
+        gat.score(X_test, y=y_test)
 
-    score = np.array(score)
+    # Organize and save
+    score = np.array(gat.scores_)
     diagonal = np.diagonal(score)
+    y_pred = np.array(gat.y_pred_)
 
-    return gat, score, diagonal
+    return y_pred, score, diagonal
+
+
+    # print(gat)
+    # results = ({'params': params, 'gat': gat})
+    # fname = dirs['result'] + 'individual_results/GAT'
+    # np.save(fname, results)
+    # print('GAT saved!')

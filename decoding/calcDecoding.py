@@ -19,21 +19,21 @@ def calcDecoding(params, type, scorer, gatordiag):
     if type == 'class':
         # Define scorer
         print('Decoding classification subject ' + params['subject'])
-        gat, score, diagonal = calcClassification(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+        y_pred, score, diagonal = calcClassification(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     elif type == 'reg':
         # Define scorer
         print('Decoding regression subject ' + params['subject'])
-        gat, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+        y_pred, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     print('decoding subject ' + params['subject'] + ' done!')
 
     # Organize results
-    results = ({'params': params,'gat': gat, 'score': score, 'diagonal': diagonal})
+    results = ({'params': params,'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
     print ('results size is: ' + str(sys.getsizeof(results))) + ' bytes'
 
     print('saving results')
     # Save data
     fname = dirs['result'] + 'individual_results/' + params['subject'] + '_' + params['train_set'] + '_' + params['test_set'] \
-            + '_results_' + type + '_' + scorer + '_' + gatordiag
+            + '_results_' + type + '_' + scorer + '_' + gatordiag + '_' + params['baseline_correction']
     np.save(fname, results)
     print('saving done')
 
