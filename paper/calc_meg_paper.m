@@ -44,10 +44,10 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'low', 10, 1, 1, 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResultnoZero', 'low', 10, 1, 1, 5);
 
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'high', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'high', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'high', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'high', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'high', 10, 1, 1, 5);
 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 1, 5);
@@ -69,8 +69,8 @@ operand1high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_
 %% Explore TF analysis
 % plot parameters
 
-load('s08_TFA_low.mat')
-load('s08_TFA_high.mat')
+load([tfa_data_dir,'s08_TFA_low.mat'])
+load([tfa_data_dir,'s08_TFA_high.mat'])
 
 load SensorClassification;
 
@@ -78,7 +78,7 @@ cfg = [];
 cfg.showlabels   = 'no';	
 cfg.layout       = 'neuromag306all.lay'; %neuromag306all.lay neuromag306mag
 % cfg.channel = Grad;
-cfg.baseline = [-0.5 -0.02];
+cfg.baseline = [-0.2 -0.02];
 cfg.baselinetype = 'db';
 
 TFRlow = TFR
@@ -90,10 +90,20 @@ for i = length(sub_name);
     ft_multiplotTFR(cfg, TFR);
     load([tfa_data_dir, sub_name{i}, '_TFA_high.mat'])
     ft_multiplotTFR(cfg, TFRhigh);
+    
+%% Test baseline correct cfg = [];
+cfg = [];
+cfg.baseline = [-0.2 -0.02];
+cfg.baselinetype = 'db';
+TFRbaseline = ft_freqbaseline(cfg, TFR);
 
 
+figure(4)
+ft_multiplotTFR(cfg, TFRbaseline);
 
-%%
+%% 
+
+
 
 % average frequencies of interest
 cfg = [];

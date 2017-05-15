@@ -10,7 +10,7 @@ cosmo_set_path()
 
 % %% Searchlight specs
 % spacesphere   = 10; % 10 sensors in each sphere
-% timesphere    = 1;  % should be 1*2+1=3 time-bin, each is 40 ms
+% timesphere    = 2;  % should be 1*2+1=3 time-bin, each is 40 ms
 % freqsphere    = 1;  % should be 1*2+1=3 frequency-bin, each is 1 Hz
 % nchunks=5;          % for cross-validation
 
@@ -23,6 +23,17 @@ for subi = 1:length(sub_name) % loop across subjects
     % Load data
     display(['Loading TFA data of subject ' sub_name{subi}])
     load([tfa_data_dir, sub_name{subi} '_TFA_' fq_range '.mat']);
+    
+    % Baseline correct in case of high frequencies
+    if strcmp(fq_range,'high') == 1
+        cfg = [];
+        cfg.baseline = [-0.2 -0.02];
+        cfg.baselinetype = 'db';
+        TFRbaseline = ft_freqbaseline(cfg, TFR);
+        TFRbaseline.cumtapcnt = TFR.cumtapcnt;
+        TFR = TFRbaseline;
+    else
+    end
     
     % Define conditions  
     display(['Selecting trials for ' conds])
@@ -39,7 +50,6 @@ for subi = 1:length(sub_name) % loop across subjects
     
     % Convert to cosmomvpa struct
     display('Converting data to cosmo mvpa data structure')
-
     ds_tf=cosmo_meeg_dataset(TFR);
     
     % Set the target (conditions' labels)
@@ -63,7 +73,7 @@ for subi = 1:length(sub_name) % loop across subjects
     % set chunks for crossvalidation, 5 random
     ds_tf.sa.chunks=cosmo_chunkize(ds_tf, nchunks);
     
-    % Define channel tipe
+    % Define channel type
     chan_type='meg_combined_from_planar';
  
     % Define the neighborhood for each dimensions

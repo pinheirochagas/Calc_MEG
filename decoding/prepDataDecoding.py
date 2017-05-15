@@ -18,7 +18,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
     """
 
     # Preprocessing
-    baseline = (-0.4, -0.05)  # time for the baseline period
+    baseline = (-0.2, -0.05)  # time for the baseline period
     downsampling = 0  # downsampling factor (input at 250Hz)
 
     # Import epochs calc
@@ -82,7 +82,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': 3.2, 'length': 0.05}
+            train_times = {'start': -0.2, 'stop': 1.6}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'op2':
             train_index = info_calc['operator'] != 0
@@ -91,7 +91,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -0.2, 'stop': 1.6}
             test_times = train_times
         elif train_set == 'op1':
             train_index = info_calc['operator'] != 0
@@ -100,7 +100,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -0.2, 'stop': 1.6}
             test_times = train_times
         elif train_set == 'addsub':
             train_index = info_calc['operator'] != 0
@@ -109,7 +109,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -0.2, 'stop': 1.6}
             test_times = train_times
         elif train_set == 'presTlock':
             train_index = (info_calc_resplock['preResult'] >= 3) & (info_calc_resplock['preResult'] <= 6) & (info_calc_resplock['operator'] != 0)

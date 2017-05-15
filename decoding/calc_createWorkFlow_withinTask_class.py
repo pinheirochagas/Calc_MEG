@@ -14,7 +14,7 @@ from initDirs import root
 
 ########################################################################################################################
 # List of parameters to be parallelized
-subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 
+subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
            's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
 
 # conditions = [['op1', 'op1'], ['op2', 'op2'], ['pres', 'pres'],['cres', 'cres'],
@@ -31,8 +31,9 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 #['op1_34', 'op1_34'], ['op1_35', 'op1_35'], ['op1_36', 'op1_36'],
 #['op1_45', 'op1_45'], ['op1_46', 'op1_46'], ['op1_56', 'op1_56']]
 
-conditions = [['cres', 'cres']]
-
+#conditions = [['cres', 'cres']]
+conditions = [['op1', 'op1'], ['op2', 'op2'], ['addsub', 'addsub'],['presTlock', 'presTlock']]
+#conditions = [['op1', 'op1']]
 
 #conditions = [['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'], ['pres_45', 'pres_45'],
 #['pres_46', 'pres_46'], ['pres_56', 'pres_56']]
@@ -54,8 +55,8 @@ python_file, Listfile = [], []
 
 for c, condcouple in enumerate(conditions):
     for s, subject in enumerate(subjects):
-        body = initbody + "params = prepDataDecoding(dirs," + "'" + condcouple[0] + "'" + "," + "'" + condcouple[1] + "'" + "," + "'" + subject + "'" "," "'baseline_correct'" + ")\n"
-        body_class = body + "calcDecoding(params," + "'class'" + "," + "'scorer_auc'" + "," + "'diagonal'" + ")"
+        body = initbody + "params = prepDataDecoding(dirs," + "'" + condcouple[0] + "'" + "," + "'" + condcouple[1] + "'" + "," + "'" + subject + "'" "," "'nobaseline_correct'" + ")\n"
+        body_class = body + "calcDecoding(params," + "'class'" + "," + "'accuracy'" + "," + "'diagonal'" + ")"
 
         # body_reg = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'reg'" + ")"
 
