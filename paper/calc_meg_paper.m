@@ -210,25 +210,70 @@ end
 
 % Load all data
 for p = 1:length(sub_name)
-    load([rsa_result_dir '/RSA_cosmo_' sub_name{p} '.mat'])
+    load([rsa_result_dir '/RSA_cosmo_jac' sub_name{p} '.mat'])
     fieldnames_RSA = fieldnames(RSA);
     for f = 1:length(fieldnames_RSA);
-        RSA_all.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
     end
 end
 
 % Calculate stats
 for f = 1:length(fieldnames_RSA);
-    RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
+    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
 
+
+%% Merge jaccard
+fieldnames_RSA = fieldnames(RSA1);
+%%
+
 % Plot results 
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
 for f = 1:length(fieldnames_RSA);
     load([rsa_result_dir '/group/RSA_stats_model_', fieldnames_RSA{f}, '.mat'])
-    
+    subplot(4,4,f)
     RSAplot(RSAres.ds_stacked_RSA,RSAres.timevect,RSAres.sig_tp_RSA)
-    hold on
+    title(fieldnames_RSA{f}, 'interpreter', 'none')
 end
+savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])
+
+
+% Plot results 
+fieldnames_RSA = fieldnames(RSA2);
+
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
+for f = 1:length(fieldnames_RSA);
+    load([rsa_result_dir 'group/RSA_stats_model_', fieldnames_RSA{f}, '_jac.mat'])
+    subplot(4,4,f)
+    RSAplot(RSAres.ds_stacked_RSA,RSAres.timevect,RSAres.sig_tp_RSA)
+    title(fieldnames_RSA{f}, 'interpreter', 'none')
+end
+savePNG(gcf,200,[rsa_result_dir 'plots/calc_RSA_jac.png'])
+
+
+
+% Plot results 
+load('cdcol.mat')
+fieldnames_RSA = fieldnames(RSA2);
+
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
+
+
+RSA_op1_mag_reg_vis = load([rsa_result_dir 'group/RSA_stats_model_', 'op1_mag_reg_op1_vis_jc_jc' , '_jac.mat'])
+RSA_op2_mag_reg_vis = load([rsa_result_dir 'group/RSA_stats_model_', 'op2_mag_reg_op2_vis_jc_jc' , '_jac.mat'])
+
+hold on
+RSAplot(RSA_op1_mag_reg_vis.RSAres, cdcol.carmine)
+RSAplot(RSA_op2_mag_reg_vis.RSAres, cdcol.cobaltblue)
+
+
+
+title(fieldnames_RSA{f}, 'interpreter', 'none')
+end
+
 
     
 end

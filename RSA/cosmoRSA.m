@@ -29,43 +29,74 @@ measure_args.center_data=true; %removes the mean pattern before correlating
 
 %% Run RSA
 RSA = [];
+% %% Single factor models
+% fieldnames_RDM = fieldnames(RDM);
+% for i = 1:length(fieldnames_RDM)
+%     disp(['processing RSA of ' (fieldnames_RDM{i})]);
+%     measure_args.target_dsm = RDM.(fieldnames_RDM{i});
+%     RSA.(fieldnames_RDM{i}) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+% end
+
 %% Single factor models
-fieldnames_RDM = fieldnames(RDM);
+fieldnames_RDM = {'op1_vis_jc', 'op2_vis_jc', 'result_vis_jc'};
 for i = 1:length(fieldnames_RDM)
     disp(['processing RSA of ' (fieldnames_RDM{i})]);
     measure_args.target_dsm = RDM.(fieldnames_RDM{i});
     RSA.(fieldnames_RDM{i}) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
 end
 
-%% Results model regressing out operator 
-disp('processing RSA of result_reg_operator');
-measure_args.target_dsm = RDM.result_mag;
-measure_args.regress_dsm = RDM.operator;
-RSA.result_mag_reg_operator = cosmo_searchlight(ds,nbrhood,measure,measure_args);
-measure_args = rmfield(measure_args,'regress_dsm');
+% 
+% %% Results model regressing out operator 
+% disp('processing RSA of result_reg_operator');
+% measure_args.target_dsm = RDM.result_mag;
+% measure_args.regress_dsm = RDM.operator;
+% RSA.result_mag_reg_operator = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+% measure_args = rmfield(measure_args,'regress_dsm');
+% 
+% %% Magnitude models regressing out visual models 
+% RDM_mag_vis = {'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
+% for i = 1:2:length(RDM_mag_vis)
+%     disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1}]]);
+%     measure_args.target_dsm = RDM.(RDM_mag_vis{i});
+%     measure_args.regress_dsm = RDM.(RDM_mag_vis{i+1});
+%     RSA.([RDM_mag_vis{i} 'reg' RDM_mag_vis{i+1}]) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+%     measure_args = rmfield(measure_args,'regress_dsm');
+% end
 
-%% Magnitude models regressing out visual models 
-RDM_mag_vis = {'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
+%% Magnitude models regressing out visual models jaccart
+RDM_mag_vis = {'op1_mag', 'op1_vis_jc', 'op2_mag', 'op2_vis_jc', 'result_mag', 'result_vis_jc'};
 for i = 1:2:length(RDM_mag_vis)
     disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1}]]);
     measure_args.target_dsm = RDM.(RDM_mag_vis{i});
     measure_args.regress_dsm = RDM.(RDM_mag_vis{i+1});
-    RSA.([RDM_mag_vis{i} 'reg' RDM_mag_vis{i+1}]) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+    RSA.([RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1} '_jc']) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
     measure_args = rmfield(measure_args,'regress_dsm');
 end
 
-%% Visual models regressing out magnitude models 
-RDM_mag_vis = {'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
+% %% Visual models regressing out magnitude models 
+% RDM_mag_vis = {'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
+% for i = 2:2:length(RDM_mag_vis)
+%     disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1}]]);
+%     measure_args.target_dsm = RDM.(RDM_mag_vis{i});
+%     measure_args.regress_dsm = RDM.(RDM_mag_vis{i-1});
+%     RSA.([RDM_mag_vis{i} 'reg' RDM_mag_vis{i-1}]) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+%     measure_args = rmfield(measure_args,'regress_dsm');
+% end
+
+%% Visual models jaccart regressing out magnitude models 
+RDM_mag_vis = {'op1_mag', 'op1_vis_jc', 'op2_mag', 'op2_vis_jc', 'result_mag', 'result_vis_jc'};
 for i = 2:2:length(RDM_mag_vis)
     disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1}]]);
     measure_args.target_dsm = RDM.(RDM_mag_vis{i});
     measure_args.regress_dsm = RDM.(RDM_mag_vis{i-1});
-    RSA.([RDM_mag_vis{i} 'reg' RDM_mag_vis{i-1}]) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+    RSA.([RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1} '_jc'] ) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
     measure_args = rmfield(measure_args,'regress_dsm');
 end
 
+
+
 %% Save
-save([rsa_result_dir 'RSA_cosmo_' subject '.mat'], 'RSA')
+save([rsa_result_dir 'RSA_cosmo_jac' subject '.mat'], 'RSA')
 
 
 end
