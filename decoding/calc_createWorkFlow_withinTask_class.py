@@ -17,6 +17,8 @@ from initDirs import root
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
            's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
 
+subjects = ['s07', 's08', 's09']
+
 # conditions = [['op1', 'op1'], ['op2', 'op2'], ['pres', 'pres'],['cres', 'cres'],
 #['presc', 'presc'], ['presi', 'presi'], ['op1', 'pres'], ['op1', 'cres']]
 
@@ -32,7 +34,7 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 #['op1_45', 'op1_45'], ['op1_46', 'op1_46'], ['op1_56', 'op1_56']]
 
 #conditions = [['cres', 'cres']]
-conditions = [['op1', 'op1'], ['op2', 'op2'], ['addsub', 'addsub'],['presTlock', 'presTlock']]
+conditions = [['addsub', 'addsub']]
 #conditions = [['op1', 'op1']]
 
 #conditions = [['pres_34', 'pres_34'], ['pres_35', 'pres_35'], ['pres_36', 'pres_36'], ['pres_45', 'pres_45'],
