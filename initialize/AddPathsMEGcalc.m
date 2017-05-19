@@ -10,6 +10,7 @@ if strcmp(comp, 'MACI64') == 1
     fieldtrip_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/fieldtrips/fieldtrip_testedversion/';   
     addpath(fieldtrip_dir)
     ft_defaults;
+    addpath(genpath('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calculia/scripts/Calc_ECoG/PedroMatlabCustom/'))
 %     addpath(genpath(fieldtrip_dir));
     % Linux
 elseif strcmp(comp, 'GLNXA64') == 1

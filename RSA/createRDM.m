@@ -43,7 +43,6 @@ addpath '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/stimuli_anal
 imageDir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/stimuli_analises/images'
 imageDirAll = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/stimuli_analises/images/all'
 
-import('R')
 
 [F word_map RDM_visual img_categories] = img_sim(imageDir, 8, 1, 1, 1, 5)
 close all
@@ -58,12 +57,25 @@ set(gca, 'FontSize', 18)
 axis square
 colorbar
 
+load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/RSA/stim_matrices/calc_RDM_matrices_jaccard.mat', 'jaccardMAT');
+jaccardMAT(isnan(jaccardMAT)) = 0;
+
+%% COmpare jaccart and gabor
+count = 1
+for i = 1:length(RDM_visual)-1
+    for j = i+1:length(RDM_visual)
+        RDM_visualVZ(count)=RDM_visual(i,j);
+        jaccardMATVZ(count)=jaccardMAT(i,j);
+        count=count+1;
+    end
+end
 
 %%
 RDM.op1_vis = zeros(32);
 for i = 1:size(RDM.op1_vis,1)
     for j = 1:size(RDM.op1_vis,2)
         RDM.op1_vis(i,j) = RDM_visual(str2num(allop{i}(1))+1,str2num(allop{j}(1))+1);
+        RDM.op1_vis_jc(i,j) = jaccardMAT(str2num(allop{i}(1))+1,str2num(allop{j}(1))+1);
     end
 end
 
@@ -72,6 +84,7 @@ RDM.op2_vis = zeros(32);
 for i = 1:size(RDM.op2_vis,1)
     for j = 1:size(RDM.op2_vis,2)
         RDM.op2_vis(i,j) = RDM_visual(str2num(allop{i}(3))+1,str2num(allop{j}(3))+1);
+        RDM.op2_vis_jc(i,j) = jaccardMAT(str2num(allop{i}(3))+1,str2num(allop{j}(3))+1);
     end
 end
 
@@ -80,6 +93,7 @@ RDM.result_vis = zeros(32);
 for i = 1:size(RDM.result_vis,1)
     for j = 1:size(RDM.result_vis,2)
         RDM.result_vis(i,j) = RDM_visual(str2num(allop{i})+1,str2num(allop{j})+1);
+        RDM.result_vis_jc(i,j) = jaccardMAT(str2num(allop{i})+1,str2num(allop{j})+1);
     end
 end
 
