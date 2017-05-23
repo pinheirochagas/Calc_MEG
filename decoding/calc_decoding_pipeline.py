@@ -50,12 +50,13 @@ sys.path.append('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding'
 
 from jr.plot import pretty_gat, pretty_decod
 
-subjects = ['s02', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
+subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's12', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
 
-subjects = ['s02']
+subjects = ['s02', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
+            's11', 's12']
 
-conditions = [['cres', 'cres']]
+conditions = [['cres_len50ms', 'cres_len50ms']]
 
 #Combine results from all conditions
 all_scores = []
@@ -64,7 +65,7 @@ all_diagonals = []
 for c, cond in enumerate(conditions):
     for s, subject in enumerate(subjects):
         print('loading subject ' + subject)
-        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_baseline_nocorrect.npy'
+        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         results = np.load(fname)
         # Convert to list
         results = results.tolist()
@@ -109,7 +110,20 @@ for s, subject in enumerate(subjects):
     plt.ylim(.1,.50)
     plt.savefig(dirs['result'] + 'individual_results/' + subject + 'cres.png')
 
+    plt.figure(figsize=(15, 5))
+
+for s, subject in enumerate(subjects):
+    plt.subplot(5, 4, s+1)
+    pretty_decod(all_scores[0,s,:,0], chance=.25)
+    plt.savefig(dirs['result'] + 'individual_results/' + subject + 'cres_50ms.png')
+
+
 plt.close('all')
+
+time_cres50 = np.arange(-1.5, 3.20, 0.004)
+
+pretty_decod(all_scores[0,:,:,0], chance=.25)
+
 
 #params = prepDataDecoding(dirs, 'cres', 'cres', 's02', 'baseline_correct')
 

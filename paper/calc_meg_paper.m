@@ -50,7 +50,30 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'high', 10, 1, 1,
 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 1, 5);
- 
+
+%% Stats cosmo searchlight
+% Load all data
+conds = 'corrResult';
+spacesphere = 10;
+timesphere = 1;
+freqsphere = 1;
+fq_range = 'low';
+
+                
+
+for p = 1:length(sub_name)
+    load([searchlight_result_dir 'searchlight_ft_', conds '_' sub_name{p} '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range '_freq.mat'], 'all_ft');
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
+end
+
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
+
 
 %% Vizualize searchlight
 
@@ -63,6 +86,9 @@ operator = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10
 
 operand1high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat'])
 
+corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']) 
+
+ft_multiplotTFR(cfg, corrResult.searchlight_ft_allsub);
 
 
 %% Explore TF analysis
@@ -206,7 +232,6 @@ for subj = 1:length(sub_name)
 end
 
 %% Calculate stats and plot
-
 % Load all data
 for p = 1:length(sub_name)
     load([rsa_result_dir '/RSA_cosmo_jac' sub_name{p} '.mat'])

@@ -45,7 +45,7 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
 
     # Learning process
     gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'],
-                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
+                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=1)
 
     # CHECK THIS, gave error TypeError: an integer is required
 

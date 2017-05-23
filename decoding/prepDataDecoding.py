@@ -85,9 +85,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'cres_len50ms':
-            train_index = info_calc['operator'] != 0
+            train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
             X_train = epoch_calc[train_index]
-            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = np.array(info_calc[train_index]['corrResult'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
@@ -128,6 +128,24 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             X_test = X_train
             y_test = y_train
             train_times = {'start': -0.2, 'stop': 0.8}
+            test_times = train_times
+        elif train_set == 'op1_len50ms':
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand1'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.1, 'stop': 1.6, 'length': 0.05}
+            test_times = train_times
+        elif train_set == 'op2_len50ms':
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': 1.5, 'stop': 3.2, 'length': 0.05}
             test_times = train_times
     else:
         mode = 'mean-prediction'

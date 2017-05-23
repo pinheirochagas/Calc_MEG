@@ -1,4 +1,4 @@
-function [conds_idx, labels] = selecCondsMegCalc(trialinfo, conds);
+function [conds_idx, labels] = selecCondsMegCalc(trialinfo, conds)
 
 if strcmp(conds, 'corrResult') || strcmp(conds, 'presResult')
     conds_idx = (trialinfo.(conds) > 2 & trialinfo.(conds) < 7 & trialinfo.operator ~= 0);
