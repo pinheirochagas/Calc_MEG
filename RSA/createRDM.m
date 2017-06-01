@@ -100,26 +100,31 @@ end
 %% Save 
 save([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM')
 
+load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM')
+
 
 %% Plotting
 fieldnames_RDM = fieldnames(RDM);
 fieldnames_RDM = fieldnames_RDM(~strcmp(fieldnames_RDM,'operator'));
 figureDim = [0 0 1 1];
 figure('units','normalized','outerposition',figureDim)
-for s = 1:length(fieldnames_RDM)
-    subplot(2,3,s)
+count = 1;
+for s = [1 2 3 4 5 6]
+    subplot(2,3,count)
     imagesc(RDM.(fieldnames_RDM{s}))
-    title(fieldnames_RDM{s}, 'interpreter', 'none')
+%     title(fieldnames_RDM{s}, 'interpreter', 'none')
     axis square
     set(gca,'XTick',1:1:32)
     set(gca,'XTickLabel',allop);
     set(gca,'XaxisLocation','top')
     set(gca,'XTickLabelRotation',-90)
     set(gca,'YTick',1:1:32)
-    set(gca,'YTickLabel',allop); 
+    set(gca,'YTickLabel',allop);
+    count = count+1;
 end
 % Save
 savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matrices.png'])
+savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matric_operator.png'])
 
 
 

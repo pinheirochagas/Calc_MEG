@@ -221,18 +221,24 @@ for f = 1:length(fieldnames_RSA);
     RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
 
+%% Load data
+load([rsa_result_dir 'RSA_cosmo_s02.mat']);
 
 %% Merge jaccard
-fieldnames_RSA = fieldnames(RSA1);
+fieldnames_RSA = fieldnames(RSA);
 %%
 
-% Plot results 
+fieldnames_RSA_plot = {'op1_mag', 'op2_mag', 'result_mag', 'op1_magregop1_vis', 'op2_magregop1_vis', 'result_magregresult_vis'};
+
+%% Plot results 
+load('cdcol.mat')
+
 figureDim = [0 0 1 1];
 figure('units','normalized','outerposition',figureDim)
 for f = 1:length(fieldnames_RSA);
     load([rsa_result_dir '/group/RSA_stats_model_', fieldnames_RSA{f}, '.mat'])
-    subplot(4,4,f)
-    RSAplot(RSAres.ds_stacked_RSA,RSAres.timevect,RSAres.sig_tp_RSA)
+    subplot(3,2,f)
+    RSAplot(RSAres,cdcol.cobaltblue)
     title(fieldnames_RSA{f}, 'interpreter', 'none')
 end
 savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])

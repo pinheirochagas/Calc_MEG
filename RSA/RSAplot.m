@@ -7,7 +7,7 @@ function RSAplot(RSAres, coloR)
 timeStart = find(RSAres.timevect > .2); timeStart = timeStart(1);
 timeStop = find(RSAres.timevect > 3.2); timeStop = timeStop(1);
 
-data_rsa = RSAres.ds_stacked_RSA(timeStart:timeStop);
+data_rsa = RSAres.ds_stacked_RSA.samples(:,timeStart:timeStop);
 time_rsa = RSAres.timevect(timeStart:timeStop);
 sig_tp_RSA = RSAres.sig_tp_RSA(timeStart:timeStop);  
 
@@ -24,7 +24,7 @@ line([3.2 3.2], ylim, 'Color', 'k', 'LineWidth', LineWidthMark);
 ylim
 hold on
 % result
-plt = shadedErrorBar(time_rsa,mean(data_rsa.samples),std(data_rsa.samples)/sqrt(size(data_rsa.samples,1)), ... 
+plt = shadedErrorBar(time_rsa,mean(data_rsa),std(data_rsa)/sqrt(size(data_rsa,1)), ... 
     {'color', coloR});
 ylim([-0.05, .1])
 hold on
