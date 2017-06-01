@@ -10,6 +10,8 @@ from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.cross_validation import StratifiedKFold
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_classif
 from initDirs import dirs
 
 def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
@@ -28,11 +30,15 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     # model = svm.SVC(C=1, kernel='linear', probability='True', class_weight='balanced', decision_function_shape='ovo')
     # probability='true' probably comes with pred label and probability
 
+    # Feature selection
+    fs = SelectKBest(f_classif, k=153)
+
     # Pipeline
-    clf = make_pipeline(scaler, model)
+    clf = make_pipeline(fs, scaler, model)
 
     # Cross-validation
     cv = StratifiedKFold(y_train, 5)
+
 
     # Define scorer
     if scorer is 'scorer_auc':

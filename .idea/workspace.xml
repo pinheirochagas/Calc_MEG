@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b5d51ef7-6129-45d3-92f7-77465b79927c" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/.~lock.calc_WorkFlow_withinTask_class#" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/GATclassifiers.py" afterPath="$PROJECT_DIR$/decoding/GATclassifiers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" afterPath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
+            <state relative-caret-position="400">
+              <caret line="152" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -34,18 +38,20 @@
       <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="109" column="34" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="34" />
-              <folding />
+            <state relative-caret-position="400">
+              <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+              <folding>
+                <element signature="e#62#80#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calc_createWorkFlow_withinTask_class.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="calc_createWorkFlow_withinTask_class.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="29" />
+            <state relative-caret-position="440">
+              <caret line="22" column="74" lean-forward="true" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
               <folding>
                 <element signature="e#216#225#0" expanded="true" />
               </folding>
@@ -56,7 +62,7 @@
       <file leaf-file-name="pool.py" pinned="false" current-in-tab="false">
         <entry file="file:///volatile/anaconda/lib/python2.7/multiprocessing/pool.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11320">
+            <state relative-caret-position="637">
               <caret line="566" column="21" lean-forward="false" selection-start-line="566" selection-start-column="21" selection-end-line="566" selection-end-column="21" />
               <folding>
                 <marker date="1482297092000" expanded="true" signature="0:1612" ph="..." />
@@ -216,7 +222,7 @@
       <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-240">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -226,7 +232,7 @@
       <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2600">
+            <state relative-caret-position="2660">
               <caret line="133" column="40" lean-forward="false" selection-start-line="133" selection-start-column="27" selection-end-line="133" selection-end-column="40" />
               <folding>
                 <element signature="e#12#22#0" expanded="true" />
@@ -268,18 +274,18 @@
         <option value="$PROJECT_DIR$/decoding/jobs_s01_op1_op1_class.py" />
         <option value="$PROJECT_DIR$/decoding/calc_decoding.py" />
         <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py" />
-        <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
         <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
-        <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
         <option value="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
+        <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
+        <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="296" />
-    <option name="y" value="24" />
-    <option name="width" value="1387" />
-    <option name="height" value="1176" />
+    <option name="x" value="65" />
+    <option name="y" value="-4" />
+    <option name="width" value="1855" />
+    <option name="height" value="1204" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -518,15 +524,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="296" y="24" width="1387" height="1176" extended-state="4" />
+    <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20283371" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15035932" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5026022" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3200371" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.49739778" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41929498" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.4980631" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -598,7 +604,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2040">
           <caret line="109" column="9" lean-forward="false" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="e#62#80#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -860,7 +868,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="820">
           <caret line="47" column="62" lean-forward="true" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
-          <folding />
+          <folding>
+            <element signature="e#62#80#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -968,9 +978,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="70" lean-forward="false" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/other_organize/probably_keep/calc_dec_wTask_CR.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7640">
+          <caret line="460" column="0" lean-forward="false" selection-start-line="460" selection-start-column="0" selection-end-line="461" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file:///volatile/anaconda/lib/python2.7/multiprocessing/pool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11320">
+        <state relative-caret-position="637">
           <caret line="566" column="21" lean-forward="false" selection-start-line="566" selection-start-column="21" selection-end-line="566" selection-end-column="21" />
           <folding>
             <marker date="1482297092000" expanded="true" signature="0:1612" ph="..." />
@@ -1126,23 +1150,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="70" lean-forward="false" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/other_organize/probably_keep/calc_dec_wTask_CR.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7640">
-          <caret line="460" column="0" lean-forward="false" selection-start-line="460" selection-start-column="0" selection-end-line="461" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-240">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1150,7 +1160,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2600">
+        <state relative-caret-position="2660">
           <caret line="133" column="40" lean-forward="false" selection-start-line="133" selection-start-column="27" selection-end-line="133" selection-end-column="40" />
           <folding>
             <element signature="e#12#22#0" expanded="true" />
@@ -1160,27 +1170,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="109" column="34" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
-          <folding />
+        <state relative-caret-position="400">
+          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+          <folding>
+            <element signature="e#62#80#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="29" />
+        <state relative-caret-position="440">
+          <caret line="22" column="74" lean-forward="true" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
           <folding>
             <element signature="e#216#225#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="152" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
