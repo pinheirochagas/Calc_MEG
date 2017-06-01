@@ -57,6 +57,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
 
     epoch_calc_resplock = mne.epochs.concatenate_epochs([epoch_calc_delay, epoch_calc_nodelay])
     info_calc_resplock = pd.concat([info_calc_delay, info_calc_nodelay])
+
+
     print ('done')
 
     # Baseline correct if needed
@@ -82,7 +84,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            train_times = {'start': -.2, 'stop': 4.4}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'cres_len50ms':
             train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
@@ -100,7 +102,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -.2, 'stop': 4.4}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'op1':
             train_index = info_calc['operator'] != 0
@@ -109,7 +111,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -.2, 'stop': 4.4}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'addsub':
             train_index = info_calc['operator'] != 0
@@ -118,12 +120,21 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -.2, 'stop': 4.4}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'presTlock':
             train_index = (info_calc_resplock['preResult'] >= 3) & (info_calc_resplock['preResult'] <= 6) & (info_calc_resplock['operator'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['preResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': 0.8}
+            test_times = train_times
+        elif train_set == 'presTlockCres':
+            train_index = (info_calc_resplock['corrResult'] >= 3) & (info_calc_resplock['corrResult'] <= 6) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['deviant'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['corrResult'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
@@ -160,18 +171,23 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_test = y_test.astype(np.float64)
             train_times = {'start': -0.2, 'stop': 0.8}
             test_times = {'start': -0.2, 'stop': 0.8}
-        elif (train_set == 'op1m') & (test_set == 'cresm'):
-            # train_index = info_calc['operand1'] != info_calc['preResult']
+        elif (train_set == 'op1') & (test_set == 'cres'):
+            mode = 'cross-validation' # just to see what happens
+            epoch_cres = epoch_calc
+            epoch_cres.crop(1.5, 2.4)
+            epoch_cres.times = np.arange(-0.1, 0.8004, 0.004)
+            epoch_calc.crop(-0.1, 0.8)
+            #train_index = info_calc['operand1']
             test_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
             X_train = epoch_calc
             y_train = np.array(info_calc['operand1'])
             y_train = y_train.astype(np.float64)
-            X_test = epoch_calc[test_index]
+            X_test = epoch_cres[test_index]
             y_test = np.array(info_calc[test_index]['corrResult'])
             y_test = y_test.astype(np.float64)
             # Update params
             train_times = {'start': -0.1, 'stop': 0.8}
-            test_times = {'start': 1.5, 'stop': 2.4}
+            test_times = {'start': -0.1, 'stop': 0.8}
     print('done')
 
     # Organize parameters

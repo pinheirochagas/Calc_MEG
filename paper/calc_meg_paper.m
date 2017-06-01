@@ -78,17 +78,39 @@ end
 %% Vizualize searchlight
 
 
-operand1 = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat'])
-operand2 = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat'])
+operand1_lf = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat'])
+operand2_lf = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat'])
 corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']) 
 operator = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']) 
+
+operand1_hf = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat'])
 
 
 operand1high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat'])
 
 corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']) 
 
-ft_multiplotTFR(cfg, corrResult.searchlight_ft_allsub);
+cfg = [];
+cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
+
+
+ft_multiplotTFR(cfg, operand2_lf.searchlight_ft_allsub);
+save2pdf([searchlight_result_dir 'searchlight_op2_low_best.pdf'], gcf, 600)
+caxis([.24 .30])
+
+
+
+operand1_lf =  operand1_lf.searchlight_ft_allsub;
+
+operand1_lf.meanall = squeeze(mean(operand1_lf.powspctrm,1));
+operand1_lf.meanall(operand1_lf.meanall(:) < .25) = nan; 
+imagesc(operand1_lf.meanall)
+caxis([.24 .3])
+
+operand2_lf =  operand1_lf.searchlight_ft_allsub;
+operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
+
+
 
 
 %% Explore TF analysis
@@ -101,7 +123,7 @@ load SensorClassification;
 
 cfg = [];
 cfg.showlabels   = 'no';	
-cfg.layout       = 'neuromag306all.lay'; %neuromag306all.lay neuromag306mag
+cfg.layout       = 'neuromag306.lay'; %neuromag306all.lay neuromag306mag
 % cfg.channel = Grad;
 cfg.baseline = [-0.2 -0.02];
 cfg.baselinetype = 'db';
