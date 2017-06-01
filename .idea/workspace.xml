@@ -3,33 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b5d51ef7-6129-45d3-92f7-77465b79927c" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/.~lock.calc_WorkFlow_withinTask_class#" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s08_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s08_cres_cres_class.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" afterPath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s22_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s22_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paper/calc_meg_paper.m" afterPath="$PROJECT_DIR$/paper/calc_meg_paper.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s21_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s21_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s14_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s14_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s15_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s15_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s09_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s09_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s03_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s03_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/initialize/AddPathsMEGcalc.m" afterPath="$PROJECT_DIR$/initialize/AddPathsMEGcalc.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s12_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s12_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s07_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s07_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s05_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s05_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s11_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s11_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s02_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s02_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s17_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s17_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s10_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s10_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s13_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s13_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/prepDataDecoding.py" afterPath="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s16_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s16_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s04_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s04_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s06_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s06_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s19_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s19_cres_cres_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s18_cres_cres_class.py" afterPath="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s18_cres_cres_class.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+            <state relative-caret-position="460">
+              <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -67,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calc_createWorkFlow_withinTask_class.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="calc_createWorkFlow_withinTask_class.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
+            <state relative-caret-position="513">
               <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="29" />
               <folding>
                 <element signature="e#216#225#0" expanded="true" />
@@ -545,13 +519,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="296" y="24" width="1387" height="1176" extended-state="4" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20283371" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5026022" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.49739778" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.4980631" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1183,16 +1158,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="29" />
-          <folding>
-            <element signature="e#216#225#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2040">
@@ -1203,9 +1168,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="71" column="43" lean-forward="false" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+        <state relative-caret-position="460">
+          <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="29" />
+          <folding>
+            <element signature="e#216#225#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

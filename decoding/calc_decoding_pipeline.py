@@ -56,7 +56,7 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 subjects = ['s02', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's12']
 
-conditions = [['op1', 'op1']]
+conditions = [['presTlockCres', 'presTlockCres']]
 
 #Combine results from all conditions
 all_scores = []
@@ -78,7 +78,6 @@ params = results['params']
 all_scores = np.array(all_scores) #shape: subjects*n_cond, training_times, testing_times
 all_diagonals = np.array(all_diagonals)
 
-fname =  dirs['result'] + 'individual_results/' + 's10_presTlockCres_presTlockCres_results_class_accuracy_diagonal_nobaseline_correct.npy'
 
 
 #Average data
