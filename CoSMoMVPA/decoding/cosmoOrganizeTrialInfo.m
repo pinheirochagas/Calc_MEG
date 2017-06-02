@@ -1,4 +1,4 @@
-function [stim,stimfull] = comoOrganizeTrialInfo(trialinfo)
+function [stim,stimfull] = cosmoOrganizeTrialInfo(trialinfo)
 
 for i = 1:length(trialinfo.operand1)
     if trialinfo.operator(i) == 1

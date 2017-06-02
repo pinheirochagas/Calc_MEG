@@ -4,6 +4,8 @@ InitDirsMEGcalc
 
 % Load operations
 load([rsa_result_dir 'stim_matrices/allop.mat'])
+load([rsa_result_dir 'stim_matrices/allop_cres_3456.mat'])
+
 
 %% Operand 1
 RDM.op1_mag = zeros(32);
@@ -58,6 +60,7 @@ axis square
 colorbar
 
 load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/RSA/stim_matrices/calc_RDM_matrices_jaccard.mat', 'jaccardMAT');
+
 jaccardMAT(isnan(jaccardMAT)) = 0;
 
 %% COmpare jaccart and gabor
@@ -127,18 +130,44 @@ savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matrices.png'])
 savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matric_operator.png'])
 
 
+%% For correct result 3 4 5 6 
+load([rsa_result_dir 'stim_matrices/allop_cres_3456.mat'])
+%% Result
+RDM.result_mag = zeros(length(allop_cres_3456));
+for i = 1:size(RDM.result_mag,1)
+    for j = 1:size(RDM.result_mag,2)
+        RDM.result_mag(i,j) = abs(str2num(allop_cres_3456{i}) - str2num(allop_cres_3456{j}));
+    end
+end
 
-% %% Magnitude
-% RDM_number = zeros(10,10)
-% for i  = -9:9
-%     RDM_number = RDM_number + triu(ones(10,10),i)
-% end
-% RDM_number = abs(RDM_number - 10)
-% imagesc(RDM_number)
+%% Operator
+RDM.operator = zeros(length(allop_cres_3456));
+for i = 1:size(RDM.operator,1)
+    for j = 1:size(RDM.operator,2)
+        RDM.operator(i,j) = allop_cres_3456{i}(2) ~= allop_cres_3456{j}(2);
+    end
+end
+
+save([rsa_result_dir 'stim_matrices/calc_RDM_matrices_cres3456.mat'], 'RDM')
 
 
-
-
-
-
+%% Plotting
+fieldnames_RDM = fieldnames(RDM);
+fieldnames_RDM = fieldnames_RDM(~strcmp(fieldnames_RDM,'operator'));
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
+count = 1;
+for s = [1 2]
+    subplot(2,3,count)
+    imagesc(RDM.(fieldnames_RDM{s}))
+%     title(fieldnames_RDM{s}, 'interpreter', 'none')
+    axis square
+    set(gca,'XTick',1:1:32)
+    set(gca,'XTickLabel',allop);
+    set(gca,'XaxisLocation','top')
+    set(gca,'XTickLabelRotation',-90)
+    set(gca,'YTick',1:1:32)
+    set(gca,'YTickLabel',allop);
+    count = count+1;
+end
 

@@ -5,8 +5,7 @@ AddPathsMEGcalc
 InitDirsMEGcalc
 
 %%  List subjects
-sub_name = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15', ...
-        's16','s17','s18','s19','s21','s22'};
+sub_name = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
     
 sub_name = {'s14','s15','s16','s17','s18','s19','s21','s22'};    
 %% Behavior analysis
@@ -53,16 +52,44 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 
  
 
 %% Vizualize searchlight
+sl.op1_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat']);
+sl.op2_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat']);
+sl.cres_low = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']); 
+sl.op_low = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']);
+
+sl.op1_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat']);
+sl.op2_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_high_freq.mat']);
+sl.cres_high = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']); 
+sl.op_high = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_high_freq.mat']);
+
+names_sl = fieldnames(sl);
+
+% Plot
+cfg = [];
+cfg.layout = 'neuromag306cmb.lay';
+
+figureDim = [0 0 0.7 1];
+for i=1:length(names_sl)
+    figure('units','normalized','outerposition',figureDim)
+    ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
+    savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
+end
 
 
-operand1 = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat'])
-operand2 = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat'])
-corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']) 
-operator = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']) 
 
-
-operand1high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat'])
-
+ft_multiplotTFR(cfg, sl.(names_sl{1}).searchlight_ft_allsub);
+colorbar
+title('')
+set(gca, 'FontSize', 30)
+LineWidthMark = 2; LineCol = [1 1 1]; 
+line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+ylabel('Frequency (Hz)')
+xlabel('Time (sec.)')
+savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{1} '_bestchan2.png'])
 
 
 %% Explore TF analysis
@@ -82,6 +109,172 @@ cfg.baselinetype = 'db';
 
 TFRlow = TFR
 TFRhigh = TFR
+
+
+
+%% Cosmo simple decoding
+    % Load all data from all subjects (needs at least 30 gb free in disk space)
+for subj = 2:length(sub_name)
+    load([data_dir sub_name{subj} '_calc_BR.mat'])
+    % z-score each channel for later PCA
+    
+    
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMO(data);
+    % Organize trialinfo
+    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
+    data_cosmo.sa.stim = stim;
+    data_cosmo.sa.stimfull = stimfull;
+    sa = data_cosmo.sa;
+    save([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'data_cosmo', 'sa', '-v7.3');
+end
+
+%% Count number of events per subject 
+for subj = 1:length(sub_name)
+    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'sa');
+    tab_stim = tabulate(sa.stim(sa.operator ~= 0));
+    tab_stim_all(:,subj) = cell2mat(tab_stim(:,2));
+end
+
+%% Run PCA 
+for subj = 1:length(sub_name)
+    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
+    dt_cosmo_pca = PCAforcosmo(data_cosmo);
+end
+
+%% RSA cosmo
+for subj = 1:length(sub_name)
+    % Load data and convert to cosmo
+    load([data_dir sub_name{subj} '_calc_AICA.mat'])     
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMO(data);
+    % Organize trialinfo and leave only the stim field
+    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
+    % Select only the calculation trials
+    data_cosmo.samples = data_cosmo.samples(data_cosmo.sa.operator ~= 0,:);
+    stim = stim(data_cosmo.sa.operator ~= 0); 
+    data_cosmo.sa = [];
+    data_cosmo.sa.stim = stim';    
+    % Run RSA
+    cosmoRSA(sub_name{subj}, data_cosmo)
+end
+
+%% Calculate stats and plot
+
+% Load all data
+for p = 1:length(sub_name)
+    load([rsa_result_dir '/RSA_cosmo_jac' sub_name{p} '.mat'])
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
+end
+
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
+
+%% Load data
+load([rsa_result_dir 'RSA_cosmo_s02.mat']);
+
+%% Merge jaccard
+fieldnames_RSA = fieldnames(RSA);
+%%
+
+fieldnames_RSA_plot = {'op1_mag', 'op2_mag', 'result_mag', 'op1_vis', 'op2_vis', 'operator', 'op1_magregop1_vis', 'op2_magregop2_vis', 'result_magregoperator'};
+colors_plot = repmat([cdcol.turquoiseblue; cdcol.grassgreen; cdcol.orange],3,1);
+
+%% Plot results 
+load('cdcol.mat')
+
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
+for f = 1:length(fieldnames_RSA_plot);
+    load([rsa_result_dir '/group/RSA_stats_model_', fieldnames_RSA_plot{f}, '.mat'])
+    subplot(3,3,f)
+    if strcmp(fieldnames_RSA_plot{f}, 'operator') == 1
+        RSAplot(RSAres,colors_plot(f,:), 'y_lim', [-0.05 .35])
+    else
+        RSAplot(RSAres,colors_plot(f,:), 'y_lim', [-0.05 .21])
+    end
+    title(fieldnames_RSA_plot{f}, 'interpreter', 'none')
+end
+savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])
+
+
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
+subplot(3,3,1)
+load([rsa_result_dir '/group/RSA_stats_model_', 'operator', '.mat'])
+RSAplot(RSAres,cdcol.scarlet)
+savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])
+
+
+%% Calculate RSA with only results 3-6
+
+%% RSA cosmo
+for subj = 1:length(sub_name)
+    % Load data and convert to cosmo
+    load([data_dir sub_name{subj} '_calc_AICA.mat'])
+    % Select trials
+    data = filterData(data, 'corrResult');
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMO(data);
+    % Organize trialinfo and leave only the stim field
+    [stim, stimfull] = cosmoOrganizeTrialInfo(data_cosmo.sa);
+    % Select only the calculation trials
+    data_cosmo.samples = data_cosmo.samples(data_cosmo.sa.operator ~= 0,:);
+    stim = stim(data_cosmo.sa.operator ~= 0); 
+    data_cosmo.sa = [];
+    data_cosmo.sa.stim = stim';    
+    % Run RSA
+    cosmoRSA(sub_name{subj}, data_cosmo)
+end
+
+
+
+% Load all data
+for p = 1:length(sub_name)
+    load([rsa_result_dir '/RSA_cosmo_cres_3456' sub_name{p} '.mat'])
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
+end
+
+RSA = rmfield(RSA, {'result_mag', 'operator'})
+RSA_all = rmfield(RSA_all,  {'result_mag', 'operator'}); 
+fieldnames_RSA = fieldnames(RSA)
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
+
+%% Plot results 
+load('cdcol.mat')
+
+fieldnames_RSA_plot = {'result_mag', 'operator', 'result_mag_reg_operator'};
+colors_plot = repmat([cdcol.turquoiseblue; cdcol.grassgreen; cdcol.orange],3,1);
+
+
+figureDim = [0 0 1 1];
+figure('units','normalized','outerposition',figureDim)
+count = [1 4 7];
+for f = 1:length(fieldnames_RSA_plot);
+    load([rsa_result_dir 'group_AICA/RSA_stats_model_', fieldnames_RSA_plot{f}, '_cres_3456.mat'])
+    subplot(3,3,count(f))
+    if strcmp(fieldnames_RSA_plot{f}, 'operator') == 1
+        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.05 .35])
+    else
+        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.05 .21])
+    end
+    title(fieldnames_RSA_plot{f}, 'interpreter', 'none')
+end
+savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_cres_3456.png'])
+
+
+%%
 
 
 for i = length(sub_name);
@@ -157,129 +350,4 @@ figureDim = [0 0 1 .45];
 
 figure('units','normalized','outerposition',figureDim)
 
-
-%% Cosmo simple decoding
-    % Load all data from all subjects (needs at least 30 gb free in disk space)
-for subj = 2:length(sub_name)
-    load([data_dir sub_name{subj} '_calc_BR.mat'])
-    % z-score each channel for later PCA
-    
-    
-    % Convert to cosmo MVPA
-    data_cosmo = calcConvertCOSMO(data);
-    % Organize trialinfo
-    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
-    data_cosmo.sa.stim = stim;
-    data_cosmo.sa.stimfull = stimfull;
-    sa = data_cosmo.sa;
-    save([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'data_cosmo', 'sa', '-v7.3');
-end
-
-%% Count number of events per subject 
-for subj = 1:length(sub_name)
-    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'sa');
-    tab_stim = tabulate(sa.stim(sa.operator ~= 0));
-    tab_stim_all(:,subj) = cell2mat(tab_stim(:,2));
-end
-
-%% Run PCA 
-for subj = 1:length(sub_name)
-    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
-    dt_cosmo_pca = PCAforcosmo(data_cosmo);
-end
-
-%% RSA cosmo
-for subj = 1:length(sub_name)
-    % Load data and convert to cosmo
-    load([data_dir sub_name{subj} '_calc_AICA.mat'])     
-    % Convert to cosmo MVPA
-    data_cosmo = calcConvertCOSMO(data);
-    % Organize trialinfo and leave only the stim field
-    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
-    % Select only the calculation trials
-    data_cosmo.samples = data_cosmo.samples(data_cosmo.sa.operator ~= 0,:);
-    stim = stim(data_cosmo.sa.operator ~= 0); 
-    data_cosmo.sa = [];
-    data_cosmo.sa.stim = stim';    
-    % Run RSA
-    cosmoRSA(sub_name{subj}, data_cosmo)
-end
-
-%% Calculate stats and plot
-
-% Load all data
-for p = 1:length(sub_name)
-    load([rsa_result_dir '/RSA_cosmo_jac' sub_name{p} '.mat'])
-    fieldnames_RSA = fieldnames(RSA);
-    for f = 1:length(fieldnames_RSA);
-        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
-    end
-end
-
-% Calculate stats
-for f = 1:length(fieldnames_RSA);
-    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
-end
-
-%% Load data
-load([rsa_result_dir 'RSA_cosmo_s02.mat']);
-
-%% Merge jaccard
-fieldnames_RSA = fieldnames(RSA);
-%%
-
-fieldnames_RSA_plot = {'op1_mag', 'op2_mag', 'result_mag', 'op1_magregop1_vis', 'op2_magregop1_vis', 'result_magregresult_vis'};
-
-%% Plot results 
-load('cdcol.mat')
-
-figureDim = [0 0 1 1];
-figure('units','normalized','outerposition',figureDim)
-for f = 1:length(fieldnames_RSA);
-    load([rsa_result_dir '/group/RSA_stats_model_', fieldnames_RSA{f}, '.mat'])
-    subplot(3,2,f)
-    RSAplot(RSAres,cdcol.cobaltblue)
-    title(fieldnames_RSA{f}, 'interpreter', 'none')
-end
-savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])
-
-
-% Plot results 
-fieldnames_RSA = fieldnames(RSA2);
-
-figureDim = [0 0 1 1];
-figure('units','normalized','outerposition',figureDim)
-for f = 1:length(fieldnames_RSA);
-    load([rsa_result_dir 'group/RSA_stats_model_', fieldnames_RSA{f}, '_jac.mat'])
-    subplot(4,4,f)
-    RSAplot(RSAres.ds_stacked_RSA,RSAres.timevect,RSAres.sig_tp_RSA)
-    title(fieldnames_RSA{f}, 'interpreter', 'none')
-end
-savePNG(gcf,200,[rsa_result_dir 'plots/calc_RSA_jac.png'])
-
-
-
-% Plot results 
-load('cdcol.mat')
-fieldnames_RSA = fieldnames(RSA2);
-
-figureDim = [0 0 1 1];
-figure('units','normalized','outerposition',figureDim)
-
-
-RSA_op1_mag_reg_vis = load([rsa_result_dir 'group/RSA_stats_model_', 'op1_mag_reg_op1_vis_jc_jc' , '_jac.mat'])
-RSA_op2_mag_reg_vis = load([rsa_result_dir 'group/RSA_stats_model_', 'op2_mag_reg_op2_vis_jc_jc' , '_jac.mat'])
-
-hold on
-RSAplot(RSA_op1_mag_reg_vis.RSAres, cdcol.carmine)
-RSAplot(RSA_op2_mag_reg_vis.RSAres, cdcol.cobaltblue)
-
-
-
-title(fieldnames_RSA{f}, 'interpreter', 'none')
-end
-
-
-    
-end
 

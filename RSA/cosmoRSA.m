@@ -20,6 +20,13 @@ nbrhood=cosmo_interval_neighborhood(ds,'time','radius',10); % to calculate the c
 %% Run Magnitude Model
 % set measure
 load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'])
+%load([rsa_result_dir 'stim_matrices/calc_RDM_matrices_cres_3456.mat'])
+
+% measure=@cosmo_target_dsm_corr_measure;
+% measure_args=struct();
+% measure_args.type='Spearman'; %correlation type between target and MEG dsms
+% measure_args.metric='Spearman'; %metric to use to compute MEG dsm
+% measure_args.center_data=true; %removes the mean pattern before correlating
 
 measure=@cosmo_target_dsm_corr_measure;
 measure_args=struct();
@@ -27,8 +34,8 @@ measure_args.type='Spearman'; %correlation type between target and MEG dsms
 measure_args.metric='Spearman'; %metric to use to compute MEG dsm
 measure_args.center_data=true; %removes the mean pattern before correlating
 
-%% Run RSA
-RSA = [];
+% %% Run RSA
+% RSA = [];
 % %% Single factor models
 % fieldnames_RDM = fieldnames(RDM);
 % for i = 1:length(fieldnames_RDM)
@@ -37,13 +44,13 @@ RSA = [];
 %     RSA.(fieldnames_RDM{i}) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
 % end
 
-%% Single factor models
-fieldnames_RDM = {'op1_vis_jc', 'op2_vis_jc', 'result_vis_jc'};
-for i = 1:length(fieldnames_RDM)
-    disp(['processing RSA of ' (fieldnames_RDM{i})]);
-    measure_args.target_dsm = RDM.(fieldnames_RDM{i});
-    RSA.(fieldnames_RDM{i}) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
-end
+% %% Single factor models
+% fieldnames_RDM = {'op1_vis_jc', 'op2_vis_jc', 'result_vis_jc'};
+% for i = 1:length(fieldnames_RDM)
+%     disp(['processing RSA of ' (fieldnames_RDM{i})]);
+%     measure_args.target_dsm = RDM.(fieldnames_RDM{i});
+%     RSA.(fieldnames_RDM{i}) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+% end
 
 % 
 % %% Results model regressing out operator 
@@ -64,14 +71,14 @@ end
 % end
 
 %% Magnitude models regressing out visual models jaccart
-RDM_mag_vis = {'op1_mag', 'op1_vis_jc', 'op2_mag', 'op2_vis_jc', 'result_mag', 'result_vis_jc'};
-for i = 1:2:length(RDM_mag_vis)
-    disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1}]]);
-    measure_args.target_dsm = RDM.(RDM_mag_vis{i});
-    measure_args.regress_dsm = RDM.(RDM_mag_vis{i+1});
-    RSA.([RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1} '_jc']) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
-    measure_args = rmfield(measure_args,'regress_dsm');
-end
+% RDM_mag_vis = {'op1_mag', 'op1_vis_jc', 'op2_mag', 'op2_vis_jc', 'result_mag', 'result_vis_jc'};
+% for i = 1:2:length(RDM_mag_vis)
+%     disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1}]]);
+%     measure_args.target_dsm = RDM.(RDM_mag_vis{i});
+%     measure_args.regress_dsm = RDM.(RDM_mag_vis{i+1});
+%     RSA.([RDM_mag_vis{i} '_reg_' RDM_mag_vis{i+1} '_jc']) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+%     measure_args = rmfield(measure_args,'regress_dsm');
+% end
 
 % %% Visual models regressing out magnitude models 
 % RDM_mag_vis = {'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
@@ -83,20 +90,35 @@ end
 %     measure_args = rmfield(measure_args,'regress_dsm');
 % end
 
-%% Visual models jaccart regressing out magnitude models 
-RDM_mag_vis = {'op1_mag', 'op1_vis_jc', 'op2_mag', 'op2_vis_jc', 'result_mag', 'result_vis_jc'};
-for i = 2:2:length(RDM_mag_vis)
-    disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1}]]);
-    measure_args.target_dsm = RDM.(RDM_mag_vis{i});
-    measure_args.regress_dsm = RDM.(RDM_mag_vis{i-1});
-    RSA.([RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1} '_jc'] ) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
-    measure_args = rmfield(measure_args,'regress_dsm');
-end
+% %% Results model regressing out operator 
+% disp('processing RSA of result_reg_operator');
+% measure_args.target_dsm = RDM.result_mag;
+% measure_args.regress_dsm = RDM.operator;
+% RSA.result_mag_reg_operator = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+% measure_args = rmfield(measure_args,'regress_dsm');
+
+%% Results model regressing out everything else
+disp('processing RSA of result_reg_operator');
+measure_args.glm_dsm = {RDM.operator, RDM.op1_mag, RDM.op2_mag, RDM.op1_vis, RDM.op2_vis} ;
+RSA.result_reg_everything = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+% measure_args = rmfield(measure_args,'regress_dsm');
+
+
+% 
+% %% Visual models jaccart regressing out magnitude models 
+% RDM_mag_vis = {'op1_mag', 'op1_vis_jc', 'op2_mag', 'op2_vis_jc', 'result_mag', 'result_vis_jc'};
+% for i = 2:2:length(RDM_mag_vis)
+%     disp(['processing RSA of ' [RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1}]]);
+%     measure_args.target_dsm = RDM.(RDM_mag_vis{i});
+%     measure_args.regress_dsm = RDM.(RDM_mag_vis{i-1});
+%     RSA.([RDM_mag_vis{i} '_reg_' RDM_mag_vis{i-1} '_jc'] ) = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+%     measure_args = rmfield(measure_args,'regress_dsm');
+% end
 
 
 
 %% Save
-save([rsa_result_dir 'RSA_cosmo_jac' subject '.mat'], 'RSA')
+save([rsa_result_dir 'RSA_cosmo_cres_test_mr' subject '.mat'], 'RSA')
 
 
 end
