@@ -1,4 +1,6 @@
 # Libraries
+import sys
+sys.path.append('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding')
 from initDirs import dirs
 from prepDataDecoding import prepDataDecoding
 from calcDecoding import calcDecoding
@@ -42,18 +44,14 @@ import matplotlib.pyplot as plt
 import scipy.io as sio
 from scipy import stats
 from initDirs import dirs
-
+from jr.plot import pretty_gat, pretty_decod
 import mne
 from mne.decoding import GeneralizationAcrossTime
 
-sys.path.append('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding')
 
-from jr.plot import pretty_gat, pretty_decod
 
-subjects = ['s02', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
+subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's12', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
-
-subjects = ['s02']
 
 conditions = [['cres', 'cres']]
 
@@ -64,7 +62,11 @@ all_diagonals = []
 for c, cond in enumerate(conditions):
     for s, subject in enumerate(subjects):
         print('loading subject ' + subject)
+<<<<<<< HEAD
         fname = dirs['result'] + 'individual_results/op1_op2_cres_full/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
+=======
+        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
+>>>>>>> 3f4d88e3ea5dbf40c67e1b6c26be6db7537a87b3
         results = np.load(fname)
         # Convert to list
         results = results.tolist()
@@ -76,7 +78,6 @@ time_calc = results['params']['times_calc']
 params = results['params']
 all_scores = np.array(all_scores) #shape: subjects*n_cond, training_times, testing_times
 all_diagonals = np.array(all_diagonals)
-
 
 
 
@@ -115,6 +116,7 @@ for c, cond in enumerate(conditions):
 for s, subject in enumerate(subjects):
     plt.figure(figsize=(15, 5))
     pretty_decod(all_scores[0,s,:,0], chance=.25)
+    plt.axvline(0, color = 'g') #mark stimulus onset
     plt.axvline(.8, color = 'g') #mark stimulus onset
     plt.axvline(1.6, color = 'g') #mark stimulus onset
     plt.axvline(2.4, color = 'g') #mark stimulus onset
@@ -122,7 +124,34 @@ for s, subject in enumerate(subjects):
     plt.ylim(.1,.50)
     plt.savefig(dirs['result'] + 'individual_results/' + subject + 'cres.png')
 
+    plt.figure(figsize=(15, 5))
+
+
+for s, subject in enumerate(subjects):
+    plt.subplot(5, 4, s+1)
+    pretty_decod(all_scores[0,s,:,0], chance=.25)
+    #plt.savefig(dirs['result'] + 'individual_results/' + subject + 'cres_50ms.png')
+
+
 plt.close('all')
+
+times = np.arange(-0.2, 4.4004, 0.004)
+
+s_good = np.array([1,2,4,5,6,7,9,10,13,14,16])-1
+
+plt.subplot(2,2,1)
+pretty_decod(all_scores[0,s_good,:,0], chance=.25, color=[1,0,0])
+pretty_decod(all_scores[0,np.array([2,6,10,14])-1,:,0], chance=.25, color=[0,1,0])
+
+
+
+plt.ylim(.22, .4)
+plt.subplot(2,2,2)
+pretty_decod(all_scores[0,:,:,0], chance=.25)
+plt.ylim(.22, .4)
+plt.subplot(2,2,3)
+pretty_decod(all_scores[0,np.array([2,6,10,14])-1,:,0], chance=.25)
+plt.ylim(.22, .4)
 
 #params = prepDataDecoding(dirs, 'cres', 'cres', 's02', 'baseline_correct')
 
@@ -132,6 +161,12 @@ params = prepDataDecoding(dirs, 'cres', 'cres', 's08', 'baseline_correct')
 calcDecoding(params, 'class', 'accuracy', 'diagonal')
 
 
+pretty_decod(all_scores[0,:,:,0], chance=.25, color=[0,0,1], times=times)
+plt.axvline(.8, color='g')  # mark stimulus onset
+plt.axvline(1.6, color='g')  # mark stimulus onset
+plt.axvline(2.4, color='g')  # mark stimulus onset
+plt.axvline(3.2, color='g')  # mark stimulus onset
+plt.ylim(.22, .3)
 
 
 
@@ -165,7 +200,7 @@ calc_dec_wTask_CR(root_dir,['addsub', 'addsub'],'s01','class')
 
 ##############################################################
 
-
+# Find peak decoding of op2
 
 
 

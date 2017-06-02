@@ -40,7 +40,7 @@ for subi = 1:length(sub_name) % loop across subjects
     [conds_idx, labels] = selecCondsMegCalc(trialinfo, conds);
 %     labels = repmat([2 3 4 5],1,5)';
     
-    % Filter data
+    % Filter trials
     TFR.powspctrm = TFR.powspctrm(conds_idx,:,:,:);
     TFR.cumtapcnt = TFR.cumtapcnt(conds_idx,:);
 
@@ -160,68 +160,3 @@ save([searchlight_result_dir 'searchlight_ft_allsub_' conds '_lda_ch' num2str(sp
 end
 
 
-
-% 
-% Allsub_samples = [];
-% for subi = 1 : length(subs) % loop across subjects
-%     load(['/neurospin/meg/meg_tmp/Semdim_Valentina_2014/data/results_TFA/COSMO/Results/sound_' subs{subi} '_lda_ch10_tbin1_frbin1.mat'])
-%     Allsub_samples = [Allsub_samples; sl_tf_ds.samples];
-% end
-
-
-%     % how many sensors
-%     chan_count = spacesphere;
-%     % how many time bins  
-%     time_radius = timesphere;
-%     % how many frequency bins  
-%     freq_radius = freqsphere;
-
-
-% 
-% %%
-% % need cosmo
-% cd /volatile/CoSMoMVPA-master/mvpa
-% cosmo_set_path
-% % set configuration
-% config=cosmo_config();
-% % need fieldtrip
-% addpath '/neurospin/meg/meg_tmp/Semdim_Valentina_2014/software4valentina/fieldtrip_latest' 
-% ft_defaults  
-% cd /neurospin/meg/meg_tmp/Semdim_Valentina_2014/data/results_TFA/COSMO/Results
-% clc;
-
-%% Searchlight 
-
-% Searchlight in space(sensors) x time x frequencies
-
-
-% define channel type of neighbors [from documentation/examples]:
-        % 'meg_combined_from_planar' = input are planar channels but the output has combined-planar channels
-        % e.g.  get neighbors with radius of .1 for
-                % planar neuromag306 channels, but with the center labels
-                % the set of combined planar channels
-                % (there are 8 channels in the .neighblabel fields, because
-                %  there are two planar channels per combined channel)
-                    %  nbrhood=cosmo_meeg_chan_neighborhood(ds,...
-                    %  'chantype','meg_combined_from_planar','radius',.1);
-
-        % 'meg_axial'   = to use the magnetometers, use 'meg_axial'
-        
-        % 'meg_planar'  = ?
-        % e.g.
-               % get neighbors at 4 neighboring sensor location for
-               % planar neuromag306 channels:
-                   % nbrhood=cosmo_meeg_chan_neighborhood(ds,...
-                   % 'chantype','meg_planar','count',4);
-
-        % 'eeg'
-        % 'all'                      = use all channel types associated with lab
-        
-        % 'all_combined'             = use 'meg_combined_from_planar' with all other channel types in ds except for 'meg_planar'.
-        % e.g.  Here the axial channels only have axial neighbors, and the planar
-                % channels only have planar neighbors. With 7 timepoints and 10
-                % neighboring channels, the meg_axial channels all have 70 axial
-                % neighbors while the meg_planar_combined channels all have
-                % 140 neighbors based on the planar channel pairs in the original dataset
-                    %  nbrhood=cosmo_meeg_chan_neighborhood(ds,...
-                    %  'chantype','all_combined','count',10);

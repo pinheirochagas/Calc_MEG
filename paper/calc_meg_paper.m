@@ -7,7 +7,7 @@ InitDirsMEGcalc
 %%  List subjects
 sub_name = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
     
-sub_name = {'s14','s15','s16','s17','s18','s19','s21','s22'};    
+sub_name = {'s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};    
 %% Behavior analysis
 behAnalysisCalcMEG(subs)
     
@@ -49,7 +49,30 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'high', 10, 1, 1,
 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 1, 5);
- 
+
+%% Stats cosmo searchlight
+% Load all data
+conds = 'corrResult';
+spacesphere = 10;
+timesphere = 1;
+freqsphere = 1;
+fq_range = 'low';
+
+                
+
+for p = 1:length(sub_name)
+    load([searchlight_result_dir 'searchlight_ft_', conds '_' sub_name{p} '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range '_freq.mat'], 'all_ft');
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
+end
+
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
+
 
 %% Vizualize searchlight
 sl.op1_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat']);
@@ -62,6 +85,7 @@ sl.op2_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_c
 sl.cres_high = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']); 
 sl.op_high = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_high_freq.mat']);
 
+<<<<<<< HEAD
 names_sl = fieldnames(sl);
 
 % Plot
@@ -74,6 +98,38 @@ for i=1:length(names_sl)
     ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
     savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
 end
+=======
+operand1_lf = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat'])
+operand2_lf = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat'])
+corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']) 
+operator = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']) 
+
+operand1_hf = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat'])
+
+>>>>>>> 3f4d88e3ea5dbf40c67e1b6c26be6db7537a87b3
+
+
+corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']) 
+
+cfg = [];
+cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
+
+
+ft_multiplotTFR(cfg, operand2_lf.searchlight_ft_allsub);
+save2pdf([searchlight_result_dir 'searchlight_op2_low_best.pdf'], gcf, 600)
+caxis([.24 .30])
+
+
+
+operand1_lf =  operand1_lf.searchlight_ft_allsub;
+
+operand1_lf.meanall = squeeze(mean(operand1_lf.powspctrm,1));
+operand1_lf.meanall(operand1_lf.meanall(:) < .25) = nan; 
+imagesc(operand1_lf.meanall)
+caxis([.24 .3])
+
+operand2_lf =  operand1_lf.searchlight_ft_allsub;
+operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
 
 
 
@@ -102,7 +158,7 @@ load SensorClassification;
 
 cfg = [];
 cfg.showlabels   = 'no';	
-cfg.layout       = 'neuromag306all.lay'; %neuromag306all.lay neuromag306mag
+cfg.layout       = 'neuromag306.lay'; %neuromag306all.lay neuromag306mag
 % cfg.channel = Grad;
 cfg.baseline = [-0.2 -0.02];
 cfg.baselinetype = 'db';
@@ -160,7 +216,6 @@ for subj = 1:length(sub_name)
 end
 
 %% Calculate stats and plot
-
 % Load all data
 for p = 1:length(sub_name)
     load([rsa_result_dir '/RSA_cosmo_jac' sub_name{p} '.mat'])

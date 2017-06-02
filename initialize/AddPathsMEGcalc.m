@@ -11,7 +11,6 @@ if strcmp(comp, 'MACI64') == 1
     addpath(fieldtrip_dir)
     ft_defaults;
     addpath(genpath('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calculia/scripts/Calc_ECoG/PedroMatlabCustom/'))
-%     addpath(genpath(fieldtrip_dir));
     % Linux
 elseif strcmp(comp, 'GLNXA64') == 1
     % Paths
@@ -20,7 +19,7 @@ elseif strcmp(comp, 'GLNXA64') == 1
     fieldtrip_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/fieldtrips/fieldtrip_testedversion/';
     addpath(fieldtrip_dir)
     ft_defaults;
-%     addpath(genpath(fieldtrip_dir));    
+    addpath(genpath('/neurospin/unicog/protocols/intracranial/Calc_ECoG/scripts/'))
 else
     error('You can only be using your macbook or a linux workstation at neurospin')
 end
