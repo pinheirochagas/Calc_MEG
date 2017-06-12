@@ -62,11 +62,8 @@ all_diagonals = []
 for c, cond in enumerate(conditions):
     for s, subject in enumerate(subjects):
         print('loading subject ' + subject)
-<<<<<<< HEAD
         fname = dirs['result'] + 'individual_results/op1_op2_cres_full/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
-=======
-        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
->>>>>>> 3f4d88e3ea5dbf40c67e1b6c26be6db7537a87b3
+        #fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         results = np.load(fname)
         # Convert to list
         results = results.tolist()

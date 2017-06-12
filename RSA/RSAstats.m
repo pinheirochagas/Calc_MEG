@@ -33,7 +33,8 @@ RSAres.timevect = timevect;
 RSAres.opt = opt;
 
 %% Save results
-save([rsa_result_dir '/group_AICA/RSA_stats_model_', RSA_model, '_cres_3456.mat'], 'RSAres');
+save([rsa_result_dir '/group_rsa_mr_AICA/RSA_stats_model_', RSA_model, 'all_DSM_MR_AICA.mat'], 'RSAres');
+% save([rsa_result_dir '/group_rsa_mr_AICA/RSA_stats_model_', RSA_model, 'all_DSM_MR_AICA.mat'], 'RSAres');
 
 end
 

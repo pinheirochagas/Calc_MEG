@@ -28,11 +28,11 @@ load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'])
 % measure_args.metric='Spearman'; %metric to use to compute MEG dsm
 % measure_args.center_data=true; %removes the mean pattern before correlating
 
-measure=@cosmo_target_dsm_corr_measure;
-measure_args=struct();
-measure_args.type='Spearman'; %correlation type between target and MEG dsms
-measure_args.metric='Spearman'; %metric to use to compute MEG dsm
-measure_args.center_data=true; %removes the mean pattern before correlating
+% measure=@cosmo_target_dsm_corr_measure;
+% measure_args=struct();
+% measure_args.type='Spearman'; %correlation type between target and MEG dsms
+% measure_args.metric='Spearman'; %metric to use to compute MEG dsm
+% measure_args.center_data=true; %removes the mean pattern before correlating
 
 % %% Run RSA
 % RSA = [];
@@ -98,11 +98,14 @@ measure_args.center_data=true; %removes the mean pattern before correlating
 % measure_args = rmfield(measure_args,'regress_dsm');
 
 %% Results model regressing out everything else
+predictors = {'operator', 'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
 disp('processing RSA of result_reg_operator');
-measure_args.glm_dsm = {RDM.operator, RDM.op1_mag, RDM.op2_mag, RDM.op1_vis, RDM.op2_vis} ;
+measure=@cosmo_target_dsm_corr_measure;
+measure_args=struct();
+measure_args.glm_dsm = {RDM.(predictors{1}), RDM.(predictors{2}), RDM.(predictors{3}), RDM.(predictors{4}), RDM.(predictors{5}), RDM.(predictors{6}), RDM.(predictors{7})} ;
 RSA.result_reg_everything = cosmo_searchlight(ds,nbrhood,measure,measure_args);
+RSA.predictors = predictors;
 % measure_args = rmfield(measure_args,'regress_dsm');
-
 
 % 
 % %% Visual models jaccart regressing out magnitude models 
@@ -118,7 +121,7 @@ RSA.result_reg_everything = cosmo_searchlight(ds,nbrhood,measure,measure_args);
 
 
 %% Save
-save([rsa_result_dir 'RSA_cosmo_cres_test_mr' subject '.mat'], 'RSA')
+save([rsa_result_dir 'RSA_cosmo_every_DSM' subject '_AICA.mat'], 'RSA')
 
 
 end

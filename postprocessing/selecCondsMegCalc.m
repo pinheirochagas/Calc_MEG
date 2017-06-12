@@ -12,6 +12,10 @@ elseif strcmp(conds, 'corrResultnoZero')
     conds_idx = (trialinfo.corrResult > 2 & trialinfo.corrResult < 7 & trialinfo.operator ~= 0 & trialinfo.operand2 ~= 0);
     labels(:,1) = trialinfo.corrResult(conds_idx);
     
+elseif strcmp(conds, 'calc')
+    conds_idx = trialinfo.operator ~= 0;
+    labels(:,1) = trialinfo.corrResult(conds_idx);    
+    
 end
     
 end

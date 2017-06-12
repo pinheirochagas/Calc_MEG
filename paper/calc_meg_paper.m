@@ -5,7 +5,7 @@ AddPathsMEGcalc
 InitDirsMEGcalc
 
 %%  List subjects
-sub_name = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
+sub_name = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
     
 sub_name = {'s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};    
 %% Behavior analysis
@@ -85,7 +85,6 @@ sl.op2_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_c
 sl.cres_high = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']); 
 sl.op_high = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_high_freq.mat']);
 
-<<<<<<< HEAD
 names_sl = fieldnames(sl);
 
 % Plot
@@ -98,15 +97,6 @@ for i=1:length(names_sl)
     ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
     savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
 end
-=======
-operand1_lf = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat'])
-operand2_lf = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat'])
-corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']) 
-operator = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']) 
-
-operand1_hf = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat'])
-
->>>>>>> 3f4d88e3ea5dbf40c67e1b6c26be6db7537a87b3
 
 
 corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']) 
@@ -266,21 +256,19 @@ RSAplot(RSAres,cdcol.scarlet)
 savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])
 
 
-%% Calculate RSA with only results 3-6
+%% Calculate RSA
 
 %% RSA cosmo
 for subj = 1:length(sub_name)
     % Load data and convert to cosmo
     load([data_dir sub_name{subj} '_calc_AICA.mat'])
     % Select trials
-    data = filterData(data, 'corrResult');
+    data = filterData(data, 'calc');
     % Convert to cosmo MVPA
     data_cosmo = calcConvertCOSMO(data);
     % Organize trialinfo and leave only the stim field
     [stim, stimfull] = cosmoOrganizeTrialInfo(data_cosmo.sa);
     % Select only the calculation trials
-    data_cosmo.samples = data_cosmo.samples(data_cosmo.sa.operator ~= 0,:);
-    stim = stim(data_cosmo.sa.operator ~= 0); 
     data_cosmo.sa = [];
     data_cosmo.sa.stim = stim';    
     % Run RSA
@@ -291,25 +279,25 @@ end
 
 % Load all data
 for p = 1:length(sub_name)
-    load([rsa_result_dir '/RSA_cosmo_cres_3456' sub_name{p} '.mat'])
-    fieldnames_RSA = fieldnames(RSA);
+    load([rsa_result_dir '/RSA_cosmo_every_DSM' sub_name{p} '_AICA.mat'])
+    fieldnames_RSA = RSA.predictors;
     for f = 1:length(fieldnames_RSA);
-        RSA_all.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+        RSA_all.(fieldnames_RSA{f}){p}=RSA.result_reg_everything;
+        RSA_all.(fieldnames_RSA{f}){p}.samples=RSA.result_reg_everything.samples(f,:);
+        RSA_all.(fieldnames_RSA{f}){p}.sa.labels=RSA.result_reg_everything.sa.labels(f);
+        RSA_all.(fieldnames_RSA{f}){p}.sa.metric=RSA.result_reg_everything.sa.metric(f);
     end
 end
 
-RSA = rmfield(RSA, {'result_mag', 'operator'})
-RSA_all = rmfield(RSA_all,  {'result_mag', 'operator'}); 
-fieldnames_RSA = fieldnames(RSA)
 % Calculate stats
-for f = 1:length(fieldnames_RSA);
+for f = 1:length(fieldnames_RSA);    
     RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
 
 %% Plot results 
 load('cdcol.mat')
 
-fieldnames_RSA_plot = {'result_mag', 'operator', 'result_mag_reg_operator'};
+fieldnames_RSA_plot = fieldnames_RSA;
 colors_plot = repmat([cdcol.turquoiseblue; cdcol.grassgreen; cdcol.orange],3,1);
 
 
@@ -317,8 +305,8 @@ figureDim = [0 0 1 1];
 figure('units','normalized','outerposition',figureDim)
 count = [1 4 7];
 for f = 1:length(fieldnames_RSA_plot);
-    load([rsa_result_dir 'group_AICA/RSA_stats_model_', fieldnames_RSA_plot{f}, '_cres_3456.mat'])
-    subplot(3,3,count(f))
+    load([rsa_result_dir 'group_rsa_mr_AICA/RSA_stats_model_', fieldnames_RSA_plot{f}, 'all_DSM_MR_AICA.mat'], 'RSAres');
+    subplot(4,3,f)
     if strcmp(fieldnames_RSA_plot{f}, 'operator') == 1
         RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.05 .35])
     else
@@ -326,7 +314,59 @@ for f = 1:length(fieldnames_RSA_plot);
     end
     title(fieldnames_RSA_plot{f}, 'interpreter', 'none')
 end
-savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_cres_3456.png'])
+savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_mr_AICA.png'])
+
+%% RSA searchlight TF cosmo
+fq_range = 'low';
+for subj = 1:length(sub_name)
+    % Load data and convert to cosmo
+    load([tfa_data_dir, sub_name{subj} '_TFA_' fq_range '.mat']);
+    TFR.trialinfo = trialinfo;
+    % Select trials
+    data = filterDataTF(TFR, 'calc');
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMOtf(data);    
+    % Organize trialinfo and leave only the stim field
+    [stim] = cosmoOrganizeTrialInfo(data_cosmo.sa);
+    % Select only the calculation trials
+    data_cosmo.sa = [];
+    data_cosmo.sa.stim = stim';    
+    % Run RSA
+    cosmoRSAsearchLight(sub_name{subj}, data_cosmo, fq_range, 10, 2, 1)    
+end
+
+% Load all data
+for p = 1:length(sub_name)   
+    load([rsa_result_dir sub_name{p} '_RSA_searchlight_all_DSM_ch10_tbin2_frbin1_low_freq.mat']);
+    fieldnames_RSA = RSA.predictors;
+    for f = 1:length(fieldnames_RSA);
+        RSA_all.(fieldnames_RSA{f}){p}=RSA.result_reg_everything;
+        RSA_all.(fieldnames_RSA{f}){p}.samples=RSA.result_reg_everything.samples(f,:);
+        RSA_all.(fieldnames_RSA{f}){p}.sa.labels=RSA.result_reg_everything.sa.labels(f);
+        RSA_all.(fieldnames_RSA{f}){p}.sa.metric=RSA.result_reg_everything.sa.metric(f);
+    end
+end
+
+% Avg data cosmo and convert to fieldtrip
+
+% Calculate stats
+for f = 1:length(fieldnames_RSA);    
+    ds_stacked_RSA = cosmo_stack(RSA_all.(fieldnames_RSA{f}));
+    ds_stacked_RSA_ft.(fieldnames_RSA{f}) = cosmo_map2meeg(ds_stacked_RSA);
+end
+
+
+ft_multiplotTFR(cfg, ds_stacked_RSA_ft.result_mag);
+
+
+
+
+    % Organize trialinfo and leave only the stim field
+    [stim, stimfull] = cosmoOrganizeTrialInfo(data_cosmo.sa);
+    % Select only the calculation trials
+    data_cosmo.sa = [];
+    data_cosmo.sa.stim = stim';    
+    % Run RSA
 
 
 %%
