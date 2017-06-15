@@ -347,9 +347,15 @@ for p = 1:length(sub_name)
     end
 end
 
-% Avg data cosmo and convert to fieldtrip
+
 
 % Calculate stats
+for f = 1:length(fieldnames_RSA);    
+    RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
+
+
+% Avg data cosmo and convert to fieldtrip
 for f = 1:length(fieldnames_RSA);    
     ds_stacked_RSA = cosmo_stack(RSA_all.(fieldnames_RSA{f}));
     ds_stacked_RSA_ft.(fieldnames_RSA{f}) = cosmo_map2meeg(ds_stacked_RSA);
