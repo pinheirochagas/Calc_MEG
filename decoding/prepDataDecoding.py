@@ -95,6 +95,15 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_test = y_train
             train_times = {'start': 1.5, 'stop': 3.2, 'length': 0.05}
             test_times = train_times
+        elif train_set == 'cres_add':
+            train_index = info_calc['operator'] == 1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 4.4}
+            test_times = train_times
         elif train_set == 'op2':
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]

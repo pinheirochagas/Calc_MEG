@@ -50,10 +50,10 @@ from mne.decoding import GeneralizationAcrossTime
 
 
 
-subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
+subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's12', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
 
-conditions = [['cres', 'cres']]
+conditions = [['cres_add', 'cres_add']]
 
 #Combine results from all conditions
 all_scores = []
@@ -62,7 +62,7 @@ all_diagonals = []
 for c, cond in enumerate(conditions):
     for s, subject in enumerate(subjects):
         print('loading subject ' + subject)
-        fname = dirs['result'] + 'individual_results/op1_op2_cres_full/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
+        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         #fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         results = np.load(fname)
         # Convert to list
@@ -91,12 +91,12 @@ sem_group_diagonal = np.zeros((len(conditions), all_diagonals.shape[2]))
 
 # Plot
 times = np.arange(-0.2, 4.4004, 0.004)
-pretty_decod(all_scores[0,:,:,0], chance=.25, color=[0,0,1], times=times)
+pretty_decod(all_scores[0,:,:,0], chance=.14, color=[0,0,1], times=times)
 plt.axvline(.8, color='k')  # mark stimulus onset
 plt.axvline(1.6, color='k')  # mark stimulus onset
 plt.axvline(2.4, color='k')  # mark stimulus onset
 plt.axvline(3.2, color='k')  # mark stimulus onset
-plt.ylim(.22, .28)
+plt.ylim(.09, .2)
 plt.savefig(dirs['result'] + 'individual_results/figures/' + 'cres_full.png')
 
 

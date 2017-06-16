@@ -1,7 +1,8 @@
 function trialinfo = addAccuracy(subject)
 
 %% Paths
-addPathInitDirsMEGcalc
+AddPathsMEGcalc
+InitDirsMEGcalc
 
 %% Load response key
 load('response_key.mat')

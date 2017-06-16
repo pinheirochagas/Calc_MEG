@@ -1,9 +1,9 @@
-function bstImportRecordings(subjects)
+function bstImportRecordings(subjects, cond_lab, op_lab)
 %% Import data from fieldtrip to brainstorm for source localization
 
 
 %% Initialize directories
-InitializeDirsMEGcalc
+InitDirsMEGcalc
 
 for s = 1:length(subjects)
     %% Import MEG recordigns
@@ -23,9 +23,9 @@ for s = 1:length(subjects)
     % acc = {'all', 'correct', 'incorrect'};
     
     %% Define conditions to add using an automatic way
-    cond_lab = {'add', 'sub', 'addsub'};
-    op_lab = {'opall', 'op1_3', 'op1_4', 'op1_5', 'op1_6', 'op2_0', 'op2_1', 'op2_2', 'op2_3', 'cRes_3', 'cRes_4', 'cRes_5', 'cRes_6'};
-    
+%     cond_lab = {'add', 'sub', 'addsub'};
+%     op_lab = {'opall', 'op1_3', 'op1_4', 'op1_5', 'op1_6', 'op2_0', 'op2_1', 'op2_2', 'op2_3', 'cRes_3', 'cRes_4', 'cRes_5', 'cRes_6'};
+%     
     %% For each condition, save trial data following brainstorm's structure
     for condi = 1:length(cond_lab)
         for opi = 1:length(op_lab)

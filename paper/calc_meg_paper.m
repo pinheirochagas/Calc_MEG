@@ -353,7 +353,7 @@ end
 
 
 % Calculate stats
-for f = 1:length(fieldnames_RSA);    
+for f = 2:length(fieldnames_RSA);    
     RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
 

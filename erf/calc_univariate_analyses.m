@@ -22,7 +22,7 @@ stats_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/erf/stats/';
 
 %% Fildtrip stats
 lat = [-.5 4.5];
-probthr=0.2;
+% probthr=0.2;
 
 %% Operation
 lat = [.8 1.2]; 
