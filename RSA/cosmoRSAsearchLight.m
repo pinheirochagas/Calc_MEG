@@ -22,13 +22,26 @@ ds.sa.chunks = (1:length(ds.sa.stim))'; % treats each trial as being independent
 
 %% Define searchlight
 chan_type='meg_combined_from_planar';
-chan_nbrhood=cosmo_meeg_chan_neighborhood(ds, 'count', spacesphere, 'chantype', chan_type);
 freq_nbrhood=cosmo_interval_neighborhood(ds,'freq', 'radius',timesphere);
 time_nbrhood=cosmo_interval_neighborhood(ds,'time', 'radius',freqsphere);
 
-% Cross neighborhoods for chan-time-freq searchlight
-display('Cross neighborhoods for chan-time-freq searchlight');
-nbrhood=cosmo_cross_neighborhood(ds,{chan_nbrhood, freq_nbrhood, time_nbrhood});
+if isstr(spacesphere) == 1
+    nbrhood=cosmo_cross_neighborhood(ds,{freq_nbrhood, time_nbrhood});
+%     % Select channels of interest
+%     [chantypes,~]=cosmo_meeg_chantype(ds);
+%     % Select MEG planar combined channel
+%     chan_type_of_interest='meg_planar';
+%     chan_indices=find(cosmo_match(chantypes, chan_type_of_interest));
+%     % define channel mask
+%     chan_msk=cosmo_match(ds.fa.chan,chan_indices);
+%     % slice the dataset
+%     ds_chan=cosmo_slice(ds,chan_msk,2);
+%     ds=cosmo_dim_prune(ds_chan); % to really remove channels
+else
+    chan_nbrhood=cosmo_meeg_chan_neighborhood(ds, 'count', spacesphere, 'chantype', chan_type);
+    nbrhood=cosmo_cross_neighborhood(ds,{chan_nbrhood, freq_nbrhood, time_nbrhood});
+end
+
 
 %% Print some info
 nbrhood_nfeatures=cellfun(@numel,nbrhood.neighbors);
@@ -58,6 +71,5 @@ display(['RSA searchlight in subject ' subject ' completed in ' num2str(time_ela
 %% Save
 save([rsa_result_dir subject '_RSA_searchlight_all_DSM' '_ch' num2str(spacesphere)...
     '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '_' fq_range '_freq.mat'], 'RSA');
-    
 
 end

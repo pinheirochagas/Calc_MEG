@@ -1,31 +1,31 @@
-
-clear all
-
-% matlab-R2014a 
+%% Preprocessing pipeline Calc MEG
 
 %% Paths to be added
 % addpath(genpath('/neurospin/meg/meg_tmp/WMP_Ojeda_2013/fieldtrip/'))
-addpath('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/preproc_seb')
-addpath('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/')
+% Get computer
+comp = computer;
+% MAC + Hard Drive
+if strcmp(comp, 'MACI64') == 1
+    root_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/';
+% Linux
+elseif strcmp(comp, 'GLNXA64') == 1
+    root_dir = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/';
+else
+    error('You can only be using your macbook or a linux workstation at neurospin')
+end
 
-% listdir = dir('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/')
-% for i=1:length(listdir)
-%     listsub{i} = listdir(i).name;
-% end
-% listsub = listsub(3:end);
-% 
-% % for allsub=13:length(listsub)
-% % clearvars -except trialsexcAll allsub listsub
+addpath([root_dir 'scripts/preproc_seb'])
+addpath([root_dir 'data/mat/'])
+
 
 %% Subject informations
 par = [];
-par.Sub_Num         = 's11';
-% par.Sub_Num         = listsub{allsub};
+par.Sub_Num         = 's13';
 par.srate = 1000; % sampling frequency in Hz
-par.pathraw         = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/raw/'; % Raw data 
-par.pathmat         = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/mat/'; % path for matlab files
-par.pathsss         = ['/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/sss/' par.Sub_Num '/']  ; % SSS Data 
-par.pathbh          = ['/neurospin/meg/meg_tmp/Calculation_Pedro_2014/data/behavior/results/Calc/',par.Sub_Num, '/']; % Behavioral data 
+par.pathraw         = [root_dir 'data/raw/']; % Raw data 
+par.pathmat         = [root_dir 'data/mat/']; % path for matlab files
+par.pathsss         = [root_dir 'data/sss/' par.Sub_Num '/']  ; % SSS Data 
+par.pathbh          = [root_dir 'data/behavior/results/Calc/',par.Sub_Num, '/']; % Behavioral data 
 
 % Name files for each run
 for i = 1:10
@@ -61,9 +61,7 @@ savename = [par.Sub_Num]; % Filename to save
 %     wmp_runMaxfilter(par, [par.pathraw input_file], [par.pathsss output_file]);
 % end
 
-
-
-%% epoch the data
+%% Epoch the data
 for i = 1:1:length(par.sssfiles)
     [par, data_cont] = calc_preproc_continuous(par, [par.pathsss par.sssfiles(i).name]); % correct bad EEG chan on continuous data and rereference on the average.    
     [epoch{i}, ECGEOG{i}, alltrigNew{i}] = calc_definetrial(par, [par.pathsss par.sssfiles(i).name], [par.pathbh par.bhfiles(i).name], data_cont); % epoch the data
@@ -75,20 +73,9 @@ for i=1:length(epoch)
     trialsexc(i) = 43-length(epoch{i}.trial);   
 end
 display([par.Sub_Num ': Number of excluded trials per run: ',num2str(trialsexc), ' - total: ' num2str(sum(trialsexc))])
-% end
 
 
-%%
-% save([par.pathmat savename,'_AE.mat'], '-v7.3') 
-
-% %% process triggers for each block
-% % To correct the triggers potentially excluding spurious trials or events
-% for i = 1:length(epoch)
-%     [trialinfo(i)] = processTriggers( epoch{i}.triggers.trl,epoch{i}.triggers.alltrig);
-% end
-
-
-% Concatenate the runs MEG
+%% Concatenate the runs MEG
 data = []; 
 cfg=[]; 
 data = ft_appenddata(cfg, epoch{:}); % concatenate runs
@@ -126,28 +113,11 @@ dataECGEOG = calc_downsample(dataECGEOG);
 data.ECGEOG = dataECGEOG.trial;
 
 save([par.pathmat par.Sub_Num,'_calc_BICA_downsample.mat'], 'data', 'par')   % Save the structure in MAT file
+disp(['Saving Subject ' par.Sub_Num ': Done.']);
 
 %% Run ICA
 [par.artifact.rejcomp_run data] = wmp_decomposition(par, data); % decompose data and reject component.
 save([par.pathmat par.Sub_Num,'_calc_AICA.mat'], 'data', 'par')   % Save the structure in MAT file
-
-
-% concatenate and reject bad trials from additional data
-% data.triggers.trl = cat(1,epoch{1}.triggers.trl, epoch{2}.triggers.trl);
-% data.triggers.alltrig = cat(1,epoch{1}.triggers.alltrig, epoch{2}.triggers.alltrig);
-
-% %% remove trials with incomplete trigger information
-% invalidTrials = isnan(data.trialinfo.condition.target);
-% data.trial(invalidTrials) = [];
-% data.time(invalidTrials) = [];
-% data.ECGEOG(invalidTrials) = [];
-% data.sampleinfo(invalidTrials) = [];
-% data.trialinfo.condition.target(invalidTrials) = [];
-% data.trialinfo.condition.distractor(invalidTrials) = [];
-% data.trialinfo.condition.delay(invalidTrials) = [];
-% data.trialinfo.behavior.visibility(invalidTrials) = [];
-% data.trialinfo.behavior.position(invalidTrials) = [];
-% save([par.pathmat savename,'_BF.mat'])   % Save the structure in MAT file
 
 
 %% Low-pass Filter 
@@ -165,197 +135,4 @@ data.ECGEOG = ECGEOG;
 % Save data
 data.par = par;
 save([par.pathmat par.Sub_Num,'_calc.mat'], 'data')   % Save the structure in MAT file
-disp(['Processing Subject ' par.Sub_Num ': Done.']);
-%%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%% END! 
-
-%% Average , save original and average
-cfg             = [];
-data.Avg     = ft_timelockanalysis(cfg, data);
-data.par = par;
-
-% average EOG data
-for i=1:length(data.ECGEOG)
-eog1(i,:)=data.ECGEOG{i}(1,:);
-eog2(i,:)=data.ECGEOG{i}(2,:);
-end
-data.eog2Avg = mean(eog2);
-data.eog1Avg = mean(eog1);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%% display
-% load([par.pathmat savename,'.mat']);
-
-load SensorClassification
-% for chanselec = 3:
-%     switch chanselec
-%         case 1
-%             sensor = Grad2_1;
-%             sensorlabel = 'grad1';
-%             layout = 'neuromag306all.lay';
-%         case 2
-%             sensor = Grad2_2;
-%             sensorlabel = 'grad2';
-%             layout = 'neuromag306all.lay';
-%         case 3
-            sensor = Mag2;
-            sensorlabel = 'mag';
-            layout = 'neuromag306all.lay';
-%         case 4
-%             sensor = EEG;
-%             sensorlabel = 'eeg';
-%             layout='eeg_64_NM20884N.lay';
-%     end
-    figure
-    cfg = [];
-    cfg.showlabels = 'yes';
-    cfg.interactive = 'no';
-    cfg.xlim = [-0.5 2.5];
-    cfg.fontsize = 12;
-   cfg.channel = sensor;
-    cfg.layout = layout;
-    % cfg.layout='eeg_64_NM20884N.lay';
-    % cfg.baseline = [-0.2 0];
-    % cfg.trials = tmp1.Subject.response == 64;
-%         ft_multiplotER(cfg, data.Avg);
-    ft_multiplotER(cfg, grpdata.both.unseen{1},grpdata.both.seen{1}, grpdata.both.blank{1});
-%     ft_multiplotER(cfg, grpavg.both.unseen,grpavg.both.seen, grpavg.both.blank);
-    
-    %%
-    figure
-    for i = 1:5
-    gfp_seen = eeg_gfp(grpdata.wm.seen{i}.avg(1:306,:),0);
-    gfp_unseen = eeg_gfp(grpdata.wm.unseen{i}.avg(1:306,:),0);
-    subplot(2,3,i);
-    plot(grpavg.p.seen.time, gfp_seen, 'r'); hold;
-    plot(grpavg.p.seen.time, gfp_unseen, 'b');
-    end
-    
-    figure;
-    gfp_seen = eeg_gfp(grpavg.seen.avg(1:306,:),0);
-    gfp_unseen = eeg_gfp(grpavg.unseen.avg(1:306,:),0);
-     plot(grpavg.p.seen.time, gfp_seen, 'r'); hold;
-    plot(grpavg.p.seen.time, gfp_unseen, 'b');
-% end
-%%
-figure;
-plot(data.time{1},data.eog1Avg);
-figure;
-plot(data.time{1},data.eog2Avg);
-
-figure
-channum = find(strcmp('EEG048', data.label));
-plot(data.time{1},data.Avg.avg(channum,:));
-
-%% group average
-% first with all data
-path = '/neurospin/meg/meg_tmp/WMP_Ojeda_2013/data/cleansubjects/';
-subnips = {'ad120287','sa130042','sb120316','ro130031',};%'el130086'
-for i = 1:1%length(subnips)
-    load([path subnips{i} '.mat']);
-%     grpdata.all{i} = data.Avg;
-    selec = splitConditions(data);
-%     grpdata.p.all{i}= selec.p.all.Avg;
-%     grpdata.p.unseen{i} = selec.p.unseen.Avg;
-%     grpdata.p.seen{i} = selec.p.seen.Avg;
-%     grpdata.p.difference{i}= selec.p.difference;
-%     grpdata.p.blank{i} = selec.p.blank.Avg;
-%     
-%     grpdata.wm.all{i} = selec.wm.all.Avg;
-%     grpdata.wm.unseen{i} = selec.wm.unseen.Avg;   
-%     grpdata.wm.seen{i} = selec.wm.seen.Avg; 
-%     grpdata.wm.difference{i} = selec.wm.difference;
-%     grpdata.wm.blank{i} = selec.wm.blank.Avg;
-%     
-%     grpdata.both.seen{i} = selec.both.seen.Avg;
-%     grpdata.both.unseen{i} = selec.both.unseen.Avg;
-%     grpdata.both.difference{i} = selec.both.difference;
-%     grpdata.both.blank{i} = selec.both.blank.Avg;
-%     
-    
-    
-%     clear data selec
-    disp(num2str(i));
-end
-cfg = [];
-cfg.channel = '*';
-% cfg.keepindividual = 'yes';
-% grpavg.all = ft_timelockgrandaverage(cfg, grpdata.all{:});
-grpavg.p.all = ft_timelockgrandaverage(cfg, grpdata.p.all{:});
-grpavg.p.unseen = ft_timelockgrandaverage(cfg, grpdata.p.unseen{:});
-grpavg.p.seen = ft_timelockgrandaverage(cfg, grpdata.p.seen{:});
-grpavg.p.difference = ft_timelockgrandaverage(cfg, grpdata.p.difference{:});
-grpavg.p.blank = ft_timelockgrandaverage(cfg, grpdata.p.blank{:});
-
-grpavg.wm.all = ft_timelockgrandaverage(cfg, grpdata.wm.all{:});
-grpavg.wm.unseen = ft_timelockgrandaverage(cfg, grpdata.wm.unseen{:});
-grpavg.wm.seen = ft_timelockgrandaverage(cfg, grpdata.wm.seen{:});
-grpavg.wm.difference = ft_timelockgrandaverage(cfg, grpdata.wm.difference{:});
-grpavg.wm.blank = ft_timelockgrandaverage(cfg, grpdata.wm.blank{:});
-
-grpavg.both.unseen =  ft_timelockgrandaverage(cfg, grpdata.both.unseen{:});
-grpavg.both.seen =  ft_timelockgrandaverage(cfg, grpdata.both.seen{:});
-grpavg.both.difference = ft_timelockgrandaverage(cfg, grpdata.both.difference{:});
-grpavg.both.blank = ft_timelockgrandaverage(cfg,grpdata.both.blank{:});
-
-
-%% plot each subject
-path = '/neurospin/meg/meg_tmp/WMP_Ojeda_2013/data/cleansubjects/';
-subnips = {'ad120287','sa130042','sb120316','ro130031',};%'el130086'
-for i = 1:1%length(subnips)
-    load([path subnips{i} '.mat']);
-    selec = splitConditions(data);
-    coursetopos(selec,subnips{i})
-    clear data selec
-    disp(num2str(i));
-end
-
-
-%%  plot group average 
-coursetopos(grpavg,'group')
-
-
-%% other
-cfg = [];
-cfg.trials = 1;
-fakeepoch = ft_preprocessing(cfg, epoch{1});
-
-cfg = [];
-
-enlarged = ft_appenddata(cfg,fakeepoch,epoch{6})
+disp(['Preprocessing Subject ' par.Sub_Num ': Done.']);

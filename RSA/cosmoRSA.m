@@ -1,4 +1,7 @@
-function cosmoRSA(subject, ds)
+function cosmoRSA(subject, ds, timesphere)
+
+%% HAVE TO SELECT CHANNEL TYPES, because MAG AND GRAD are not in the same scale! 
+% Or maybe not an issue for RSA? 
 
 % InitDirsMEGcalc
 InitDirsMEGcalc
@@ -15,7 +18,7 @@ cosmo_disp(ds);
 % Define targets and chunks
 ds.sa.targets = (1:length(ds.sa.stim))'; % treats each trial as one 'condition'
 ds.sa.chunks = (1:length(ds.sa.stim))'; % treats each trial as being independent
-nbrhood=cosmo_interval_neighborhood(ds,'time','radius',10); % to calculate the correlations it looks at each timepoint separately
+nbrhood=cosmo_interval_neighborhood(ds,'time','radius',timesphere); % to calculate the correlations it looks at each timepoint separately
 
 %% Run Magnitude Model
 % set measure
@@ -121,7 +124,7 @@ RSA.predictors = predictors;
 
 
 %% Save
-save([rsa_result_dir 'RSA_cosmo_every_DSM' subject '_AICA.mat'], 'RSA')
+save([rsa_result_dir 'RSA_all_DSM_' 'tbin' num2str(timesphere) '_' subject '.mat'], 'RSA')
 
-
+c
 end

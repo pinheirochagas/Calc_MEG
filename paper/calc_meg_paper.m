@@ -8,13 +8,13 @@ cd(cosmo_mvpa_dir)
 cosmo_set_path()
 
 %%  List subjects
-sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
+% sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
+sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
     
-sub_name = {'s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};    
 %% Behavior analysis
 behAnalysisCalcMEG(subs)
     
-%% ERF
+%% ERF - to complete
     % Load all data from all subjects (needs at least 30 gb free in disk space)
 for subj = 1:length(sub_name)
     load([data_dir sub_name{subj} '_calc.mat'])
@@ -38,7 +38,25 @@ for i = length(sub_name);
     clear('data', 'TFR', 'trialinfo')
 end
 
-%% Cosmo time-frequency-space searchlight 
+%% Explore TF analysis
+% plot parameters
+
+load([tfa_data_dir,'s08_TFA_low.mat'])
+load([tfa_data_dir,'s08_TFA_high.mat'])
+
+load SensorClassification;
+
+cfg = [];
+cfg.showlabels   = 'no';	
+cfg.layout       = 'neuromag306.lay'; %neuromag306all.lay neuromag306mag
+% cfg.channel = Grad;
+cfg.baseline = [-0.2 -0.02];
+cfg.baselinetype = 'db';
+
+TFRlow = TFR
+TFRhigh = TFR
+
+%% Cosmo time-frequency-space searchlight LDA
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'low', 10, 1, 1, 5);
@@ -52,29 +70,6 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'high', 10, 1, 1,
 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 1, 5);
-
-%% Stats cosmo searchlight
-% Load all data
-conds = 'corrResult';
-spacesphere = 10;
-timesphere = 1;
-freqsphere = 1;
-fq_range = 'low';
-
-                
-
-for p = 1:length(sub_name)
-    load([searchlight_result_dir 'searchlight_ft_', conds '_' sub_name{p} '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range '_freq.mat'], 'all_ft');
-    fieldnames_RSA = fieldnames(RSA);
-    for f = 1:length(fieldnames_RSA);
-        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
-    end
-end
-
-% Calculate stats
-for f = 1:length(fieldnames_RSA);
-    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
-end
 
 
 %% Vizualize searchlight
@@ -98,20 +93,19 @@ figureDim = [0 0 0.7 1];
 for i=1:length(names_sl)
     figure('units','normalized','outerposition',figureDim)
     ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
+    colormap(flip(cbrewer2('RdBu')))
     savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
 end
 
-
+%% Some individual plots
 corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']) 
 
 cfg = [];
 cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
 
-
 ft_multiplotTFR(cfg, operand2_lf.searchlight_ft_allsub);
 save2pdf([searchlight_result_dir 'searchlight_op2_low_best.pdf'], gcf, 600)
 caxis([.24 .30])
-
 
 
 operand1_lf =  operand1_lf.searchlight_ft_allsub;
@@ -141,32 +135,11 @@ xlabel('Time (sec.)')
 savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{1} '_bestchan2.png'])
 
 
-%% Explore TF analysis
-% plot parameters
-
-load([tfa_data_dir,'s08_TFA_low.mat'])
-load([tfa_data_dir,'s08_TFA_high.mat'])
-
-load SensorClassification;
-
-cfg = [];
-cfg.showlabels   = 'no';	
-cfg.layout       = 'neuromag306.lay'; %neuromag306all.lay neuromag306mag
-% cfg.channel = Grad;
-cfg.baseline = [-0.2 -0.02];
-cfg.baselinetype = 'db';
-
-TFRlow = TFR
-TFRhigh = TFR
-
-
-
-%% Cosmo simple decoding
+%% Cosmo simple decoding - to be completed
     % Load all data from all subjects (needs at least 30 gb free in disk space)
 for subj = 2:length(sub_name)
     load([data_dir sub_name{subj} '_calc_BR.mat'])
     % z-score each channel for later PCA
-    
     
     % Convert to cosmo MVPA
     data_cosmo = calcConvertCOSMO(data);
@@ -191,7 +164,8 @@ for subj = 1:length(sub_name)
     dt_cosmo_pca = PCAforcosmo(data_cosmo);
 end
 
-%% RSA cosmo
+
+%% RSA cosmo - multiple regression
 for subj = 1:length(sub_name)
     % Load data and convert to cosmo
     load([data_dir sub_name{subj} '_calc_AICA.mat'])     
@@ -279,10 +253,9 @@ for subj = 1:length(sub_name)
 end
 
 
-
 % Load all data
 for p = 1:length(sub_name)
-    load([rsa_result_dir '/RSA_cosmo_every_DSM' sub_name{p} '_AICA.mat'])
+    load([rsa_result_dir 'RSA_all_DSM_' sub_name{p} '.mat'])
     fieldnames_RSA = RSA.predictors;
     for f = 1:length(fieldnames_RSA);
         RSA_all.(fieldnames_RSA{f}){p}=RSA.result_reg_everything;
@@ -297,6 +270,31 @@ for f = 1:length(fieldnames_RSA);
     RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
 
+%% Plot single subjects
+for i=1:length(sub_name)
+    hold on
+    subplot(6,3,i)
+    plot(data.time{1},RSA_all.result_mag{i}.samples)
+    title(sub_name{i})
+end
+
+%% Avg data
+for f = 1:length(fieldnames_RSA);    
+    ds_stacked_RSA.(fieldnames_RSA{f}) = cosmo_stack(RSA_all.(fieldnames_RSA{f}));
+    ds_stacked_RSA_ft.(fieldnames_RSA{f}) = cosmo_map2meeg(ds_stacked_RSA.(fieldnames_RSA{f}));
+end
+% add time 
+plot(data.time{1},mean(ds_stacked_RSA.op2_mag.samples,1))
+
+%% Plot single subjects
+for i=1:length(ds_stacked_RSA_ft)
+    subplot(6,3,i)
+    plot(data.time{1},ds_stacked_RSA_ft.result_mag)
+    title(sub_name{i})
+end
+    
+
+
 %% Plot results 
 load('cdcol.mat')
 
@@ -308,16 +306,16 @@ figureDim = [0 0 1 1];
 figure('units','normalized','outerposition',figureDim)
 count = [1 4 7];
 for f = 1:length(fieldnames_RSA_plot);
-    load([rsa_result_dir 'group_rsa_mr_AICA/RSA_stats_model_', fieldnames_RSA_plot{f}, 'all_DSM_MR_AICA.mat'], 'RSAres');
+    load([rsa_result_dir 'group_rsa_mr/RSA_stats_model_', fieldnames_RSA_plot{f}, 'all_DSM_MR.mat'], 'RSAres');
     subplot(4,3,f)
     if strcmp(fieldnames_RSA_plot{f}, 'operator') == 1
-        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.05 .35])
+        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.08 .35])
     else
-        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.05 .21])
+        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.08 .21])
     end
     title(fieldnames_RSA_plot{f}, 'interpreter', 'none')
 end
-savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_mr_AICA.png'])
+savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_mr.png'])
 
 %% RSA searchlight TF cosmo
 fq_range = 'low';
@@ -335,7 +333,8 @@ for subj = 1:length(sub_name)
     data_cosmo.sa = [];
     data_cosmo.sa.stim = stim';    
     % Run RSA
-    cosmoRSAsearchLight(sub_name{subj}, data_cosmo, fq_range, 10, 2, 1)    
+    cosmoRSAsearchLight(sub_name{subj}, data_cosmo, fq_range, 'all', 2, 1)
+%     cosmoRSAsearchLight(sub_name{subj}, data_cosmo, fq_range, 10, 2, 1)    
 end
 
 % Load all data
@@ -351,22 +350,60 @@ for p = 1:length(sub_name)
 end
 
 
-
-% Calculate stats
+%% Calculate stats - to be completed
 for f = 2:length(fieldnames_RSA);    
     RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
 
 
-% Avg data cosmo and convert to fieldtrip
+%% Avg data cosmo and convert to fieldtrip
 for f = 1:length(fieldnames_RSA);    
     ds_stacked_RSA = cosmo_stack(RSA_all.(fieldnames_RSA{f}));
     ds_stacked_RSA_ft.(fieldnames_RSA{f}) = cosmo_map2meeg(ds_stacked_RSA);
 end
 
+% Plot
+cfg = [];
+cfg.layout = 'neuromag306cmb.lay';
+cfg.showoutline = 'yes';
+cfg.box = 'yes';
+cfg.showlabels = 'no';
+cfg.colorbar = 'yes';
 
-ft_multiplotTFR(cfg, ds_stacked_RSA_ft.result_mag);
+figureDim = [0 0 0.7 1];
+for i=1:length(fieldnames_RSA)
+    figure('units','normalized','outerposition',figureDim)
+    data_tmp = ds_stacked_RSA_ft.(fieldnames_RSA{i});
+    ft_multiplotTFR(cfg, data_tmp);
+    colormap(flip(cbrewer2('RdBu')))
+    caxis([-prctile(data_tmp.powspctrm(:),95) prctile(data_tmp.powspctrm(:),95)])
+    savePNG(gcf,200, [searchlight_result_dir 'figures/RSA_all_DSM_mr' fieldnames_RSA{i} '.png'])
+end
 
+%% Manual plotting selecting channels
+i = 3;
+figureDim = [0 0 .6 .7];
+data_tmp = ds_stacked_RSA_ft.(fieldnames_RSA{i});
+ft_multiplotTFR(cfg, data_tmp);
+colormap(flip(cbrewer2('RdBu')))
+caxis([-0.08 .08])
+title('')
+set(gca, 'FontSize', 30)
+set(gcf, 'units','normalized','outerposition',figureDim)
+LineWidthMark = 2; LineCol = [.3 .3 .3]; 
+line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([3.6 3.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+ylabel('Frequency (Hz)')
+xlabel('Time (s)')
+savePNG(gcf,200, [searchlight_result_dir 'figures/RSA_all_DSM_mr_' fieldnames_RSA{i} '_best_channels.png'])
+
+
+
+%% END
 
 
 
@@ -455,3 +492,25 @@ figureDim = [0 0 1 .45];
 figure('units','normalized','outerposition',figureDim)
 
 
+%% Stats cosmo searchlight
+% Load all data
+conds = 'corrResult';
+spacesphere = 10;
+timesphere = 1;
+freqsphere = 1;
+fq_range = 'low';
+
+                
+
+for p = 1:length(sub_name)
+    load([searchlight_result_dir 'searchlight_ft_', conds '_' sub_name{p} '_lda_ch' num2str(spacesphere) '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere), '_' fq_range '_freq.mat'], 'all_ft');
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all_jac.(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
+end
+
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all_jac.(fieldnames_RSA{f}), fieldnames_RSA{f})
+end
