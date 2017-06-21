@@ -317,6 +317,29 @@ for f = 1:length(fieldnames_RSA_plot);
 end
 savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_mr.png'])
 
+
+operator_gavg.avgERFallGavg.addsub.operator.operator1
+
+
+cfg = [];
+cfg.comment = 'xlim';
+cfg.commentpos = 'title';
+cfg.xlim = [0 .2];                
+cfg.ylim = [15 20];                  
+cfg.zlim = [0.6 1.4]; % the value 1 means 100%, so this ranges from 60% to 140% of the baseline power
+cfg.layout = 'neuromag306planar.lay';
+figure; ft_topoplotTFR(cfg,operator_gavg.avgERFallGavg.addsub.operator.operator1)
+; colorbar
+
+
+
+
+labela = RSAres_ft.label
+labelb = operator_gavg.avgERFallGavg.addsub.operator.operator1.label
+
+
+
+
 %% RSA searchlight TF cosmo
 fq_range = 'low';
 for subj = 1:length(sub_name)
@@ -339,7 +362,7 @@ end
 
 % Load all data
 for p = 1:length(sub_name)   
-    load([rsa_result_dir sub_name{p} '_RSA_searchlight_all_DSM_ch10_tbin2_frbin1_low_freq.mat']);
+    load([rsa_result_dir sub_name{p} '_RSA_searchlight_all_DSM_chall_tbin2_frbin1_low_freq.mat']);
     fieldnames_RSA = RSA.predictors;
     for f = 1:length(fieldnames_RSA);
         RSA_all.(fieldnames_RSA{f}){p}=RSA.result_reg_everything;
@@ -354,6 +377,12 @@ end
 for f = 2:length(fieldnames_RSA);    
     RSAstats(RSA_all.(fieldnames_RSA{f}), fieldnames_RSA{f})
 end
+
+%% Convert to fieldtrip
+RSAres_ft = cosmo_map2meeg(RSAres.ds_stacked_RSA);
+ft_multiplotTFR(cfg, RSAres_ft);
+
+reshape(RSAres.sig_tp_RSA)
 
 
 %% Avg data cosmo and convert to fieldtrip
@@ -379,6 +408,8 @@ for i=1:length(fieldnames_RSA)
     caxis([-prctile(data_tmp.powspctrm(:),95) prctile(data_tmp.powspctrm(:),95)])
     savePNG(gcf,200, [searchlight_result_dir 'figures/RSA_all_DSM_mr' fieldnames_RSA{i} '.png'])
 end
+
+ft_singleplotER(cfg, data_tmp)
 
 %% Manual plotting selecting channels
 i = 3;
