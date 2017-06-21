@@ -93,7 +93,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.5, 'stop': 3.2, 'length': 0.05}
+            train_times = {'start': 1.5, 'stop': 2.4, 'length': 0.1}
             test_times = train_times
         elif train_set == 'cres_add':
             train_index = info_calc['operator'] == 1

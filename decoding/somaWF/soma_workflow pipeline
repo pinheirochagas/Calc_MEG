@@ -2,16 +2,16 @@
 # 1. if server is reinitialized and then the python command will gone
 # 2. to interact with current jobs using some command lines 
 
-ssh pp242904@gabriel.intra.cea.fr
-pnrp/2bm
+ssh pcpinhei@gabriel.intra.cea.fr
+Password01
 
-python -m soma_workflow.start_database_server DSV_cluster_pp242904
+python -m soma_workflow.start_database_server DSV_cluster_pcpinhei
 ctrl + Z
 bg
 
 This line indicates that cluster is running in the background
-pp242904 15354  0.6  0.0 163496 10604 pts/41   S    11:43   0:00 
-python -m soma_workflow.start_database_server DSV_cluster_pp242904
+pcpinhei 15354  0.6  0.0 163496 10604 pts/41   S    11:43   0:00 
+python -m soma_workflow.start_database_server DSV_cluster_pcpinhei
 
 
 ### On the local side
@@ -50,17 +50,17 @@ import the jobs (jobs_list.somawf) and submit
 ## OTHER STUFF
 
 
-pp242904              <--- identifiant
-pnrp/2bm                <--- passwd (A changer dès que possible, SVP) 
+pcpinhei              <--- identifiant
+Password01            <--- passwd 
 
 
-touch /home/pp242904/.soma-workflow.cfg
+touch /home/pcpinhei/.soma-workflow.cfg
 
 
 ssh pp242904@gabriel.intra.cea.fr
 
 
-touch /home/pp242904/.soma-workflow.cfg
+touch /home/pcpinhei/.soma-workflow.cfg
 
 
 
@@ -69,25 +69,25 @@ touch /home/pp242904/.soma-workflow.cfg
 
 
 
-mkdir /home/pp242904/soma-workflow
-mkdir /home/pp242904/soma-workflow/logs
-mkdir /home/pp242904/soma-workflow/soma-workflow
-mkdir /home/pp242904/soma-workflow/transfered-files
+mkdir /home/pcpinhei/soma-workflow
+mkdir /home/pcpinhei/soma-workflow/logs
+mkdir /home/pcpinhei/soma-workflow/soma-workflow
+mkdir /home/pcpinhei/soma-workflow/transfered-files
 
 
 
-ssh  -X pp242904@gabriel.intra.cea.fr
+ssh  -X pcpinhei@gabriel.intra.cea.fr
 
 
 
 
-python -m soma_workflow.start_database_server DSV_cluster_pp242904 soma_workflow_gui 
-ps -aux | grep pp242904 
+python -m soma_workflow.start_database_server DSV_cluster_pcpinhei soma_workflow_gui 
+ps -aux | grep pcpinhei 
 
 
 
 This line indicates that cluster is running in the background
-pp242904 15354  0.6  0.0 163496 10604 pts/41   S    11:43   0:00 python -m soma_workflow.start_database_server DSV_cluster_pp242904
+pcpinhei 15354  0.6  0.0 163496 10604 pts/41   S    11:43   0:00 python -m soma_workflow.start_database_server DSV_cluster_pcpinhei
 
 
 

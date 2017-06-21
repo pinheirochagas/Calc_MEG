@@ -4,17 +4,8 @@
     <list default="true" id="b5d51ef7-6129-45d3-92f7-77465b79927c" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/.~lock.calc_WorkFlow_withinTask_class#" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/behavior/addAccuracy.m" afterPath="$PROJECT_DIR$/behavior/addAccuracy.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bst_scripts/source_z_sm_group.m" afterPath="$PROJECT_DIR$/bst_scripts/source_z_sm_group.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" afterPath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/prepDataDecoding.py" afterPath="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/erf/calc_univariate_analyses.m" afterPath="$PROJECT_DIR$/erf/calc_univariate_analyses.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/initialize/InitDirsMEGcalc.m" afterPath="$PROJECT_DIR$/initialize/InitDirsMEGcalc.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/software4valentina/organize/pipeline_tmp/fp_statdepregr.m" afterPath="$PROJECT_DIR$/software4valentina/organize/pipeline_tmp/fp_statdepregr.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sources/bstImportRecordings.m" afterPath="$PROJECT_DIR$/sources/bstImportRecordings.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sources/bst_sources_pipeline.m" afterPath="$PROJECT_DIR$/sources/bst_sources_pipeline.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/soma_workflow pipeline" afterPath="$PROJECT_DIR$/decoding/somaWF/soma_workflow pipeline" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="91" column="6" lean-forward="true" selection-start-line="91" selection-start-column="6" selection-end-line="91" selection-end-column="6" />
+            <state relative-caret-position="860">
+              <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -45,7 +36,7 @@
       <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
+            <state relative-caret-position="220">
               <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
@@ -58,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="400">
-              <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+              <caret line="47" column="22" lean-forward="false" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
               <folding>
                 <element signature="e#216#225#0" expanded="true" />
               </folding>
@@ -69,7 +60,7 @@
       <file leaf-file-name="pool.py" pinned="false" current-in-tab="false">
         <entry file="file:///volatile/anaconda/lib/python2.7/multiprocessing/pool.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="637">
+            <state relative-caret-position="11320">
               <caret line="566" column="21" lean-forward="false" selection-start-line="566" selection-start-column="21" selection-end-line="566" selection-end-column="21" />
               <folding>
                 <marker date="1482297092000" expanded="true" signature="0:1612" ph="..." />
@@ -229,18 +220,18 @@
       <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-240">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="97" column="35" lean-forward="false" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="35" />
+            <state relative-caret-position="400">
+              <caret line="95" column="52" lean-forward="false" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
               <folding>
                 <element signature="e#12#22#0" expanded="true" />
               </folding>
@@ -282,9 +273,9 @@
         <option value="$PROJECT_DIR$/decoding/calc_decoding.py" />
         <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py" />
         <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
-        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
         <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
         <option value="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
+        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
       </list>
     </option>
   </component>
@@ -312,6 +303,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -341,7 +333,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -534,7 +525,7 @@
     <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15035932" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15201768" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5026022" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3200371" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1001,7 +992,7 @@
     </entry>
     <entry file="file:///volatile/anaconda/lib/python2.7/multiprocessing/pool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
+        <state relative-caret-position="11320">
           <caret line="566" column="21" lean-forward="false" selection-start-line="566" selection-start-column="21" selection-end-line="566" selection-end-column="21" />
           <folding>
             <marker date="1482297092000" expanded="true" signature="0:1612" ph="..." />
@@ -1159,7 +1150,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-240">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1167,7 +1158,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
+        <state relative-caret-position="220">
           <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
           <folding>
             <element signature="e#62#80#0" expanded="true" />
@@ -1175,31 +1166,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="97" column="35" lean-forward="false" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="35" />
-          <folding>
-            <element signature="e#12#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="860">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
-          <caret line="47" column="22" lean-forward="true" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+          <caret line="47" column="22" lean-forward="false" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
           <folding>
             <element signature="e#216#225#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
+    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="91" column="6" lean-forward="true" selection-start-line="91" selection-start-column="6" selection-end-line="91" selection-end-column="6" />
-          <folding />
+        <state relative-caret-position="400">
+          <caret line="95" column="52" lean-forward="false" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
+          <folding>
+            <element signature="e#12#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
