@@ -21,6 +21,8 @@ sig_tp_RSA = RSAres.sig_tp_RSA(timeStart:timeStop);
 data_avg = mean(data_rsa,1);
 data_sem = std(data_rsa)/sqrt(size(data_rsa,1));
 
+LineWidthLine = 1.5;
+LineWidthLineThick = 3;
 LineWidthMark = 0.5;
 LineCol = [.5 .5 .5];
 
@@ -36,10 +38,15 @@ line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 
 % result
 hold on
-plt = shadedErrorBar(time_rsa,data_avg,data_sem, {'color', coloR, 'LineWidth',2});
-plt.patch.FaceAlpha = 1;
+plt = shadedErrorBar(time_rsa,data_avg,data_sem, {'color', coloR, 'LineWidth',LineWidthLine});
+plt.patch.FaceAlpha = .5;
 % Significant time points
 plot(time_rsa(sig_tp_RSA),data_avg(sig_tp_RSA),'.','MarkerSize',30,'Color', coloR)
+
+time_rsa(~sig_tp_RSA) = nan; 
+data_avg(~sig_tp_RSA) = nan;
+area(time_rsa,data_avg, 'FaceColor', coloR, 'LineStyle', 'none')
+
 set(gca, 'FontSize', 18)
 box on
 

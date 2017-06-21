@@ -30,7 +30,7 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     # model = svm.SVC(C=1, kernel='linear', probability='True', class_weight='balanced', decision_function_shape='ovo')
     # probability='true' probably comes with pred label and probability
 
-    # Feature selection
+    # Feature selection - HAVE TO DECIDE ON THAT!
     fs = SelectKBest(f_classif, k=153)
 
     # Pipeline

@@ -12,7 +12,7 @@ cosmo_set_path()
 sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
     
 %% Behavior analysis
-behAnalysisCalcMEG(subs)
+behAnalysisCalcMEG(sub_name)
     
 %% ERF - to complete
     % Load all data from all subjects (needs at least 30 gb free in disk space)
@@ -298,22 +298,28 @@ end
 %% Plot results 
 load('cdcol.mat')
 
-fieldnames_RSA_plot = fieldnames_RSA;
-colors_plot = repmat([cdcol.turquoiseblue; cdcol.grassgreen; cdcol.orange],3,1);
+fieldnames_RSA_plot = {'op1_vis' 'op1_mag' 'operator' 'op2_vis' 'op2_mag'    'result_vis' 'result_mag'};
+colors_plot = [cdcol.orange; [.5 .5 .5]; cdcol.grassgreen; [.5 .5 .5]; cdcol.turquoiseblue; [.5 .5 .5]; [.5 .5 .5]];
 
 
-figureDim = [0 0 1 1];
+figureDim = [0 0 .3 1];
 figure('units','normalized','outerposition',figureDim)
 count = [1 4 7];
 for f = 1:length(fieldnames_RSA_plot);
     load([rsa_result_dir 'group_rsa_mr/RSA_stats_model_', fieldnames_RSA_plot{f}, 'all_DSM_MR.mat'], 'RSAres');
-    subplot(4,3,f)
+    subplot(7,1,f)
     if strcmp(fieldnames_RSA_plot{f}, 'operator') == 1
-        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.08 .35])
+        RSAplot(RSAres,colors_plot(f,:), 'y_lim', [-0.08 .35])
     else
-        RSAplot(RSAres,cdcol.orange, 'y_lim', [-0.08 .21])
+        RSAplot(RSAres,colors_plot(f,:), 'y_lim', [-0.08 .21])
     end
-    title(fieldnames_RSA_plot{f}, 'interpreter', 'none')
+%     title(fieldnames_RSA_plot{f}, 'interpreter', 'none')
+    ylabel('rho')
+    if f == length(fieldnames_RSA_plot)
+        xlabel('Time (s)')
+    else
+        set(gca, 'XTickLabel', [])
+    end
 end
 savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA_mr.png'])
 

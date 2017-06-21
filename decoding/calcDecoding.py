@@ -7,6 +7,9 @@ import sys
 from GATclassifiers import (calcClassification, calcRegression)
 from initDirs import dirs
 import numpy as np
+from mne.decoding import Vectorizer
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.model_selection import cross_val_score
 
 # cwd = os.path.dirname(os.path.abspath(__file__))
 # os.chdir(cwd)
@@ -38,10 +41,22 @@ def calcDecoding(params, type, scorer, gatordiag):
     print('saving done')
 
 
+def calcDecodingAlltimes(params):
+    scores = list()
+    for tmax in np.linspace(1.5, 2.4, 10):
+        X_train = params['X_train']
 
-# params, times_calc, y_predictive, y_true, score, diagonal, y_train, y_test, gat_scorer, scoreR = calc_prepDec_wTask_CR(wkdir, Condition, Subject, Type)
-# y_predictive = gat.y_pred_
-# y_true = gat.y_true_
+        vec = X_train.Vectorizer()
+        X_train_result = params['X_train'].copy().crop(tmin=tmin, tmax=tmax).get_data()
+        X_test_result = params['X_test'].copy().crop(tmin=tmin, tmax=tmax).get_data()
 
-# 'y_predictive': y_predictive, 'y_true': y_true,
-# 'score': score, 'diagonal': diagonal, 'y_train': y_train, 'y_test': y_test}
+        X_train_result = vec.fit_transform(X_train_result, params['y_train'])
+        X_test_result = vec.fit_transform(X_test_result, params['y_test'])
+
+        lda = LinearDiscriminantAnalysis()
+        print('Fitting LDA')
+        scores.append(cross_val_score(lda, X_train_result, y_train, scoring='confusion_matrix'))
+        print('Done')
+
+    return scores
+

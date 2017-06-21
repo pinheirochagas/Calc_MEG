@@ -78,7 +78,7 @@ RDM.op1_vis = zeros(32);
 for i = 1:size(RDM.op1_vis,1)
     for j = 1:size(RDM.op1_vis,2)
         RDM.op1_vis(i,j) = RDM_visual(str2num(allop{i}(1))+1,str2num(allop{j}(1))+1);
-        RDM.op1_vis_jc(i,j) = jaccardMAT(str2num(allop{i}(1))+1,str2num(allop{j}(1))+1);
+%         RDM.op1_vis_jc(i,j) = jaccardMAT(str2num(allop{i}(1))+1,str2num(allop{j}(1))+1);
     end
 end
 
@@ -87,7 +87,7 @@ RDM.op2_vis = zeros(32);
 for i = 1:size(RDM.op2_vis,1)
     for j = 1:size(RDM.op2_vis,2)
         RDM.op2_vis(i,j) = RDM_visual(str2num(allop{i}(3))+1,str2num(allop{j}(3))+1);
-        RDM.op2_vis_jc(i,j) = jaccardMAT(str2num(allop{i}(3))+1,str2num(allop{j}(3))+1);
+%         RDM.op2_vis_jc(i,j) = jaccardMAT(str2num(allop{i}(3))+1,str2num(allop{j}(3))+1);
     end
 end
 
@@ -96,7 +96,7 @@ RDM.result_vis = zeros(32);
 for i = 1:size(RDM.result_vis,1)
     for j = 1:size(RDM.result_vis,2)
         RDM.result_vis(i,j) = RDM_visual(str2num(allop{i})+1,str2num(allop{j})+1);
-        RDM.result_vis_jc(i,j) = jaccardMAT(str2num(allop{i})+1,str2num(allop{j})+1);
+%         RDM.result_vis_jc(i,j) = jaccardMAT(str2num(allop{i})+1,str2num(allop{j})+1);
     end
 end
 
@@ -113,7 +113,7 @@ figureDim = [0 0 1 1];
 figure('units','normalized','outerposition',figureDim)
 count = 1;
 for s = [1 2 3 4 5 6]
-    subplot(2,3,count)
+    subplot(7,1,count)
     imagesc(RDM.(fieldnames_RDM{s}))
 %     title(fieldnames_RDM{s}, 'interpreter', 'none')
     axis square
