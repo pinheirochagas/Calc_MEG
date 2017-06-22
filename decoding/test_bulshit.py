@@ -9,3 +9,4 @@ import numpy as np
 
 subject = 's03'
 params = prepDataDecoding(dirs, 'presTlockCres', 'cres', subject, 'baseline_nocorrect')
+calcDecoding(params, 'class', 'accuracy', 'gat')

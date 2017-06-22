@@ -42,8 +42,8 @@ for s, subject in enumerate(subjects):
 
 
 for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'presTlockCres', 'cres', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'gat')
+    params = prepDataDecoding(dirs, 'cres_group', 'cres_group', subject, 'baseline_nocorrect')
+    calcDecoding(params, 'class', 'accuracy', 'diagonal')
 
 
 
@@ -67,7 +67,9 @@ from mne.decoding import GeneralizationAcrossTime
 subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's22']
 
-conditions = [['presTlockCres', 'cres']]
+#subjects = ['s02']
+
+conditions = [['cres_group', 'cres_group']]
 
 #Combine results from all conditions
 all_scores = []
@@ -76,7 +78,7 @@ all_diagonals = []
 for c, cond in enumerate(conditions):
     for s, subject in enumerate(subjects):
         print('loading subject ' + subject)
-        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_gat_nobaseline_correct.npy'
+        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         #fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         results = np.load(fname)
         # Convert to list
@@ -85,8 +87,8 @@ for c, cond in enumerate(conditions):
         all_diagonals.append(results['diagonal'])
 score = results['score']
 diagonal = results['diagonal']
-time_calc = results['params']['times_calc']
-params = results['params']
+#time_calc = results['params']['times_calc']
+#params = results['params']
 all_scores = np.array(all_scores) #shape: subjects*n_cond, training_times, testing_times
 all_diagonals = np.array(all_diagonals)
 
@@ -102,16 +104,27 @@ sem_group_scores = np.zeros((len(conditions), all_scores.shape[2], all_scores.sh
 group_diagonal = np.zeros((len(conditions), all_diagonals.shape[2]))
 sem_group_diagonal = np.zeros((len(conditions), all_diagonals.shape[2]))
 
+for c, cond in enumerate(conditions):
+    group_scores[c, :, :] = np.mean(all_scores[c, :, :, :], 0)
+    sem_group_scores[c, :, :] = stats.sem(all_scores[c, :, :, :], 0)
+
+    group_diagonal[c, :] = np.mean(all_diagonals[c, :, :], 0)
+    sem_group_diagonal[c, :] = stats.sem(all_diagonals[c, :, :], 0)
+
+
+
+pretty_gat(group_scores[0, :, :], chance=.25)
+plt.savefig(dirs['result'] + 'individual_results/figures/' + 'presTlockCres_cres_gat.png')
 
 # Plot
-times = np.arange(-0.2, 4.4004, 0.004)
-pretty_decod(all_scores[0,:,:,0], chance=.14, color=[0,0,1], times=times)
+times = np.arange(-0.2, 4.0004, 0.004)
+pretty_decod(all_scores[0,:,:,0], chance=.5, color=[0,0,1], times=times)
 plt.axvline(.8, color='k')  # mark stimulus onset
 plt.axvline(1.6, color='k')  # mark stimulus onset
 plt.axvline(2.4, color='k')  # mark stimulus onset
 plt.axvline(3.2, color='k')  # mark stimulus onset
 plt.ylim(.09, .2)
-plt.savefig(dirs['result'] + 'individual_results/figures/' + 'cres_full.png')
+plt.savefig(dirs['result'] + 'individual_results/figures/' + 'cres_group.png')
 
 
 
@@ -133,7 +146,7 @@ for s, subject in enumerate(subjects):
     plt.axvline(2.4, color = 'g') #mark stimulus onset
     plt.axvline(3.2, color = 'g') #mark stimulus onset
     plt.ylim(.1,.50)
-    plt.savefig(dirs['result'] + 'individual_results/' + subject + 'cres.png')
+    plt.savefig(dirs['result'] + 'individual_results/' + subject + 'cres_group.png')
 
     plt.figure(figsize=(15, 5))
 

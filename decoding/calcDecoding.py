@@ -7,9 +7,9 @@ import sys
 from GATclassifiers import (calcClassification, calcRegression)
 from initDirs import dirs
 import numpy as np
-from mne.decoding import Vectorizer
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.model_selection import cross_val_score
+#from mne.decoding import Vectorizer
+#from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+#from sklearn.model_selection import cross_val_score
 
 # cwd = os.path.dirname(os.path.abspath(__file__))
 # os.chdir(cwd)
@@ -30,7 +30,8 @@ def calcDecoding(params, type, scorer, gatordiag):
     print('decoding subject ' + params['subject'] + ' done!')
 
     # Organize results
-    results = ({'params': params,'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
+    # results = ({'params': params,'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
+    results = ({'times_calc': params['times_calc'], 'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
     print ('results size is: ' + str(sys.getsizeof(results))) + ' bytes'
 
     print('saving results')
@@ -39,6 +40,7 @@ def calcDecoding(params, type, scorer, gatordiag):
             + '_results_' + type + '_' + scorer + '_' + gatordiag + '_' + params['baseline_correction']
     np.save(fname, results)
     print('saving done')
+    print(fname)
 
 
 def calcDecodingAlltimes(params):
