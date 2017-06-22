@@ -14,8 +14,15 @@ elseif strcmp(conds, 'corrResultnoZero')
     
 elseif strcmp(conds, 'calc')
     conds_idx = trialinfo.operator ~= 0;
-    labels(:,1) = trialinfo.corrResult(conds_idx);    
+    labels(:,1) = trialinfo.corrResult(conds_idx);   
     
+elseif strcmp(conds, 'add')
+    conds_idx = trialinfo.operator == 1;
+    labels(:,1) = trialinfo.corrResult(conds_idx);      
+
+elseif strcmp(conds, 'sub')
+    conds_idx = trialinfo.operator == 1;
+    labels(:,1) = trialinfo.corrResult(conds_idx);       
 end
     
 end

@@ -8,7 +8,7 @@ function RSAplot(RSAres, coloR, varargin)
 [x_lim, y_lim] = parseArgs(varargin);
 
 if isempty(x_lim); x_lim = [-0.2 4]; else end
-if isempty(y_lim); x_lim = [-0.15 2]; else end
+if isempty(y_lim); y_lim = [-0.1 .2]; else end
 
 timeStart = find(RSAres.timevect > x_lim(1)); timeStart = timeStart(1);
 timeStop = find(RSAres.timevect > x_lim(2)); timeStop = timeStop(1);

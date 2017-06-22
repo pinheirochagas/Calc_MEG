@@ -34,7 +34,7 @@ RSAres.opt = opt;
 
 %% Save results
 %save([rsa_result_dir '/group_rsa_mr_searchlight/RSA_stats_model_', RSA_model, 'all_DSM_MR_searchlight.mat'], 'RSAres');
-save([rsa_result_dir '/group_rsa_mr/RSA_stats_model_', RSA_model, 'all_DSM_MR.mat'], 'RSAres');
+save([rsa_result_dir '/group_rsa_mr/RSA_stats_model_', RSA_model, '_all_DSM_MR.mat'], 'RSAres');
 
 end
 

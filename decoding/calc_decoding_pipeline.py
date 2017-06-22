@@ -14,7 +14,7 @@ subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10'
 subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's22']
 
-subjects = ['s03']
+subject = 's03'
 
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, 'cres', 'cres', subject, 'baseline_nocorrect')
@@ -41,6 +41,10 @@ for s, subject in enumerate(subjects):
     scores = calcDecodingAlltimes(params)
 
 
+for s, subject in enumerate(subjects):
+    params = prepDataDecoding(dirs, 'presTlockCres', 'cres', subject, 'baseline_nocorrect')
+    calcDecoding(params, 'class', 'accuracy', 'gat')
+
 
 
 
@@ -61,9 +65,9 @@ from mne.decoding import GeneralizationAcrossTime
 
 
 subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
-            's11', 's12', 's14', 's15', 's16', 's17', 's18','s19', 's21', 's22']
+            's11', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's22']
 
-conditions = [['cres_add', 'cres_add']]
+conditions = [['presTlockCres', 'cres']]
 
 #Combine results from all conditions
 all_scores = []
@@ -72,7 +76,7 @@ all_diagonals = []
 for c, cond in enumerate(conditions):
     for s, subject in enumerate(subjects):
         print('loading subject ' + subject)
-        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
+        fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_gat_nobaseline_correct.npy'
         #fname = dirs['result'] + 'individual_results/' + subject + '_' + cond[0] + '_' + cond[1] + '_results_class_accuracy_diagonal_nobaseline_correct.npy'
         results = np.load(fname)
         # Convert to list

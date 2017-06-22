@@ -31,10 +31,11 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     # probability='true' probably comes with pred label and probability
 
     # Feature selection - HAVE TO DECIDE ON THAT!
-    fs = SelectKBest(f_classif, k=153)
+    # fs = SelectKBest(f_classif, k=153)
 
     # Pipeline
-    clf = make_pipeline(fs, scaler, model)
+    clf = make_pipeline(scaler, model)
+    # clf = make_pipeline(fs, scaler, model)
 
     # Cross-validation
     cv = StratifiedKFold(y_train, 5)
