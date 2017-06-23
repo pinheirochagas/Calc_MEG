@@ -1,6 +1,6 @@
 .idea
 *.pyc
 *~*
-~/decoding/somaWF/jobs/
-~/.idea/workspace.xml
-~/.ipynb_checkpoints
+decoding/somaWF/jobs/
+.idea/workspace.xml
+.ipynb_checkpoints

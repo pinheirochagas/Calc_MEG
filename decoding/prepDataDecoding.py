@@ -23,17 +23,17 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
 
     # Import epochs calc
     print('importing calc data')
-    fname_calc = dirs['data'] + subject + '_calc_AICA.mat'  # make this dynamic
+    fname_calc = dirs['data'] + subject + '_calc.mat'  # make this dynamic
     epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
     times_calc = epoch_calc.times
     print('done')
 
-    # Import epochs vsa
-    # print('importing vsa data')
-    # fname_vsa = dirs['data'] + subject + '_vsa_AICA.mat'
-    # epoch_vsa, info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
-    # times_vsa = epoch_vsa.times
-    # print('done')
+    if train_set == 'vsa' or test_set == 'vsa':
+        print('importing vsa data')
+        fname_vsa = dirs['data'] + subject + '_vsa.mat'
+        epoch_vsa, info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
+        times_vsa = epoch_vsa.times
+        print('done')
 
     # Time lock to the presentation of the result
     print ('timelock result and concate')
@@ -62,7 +62,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
     print ('done')
 
     # Baseline correct if needed
-    if baselinecorr == 'baseline_correct':
+    if baselinecorr == 'baseline':
         print('baseline correcting')
         epoch_calc.apply_baseline(baseline)
         print('done')
@@ -187,6 +187,15 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
             y_test = y_train
             train_times = {'start': 1.5, 'stop': 3.2, 'length': 0.05}
             test_times = train_times
+        elif train_set == 'vsa':
+            train_index = info_vsa['congruency'] == 1
+            X_train = epoch_vsa[train_index]
+            y_train = np.array(info_vsa[train_index]['cue'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.1, 'stop': 1.5}
+            test_times = {'start': -0.1, 'stop': 1.5}
     else:
         mode = 'mean-prediction'
         if (train_set == 'op1') & (test_set == 'presTlock'):
@@ -235,7 +244,36 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr):
 
             train_times = {'start': 0, 'stop': .4}
             test_times = {'start': 1.5, 'stop': 3.2}
-
+        elif (train_set == 'vsa') & (test_set == 'addsub'):
+            train_index = info_vsa['congruency'] == 1
+            test_index = info_calc['operator'] != 0
+            # Correct labels for the cue to match add and sub
+            info_vsa[info_vsa['cue'] == 1] = -1
+            info_vsa[info_vsa['cue'] == 2] = 1
+            X_train = epoch_vsa[train_index]
+            y_train = np.array(info_vsa[train_index]['cue'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Update params
+            train_times = {'start': -0.1, 'stop': 1.5}
+            test_times = {'start': 0.7, 'stop': 3.2}
+        elif (train_set == 'addsub') & (test_set == 'vsa'):
+            train_index = info_calc['operator'] != 0
+            test_index = info_vsa['congruency'] == 1
+            # Correct labels for the cue to match add and sub
+            info_vsa[info_vsa['cue'] == 1] = -1
+            info_vsa[info_vsa['cue'] == 2] = 1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[test_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_vsa[test_index]
+            y_test = np.array(info_vsa[train_index]['cue'])
+            y_test = y_test.astype(np.float64)
+            # Update params
+            train_times = {'start': 0.7, 'stop': 3.2}
+            test_times = {'start': -0.1, 'stop': 1.5}
     print(train_set)
     print(test_set)
     print('done')
