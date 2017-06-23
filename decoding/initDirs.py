@@ -19,6 +19,8 @@ dirs = ({'root': root,
          'job': root + 'scripts/decoding/somaWF/jobs/',
          'data': root + 'data/mat/',
          'result': root + 'results/decoding/',
+         'ind_result': root + 'results/decoding/individual_results/',
+         'gp_result': root + 'results/decoding/group_results/',
          'script': root + 'scripts/decoding/'})
 
 

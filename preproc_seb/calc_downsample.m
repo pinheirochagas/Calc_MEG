@@ -1,7 +1,7 @@
 function dataout = calc_downsample(data) 
 
 % Define configuration file
-cfg.resamplefs = 250;
+cfg.resamplefs = 100;
 cfg.detrend    = 'no';
 cfg.demean     = 'no';
 cfg.feedback   = 'text';
