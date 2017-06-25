@@ -41,36 +41,38 @@ def fldtrp2mne_calc(filename, var, experiment):
     events = np.c_[np.cumsum(np.ones(n_trial)) * 5 * sfreq,
                    np.zeros(n_trial), np.zeros(n_trial)]
     epochs = EpochsArray(data, info, events = np.array(events, int),
-                         tmin = np.min(time), verbose = False)
+                         tmin = np.min(time), verbose = False) # or tmin = 0
+    #epochs.times = time # correct timing (was having problem with downsampled to 125hz)
 
     #Recover trialinfo
-    matinfo = sio.loadmat(filename)
-    trialinfo = matinfo['data']['trialinfo']  
-
     if experiment == 'calc':
-        run = trialinfo[0][0][0][0][0].T
-        operand1 = trialinfo[0][0][0][0][1].T
-        operator = trialinfo[0][0][0][0][2].T
-        operand2 = trialinfo[0][0][0][0][3].T
-        preResult = trialinfo[0][0][0][0][4].T
-        delay = trialinfo[0][0][0][0][5].T
-        corrResult = trialinfo[0][0][0][0][6].T
-        deviant = trialinfo[0][0][0][0][7].T
-        absdeviant = trialinfo[0][0][0][0][8].T
-        rt = trialinfo[0][0][0][0][9].T
-        respSide = trialinfo[0][0][0][0][10].T
-        info = pd.DataFrame(data = np.concatenate((run, operand1, operator, operand2, preResult, delay, corrResult, deviant, absdeviant, rt, respSide), axis = 1), 
-                        columns = ['run', 'operand1', 'operator', 'operand2', 'preResult', 'delay', 'corrResult', 'deviant', 'absdeviant', 'rt', 'respSide'])
+        run = np.expand_dims(ft_data.trialinfo.run, axis=0).T
+        operand1 = np.expand_dims(ft_data.trialinfo.operand1, axis=0).T
+        operator = np.expand_dims(ft_data.trialinfo.operator, axis=0).T
+        operand2 = np.expand_dims(ft_data.trialinfo.operand1, axis=0).T
+        presResult = np.expand_dims(ft_data.trialinfo.presResult, axis=0).T
+        delay = np.expand_dims(ft_data.trialinfo.delay, axis=0).T
+        corrResult = np.expand_dims(ft_data.trialinfo.corrResult, axis=0).T
+        deviant = np.expand_dims(ft_data.trialinfo.deviant, axis=0).T
+        absdeviant = np.expand_dims(ft_data.trialinfo.absdeviant, axis=0).T
+        rt = np.expand_dims(ft_data.trialinfo.rt, axis=0).T
+        respSide = np.expand_dims(ft_data.trialinfo.respSide, axis=0).T
+        accuracy = np.expand_dims(ft_data.trialinfo.accuracy, axis=0).T
+        info = pd.DataFrame(
+            data=np.concatenate((run, operand1, operator, operand2, presResult, delay, corrResult, deviant, absdeviant, rt, respSide, accuracy),axis=1),
+            columns=['run', 'operand1', 'operator', 'operand2', 'presResult', 'delay', 'corrResult','deviant', 'absdeviant', 'rt', 'respSide', 'accuracy'])
+
     elif experiment == 'vsa':
-        run = trialinfo[0][0][0][0][0].T
-        cue = trialinfo[0][0][0][0][1].T
-        targetAll = trialinfo[0][0][0][0][2].T
-        target = trialinfo[0][0][0][0][3].T
-        targetSide = trialinfo[0][0][0][0][4].T
-        congruency = trialinfo[0][0][0][0][5].T
-        rt = trialinfo[0][0][0][0][6].T
-        respSide = trialinfo[0][0][0][0][7].T
-        info = pd.DataFrame(data = np.concatenate((run, cue, targetAll, target, targetSide, congruency, rt, respSide), axis = 1), 
-                            columns = ['run', 'cue', 'targetAll', 'target', 'targetSide', 'congruency', 'rt', 'respSide'])
+        run = np.expand_dims(ft_data.trialinfo.run, axis=0).T
+        cue = np.expand_dims(ft_data.trialinfo.cue, axis=0).T
+        targetAll = np.expand_dims(ft_data.trialinfo.targetAll, axis=0).T
+        target = np.expand_dims(ft_data.trialinfo.target, axis=0).T
+        targetSide = np.expand_dims(ft_data.trialinfo.targetSide, axis=0).T
+        congruency = np.expand_dims(ft_data.trialinfo.congruency, axis=0).T
+        rt = np.expand_dims(ft_data.trialinfo.rt, axis=0).T
+        respSide = np.expand_dims(ft_data.trialinfo.respSide, axis=0).T
+        info = pd.DataFrame(
+            data=np.concatenate((run, cue, targetAll, target, targetSide, congruency, rt, respSide), axis=1),
+            columns=['run', 'cue', 'targetAll', 'target', 'targetSide', 'congruency', 'rt', 'respSide'])
 
     return epochs, info

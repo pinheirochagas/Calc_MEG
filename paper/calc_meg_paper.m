@@ -8,11 +8,26 @@ cd(cosmo_mvpa_dir)
 cosmo_set_path()
 
 %%  List subjects
-% sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
+sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
 sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
+%% Add accuracy to all subjects
+addAccuracy(sub_name_all)
+
 %% Low pass and downsample the data
-for 
+for subj = 1:length(sub_name)
+    load([data_dir sub_name{subj} '_calc_AICA_acc.mat'])
+    downsampleLowpass(data, par, 25, 125, 'calc')   
+end
+for subj = 1:length(sub_name)
+    load([data_dir sub_name{subj} '_vsa_AICA.mat'])
+    downsampleLowpass(data, par, 25, 125, 'vsa')   
+end
+
+data_new = load([data_dir sub_name{3} '_' 'calc' '_lp25_125hz.mat'])
+
+data = load([data_dir sub_name{3} '_' 'calc' '.mat'])
+
     
 %% Behavior analysis
 behAnalysisCalcMEG(sub_name)

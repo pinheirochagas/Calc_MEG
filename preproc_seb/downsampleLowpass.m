@@ -1,18 +1,24 @@
-function downsampleLowpass(data)
-%%
+function downsampleLowpass(data, par, lpfreq, resamplefs, task)
+%% Directories
+InitDirsMEGcalc
+
+%% Low-pass Filter 
+trialinfo = data.trialinfo;
+triggers = data.triggers;
+ECGEOG = data.ECGEOG; 
 cfg = [];
 cfg.lpfilter = 'yes';
-cfg.lpfreq = 25;
+cfg.lpfreq = lpfreq;
 data = ft_preprocessing(cfg, data);
 data.trialinfo = trialinfo;
 data.triggers = triggers;
 data.ECGEOG = ECGEOG;
 
 %% Downsampling
-calc_downsample(data)
+%data = calc_downsample(data,resamplefs);
 
 % Save data
-data.par = par;
-save([par.pathmat par.Sub_Num,'_calc_lp25_100hz.mat'], 'data')   % Save the structure in MAT file
+%data.par = par;
+save([data_dir par.Sub_Num,'_' task '_lp25_250hz.mat'], 'data')   % Save the structure in MAT file
 end
 

@@ -107,8 +107,8 @@ dataECGEOG = data;
 dataECGEOG.trial = data.ECGEOG;
 dataECGEOG.label = {'EOG061' 'EOG062' 'ECG063'}'; 
 
-data = calc_downsample(data);
-dataECGEOG = calc_downsample(dataECGEOG);
+data = calc_downsample(data,resamplefs);
+dataECGEOG = calc_downsample(dataECGEOG,resamplefs);
 
 data.ECGEOG = dataECGEOG.trial;
 
@@ -122,7 +122,7 @@ save([par.pathmat par.Sub_Num,'_calc_AICA.mat'], 'data', 'par')   % Save the str
 
 %% Low-pass Filter 
 trialinfo = data.trialinfo;
-triggers = data.trialinfo;
+triggers = data.triggers;
 ECGEOG = data.ECGEOG; 
 cfg = [];
 cfg.lpfilter = 'yes';

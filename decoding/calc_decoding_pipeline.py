@@ -8,46 +8,25 @@ from calcDecoding import calcDecodingAlltimes
 import numpy as np
 
 # Subjects
-subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
-            's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
+#subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
+  #          's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
 
 subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
             's11', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's22']
 
-subject = 's03'
+#subject = 's03'
+
+##
+conditions = [['presTlockCres', 'cres']]
+baselinecorr = 'nobaseline'
+dec_method = 'class'
+dec_scorer = 'accuracy'
+gatordiag = 'gat'
+decimate = 2
 
 for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'cres', 'cres', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'diagonal')
-
-for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'op1', 'op1', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'diagonal')
-
-for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'op2', 'op2', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'diagonal')
-
-for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'addsub', 'addsub', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'diagonal')
-
-for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'presTlock', 'presTlock', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'diagonal')
-
-for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'cres_alltimes', 'cres_alltimes', subject, 'baseline_nocorrect')
-    scores = calcDecodingAlltimes(params)
-
-
-for s, subject in enumerate(subjects):
-    params = prepDataDecoding(dirs, 'cres_group', 'cres_group', subject, 'baseline_nocorrect')
-    calcDecoding(params, 'class', 'accuracy', 'diagonal')
-
-
-
-
+    params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
+    calcDecoding(params, dec_method, dec_scorer, gatordiag)
 
 
 #######################################################################################################################
