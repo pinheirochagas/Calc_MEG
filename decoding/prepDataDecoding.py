@@ -27,7 +27,6 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
     #fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
 
     epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
-    times_calc = epoch_calc.times
     print('done')
 
     if train_set == 'vsa' or test_set == 'vsa':
