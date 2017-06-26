@@ -11,7 +11,7 @@ import os
 from soma_workflow.client import Job, Workflow, Helper
 from initDirs import dirs
 
-def calc_createWorkFlow(conditions, subjects, baselinecorr, dec_method, dec_scorer, gatordiag):
+def calc_createWorkFlow(conditions, subjects, baselinecorr, dec_method, dec_scorer, gatordiag, decimate):
     # Initialize job files and names
     initbody = 'import sys \n' + "sys.path.append(" + "'" + dirs['script'] + "')\n" + \
                 'from initDirs import dirs\n' + \
@@ -25,7 +25,7 @@ def calc_createWorkFlow(conditions, subjects, baselinecorr, dec_method, dec_scor
 
     for c, condcouple in enumerate(conditions):
         for s, subject in enumerate(subjects):
-            body = initbody + "params = prepDataDecoding(dirs," + "'"+condcouple[0]+"'" + "," + "'"+condcouple[1]+"'" + "," + "'"+subject+"'" + "," + "'"+baselinecorr+"'" + ")\n"
+            body = initbody + "params = prepDataDecoding(dirs," + "'"+condcouple[0]+"'" + "," + "'"+condcouple[1]+"'" + "," + "'"+subject+"'" + "," + "'"+baselinecorr+"'" + "," + str(decimate) + ")\n"
             body_class = body + "calcDecoding(params," + "'"+dec_method+"'" "," + "'"+dec_scorer+"'" + "," + "'"+gatordiag+"'" + ")"
 
             # body_reg = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'reg'" + ")"

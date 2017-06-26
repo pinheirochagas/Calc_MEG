@@ -86,7 +86,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': 1.5, 'stop': 2}  # 'length': 0.05 defonce memory!
+            #train_times = {'start': 1.5, 'stop': 2}  # 'length': 0.05 defonce memory!
+            train_times = {'start': 1.6, 'stop': 2}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'cres_group':
             info_calc[info_calc['corrResult'] == 4] = 3
@@ -142,7 +143,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -.2, 'stop': 4.4}  # 'length': 0.05 defonce memory!
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'addsub':
             train_index = info_calc['operator'] != 0
@@ -151,7 +152,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -.2, 'stop': 4.4}  # 'length': 0.05 defonce memory!
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'presTlock':
             train_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0)
@@ -288,7 +289,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
     params = {'subject': subject, 'baseline_correction': baselinecorr,
              'train_set': train_set, 'test_set': test_set,
               'train_times': train_times, 'test_times': test_times,
-              'times_calc': times_calc,
+              'times_calc': epoch_calc.times,
               'mode': mode,'baseline': baseline, 'decimate': decimate,
               'X_train': X_train, 'y_train': y_train, 'X_test': X_test, 'y_test': y_test}
 

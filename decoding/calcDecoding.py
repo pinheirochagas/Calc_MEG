@@ -7,6 +7,7 @@ import sys
 from GATclassifiers import (calcClassification, calcRegression)
 from initDirs import dirs
 import numpy as np
+import os
 #from mne.decoding import Vectorizer
 #from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 #from sklearn.model_selection import cross_val_score
@@ -31,12 +32,15 @@ def calcDecoding(params, type, scorer, gatordiag):
 
     # Organize results
     # results = ({'params': params,'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
-    results = ({'times_calc': params['times_calc'], 'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
+    results = ({'train_times': params['train_times'], 'test_times': params['test_times'], 'times_calc': params['times_calc'], 'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
     print ('results size is: ' + str(sys.getsizeof(results))) + ' bytes'
 
     print('saving results')
     # Save data
-    fname = dirs['result'] + 'individual_results/' + params['subject'] + '_' + params['train_set'] + '_' + params['test_set'] \
+    save_dir = dirs['result'] + 'individual_results/' + params['train_set'] + '_' + params['test_set'] + '/'
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    fname = save_dir + params['subject'] + '_' + params['train_set'] + '_' + params['test_set'] \
             + '_results_' + type + '_' + scorer + '_' + gatordiag + '_' + params['baseline_correction']
     np.save(fname, results)
     print('saving done')

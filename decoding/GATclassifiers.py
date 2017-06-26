@@ -9,7 +9,9 @@ from sklearn import svm
 from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
-from sklearn.model_selection import StratifiedKFold
+#from sklearn.model_selection import StratifiedKFold
+from sklearn.cross_validation import StratifiedKFold
+
 from sklearn.metrics import roc_auc_score
 from jr.gat.scorers import scorer_auc
 from jr.gat.scorers import _parallel_scorer
@@ -27,8 +29,8 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
 
     # Cross-validation
     # cv = StratifiedKFold(y_train, 5)
-    # cv = StratifiedKFold(y_train, 5)
-    cv = StratifiedKFold(n_splits=8, random_state=0, shuffle=True)
+    cv = StratifiedKFold(y_train, 8)
+    #cv = StratifiedKFold(n_splits=8, random_state=0, shuffle=True)
 
     # Scaler
     scaler = StandardScaler()

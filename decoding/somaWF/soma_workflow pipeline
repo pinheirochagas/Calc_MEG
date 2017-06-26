@@ -24,6 +24,10 @@ import the jobs (jobs_list.somawf) and submit
 # Check the cpu usage - Baptiste example git. 
 
 
+loop kill all the jobs
+qstat -u pcpinhei | grep ^3 | cut -d "." -f 1 | xargs qdel -p
+
+
 
 
 
