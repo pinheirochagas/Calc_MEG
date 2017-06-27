@@ -58,9 +58,10 @@ def fldtrp2mne_calc(filename, var, experiment):
         rt = np.expand_dims(ft_data.trialinfo.rt, axis=0).T
         respSide = np.expand_dims(ft_data.trialinfo.respSide, axis=0).T
         accuracy = np.expand_dims(ft_data.trialinfo.accuracy, axis=0).T
+        correct_choice = np.expand_dims(ft_data.trialinfo.correct_choice, axis=0).T
         info = pd.DataFrame(
-            data=np.concatenate((run, operand1, operator, operand2, presResult, delay, corrResult, deviant, absdeviant, rt, respSide, accuracy),axis=1),
-            columns=['run', 'operand1', 'operator', 'operand2', 'presResult', 'delay', 'corrResult','deviant', 'absdeviant', 'rt', 'respSide', 'accuracy'])
+            data=np.concatenate((run, operand1, operator, operand2, presResult, delay, corrResult, deviant, absdeviant, rt, respSide, accuracy, correct_choice), axis=1),
+            columns=['run', 'operand1', 'operator', 'operand2', 'presResult', 'delay', 'corrResult','deviant', 'absdeviant', 'rt', 'respSide', 'accuracy', 'correct_choice'])
 
     elif experiment == 'vsa':
         run = np.expand_dims(ft_data.trialinfo.run, axis=0).T

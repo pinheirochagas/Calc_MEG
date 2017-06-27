@@ -19,6 +19,6 @@ data.ECGEOG = ECGEOG;
 
 % Save data
 %data.par = par;
-save([data_dir par.Sub_Num,'_' task '_lp25_250hz.mat'], 'data')   % Save the structure in MAT file
+save([data_dir par.Sub_Num,'_' task '_lp30.mat'], 'data')   % Save the structure in MAT file
 end
 

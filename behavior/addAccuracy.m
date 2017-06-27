@@ -48,13 +48,26 @@ for sub = 1:length(subject)
         end
     end
     
-    %% Put back to original trialinfo format
+    %% Add accuracy
     trialinfo.accuracy = trialinfo_loop(:,12)';
+    
+    %% Add correct_choice column
+    for i = 1:length(trialinfo_loop)
+        if (trialinfo.accuracy(i) == 1 && trialinfo.deviant(i) == 0) || (trialinfo.accuracy(i) == 0 && trialinfo.deviant(i) == 0)
+        correct_choice(i) = 1;
+        elseif (trialinfo.accuracy(i) == 1 && trialinfo.deviant(i) ~= 0) || (trialinfo.accuracy(i) == 0 && trialinfo.deviant(i) ~= 0)
+        correct_choice(i) = 0;
+        end
+    end
+    trialinfo.correct_choice = correct_choice;    
+    
+    %% Put back to original trialinfo format
     data.trialinfo = trialinfo;
+    
     
     %% Plug back to data and save
     save([data_dir par.Sub_Num,'_calc_AICA_acc.mat'], 'data', 'par')   % Save the structure in MAT file
-    
+    display(['accuracy ' subject{sub} ' done'])
 end
 
 end

@@ -12,17 +12,27 @@ sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12
 sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
 %% Add accuracy to all subjects
-addAccuracy(sub_name_all)
+%addAccuracy(sub_name_all)
 
 %% Low pass and downsample the data
-for subj = 1:length(sub_name)
-    load([data_dir sub_name{subj} '_calc_AICA_acc.mat'])
-    downsampleLowpass(data, par, 25, 125, 'calc')   
+for subj = 1:length(sub_name_all)
+    load([data_dir sub_name_all{subj} '_calc_AICA_acc.mat'])
+    downsampleLowpass(data, par, 30, 250, 'calc')   
 end
-for subj = 1:length(sub_name)
-    load([data_dir sub_name{subj} '_vsa_AICA.mat'])
-    downsampleLowpass(data, par, 25, 125, 'vsa')   
+for subj = 1:length(sub_name_all)
+    load([data_dir sub_name_all{subj} '_vsa_AICA.mat'])
+    downsampleLowpass(data, par, 30, 250, 'vsa')   
 end
+
+%% Time-locked to C and to response
+for subj = 1:length(sub_name_all)
+    load([data_dir sub_name_all{subj}, '_calc_lp30.mat'])
+    timelock(data, sub_name_all{subj}, 'response')
+    timelock(data, sub_name_all{subj}, 'result')
+end
+
+
+
 
 data_new = load([data_dir sub_name{3} '_' 'calc' '_lp25_125hz.mat'])
 
