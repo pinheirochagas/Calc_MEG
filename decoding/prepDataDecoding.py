@@ -24,32 +24,19 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
 
     # Import epochs calc
     print('importing calc data')
-    fname_calc = dirs['data'] + subject + '_calc_lp25_250hz.mat'  # make this dynamic
+    fname_calc = dirs['data'] + subject + '_calc_lp30.mat'  # make this dynamic
     #fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
     epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+    epoch_calc.decimate(decimate)
     print('done')
-
-    # Add column for correct and incorrect choices
-    correct_choice = np.zeros(len(info_calc))
-    for i in range(0,len(info_calc)):
-        if ((info_calc['accuracy'][i] == 1) and (info_calc['deviant'][i] == 0)) or ((info_calc['accuracy'][i] == 0) and (info_calc['deviant'][i] == 0)):
-            correct_choice[i] = 1
-        elif ((info_calc['accuracy'][i] == 1) and (info_calc['deviant'][i] != 0)) or ((info_calc['accuracy'][i] == 0) and (info_calc['deviant'][i] != 0)):
-            correct_choice[i] = 0
-    info_calc['correct_choice'] = correct_choice
 
     #Import epoch VSA in case
     if train_set == 'vsa' or test_set == 'vsa':
         print('importing vsa data')
-        fname_vsa = dirs['data'] + subject + '_vsa_lp25_125hz.mat'
+        fname_vsa = dirs['data'] + subject + '_vsa_lp30.mat'
         epoch_vsa, info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
         times_vsa = epoch_vsa.times
         print('done')
-
-    # Time lock to the presentation of the result and response
-    epoch_calc_reslock, info_calc_reslock = resultTL(info_calc, epoch_calc)
-    epoch_calc_resplock, info_calc_resplock = responseTL(info_calc, epoch_calc)
-
 
     # Baseline correct if needed
     if baselinecorr == 'baseline':
@@ -57,13 +44,11 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
         epoch_calc.apply_baseline(baseline)
         print('done')
     # Downsample data if needed
-    if decimate > 0:
-        print('downsampling')
-        epoch_calc.decimate(decimate)
-        epoch_calc_reslock.decimate(decimate)
-        epoch_calc_resplock.decimate(decimate)
-        # epoch_vsa.decimate(decimate)
-        print('done')
+    # #if decimate > 0:
+    #     print('downsampling')
+    #     epoch_calc.decimate(decimate)
+    #     # epoch_vsa.decimate(decimate)
+    #     print('done')
 
     # Select data
     print('selecting data')
@@ -191,6 +176,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             test_times = {'start': -0.1, 'stop': 1.5}
             # Response lock
         elif train_set == 'resp_side':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = info_calc_resplock['accuracy'] == 1
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['respSide'])
@@ -200,6 +188,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'choice':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['correct_choice'])
@@ -209,6 +200,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'correctness':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['deviant'])
@@ -219,6 +213,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'resplock_cres':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['corrResult'] >= 3) & (info_calc_resplock['corrResult'] <= 6) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['accuracy'] == 1)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['corrResult'])
@@ -228,6 +225,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'resplock_pres':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['presResult'] >= 3) & (info_calc_resplock['presResult'] <= 6) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['accuracy'] == 1)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['presResult'])
@@ -237,6 +237,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'resplock_op1':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['operand1'])
@@ -246,6 +249,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'resplock_op2':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['operand2'])
@@ -255,6 +261,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.6, 'stop': -0.004}
             test_times = train_times
         elif train_set == 'resplock_operator':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
             train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['operator'])
@@ -265,6 +274,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             test_times = train_times
             # Result lock
         elif train_set == 'resultlock_cres':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
             train_index = (epoch_calc_reslock['corrResult'] >= 3) & (epoch_calc_reslock['corrResult'] <= 6) & (epoch_calc_reslock['operator'] != 0) & (epoch_calc_reslock['accuracy'] == 1)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['corrResult'])
@@ -274,6 +286,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.2, 'stop': .8}
             test_times = train_times
         elif train_set == 'resultlock_pres':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
             train_index = (epoch_calc_reslock['presResult'] >= 3) & (epoch_calc_reslock['presResult'] <= 6) & (epoch_calc_reslock['operator'] != 0) & (epoch_calc_reslock['accuracy'] == 1)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['presResult'])
@@ -283,6 +298,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.2, 'stop': .8}
             test_times = train_times
         elif train_set == 'resultlock_op1':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
             train_index = (epoch_calc_reslock['accuracy'] == 1) & (epoch_calc_reslock['operator'] != 0)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['operand1'])
@@ -292,6 +310,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.2, 'stop': .8}
             test_times = train_times
         elif train_set == 'resultlock_op2':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
             train_index = (epoch_calc_reslock['accuracy'] == 1) & (epoch_calc_reslock['operator'] != 0)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['operand2'])
@@ -301,6 +322,9 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -0.2, 'stop': .8}
             test_times = train_times
         elif train_set == 'resultlock_operator':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
             train_index = (epoch_calc_reslock['accuracy'] == 1) & (epoch_calc_reslock['operator'] != 0)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['operator'])
