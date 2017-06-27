@@ -52,14 +52,16 @@ for sub = 1:length(subject)
     trialinfo.accuracy = trialinfo_loop(:,12)';
     
     %% Add correct_choice column
+    correct_choice = zeros(1,length(trialinfo_loop),1);
     for i = 1:length(trialinfo_loop)
         if (trialinfo.accuracy(i) == 1 && trialinfo.deviant(i) == 0) || (trialinfo.accuracy(i) == 0 && trialinfo.deviant(i) == 0)
-        correct_choice(i) = 1;
+            correct_choice(i) = 1;
         elseif (trialinfo.accuracy(i) == 1 && trialinfo.deviant(i) ~= 0) || (trialinfo.accuracy(i) == 0 && trialinfo.deviant(i) ~= 0)
-        correct_choice(i) = 0;
+            correct_choice(i) = 0;
         end
     end
     trialinfo.correct_choice = correct_choice;    
+    trialinfo
     
     %% Put back to original trialinfo format
     data.trialinfo = trialinfo;
