@@ -17,12 +17,14 @@ subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 subject = 's03'
 
 ##
-conditions = [['op1', 'op1']]
+conditions = [['resp_side', 'resp_side']]
 baselinecorr = 'nobaseline'
 dec_method = 'class'
 dec_scorer = 'accuracy'
 gatordiag = 'gat'
-decimate = 2
+decimate = 0
+
+params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
 
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)

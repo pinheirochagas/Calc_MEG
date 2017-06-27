@@ -23,206 +23,206 @@
     "serialized_barriers": {}, 
     "serialized_jobs": {
         "11": {
-            "name": "s15_op1_op1_class", 
+            "name": "s15_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "10": {
-            "name": "s14_op1_op1_class", 
+            "name": "s14_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "13": {
-            "name": "s17_op1_op1_class", 
+            "name": "s17_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "12": {
-            "name": "s16_op1_op1_class", 
+            "name": "s16_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "15": {
-            "name": "s19_op1_op1_class", 
+            "name": "s19_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "14": {
-            "name": "s18_op1_op1_class", 
+            "name": "s18_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "16": {
-            "name": "s22_op1_op1_class", 
+            "name": "s22_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "1": {
-            "name": "s04_op1_op1_class", 
+            "name": "s04_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "0": {
-            "name": "s03_op1_op1_class", 
+            "name": "s03_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "3": {
-            "name": "s06_op1_op1_class", 
+            "name": "s06_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "2": {
-            "name": "s05_op1_op1_class", 
+            "name": "s05_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "5": {
-            "name": "s08_op1_op1_class", 
+            "name": "s08_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "4": {
-            "name": "s07_op1_op1_class", 
+            "name": "s07_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "7": {
-            "name": "s10_op1_op1_class", 
+            "name": "s10_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "6": {
-            "name": "s09_op1_op1_class", 
+            "name": "s09_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "9": {
-            "name": "s13_op1_op1_class", 
+            "name": "s13_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }, 
         "8": {
-            "name": "s11_op1_op1_class", 
+            "name": "s11_resp_side_resp_side_class", 
             "parallel_job_info": null, 
             "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
             "priority": 0, 
             "join_stderrout": false, 
             "command": [
                 "python", 
-                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_op1_op1_class.py"
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_resp_side_resp_side_class.py"
             ], 
             "disposal_timeout": 168
         }

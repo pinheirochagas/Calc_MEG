@@ -4,6 +4,7 @@ import mne
 from fldtrp2mne_calc import fldtrp2mne_calc
 import pandas as pd
 import numpy as np
+from epochsTimeLock import resultTL, responseTL
 
 
 def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate):
@@ -25,10 +26,19 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
     print('importing calc data')
     fname_calc = dirs['data'] + subject + '_calc_lp25_250hz.mat'  # make this dynamic
     #fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
-
     epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
     print('done')
 
+    # Add column for correct and incorrect choices
+    correct_choice = np.zeros(len(info_calc))
+    for i in range(0,len(info_calc)):
+        if ((info_calc['accuracy'][i] == 1) and (info_calc['deviant'][i] == 0)) or ((info_calc['accuracy'][i] == 0) and (info_calc['deviant'][i] == 0)):
+            correct_choice[i] = 1
+        elif ((info_calc['accuracy'][i] == 1) and (info_calc['deviant'][i] != 0)) or ((info_calc['accuracy'][i] == 0) and (info_calc['deviant'][i] != 0)):
+            correct_choice[i] = 0
+    info_calc['correct_choice'] = correct_choice
+
+    #Import epoch VSA in case
     if train_set == 'vsa' or test_set == 'vsa':
         print('importing vsa data')
         fname_vsa = dirs['data'] + subject + '_vsa_lp25_125hz.mat'
@@ -36,31 +46,10 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
         times_vsa = epoch_vsa.times
         print('done')
 
-    # Time lock to the presentation of the result
-    print ('timelock result and concate')
-    idx_delay = info_calc['delay'] == 1
-    idx_nodelay = info_calc['delay'] == 0
+    # Time lock to the presentation of the result and response
+    epoch_calc_reslock, info_calc_reslock = resultTL(info_calc, epoch_calc)
+    epoch_calc_resplock, info_calc_resplock = responseTL(info_calc, epoch_calc)
 
-    time_calc_crop = np.arange(-0.2, 0.8004, 0.004) # Sensitive line, depends on frquency sample
-
-    epoch_calc_delay = epoch_calc[idx_delay]
-    epoch_calc_delay.crop(3.4, 4.4)
-    epoch_calc_delay.times = time_calc_crop
-
-    epoch_calc_nodelay = epoch_calc[idx_nodelay]
-    epoch_calc_nodelay.crop(3.0, 4)
-    epoch_calc_nodelay.times = time_calc_crop
-
-    info_calc_delay = info_calc[info_calc['delay'] == 1]
-    info_calc_nodelay = info_calc[info_calc['delay'] == 0]
-    #info_calc_delay['operand'] = info_calc_delay['presResult']  # add another column 'operand' for the big decoder
-    #info_calc_nodelay['operand'] = info_calc_nodelay['presResult']  # add another column 'operand' for the big decoder
-
-    epoch_calc_reslock = mne.epochs.concatenate_epochs([epoch_calc_delay, epoch_calc_nodelay])
-    info_calc_reslock = pd.concat([info_calc_delay, info_calc_nodelay])
-
-
-    print ('done')
 
     # Baseline correct if needed
     if baselinecorr == 'baseline':
@@ -72,6 +61,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
         print('downsampling')
         epoch_calc.decimate(decimate)
         epoch_calc_reslock.decimate(decimate)
+        epoch_calc_resplock.decimate(decimate)
         # epoch_vsa.decimate(decimate)
         print('done')
 
@@ -199,6 +189,126 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': -0.1, 'stop': 1.5}
             test_times = {'start': -0.1, 'stop': 1.5}
+            # Response lock
+        elif train_set == 'resp_side':
+            train_index = info_calc_resplock['accuracy'] == 1
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['respSide'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'choice':
+            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['correct_choice'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'correctness':
+            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['deviant'])
+            y_train[y_train != 0] = 1
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'resplock_cres':
+            train_index = (info_calc_resplock['corrResult'] >= 3) & (info_calc_resplock['corrResult'] <= 6) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['accuracy'] == 1)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'resplock_pres':
+            train_index = (info_calc_resplock['presResult'] >= 3) & (info_calc_resplock['presResult'] <= 6) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['accuracy'] == 1)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['presResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'resplock_op1':
+            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['operand1'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'resplock_op2':
+            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+        elif train_set == 'resplock_operator':
+            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': -0.004}
+            test_times = train_times
+            # Result lock
+        elif train_set == 'resultlock_cres':
+            train_index = (epoch_calc_reslock['corrResult'] >= 3) & (epoch_calc_reslock['corrResult'] <= 6) & (epoch_calc_reslock['operator'] != 0) & (epoch_calc_reslock['accuracy'] == 1)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': .8}
+            test_times = train_times
+        elif train_set == 'resultlock_pres':
+            train_index = (epoch_calc_reslock['presResult'] >= 3) & (epoch_calc_reslock['presResult'] <= 6) & (epoch_calc_reslock['operator'] != 0) & (epoch_calc_reslock['accuracy'] == 1)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['presResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': .8}
+            test_times = train_times
+        elif train_set == 'resultlock_op1':
+            train_index = (epoch_calc_reslock['accuracy'] == 1) & (epoch_calc_reslock['operator'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['operand1'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': .8}
+            test_times = train_times
+        elif train_set == 'resultlock_op2':
+            train_index = (epoch_calc_reslock['accuracy'] == 1) & (epoch_calc_reslock['operator'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': .8}
+            test_times = train_times
+        elif train_set == 'resultlock_operator':
+            train_index = (epoch_calc_reslock['accuracy'] == 1) & (epoch_calc_reslock['operator'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.2, 'stop': .8}
+            test_times = train_times
     else:
         mode = 'mean-prediction'
         if (train_set == 'op1') & (test_set == 'presTlock'):
