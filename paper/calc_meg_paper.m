@@ -27,8 +27,8 @@ end
 %% Time-locked to C and to response
 for subj = 1:length(sub_name_all)
     load([data_dir sub_name_all{subj}, '_calc_lp30.mat'])
-    timelock(data, sub_name_all{subj}, 'response')
-    timelock(data, sub_name_all{subj}, 'result')
+    lost_trials(subj,:) = timelock(data, sub_name_all{subj}, 'response');
+    %timelock(data, sub_name_all{subj}, 'result')
 end
 
 

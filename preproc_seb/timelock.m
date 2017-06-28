@@ -1,4 +1,4 @@
-function timelock(data, subject, position)
+function lost_trials = timelock(data, subject, position)
     %% Initialize dirs
     InitDirsMEGcalc
     %%
@@ -7,15 +7,15 @@ function timelock(data, subject, position)
         % Time-lock to the response
         for i = 1:length(data.trial)
             if data.trialinfo.delay(i) == 1
-                time_epoch = 3.6 + data.trialinfo.rt(i)/1000;
+                time_epoch = 3.6 + data.trialinfo.rt(i)/1000 + .1;
             else
-                time_epoch = 3.2 + data.trialinfo.rt(i)/1000;
+                time_epoch = 3.2 + data.trialinfo.rt(i)/1000 + .1;
             end
 
             if time_epoch <= max(data.time{1})
                 good_trials(i) = 1;
                 time_resp = round((abs(min(data.time{1}))+time_epoch)*data.fsample);
-                time_before_resp = round((abs(min(data.time{1}))+time_epoch)*data.fsample) - round(0.6*data.fsample);
+                time_before_resp = round((abs(min(data.time{1}))+time_epoch)*data.fsample) - round(0.7*data.fsample);
                 locked_data{i} = data.trial{i}(:,time_before_resp:time_resp);
                 locked_data_ECGEOG{i} = data.ECGEOG{i}(:,time_before_resp:time_resp);
             else
@@ -40,9 +40,10 @@ function timelock(data, subject, position)
         % Correct time
         data.time = {};
         for i = 1:length(data.trial)
-            data.time{i} = -0.6:0.004:0;
+            data.time{i} = -0.6:0.004:.1;
         end
         % Save
+        lost_trials = [length(good_trials) sum(good_trials) 1-sum(good_trials)/length(good_trials)]; 
         save([data_dir subject '_' 'calc' '_lp30_TLresponse.mat'], 'data')   % Save the structure in MAT file
 
 
@@ -69,6 +70,8 @@ function timelock(data, subject, position)
             data.time{i} = -0.2:0.004:.8;
         end
         % Save
+        lost_trials = 0; 
+
         save([data_dir subject '_' 'calc' '_lp30_TLresult.mat'], 'data')   % Save the structure in MAT file
 
         
