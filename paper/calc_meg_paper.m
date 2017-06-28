@@ -12,7 +12,7 @@ sub_name_all = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11
 sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
 %% Add accuracy to all subjects
-%addAccuracy(sub_name_all)
+addAccuracy(sub_name_all)
 
 %% Low pass and downsample the data
 for subj = 1:length(sub_name_all)
@@ -28,7 +28,7 @@ end
 for subj = 1:length(sub_name_all)
     load([data_dir sub_name_all{subj}, '_calc_lp30.mat'])
     lost_trials(subj,:) = timelock(data, sub_name_all{subj}, 'response');
-    %timelock(data, sub_name_all{subj}, 'result')
+    timelock(data, sub_name_all{subj}, 'result')
 end
 
 
