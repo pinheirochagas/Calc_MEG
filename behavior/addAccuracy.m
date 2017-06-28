@@ -7,7 +7,6 @@ InitDirsMEGcalc
 %% Load response key
 load('response_key.mat')
 
-
 %% Loop accross subjects
 for sub = 1:length(subject)
     %% Load data
