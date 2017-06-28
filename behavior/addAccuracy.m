@@ -6,6 +6,7 @@ InitDirsMEGcalc
 
 %% Load response key
 load('response_key.mat')
+response(end,2) == 1; % correct for apparent mistake on subject 22
 
 %% Loop accross subjects
 for sub = 1:length(subject)

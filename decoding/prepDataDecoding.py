@@ -185,7 +185,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'choice':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -197,7 +197,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'correctness':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -210,7 +210,19 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
+            test_times = train_times
+        elif train_set == 'resplock_absdeviant':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
+            epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_resplock.decimate(decimate)
+            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['absdeviant'] != 0)
+            X_train = epoch_calc_resplock[train_index]
+            y_train = np.array(info_calc_resplock[train_index]['absdeviant'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'resplock_cres':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -222,7 +234,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'resplock_pres':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -234,7 +246,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'resplock_op1':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -246,7 +258,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'resplock_op2':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -258,7 +270,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
         elif train_set == 'resplock_operator':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
@@ -270,7 +282,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.6, 'stop': -0.004}
+            train_times = {'start': -0.6, 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
             # Result lock
         elif train_set == 'resultlock_cres':
