@@ -6,7 +6,6 @@ InitDirsMEGcalc
 
 %% Load response key
 load('response_key.mat')
-response(end,2) == 1; % correct for apparent mistake on subject 22
 
 %% Loop accross subjects
 for sub = 1:length(subject)
@@ -65,6 +64,7 @@ for sub = 1:length(subject)
     
     %% Put back to original trialinfo format
     data.trialinfo = trialinfo;
+    data.trialinfo.rt = data.trialinfo.rt - 50; % Correct visual delay
     
     
     %% Plug back to data and save

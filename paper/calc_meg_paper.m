@@ -14,7 +14,7 @@ sub_name_all = {'s22'};
 sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
 %% Add accuracy to all subjects
-addAccuracy(sub_name_all)
+addAccuracy(sub_name_all) % This also corrects the RT by the visual delay 
 
 %% Low pass and downsample the data
 for subj = 1:length(sub_name_all)
