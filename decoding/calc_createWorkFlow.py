@@ -23,23 +23,23 @@ def calc_createWorkFlow(conditions, subjects, baselinecorr, dec_method, dec_scor
     python_file, Listfile = [], []
     # python_file_reg, Listfile_reg = [], []
 
-    for c, condcouple in enumerate(conditions):
-        for s, subject in enumerate(subjects):
-            body = initbody + "params = prepDataDecoding(dirs," + "'"+condcouple[0]+"'" + "," + "'"+condcouple[1]+"'" + "," + "'"+subject+"'" + "," + "'"+baselinecorr+"'" + "," + str(decimate) + ")\n"
-            body_class = body + "calcDecoding(params," + "'"+dec_method+"'" "," + "'"+dec_scorer+"'" + "," + "'"+gatordiag+"'" + ")"
+    #for c, condcouple in enumerate(conditions):
+    for s, subject in enumerate(subjects):
+        body = initbody + "params = prepDataDecoding(dirs," + "'"+conditions[0]+"'" + "," + "'"+conditions[1]+"'" + "," + "'"+subject+"'" + "," + "'"+baselinecorr+"'" + "," + str(decimate) + ")\n"
+        body_class = body + "calcDecoding(params," + "'"+dec_method+"'" "," + "'"+dec_scorer+"'" + "," + "'"+gatordiag+"'" + ")"
 
-            # body_reg = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'reg'" + ")"
+        # body_reg = initbody + "calc_dec_wTask_CR('" + wkdir + "'," + str(condcouple) + "," + "'" + subject + "'" "," "'reg'" + ")"
 
-            # Use a transparent and complete job name referring to arguments of interests
-            jobname = subject + '_' + condcouple[0] + '_' + condcouple[1] + '_' + dec_method
-            ListJobName.append(jobname)
+        # Use a transparent and complete job name referring to arguments of interests
+        jobname = subject + '_' + conditions[0] + '_' + conditions[1] + '_' + dec_method + '_' + dec_scorer
+        ListJobName.append(jobname)
 
-            # Write jobs in a dedicated folder
-            name_file_class = os.path.join(dirs['root'], ('scripts/decoding/somaWF/jobs/jobs_' + jobname + '.py'))
+        # Write jobs in a dedicated folder
+        name_file_class = os.path.join(dirs['root'], ('scripts/decoding/somaWF/jobs/jobs_' + jobname + '.py'))
 
-            Listfile.append(name_file_class)
-            with open(name_file_class, 'w') as python_file:
-                python_file.write(body_class)
+        Listfile.append(name_file_class)
+        with open(name_file_class, 'w') as python_file:
+            python_file.write(body_class)
 
     # Create workflow
     jobs = []
@@ -54,5 +54,5 @@ def calc_createWorkFlow(conditions, subjects, baselinecorr, dec_method, dec_scor
     WfVar = Workflow(jobs = jobs)
     # WfVar = Workflow(jobs = jobs, dependencies = dependencies)
 
-    somaWF_name = dirs['script'] + 'somaWF/workflows/calc_WorkFlow_withinTask_class'
+    somaWF_name = dirs['script'] + 'somaWF/workflows/calc_WorkFlow_' + conditions[0] + '_' + conditions[1] + '_' + dec_method + '_' + dec_scorer
     Helper.serialize(somaWF_name, WfVar)

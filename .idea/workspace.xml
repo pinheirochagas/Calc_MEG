@@ -3,13 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="b5d51ef7-6129-45d3-92f7-77465b79927c" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/.~lock.calc_WorkFlow_withinTask_class#" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/behavior/addAccuracy.m" afterPath="$PROJECT_DIR$/behavior/addAccuracy.m" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_classEreg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_reg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/GATclassifiers.py" afterPath="$PROJECT_DIR$/decoding/GATclassifiers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" afterPath="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/createJobsSoma.py" afterPath="$PROJECT_DIR$/decoding/createJobsSoma.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/notebooks/decoding_notebook.ipynb" afterPath="$PROJECT_DIR$/decoding/notebooks/decoding_notebook.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/notebooks/decoding_notebook_choice_choice.ipynb" afterPath="$PROJECT_DIR$/decoding/notebooks/decoding_notebook_choice_choice.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/prepDataDecoding.py" afterPath="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paper/calc_meg_paper.m" afterPath="$PROJECT_DIR$/paper/calc_meg_paper.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/test_bulshit.py" afterPath="$PROJECT_DIR$/decoding/test_bulshit.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,21 +31,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/createJobsSoma.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="88" lean-forward="false" selection-start-line="7" selection-start-column="88" selection-end-line="7" selection-end-column="88" />
+            <state relative-caret-position="461">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="214" column="46" lean-forward="false" selection-start-line="214" selection-start-column="27" selection-end-line="214" selection-end-column="46" />
+            <state relative-caret-position="97">
+              <caret line="239" column="40" lean-forward="false" selection-start-line="239" selection-start-column="27" selection-end-line="239" selection-end-column="40" />
               <folding>
                 <element signature="e#12#22#0" expanded="true" />
               </folding>
@@ -49,12 +53,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calc_twoClassClassify.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/decoding/other_organize/calc_twoClassClassify.py">
+      <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="780">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="41" selection-end-column="29" />
+              <folding>
+                <element signature="e#70#80#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,8 +68,18 @@
       <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1840">
-              <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="4180">
+              <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plotDecoding.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,18 +88,8 @@
       <file leaf-file-name="test_bulshit.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fldtrp2mne.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="380">
+              <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -92,7 +98,7 @@
       <file leaf-file-name="epochsTimeLock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
+            <state relative-caret-position="20">
               <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -104,8 +110,8 @@
       <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+            <state relative-caret-position="380">
+              <caret line="115" column="33" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="33" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
               </folding>
@@ -116,8 +122,8 @@
       <file leaf-file-name="calc_createWorkFlow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+            <state relative-caret-position="400">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -126,8 +132,8 @@
       <file leaf-file-name="fldtrp2mne_calc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="56" column="18" lean-forward="false" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="18" />
+            <state relative-caret-position="543">
+              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,6 +151,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>pretty</find>
+      <find>crop</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,15 +168,16 @@
         <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_class.py" />
         <option value="$PROJECT_DIR$/decoding/other_organize/probably_keep/createJobsSoma.py" />
         <option value="$PROJECT_DIR$/decoding/other_organize/notebooks/calc_decode_corrResult_allsub.ipynb" />
-        <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" />
         <option value="$PROJECT_DIR$/decoding/calcDecoding.py" />
-        <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
         <option value="$PROJECT_DIR$/decoding/timeLockResult.py" />
         <option value="$PROJECT_DIR$/decoding/epochsTimeLock.py" />
+        <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
+        <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" />
         <option value="$PROJECT_DIR$/decoding/test_bulshit.py" />
         <option value="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
-        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
+        <option value="$PROJECT_DIR$/decoding/plotDecoding.py" />
         <option value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
+        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
       </list>
     </option>
   </component>
@@ -198,6 +206,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -226,11 +235,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/decoding/test_bulshit.py" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
@@ -250,25 +258,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.createJobsSoma">
-    <configuration default="false" name="createJobsSoma" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/decoding" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="scripts" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.test">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -365,14 +355,46 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="1">
+    <configuration default="false" name="createJobsSoma" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/decoding" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="scripts" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/volatile/anaconda/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/decoding" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="scripts" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/decoding/test_bulshit.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.createJobsSoma" />
+      <item index="1" class="java.lang.String" itemvalue="Python.test" />
     </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.createJobsSoma" />
-      </list>
-    </recent_temporary>
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -419,17 +441,17 @@
     <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16860144" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116639026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5026022" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3200371" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.49739778" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41001856" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4090909" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.4980631" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39981446" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -464,26 +486,22 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="36" />
-          <folding>
-            <element signature="e#12#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -537,7 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -553,9 +570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="e#216#225#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -592,7 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -622,157 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11320">
           <caret line="566" column="21" lean-forward="false" selection-start-line="566" selection-start-column="21" selection-end-line="566" selection-end-column="21" />
-          <folding>
-            <marker date="1482297092000" expanded="true" signature="0:1612" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="1634:1647" ph="..." />
-            <marker date="1482297092000" expanded="false" signature="1649:1837" ph="import ..." />
-            <marker date="1482297092000" expanded="true" signature="1839:1887" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="1922:1941" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="1994:2016" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2018:2052" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2090:2604" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2224:2357" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2381:2525" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2443:2524" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2550:2604" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2683:3820" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="2836:2901" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3051:3765" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3125:3206" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3232:3302" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3544:3742" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3822:3861" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3882:18031" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="3887:3965" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="4099:6015" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="4374:4501" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="5191:5282" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="5800:5971" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="6052:6579" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="6061:6224" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="6299:6556" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="6378:6556" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="6612:7261" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="6621:6755" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="6814:7261" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="6894:7052" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="7292:7452" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="7482:7706" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="7752:7906" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="7761:7816" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="7958:8117" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="7967:8020" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="8167:8931" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8176:8272" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="8333:8553" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8414:8525" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8415:8504" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8567:8931" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8751:8865" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8752:8844" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="8991:9758" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9000:9081" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="9142:9371" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9232:9343" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9233:9322" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9385:9758" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9578:9692" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9579:9671" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9825:10087" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="9834:9902" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="10160:10873" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="10169:10235" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-            <marker date="1482297092000" expanded="true" signature="10383:10510" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="10740:10849" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="10741:10842" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="10923:11334" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="10977:11074" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11158:11220" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11415:13119" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11522:12582" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11582:12284" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11633:12084" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11671:11774" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="11876:12084" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="12106:12262" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="12141:12233" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="12320:12582" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="12498:12582" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="12658:12987" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13185:14974" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13247:13845" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13333:13428" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13459:13601" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13631:13706" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13898:14336" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="13984:14079" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="14109:14198" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="14378:14859" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="14447:14637" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="14654:14798" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="14690:14798" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15029:15191" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15068:15191" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15218:15344" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15366:15507" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15427:15507" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15533:15673" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="15694:15929" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="16005:16307" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="16246:16307" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="16468:18031" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="16927:17072" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="17324:17465" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="17392:17465" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="17793:18031" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="17862:18031" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="17895:18031" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18033:18097" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18125:19285" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18167:18387" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18409:18436" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18463:18519" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18554:18719" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18596:18669" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18753:18940" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="18969:19285" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19137:19200" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19349:19411" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19442:20752" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19503:19874" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19685:19783" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19914:20752" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="19975:20452" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20123:20452" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20307:20386" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20467:20752" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20623:20694" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20754:20811" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20840:22814" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="20872:21152" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21177:21197" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21232:21882" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21274:21736" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21367:21736" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21601:21736" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21957:22529" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="21999:22479" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22032:22333" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22158:22297" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22565:22814" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22607:22764" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22685:22764" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22816:22883" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22927:23232" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22956:23232" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="22998:23182" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="23234:23239" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="23264:23999" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="23368:23430" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="23460:23626" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="23702:23999" ph="..." />
-            <marker date="1482297092000" expanded="true" signature="23817:23942" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -780,7 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="405" column="0" lean-forward="false" selection-start-line="405" selection-start-column="0" selection-end-line="405" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -788,7 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="3065" column="0" lean-forward="false" selection-start-line="3065" selection-start-column="0" selection-end-line="3065" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -796,18 +656,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="636" column="12" lean-forward="false" selection-start-line="636" selection-start-column="12" selection-end-line="636" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/other_organize/probably_keep/createJobsSoma.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/other_organize/probably_keep/createJobsSoma.py" />
     <entry file="file://$PROJECT_DIR$/decoding/other_organize/notebooks/calc_decode_corrResult_allsub.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -819,7 +671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="740">
           <caret line="436" column="0" lean-forward="false" selection-start-line="436" selection-start-column="0" selection-end-line="448" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -827,29 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="60" column="174" lean-forward="false" selection-start-line="60" selection-start-column="156" selection-end-line="60" selection-end-column="174" />
-          <folding>
-            <element signature="e#216#225#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="34" column="38" lean-forward="false" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
-          <folding>
-            <element signature="e#70#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
-          <folding>
-            <element signature="e#62#80#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -857,9 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-          <folding>
-            <element signature="e#1#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,40 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="56" column="18" lean-forward="false" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="14" column="36" lean-forward="false" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -913,29 +704,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
+    <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1840">
-          <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="20">
+          <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="115" column="33" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="33" />
+          <folding>
+            <element signature="e#62#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="214" column="46" lean-forward="false" selection-start-line="214" selection-start-column="27" selection-end-line="214" selection-end-column="46" />
+        <state relative-caret-position="4180">
+          <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="41" selection-end-column="29" />
           <folding>
-            <element signature="e#12#22#0" expanded="true" />
+            <element signature="e#70#80#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/createJobsSoma.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="88" lean-forward="false" selection-start-line="7" selection-start-column="88" selection-end-line="7" selection-end-column="88" />
+        <state relative-caret-position="461">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="239" column="40" lean-forward="false" selection-start-line="239" selection-start-column="27" selection-end-line="239" selection-end-column="40" />
+          <folding>
+            <element signature="e#12#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

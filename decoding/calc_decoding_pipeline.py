@@ -208,8 +208,3 @@ calc_dec_wTask_CR(root_dir,['addsub', 'addsub'],'s01','class')
 
 ##############################################################
 
-# Find peak decoding of op2
-
-
-
-

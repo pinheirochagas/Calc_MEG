@@ -107,7 +107,7 @@ def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, param
     clf = make_pipeline(scaler, model)
 
     # Cross-validation
-    cv = StratifiedKFold(y_train, 5)
+    cv = StratifiedKFold(y_train, 8)
 
     # Define scorer
     if scorer is 'scorer_auc':
@@ -123,15 +123,23 @@ def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, param
 
     ###Learning process###
     gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'],
-                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=8)
+                                   test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode, n_jobs=1)
 
     # Determine whether to generalize only across time or also across conditions
     if predict_mode == 'cross-validation':
+        print('fitting')
         gat.fit(X_train, y=y_train)
+        print('done fitting')
+        print('scoring')
         gat.score(X_train, y=y_train)
+        print('done scoring')
     elif predict_mode == 'mean-prediction':
+        print('fitting')
         gat.fit(X_train, y=y_train)
+        print('done fitting')
+        print('scoring')
         gat.score(X_test, y=y_test)
+        print('done scoring')
 
     # Organize and save
     score = np.array(gat.scores_)
@@ -139,6 +147,7 @@ def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, param
     y_pred = np.array(gat.y_pred_)
 
     return y_pred, score, diagonal
+
 
 
     # print(gat)
