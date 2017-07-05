@@ -31,6 +31,55 @@ for s, subject in enumerate(subjects):
     calcDecoding(params, dec_method, dec_scorer, gatordiag)
 
 
+
+### Decoding results
+from combineSubsDecoding import combineSubsDecoding
+
+#Basics
+#List of parameters
+subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
+baselinecorr = 'nobaseline'
+dec_method = 'class'  # or 'reg'
+dec_scorer = 'accuracy'  # or 'kendall_score'
+gatordiag = 'gat'
+conditions = [['vsa', 'vsa']]
+sfreq = 150
+chance = .5  # chance-level
+
+# Prepare results
+res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance)
+
+# Plot
+times = None
+# Libraries
+import matplotlib.pyplot as plt
+from jr.plot import base, gat_plot, pretty_gat, pretty_decod, pretty_slices
+from initDirs import dirs
+
+# GAT individual subjects
+for c, cond in enumerate(conditions):
+    for s, sub in enumerate(subjects):
+        plt.subplot(4,5,s+1)
+        pretty_gat(res['all_scores'][c, s, :, :], times=times, chance=chance, ax=None, sig=None, cmap='RdBu_r',
+                   clim=None, colorbar=True, sfreq=sfreq, test_times=None)
+        plt.title(cond[0] + '_'+ cond[1] + ' ' + sub)
+fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_' + 'gat_individual.png'
+plt.savefig(fname, dpi=600)
+
+# Diagonal individual subjects
+for c, cond in enumerate(conditions):
+    for s, sub in enumerate(subjects):
+        plt.subplot(4,5,s+1)
+        #print(times[np.where(p_values_diagonal[c, :] < .05)])
+        pretty_decod(res['all_diagonals'][c, s, :], times=times, chance=chance, fill=True, sfreq=sfreq)
+        plt.title(cond[0] + '_' + cond[1] + ' ' + sub)
+fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_' + 'diagonal_individual.png'
+plt.savefig(fname, dpi = 600)
+
+
+
+
+
 #######################################################################################################################
 
 

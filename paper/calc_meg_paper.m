@@ -8,7 +8,7 @@ cd(cosmo_mvpa_dir)
 cosmo_set_path()
 
 %%  List subjects
-sub_name_all = {'s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
+sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
 sub_name_all = {'s22'};
 
 sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
@@ -33,12 +33,42 @@ for subj = 1:length(sub_name_all)
     timelock(data, sub_name_all{subj}, 'result')
 end
 
+%% Global field power
+GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
 
+data_all = struct;
+cfg = [];
+cfg.keeptrials = 'no';
+for subj = 1:length(sub_name_all);
+    load([data_dir sub_name_all{subj} '_calc_lp30.mat'])
+    data = filterData(data, 'calc');
+    data_all.(sub_name_all{subj}) = ft_timelockanalysis(cfg, data);
+end
 
+cfg = [];
+cfg.keepindividual = 'no';
+[data_grandavg] = ft_timelockgrandaverage(cfg, data_all.(sub_name_all{1}), data_all.(sub_name_all{2}), data_all.(sub_name_all{3}), data_all.(sub_name_all{4}), data_all.(sub_name_all{5}), ...
+                                           data_all.(sub_name_all{6}), data_all.(sub_name_all{7}), data_all.(sub_name_all{8}), data_all.(sub_name_all{9}), data_all.(sub_name_all{10}), ...
+                                           data_all.(sub_name_all{11}), data_all.(sub_name_all{12}), data_all.(sub_name_all{13}), data_all.(sub_name_all{14}), data_all.(sub_name_all{15}), ...
+                                           data_all.(sub_name_all{16}), data_all.(sub_name_all{17}), data_all.(sub_name_all{18}), data_all.(sub_name_all{19}), data_all.(sub_name_all{20}));
 
-data_new = load([data_dir sub_name{3} '_' 'calc' '_lp25_125hz.mat'])
+% Global field power
+cfg = [];
+cfg.methods = 'power';
+[gmf] = ft_globalmeanfield(cfg, data_grandavg);
 
-data = load([data_dir sub_name{3} '_' 'calc' '.mat'])
+LineCol = [0 0 0];
+LineWidthMark = 1;
+plot(gmf.time, gmf.avg, 'LineWidth', 3)
+line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([3.6 3.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+title('Global field power')
+savePNG(gcf,200, [GFP_result_dir 'gfp_lp30.png'])
+
 
     
 %% Behavior analysis
@@ -68,23 +98,133 @@ for i = length(sub_name);
     clear('data', 'TFR', 'trialinfo')
 end
 
+for i = 1:length(sub_name_all);
+    load([data_dir, sub_name_all{i}, '_calc_AICA_acc.mat'])
+    data = filterData(data, 'calc');
+    [TFR, trialinfo] = ftTFAallfreq(data, 'no');
+    save([tfa_data_dir, sub_name_all{i}, '_TFA_allfreq_calc.mat'],'TFR','trialinfo','-v7.3');
+end
+
+
+
 %% Explore TF analysis
 % plot parameters
 
-load([tfa_data_dir,'s08_TFA_low.mat'])
-load([tfa_data_dir,'s08_TFA_high.mat'])
+data = struct;
+for i = 1:length(sub_name_all);
+    load([tfa_data_dir, sub_name_all{i}, '_TFA_allfreq_calc.mat'])
+    data.(sub_name_all{i}) = TFR;
+end
+
+cfg = [];
+cfg.keepindividual = 'yes';
+[data_grandavg] = ft_freqgrandaverage(cfg, data.(sub_name_all{1}), data.(sub_name_all{2}), data.(sub_name_all{3}), data.(sub_name_all{4}), data.(sub_name_all{5}), ...
+                                           data.(sub_name_all{6}), data.(sub_name_all{7}), data.(sub_name_all{8}), data.(sub_name_all{9}), data.(sub_name_all{10}), ...
+                                           data.(sub_name_all{11}), data.(sub_name_all{12}), data.(sub_name_all{13}), data.(sub_name_all{14}), data.(sub_name_all{15}), ...
+                                           data.(sub_name_all{16}), data.(sub_name_all{17}), data.(sub_name_all{18}), data.(sub_name_all{19}), data.(sub_name_all{20}));
+
+
+
 
 load SensorClassification;
 
 cfg = [];
 cfg.showlabels   = 'no';	
-cfg.layout       = 'neuromag306.lay'; %neuromag306all.lay neuromag306mag
-% cfg.channel = Grad;
-cfg.baseline = [-0.2 -0.02];
-cfg.baselinetype = 'db';
+cfg.layout       = 'neuromag306all.lay'; %neuromag306all.lay neuromag306mag
+%cfg.channel = Grad;
+%cfg.baseline = [-0.5 -0.02];
+%cfg.baselinetype = 'db';
+
+ft_multiplotTFR(cfg, data_grandavg);
+
+
 
 TFRlow = TFR
 TFRhigh = TFR
+
+%% Run ICA
+ICA_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/ICA/';
+
+%save([data_dir, sub_name_all{i}, '_ICA.mat'],'comp','-v7.3');
+
+for i = 1:length(sub_name_all);
+    load([data_dir, sub_name_all{i}, '_calc_AICA_acc.mat'])
+    data = filterData(data, 'calc');
+    [~,data] = timelock(data, sub_name_all{subj}, 'op2');
+end
+
+cfg = [];
+cfg.method = 'runica';
+cfg.runica.pca = 60;
+comp = ft_componentanalysis(cfg, data);
+
+
+
+data_reshape = cell2mat(arrayfun(@(x)permute(x{:},[1 3 2]),comp.trial,'UniformOutput',false));
+
+colors_plot = parula(20);
+LineCol = [0 0 0];
+LineWidthMark = 1;
+
+for i=1:20
+    subplot(4,5,i)
+    plot(comp.time{1},squeeze(mean(data_reshape(i,:,:),2)), 'Color', colors_plot(i,:), 'LineWidth', 3)
+    line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    box on
+    title(['component ' num2str(i)])
+end
+savePNG(gcf,200, [ICA_result_dir sub_name_all{7} 'comp_0-20_avg.png'])
+
+
+
+
+a = squeeze(data_reshape(1,:,:));
+
+
+comp.topolabel == SensorClassification.Mag2
+
+for i = 1:length(data.trial)
+    data
+end
+
+grad1 = 1:3:306
+grad2 = 2:3:306
+mag = 3:3:306
+
+
+
+
+
+
+SensorClassification = load('SensorClassification.mat')
+SensorClassification.Mag2
+
+
+
+cfg           = [];
+cfg.component = [1:20];       % specify the component(s) that should be plotted
+cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
+cfg.comment   = 'no';
+ft_topoplotIC(cfg, comp)
+savePNG(gcf,200, [ICA_result_dir sub_name_all{7} 'comp_0-20.png'])
+
+cfg = [];
+cfg.component = [1];       % specify the component(s) that should be plotted
+cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
+cfg.viewmode = 'component';
+ft_databrowser(cfg, comp)
+
+cfg = [];
+freq = ft_timelockanalysis(cfg, comp);
+
+
+cfg          = [];
+cfg.channel  = [2:5 15:18]; % components to be plotted
+cfg.viewmode = 'component';
+cfg.layout   = 'neuromag306cmb.lay'; % specify the layout file that should be used for plotting
+ft_databrowser(cfg, comp)
+
 
 %% Cosmo time-frequency-space searchlight LDA
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'low', 10, 1, 1, 5);
