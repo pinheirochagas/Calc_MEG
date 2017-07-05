@@ -79,7 +79,7 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
     results = ({'conditions': conditions, 'all_scores': all_scores, 'all_diagonals': all_diagonals, 'group_scores': group_scores, 'sem_group_scores': sem_group_scores, 'group_diagonal': group_diagonal,
                'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat, 'p_values_gat_fdr': p_values_gat_fdr,'p_values_diagonal': p_values_diagonal, 'p_values_diagonal_fdr': p_values_diagonal_fdr,
                'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal, 'p_values_diagonal_fdr': p_values_diagonal_fdr,
-               'sfreq': sfreq})
+               'sfreq': sfreq, 'train_times': results['train_times'], 'test_times': results['test_times']})
 
     return results
 

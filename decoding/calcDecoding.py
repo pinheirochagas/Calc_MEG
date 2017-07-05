@@ -23,16 +23,16 @@ def calcDecoding(params, type, scorer, gatordiag):
     if type == 'class':
         # Define scorer
         print('Decoding classification subject ' + params['subject'])
-        y_pred, score, diagonal = calcClassification(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+        y_true, y_pred, score, diagonal = calcClassification(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     elif type == 'reg':
         # Define scorer
         print('Decoding regression subject ' + params['subject'])
-        y_pred, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+        y_true, y_pred, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     print('decoding subject ' + params['subject'] + ' done!')
 
     # Organize results
     # results = ({'params': params,'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
-    results = ({'train_times': params['train_times'], 'test_times': params['test_times'], 'times_calc': params['times_calc'], 'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
+    results = ({'train_times': params['train_times'], 'test_times': params['test_times'], 'times_calc': params['times_calc'], 'y_true': y_true, 'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
     print ('results size is: ' + str(sys.getsizeof(results))) + ' bytes'
 
     print('saving results')
