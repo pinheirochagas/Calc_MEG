@@ -6,10 +6,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_classEreg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_reg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/GATclassifiers.py" afterPath="$PROJECT_DIR$/decoding/GATclassifiers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/prepDataDecoding.py" afterPath="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/test_bulshit.py" afterPath="$PROJECT_DIR$/decoding/test_bulshit.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +27,8 @@
       <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="469" column="40" lean-forward="false" selection-start-line="469" selection-start-column="31" selection-end-line="469" selection-end-column="40" />
+            <state relative-caret-position="147">
+              <caret line="462" column="27" lean-forward="true" selection-start-line="462" selection-start-column="27" selection-end-line="462" selection-end-column="27" />
               <folding>
                 <element signature="e#12#22#0" expanded="true" />
               </folding>
@@ -54,7 +51,7 @@
       <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
+            <state relative-caret-position="882">
               <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
               <folding />
             </state>
@@ -64,7 +61,7 @@
       <file leaf-file-name="plotDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="802">
               <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding />
             </state>
@@ -108,7 +105,7 @@
       <file leaf-file-name="calc_createWorkFlow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
+            <state relative-caret-position="448">
               <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
@@ -162,8 +159,8 @@
         <option value="$PROJECT_DIR$/decoding/plotDecoding.py" />
         <option value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
         <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
-        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
         <option value="$PROJECT_DIR$/decoding/test_bulshit.py" />
+        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
       </list>
     </option>
   </component>
@@ -425,6 +422,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11774461" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -434,7 +432,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4090909" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.4980631" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -471,14 +469,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/decoding/prepDataDecoding.py</url>
-          <line>466</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -685,56 +676,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="e#62#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-          <folding>
-            <element signature="e#70#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -755,6 +702,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="802">
+          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding>
+            <element signature="e#70#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -765,8 +756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="469" column="40" lean-forward="false" selection-start-line="469" selection-start-column="31" selection-end-line="469" selection-end-column="40" />
+        <state relative-caret-position="147">
+          <caret line="462" column="27" lean-forward="true" selection-start-line="462" selection-start-column="27" selection-end-line="462" selection-end-column="27" />
           <folding>
             <element signature="e#12#22#0" expanded="true" />
           </folding>

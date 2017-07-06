@@ -467,10 +467,10 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_index = info_calc['operator'] != 0
             test_index = info_vsa['congruency'] == 1
             X_train = epoch_calc[train_index]
-            y_train = np.array(info_calc[test_index]['operator'])
+            y_train = np.array(info_calc[train_index]['operator'])
             y_train = y_train.astype(np.float64)
             X_test = epoch_vsa[test_index]
-            y_test = np.array(info_vsa[train_index]['cue'])
+            y_test = np.array(info_vsa[test_index]['cue'])
             # Correct labels for the cue to match add and sub
             y_test[y_test == 1] = -1
             y_test[y_test == 2] = 1
