@@ -17,7 +17,7 @@ subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 subject = 's04'
 
 ##
-conditions = [['vsa', 'addsub']]
+conditions = [['addsub', 'vsa']]
 baselinecorr = 'nobaseline'
 dec_method = 'class'
 dec_scorer = 'accuracy'

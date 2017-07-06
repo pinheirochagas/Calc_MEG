@@ -308,7 +308,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'resultlock_pres':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -320,7 +320,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'resultlock_op1':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -332,7 +332,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'resultlock_op2':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -344,7 +344,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'resultlock_addsub':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -356,7 +356,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'resultlock_absdeviant':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -368,7 +368,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'resultlock_deviant':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -380,7 +380,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -0.2, 'stop': .8}
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
         elif train_set == 'vsa':
             train_index = info_vsa['congruency'] == 1

@@ -7,7 +7,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_classEreg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_reg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/GATclassifiers.py" afterPath="$PROJECT_DIR$/decoding/GATclassifiers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/prepDataDecoding.py" afterPath="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/test_bulshit.py" afterPath="$PROJECT_DIR$/decoding/test_bulshit.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,21 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/decoding/createJobsSoma.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1300">
-              <caret line="74" column="28" lean-forward="true" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+            <state relative-caret-position="227">
+              <caret line="469" column="40" lean-forward="false" selection-start-line="469" selection-start-column="31" selection-end-line="469" selection-end-column="40" />
               <folding>
                 <element signature="e#12#22#0" expanded="true" />
               </folding>
@@ -50,7 +42,7 @@
       <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="520">
               <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
               <folding>
                 <element signature="e#70#80#0" expanded="true" />
@@ -82,8 +74,8 @@
       <file leaf-file-name="test_bulshit.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+            <state relative-caret-position="320">
+              <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -104,8 +96,8 @@
       <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-40">
-              <caret line="115" column="33" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="33" />
+            <state relative-caret-position="301">
+              <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
               </folding>
@@ -126,8 +118,8 @@
       <file leaf-file-name="fldtrp2mne_calc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1480">
-              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+            <state relative-caret-position="668">
+              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -166,20 +158,20 @@
         <option value="$PROJECT_DIR$/decoding/timeLockResult.py" />
         <option value="$PROJECT_DIR$/decoding/epochsTimeLock.py" />
         <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" />
-        <option value="$PROJECT_DIR$/decoding/test_bulshit.py" />
         <option value="$PROJECT_DIR$/decoding/calc_decoding_pipeline.py" />
         <option value="$PROJECT_DIR$/decoding/plotDecoding.py" />
         <option value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
         <option value="$PROJECT_DIR$/decoding/GATclassifiers.py" />
         <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
+        <option value="$PROJECT_DIR$/decoding/test_bulshit.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="-11" />
-    <option name="width" value="1857" />
-    <option name="height" value="1212" />
+    <option name="x" value="65" />
+    <option name="y" value="-4" />
+    <option name="width" value="1855" />
+    <option name="height" value="1204" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -432,18 +424,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1857" height="1212" extended-state="6" />
-    <editor active="true" />
+    <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11774461" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5026022" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.49739778" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4090909" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4090909" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.4980631" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -482,23 +473,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py</url>
-          <line>67</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/decoding/prepDataDecoding.py</url>
+          <line>466</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="12" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow_withinTask_classEreg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="37" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/initDirs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -693,22 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1480">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="29" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/createJobsSoma.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="860">
@@ -725,10 +693,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/GATclassifiers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="115" column="33" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="33" />
+        <state relative-caret-position="301">
+          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="e#62#80#0" expanded="true" />
           </folding>
@@ -737,19 +713,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
+        <state relative-caret-position="520">
           <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
           <folding>
             <element signature="e#70#80#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -771,10 +739,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///volatile/anaconda/lib/python2.7/site-packages/pandas/core/indexing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="1938" column="0" lean-forward="false" selection-start-line="1938" selection-start-column="0" selection-end-line="1938" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/test_bulshit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="74" column="28" lean-forward="true" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+        <state relative-caret-position="227">
+          <caret line="469" column="40" lean-forward="false" selection-start-line="469" selection-start-column="31" selection-end-line="469" selection-end-column="40" />
           <folding>
             <element signature="e#12#22#0" expanded="true" />
           </folding>

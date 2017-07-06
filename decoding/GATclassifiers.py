@@ -85,8 +85,9 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     score = np.array(gat.scores_)
     diagonal = np.diagonal(score)
     y_pred = np.array(gat.y_pred_)
+    y_true = np.array(gat.y_true_)
 
-    return y_pred, score, diagonal
+    return y_true, y_pred, score, diagonal
 
 
 def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
