@@ -54,5 +54,5 @@ def calc_createWorkFlow(conditions, subjects, baselinecorr, dec_method, dec_scor
     WfVar = Workflow(jobs = jobs)
     # WfVar = Workflow(jobs = jobs, dependencies = dependencies)
 
-    somaWF_name = dirs['script'] + 'somaWF/workflows/calc_WorkFlow_' + conditions[0] + '_' + conditions[1] + '_' + dec_method + '_' + dec_scorer
+    somaWF_name = dirs['script'] + 'somaWF/workflows/' + conditions[0] + '_' + conditions[1] + '_' + dec_method + '_' + dec_scorer
     Helper.serialize(somaWF_name, WfVar)

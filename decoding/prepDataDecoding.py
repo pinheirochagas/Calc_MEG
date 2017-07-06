@@ -20,14 +20,12 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
 
     # Preprocessing
     baseline = (-0.2, -0.05)  # time for the baseline period
-    #decimate = 10  # downsampling factor (input at 250Hz)
 
     # Import epochs calc
     print('importing calc data')
     fname_calc = dirs['data'] + subject + '_calc_lp30.mat'  # make this dynamic
-    #fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
     epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
-    #epoch_calc.decimate(decimate)
+    epoch_calc.decimate(decimate)
     print('done')
 
     #Import epoch VSA in case
@@ -35,7 +33,6 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
         print('importing vsa data')
         fname_vsa = dirs['data'] + subject + '_vsa_lp30.mat'
         epoch_vsa, info_vsa = fldtrp2mne_calc(fname_vsa, 'data', 'vsa')
-        times_vsa = epoch_vsa.times
         epoch_vsa.decimate(decimate)
         print('done')
 
@@ -44,12 +41,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
         print('baseline correcting')
         epoch_calc.apply_baseline(baseline)
         print('done')
-    # Downsample data if needed
-    # #if decimate > 0:
-    #     print('downsampling')
-    #     epoch_calc.decimate(decimate)
-    #     # epoch_vsa.decimate(decimate)
-    #     print('done')
+
 
     # Select data
     print('selecting data')
@@ -129,24 +121,6 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             X_test = X_train
             y_test = y_train
             train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
-            test_times = train_times
-        elif train_set == 'presTlock':
-            train_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0)
-            X_train = epoch_calc_reslock[train_index]
-            y_train = np.array(info_calc_reslock[train_index]['presResult'])
-            y_train = y_train.astype(np.float64)
-            X_test = X_train
-            y_test = y_train
-            train_times = {'start': -0.2, 'stop': 0.8}
-            test_times = train_times
-        elif train_set == 'presTlockCres':
-            train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['deviant'] != 0)
-            X_train = epoch_calc_reslock[train_index]
-            y_train = np.array(info_calc_reslock[train_index]['corrResult'])
-            y_train = y_train.astype(np.float64)
-            X_test = X_train
-            y_test = y_train
-            train_times = {'start': -0.2, 'stop': 0.8}
             test_times = train_times
         elif train_set == 'op1_len50ms':
             train_index = info_calc['operator'] != 0

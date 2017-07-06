@@ -1,0 +1,296 @@
+{
+    "jobs": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6, 
+        7, 
+        8, 
+        9, 
+        10, 
+        11, 
+        12, 
+        13, 
+        14, 
+        15, 
+        16, 
+        17, 
+        18, 
+        19
+    ], 
+    "name": null, 
+    "serialized_temporary_paths": {}, 
+    "serialized_barriers": {}, 
+    "serialized_jobs": {
+        "11": {
+            "name": "s13_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s13_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "10": {
+            "name": "s12_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s12_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "13": {
+            "name": "s15_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s15_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "12": {
+            "name": "s14_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s14_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "15": {
+            "name": "s17_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s17_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "14": {
+            "name": "s16_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s16_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "17": {
+            "name": "s19_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s19_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "16": {
+            "name": "s18_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s18_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "19": {
+            "name": "s22_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s22_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "18": {
+            "name": "s21_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s21_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "1": {
+            "name": "s03_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s03_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "0": {
+            "name": "s02_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s02_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "3": {
+            "name": "s05_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s05_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "2": {
+            "name": "s04_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s04_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "5": {
+            "name": "s07_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s07_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "4": {
+            "name": "s06_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s06_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "7": {
+            "name": "s09_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s09_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "6": {
+            "name": "s08_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s08_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "9": {
+            "name": "s11_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s11_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }, 
+        "8": {
+            "name": "s10_vsa_vsa_class_accuracy", 
+            "parallel_job_info": null, 
+            "native_specification": "-l walltime=30:00:00, -l nodes=1:ppn=2", 
+            "priority": 0, 
+            "join_stderrout": false, 
+            "command": [
+                "python", 
+                "/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding/somaWF/jobs/jobs_s10_vsa_vsa_class_accuracy.py"
+            ], 
+            "disposal_timeout": 168
+        }
+    }, 
+    "serialized_file_transfers": {}, 
+    "serialized_groups": {}, 
+    "dependencies": [], 
+    "groups": [], 
+    "serialized_shared_res_paths": {}, 
+    "root_group": [
+        0, 
+        1, 
+        2, 
+        3, 
+        4, 
+        5, 
+        6, 
+        7, 
+        8, 
+        9, 
+        10, 
+        11, 
+        12, 
+        13, 
+        14, 
+        15, 
+        16, 
+        17, 
+        18, 
+        19
+    ]
+}
