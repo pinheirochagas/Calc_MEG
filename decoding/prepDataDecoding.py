@@ -400,7 +400,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_test.astype(np.float64)
             # Update params
             train_times = {'start': np.min(epoch_calc.times), 'stop': np.max(epoch_calc.times)}
-            test_times = {'start': -0.1, 'stop': 0.8}
+            test_times = {'start': np.min(epoch_cres.times), 'stop': np.max(epoch_cres.times)}
         elif (train_set == 'resultlock_cres') & (test_set == 'cres'):
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
             epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')

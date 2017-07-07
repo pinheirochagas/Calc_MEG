@@ -19,11 +19,18 @@ conditions = [['op1','op1'], ['addsub', 'addsub'], ['op2', 'op2'], ['cres', 'cre
               ['resplock_op2', 'resplock_op2'], ['resplock_addsub', 'resplock_addsub'], ['resplock_op1', 'resplock_op1'], ['vsa', 'vsa'],
               ['vsa', 'addsub'], ['addsub', 'vsa'], ['resultlock_cres', 'cres'], ['op1', 'cres'], ['op1', 'resultlock_pres']]
 
+conditions = [['op1','op1'], ['op2', 'op2'], ['cres', 'cres'], ['resultlock_op1', 'resultlock_op1'],
+              ['resultlock_op2', 'resultlock_op2'], ['resultlock_cres', 'resultlock_cres'],
+              ['resultlock_pres', 'resultlock_pres'], ['resultlock_absdeviant', 'resultlock_absdeviant'], ['resultlock_deviant', 'resultlock_deviant'],
+              ['resplock_absdeviant', 'resplock_absdeviant'], ['resplock_deviant', 'resplock_deviant'], ['resplock_pres', 'resplock_pres'], ['resplock_cres', 'resplock_cres'],
+              ['resplock_op2', 'resplock_op2'], ['resplock_op1', 'resplock_op1'],
+              ['resultlock_cres', 'cres'], ['op1', 'cres'], ['op1', 'resultlock_pres']]
+
 baselinecorr = 'nobaseline'
-dec_method = 'class'
-dec_scorer = 'accuracy'
-#dec_method = 'reg'
-#dec_scorer = 'kendall_score'
+#dec_method = 'class'
+#dec_scorer = 'accuracy'
+dec_method = 'reg'
+dec_scorer = 'kendall_score'
 gatordiag = 'gat'
 decimate = 2
 

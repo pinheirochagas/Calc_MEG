@@ -1496,6 +1496,8 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/old/launch_test_many.sh.e3372150" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/jobs/old/launch_test_many.sh.o3372150" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/.~lock.calc_WorkFlow_withinTask_class#" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/addsub_addsub_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/addsub_vsa_class_accuracy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_addsub_addsub_class_accuracy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_addsub_vsa_class_accuracy" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_cres_cres_class_accuracy" afterPath="" />
@@ -1525,8 +1527,30 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_classEreg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/calc_WorkFlow_withinTask_reg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" afterPath="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/cres_cres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/op1_cres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/op1_op1_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/op1_resultlock_pres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/op2_op2_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_absdeviant_resplock_absdeviant_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_addsub_resplock_addsub_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_choice_resplock_choice_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_cres_resplock_cres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_deviant_resplock_deviant_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_op1_resplock_op1_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_op2_resplock_op2_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_pres_resplock_pres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resplock_respside_resplock_respside_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_absdeviant_resultlock_absdeviant_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_addsub_resultlock_addsub_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_cres_cres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_cres_resultlock_cres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_deviant_resultlock_deviant_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_op1_resultlock_op1_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_op2_resultlock_op2_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/resultlock_pres_resultlock_pres_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/vsa_addsub_class_accuracy" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/decoding/somaWF/workflows/vsa_vsa_class_accuracy" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/createJobsSoma.py" afterPath="$PROJECT_DIR$/decoding/createJobsSoma.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/decoding/prepDataDecoding.py" afterPath="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
     </list>
@@ -1546,11 +1570,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/createJobsSoma.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            <state relative-caret-position="462">
+              <caret line="37" column="17" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="calc_createWorkFlow.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/decoding/somaWF/calc_createWorkFlow.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-260">
+              <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1569,8 +1603,8 @@
       <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-40">
-              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+            <state relative-caret-position="160">
+              <caret line="386" column="57" lean-forward="true" selection-start-line="386" selection-start-column="57" selection-end-line="386" selection-end-column="57" />
               <folding>
                 <element signature="e#12#22#0" expanded="true" />
               </folding>
@@ -1581,7 +1615,7 @@
       <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
+            <state relative-caret-position="440">
               <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
               <folding>
                 <element signature="e#70#80#0" expanded="true" />
@@ -1593,7 +1627,7 @@
       <file leaf-file-name="calc_decoding_pipeline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="882">
+            <state relative-caret-position="6140">
               <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
               <folding />
             </state>
@@ -1603,7 +1637,7 @@
       <file leaf-file-name="plotDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
+            <state relative-caret-position="2300">
               <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding />
             </state>
@@ -1623,7 +1657,7 @@
       <file leaf-file-name="epochsTimeLock.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
+            <state relative-caret-position="200">
               <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -1632,21 +1666,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calc_createWorkFlow.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="calc_createWorkFlow.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="868">
-              <caret line="56" column="53" lean-forward="false" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fldtrp2mne_calc.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
-              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state relative-caret-position="383">
+              <caret line="40" column="55" lean-forward="true" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -1692,8 +1716,9 @@
         <option value="$PROJECT_DIR$/decoding/test_bulshit.py" />
         <option value="$PROJECT_DIR$/decoding/calc_createWorkFlow.py" />
         <option value="$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s02_addsub_addsub_class.py" />
-        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
         <option value="$PROJECT_DIR$/decoding/createJobsSoma.py" />
+        <option value="$PROJECT_DIR$/decoding/somaWF/calc_createWorkFlow.py" />
+        <option value="$PROJECT_DIR$/decoding/prepDataDecoding.py" />
       </list>
     </option>
   </component>
@@ -1721,6 +1746,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1765,32 +1791,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="decoding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="somaWF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jobs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1996,16 +1999,16 @@
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33996683" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20674406" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5026022" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.49739778" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4090909" sideWeight="0.8030194" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283859" sideWeight="0.4980631" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38868275" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2041,19 +2044,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/decoding/somaWF/calc_createWorkFlow.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2145,13 +2147,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="70" lean-forward="false" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s01_cres_cres_class.py" />
     <entry file="file:///volatile/anaconda/lib/python2.7/multiprocessing/pool.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11320">
@@ -2227,15 +2223,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding>
-            <element signature="e#62#80#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/fldtrp2mne_calc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
+        <state relative-caret-position="1260">
           <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding />
         </state>
@@ -2245,13 +2238,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="1938" column="0" lean-forward="false" selection-start-line="1938" selection-start-column="0" selection-end-line="1938" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/epochsTimeLock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
+        <state relative-caret-position="200">
           <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -2261,7 +2253,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calc_decoding_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
+        <state relative-caret-position="6140">
           <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
           <folding />
         </state>
@@ -2269,7 +2261,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/calcDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
+        <state relative-caret-position="440">
           <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
           <folding>
             <element signature="e#70#80#0" expanded="true" />
@@ -2285,35 +2277,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="868">
-          <caret line="56" column="53" lean-forward="false" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/decoding/somaWF/jobs/jobs_s02_addsub_addsub_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="e#12#22#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/plotDecoding.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
+        <state relative-caret-position="2300">
           <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding />
         </state>
@@ -2329,8 +2302,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decoding/createJobsSoma.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        <state relative-caret-position="462">
+          <caret line="37" column="17" lean-forward="false" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/prepDataDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="386" column="57" lean-forward="true" selection-start-line="386" selection-start-column="57" selection-end-line="386" selection-end-column="57" />
+          <folding>
+            <element signature="e#12#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/somaWF/calc_createWorkFlow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-260">
+          <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decoding/calc_createWorkFlow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="40" column="55" lean-forward="true" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
           <folding />
         </state>
       </provider>
