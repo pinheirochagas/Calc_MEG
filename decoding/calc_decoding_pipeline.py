@@ -38,13 +38,13 @@ from combineSubsDecoding import combineSubsDecoding
 #Basics
 #List of parameters
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-subjects = ['s02', 's03', 's04']
+subjects = ['s17']
 
 baselinecorr = 'nobaseline'
 dec_method = 'class'  # or 'reg'
 dec_scorer = 'accuracy'  # or 'kendall_score'
 gatordiag = 'gat'
-conditions = [['vsa', 'vsa']]
+conditions = [['addsub', 'addsub']]
 sfreq = 125
 chance = .5  # chance-level
 
@@ -60,11 +60,13 @@ from initDirs import dirs
 import numpy as np
 
 #Times
+times = np.arange(res['train_times']['start'],res['train_times']['stop']+1/sfreq,1/sfreq)
 times = np.arange(res['train_times']['start'],res['train_times']['stop'],1/sfreq)
 times = None
 
 
 # GAT individual subjects
+plt.figure(num=None, figsize=(15,12), dpi=100, facecolor='w', edgecolor='k')
 for c, cond in enumerate(conditions):
     for s, sub in enumerate(subjects):
         plt.subplot(4,5,s+1)
@@ -75,6 +77,7 @@ fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond
 plt.savefig(fname, dpi=600)
 
 # Diagonal individual subjects
+plt.figure(num=None, figsize=(15,12), dpi=100, facecolor='w', edgecolor='k')
 for c, cond in enumerate(conditions):
     for s, sub in enumerate(subjects):
         plt.subplot(4,5,s+1)
@@ -90,7 +93,7 @@ p_val_th = 0.01
 p_vals = res['p_values_gat']
 p_vals = res['p_values_gat_fdr']
 
-
+plt.figure(num=None, figsize=(7,7), dpi=100, facecolor='w', edgecolor='k')
 for c, cond in enumerate(conditions):
     classLines = [None, None, None, None]
     print(cond)

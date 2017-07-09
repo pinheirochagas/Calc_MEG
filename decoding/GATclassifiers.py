@@ -19,6 +19,15 @@ from jr.gat.scorers import _parallel_scorer
 #from sklearn.feature_selection import f_classif
 #from initDirs import dirs
 
+
+import numpy as np
+
+from mne.decoding import UnsupervisedSpatialFilter
+from sklearn.decomposition import PCA
+from pyriemann.tangentspace import TangentSpace
+from pyriemann.estimation import (ERPCovariances, XdawnCovariances,
+                                  HankelCovariances)
+
 def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
     " Multiclass classification within or across conditions "
 
@@ -56,7 +65,13 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
 
 
     # Pipeline
-    clf = make_pipeline(scaler, model)
+    #clf = make_pipeline(scaler, model)
+    clf = make_pipeline(
+        UnsupervisedSpatialFilter(PCA(50), average=False),
+        XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
+        TangentSpace('logeuclid'),
+        svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+
     # clf = make_pipeline(fs, scaler, model)
 
     # Learning process

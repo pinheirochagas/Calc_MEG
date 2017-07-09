@@ -68,6 +68,28 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': -.2, 'stop': 4}  # 'length': 0.05 defonce memory!
             test_times = train_times
+        elif train_set == 'cres_riemann':
+            #fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
+            #epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
+            X_train = epoch_calc[train_index]
+            X_train.crop(1.6, 2.4)
+            y_train = np.array(info_calc[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+        elif train_set == 'addsub_riemann':
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            X_train.crop(.8, 1.2)
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
         elif train_set == 'cres_len200ms':
             train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
             X_train = epoch_calc[train_index]
