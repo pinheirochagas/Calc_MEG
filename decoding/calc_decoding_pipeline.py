@@ -6,32 +6,52 @@ from prepDataDecoding import prepDataDecoding
 from calcDecoding import calcDecoding
 from calcDecoding import calcDecodingAlltimes
 import numpy as np
+from classifyRiemann import classifyRiemann
+import pandas as pd
 
 # Subjects
 #subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
   #          's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
 
-subjects = ['s03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
-            's11', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's22']
+subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
 
-subject = 's03'
+
+subjects = ['s02', 's03']
 
 ##
-conditions = [['resp_side', 'resp_side']]
+conditions = [['op1_riemann', 'op1_riemann']]
 baselinecorr = 'nobaseline'
-dec_method = 'class'
+dec_method = 'classRiemann'
 dec_scorer = 'accuracy'
-gatordiag = 'gat'
+gatordiag = 'diagonal'
 decimate = 2
 
-params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
+#params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
+
+results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
 
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
-    calcDecoding(params, dec_method, dec_scorer, gatordiag)
+    #calcDecoding(params, dec_method, dec_scorer, gatordiag)
+    result = classRiemann(params['X_train'], params['y_train'])
+    results.loc[0] = result['Accuracy'][0]
+
+
+# Combine subjects Riemann
+results = np.zeros(len(subjects))
+for s, subject in enumerate(subjects):
+    fname = dirs['ind_result'] + conditions[0][0] + '_' + conditions[0][1] + '/' + subject + '_' + conditions[0][0] + '_' + conditions[0][1] \
+            + '_results_classRiemann.csv'
+    df = pd.read_csv(fname)
+    results[s] = df['Accuracy'][0]
+
+    np.mean(results)
 
 
 
+
+
+########################################################################################################################
 ### Decoding results
 from combineSubsDecoding import combineSubsDecoding
 
@@ -44,9 +64,9 @@ baselinecorr = 'nobaseline'
 dec_method = 'class'  # or 'reg'
 dec_scorer = 'accuracy'  # or 'kendall_score'
 gatordiag = 'gat'
-conditions = [['addsub', 'addsub']]
+conditions = [['op1', 'op1']]
 sfreq = 125
-chance = .5  # chance-level
+chance = .25  # chance-level
 
 # Prepare results
 res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance)

@@ -1,7 +1,7 @@
 # Libraries
 import sys
 sys.path.append('/neurospin/meg/meg_tmp/Calculation_Pedro_2014/scripts/decoding')
-from calc_createWorkFlow import calc_createWorkFlow
+from calc_createWorkFlow import (calc_createWorkFlow, calc_createWorkFlowRiemann)
 
 # Subjects
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
@@ -26,16 +26,20 @@ conditions = [['op1','op1'], ['op2', 'op2'], ['cres', 'cres'], ['resultlock_op1'
               ['resplock_op2', 'resplock_op2'], ['resplock_op1', 'resplock_op1'],
               ['resultlock_cres', 'cres'], ['op1', 'cres'], ['op1', 'resultlock_pres']]
 
+
+conditions = [['op1_riemann','op1_riemann']]
+
 baselinecorr = 'nobaseline'
-#dec_method = 'class'
-#dec_scorer = 'accuracy'
-dec_method = 'reg'
-dec_scorer = 'kendall_score'
+dec_method = 'class'
+dec_scorer = 'accuracy'
+#dec_method = 'reg'
+#dec_scorer = 'kendall_score'
 gatordiag = 'gat'
 decimate = 2
 
 for i in range(0,len(conditions)):
-    calc_createWorkFlow(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, gatordiag, decimate)
+    #calc_createWorkFlow(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, gatordiag, decimate)
+    calc_createWorkFlowRiemann(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, decimate)
 
 
 # 'resp_side'

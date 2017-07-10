@@ -4,7 +4,7 @@
 
 # Libraries
 import sys
-from GATclassifiers import (calcClassification, calcRegression)
+from GATclassifiers import (calcClassification, calcRegression, calcClassRiemann)
 from initDirs import dirs
 import numpy as np
 import os
@@ -28,7 +28,12 @@ def calcDecoding(params, type, scorer, gatordiag):
         # Define scorer
         print('Decoding regression subject ' + params['subject'])
         y_true, y_pred, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+    elif type == 'classRiemann':
+        # Define scorer
+        print('Decoding regression subject ' + params['subject'])
+        y_true, y_pred, score, diagonal = calcClassRiemann(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     print('decoding subject ' + params['subject'] + ' done!')
+
 
     # Organize results
     # results = ({'params': params,'y_pred': y_pred, 'score': score, 'diagonal': diagonal})
