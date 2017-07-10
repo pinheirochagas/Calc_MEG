@@ -8,6 +8,7 @@ from calcDecoding import calcDecodingAlltimes
 import numpy as np
 from classifyRiemann import classifyRiemann
 import pandas as pd
+from prepDataDecTFA import prepDataDecTFA
 
 # Subjects
 #subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
@@ -19,7 +20,7 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11'
 subjects = ['s02', 's03']
 
 ##
-conditions = [['op1_riemann', 'op1_riemann']]
+conditions = [['cres_freq_riemann', 'cres_freq_riemann']]
 baselinecorr = 'nobaseline'
 dec_method = 'classRiemann'
 dec_scorer = 'accuracy'
@@ -33,8 +34,23 @@ results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
     #calcDecoding(params, dec_method, dec_scorer, gatordiag)
-    result = classRiemann(params['X_train'], params['y_train'])
+    result = classifyRiemann(params['X_train'], params['y_train'])
     results.loc[0] = result['Accuracy'][0]
+
+
+##########
+results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
+conditions = [['op2_freq_riemann', 'op2_freq_riemann']]
+for s, subject in enumerate(subjects):
+    X, y, params = prepDataDecTFA(dirs, conditions[0][0], conditions[0][1], subject)
+    result = classifyRiemann(X, y, params)
+    results.loc[s] = result['Accuracy'][0]
+
+
+prepDataDecTFA(train_set, test_set, subject):
+
+
+
 
 
 # Combine subjects Riemann

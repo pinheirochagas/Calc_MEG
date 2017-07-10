@@ -105,6 +105,7 @@ for i = 1:length(sub_name_all);
     save([tfa_data_dir, sub_name_all{i}, '_TFA_allfreq_calc.mat'],'TFR','trialinfo','-v7.3');
 end
 
+%% Frequency spectrum from B to C
 for i = 1:length(sub_name_all);
     load([data_dir, sub_name_all{i}, '_calc_AICA_acc.mat'])
     data = filterData(data, 'calc');
@@ -121,14 +122,27 @@ for i = 1:length(sub_name_all);
     end
     data = removefields(data, 'ECGEOG');
     [TFR, trialinfo] = ftTFAcres(data);
-    save([tfa_data_dir, sub_name_all{i}, '_TFA_cres_calc.mat'],'TFR','trialinfo','-v7.3');   
+    save([tfa_data_dir, sub_name_all{i}, '_TFA_cres_calc.mat'],'TFR','trialinfo');   
+end
+
+
+%% Quick univariate check
+mean_res = [];
+for i = 1:length(sub_name_all);
+    load([tfa_data_dir, sub_name_all{i}, '_TFA_cres_calc.mat'],'TFR','trialinfo');
+    for cres = 1:4
+        trial_idx = trialinfo.operator ~=0 & trialinfo.corrResult == cres+2;
+        TFR_tpm = TFR.powspctrm(trial_idx,:,:);
+        mean_res(i,:,:,cres) = squeeze(mean(TFR_tpm,1));
+    end
+    
 end
 
 cfg=[];
 ft_multiplotTFR(cfg, TFR);
 
 
-[a,b] = closestMultipliers(306)
+[a,b] = closestMultipliers(204)
 for i=1:size(TFR.powspctrm,2)
     subplot(a,b,i)
     hold on

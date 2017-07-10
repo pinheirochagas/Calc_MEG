@@ -11,8 +11,8 @@ cfg.method       = 'mtmfft';
 cfg.trials       = 'all' ;
 cfg.keeptrials   = 'yes';
 cfg.trackdatainfo= 'yes';                   
-cfg.channel      = All2; 
-cfg.foi          = 2:1:15;                       % frequencies of interest [34 to 100 in steps of 2Hz]
+cfg.channel      = Grad2; 
+cfg.foi          = 1:1:40;                       % frequencies of interest [34 to 100 in steps of 2Hz]
 cfg.tapsmofrq    = cfg.foi/5;                      % frequency smoothing 20 % 
 cfg.taper        = 'hanning';
 

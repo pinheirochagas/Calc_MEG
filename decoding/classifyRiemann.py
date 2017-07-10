@@ -5,6 +5,8 @@ import pandas as pd
 from collections import OrderedDict
 from scipy.io import loadmat
 from mne.decoding import UnsupervisedSpatialFilter
+from mne.decoding import Vectorizer
+
 from sklearn.decomposition import PCA
 from sklearn.cross_validation import KFold
 from sklearn.pipeline import make_pipeline
@@ -21,22 +23,24 @@ from initDirs import dirs
 from prepDataDecoding import prepDataDecoding
 
 
-def classifyRiemann(epochs, y, params):
+def classifyRiemann(X, y, params):
 
     #Define classifier
     # Classifiers
     clfs = OrderedDict()
-    clfs['XdawnCov'] = make_pipeline(
-        UnsupervisedSpatialFilter(PCA(50), average=False),
-        XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
-        TangentSpace('logeuclid'),
-        svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+    #clfs['XdawnCov'] = make_pipeline(
+    #    UnsupervisedSpatialFilter(PCA(50), average=False),
+    #    XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
+    #    TangentSpace('logeuclid'),
+    #    svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+
+    clfs['SimpleSVM'] = make_pipeline(Vectorizer(), svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
 
     results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
 
     # Load the data
-    X = epochs._data
+    #X = epochs._data
     X = 1e12 * np.array(X)
 
     preds = np.zeros((X.shape[0], len(clfs)))

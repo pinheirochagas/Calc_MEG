@@ -4,7 +4,6 @@ import mne
 from fldtrp2mne_calc import fldtrp2mne_calc
 import pandas as pd
 import numpy as np
-from epochsTimeLock import resultTL, responseTL
 
 
 def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate):
