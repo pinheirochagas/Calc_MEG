@@ -26,8 +26,9 @@ conditions = [['op1','op1'], ['op2', 'op2'], ['cres', 'cres'], ['resultlock_op1'
               ['resplock_op2', 'resplock_op2'], ['resplock_op1', 'resplock_op1'],
               ['resultlock_cres', 'cres'], ['op1', 'cres'], ['op1', 'resultlock_pres']]
 
+conditions = [['op2', 'op2'], ['resultlock_op2', 'resultlock_op2'], ['resplock_op2', 'resplock_op2']]
 
-conditions = [['op1_riemann','op1_riemann']]
+#conditions = [['op1_riemann','op1_riemann']]
 
 baselinecorr = 'nobaseline'
 dec_method = 'class'
@@ -38,8 +39,8 @@ gatordiag = 'gat'
 decimate = 2
 
 for i in range(0,len(conditions)):
-    #calc_createWorkFlow(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, gatordiag, decimate)
-    calc_createWorkFlowRiemann(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, decimate)
+    calc_createWorkFlow(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, gatordiag, decimate)
+    #calc_createWorkFlowRiemann(conditions[i], subjects, baselinecorr, dec_method, dec_scorer, decimate)
 
 
 # 'resp_side'
