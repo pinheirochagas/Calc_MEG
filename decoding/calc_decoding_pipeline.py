@@ -73,13 +73,13 @@ from combineSubsDecoding import combineSubsDecoding
 #Basics
 #List of parameters
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-subjects = ['s17']
+subjects = ['s02', 's03']
 
 baselinecorr = 'nobaseline'
 dec_method = 'class'  # or 'class'
 dec_scorer = 'accuracy'  # or 'accuracy' kendall_score
 gatordiag = 'gat'
-conditions = [['op2', 'op2']]
+conditions = [['op1', 'op1']]
 sfreq = 125
 chance = .25  # chance-level
 
@@ -87,12 +87,19 @@ chance = .25  # chance-level
 res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance)
 
 # Plot
+
+plot
+
+
 # Libraries
 from __future__ import division
 import matplotlib.pyplot as plt
 from jr.plot import base, gat_plot, pretty_gat, pretty_decod, pretty_slices
 from initDirs import dirs
 import numpy as np
+
+reload(base)
+reload(gat_plot)
 
 #Times
 res['all_diagonals'].shape
@@ -120,8 +127,10 @@ for c, cond in enumerate(conditions):
     for s, sub in enumerate(subjects):
         plt.subplot(4,5,s+1)
         #print(times[np.where(p_values_diagonal[c, :] < .05)])
-        pretty_decod(res['all_diagonals'][c, s, :], times=times2, chance=chance, fill=True, sfreq=sfreq)
+        pretty_decod(res['all_diagonals'][c, s, :], times=times2, chance=chance, fill=True, sfreq=sfreq, xlabel='Times (s)')
         plt.title(cond[0] + '_' + cond[1] + ' ' + sub)
+        ax = plt.gca()
+
 fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_diagonal_individual.png'
 plt.savefig(fname, dpi=600)
 
@@ -145,7 +154,7 @@ plt.figure(num=None, figsize=(7,7), dpi=100, facecolor='w', edgecolor='k')
 for c, cond in enumerate(conditions):
     print(cond)
     pretty_gat(res['group_scores'][c, :, :], times=times2, chance=chance, ax=None, sig=res['p_values_gat_fdr'][c,:] < p_val_th, cmap='RdBu_r',
-               colorbar=True, xlabel='Testing Time (s)', ylabel='Training Time (s)', sfreq=125, test_times=None)
+               colorbar=True, xlabel='Testing Time (s)', ylabel='Training Time (s)', sfreq=125, test_times=None, smoothWindow=5)
     fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_group_gat_corrected.png'
 plt.savefig(fname, dpi=600)
 
@@ -155,7 +164,7 @@ for c, cond in enumerate(conditions):
         print (cond)
         #print(times[np.where(p_values_diagonal[c, :] < .05)])
         pretty_decod(res['all_diagonals'][c, :, :], times=times2, chance=chance, sig=res['p_values_diagonal'][c, :] < p_val_th,
-                 color=[1,0,0], fill=True, xlabel='Times (s)', sfreq=sfreq)
+                 color=[1,0,0], fill=True, xlabel='Times (s)', sfreq=sfreq, smoothWindow=5)
         fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_group_diagonal_uncorrected.png'
 plt.savefig(fname, dpi = 600)
 

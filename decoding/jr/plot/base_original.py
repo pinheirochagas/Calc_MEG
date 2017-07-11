@@ -9,8 +9,6 @@ import matplotlib.colors as col
 from matplotlib.colors import LinearSegmentedColormap
 from ..utils import logcenter
 from ..stats import median_abs_deviation
-from scipy.ndimage.filters import generic_filter as gf
-
 
 RdPuBu = col.LinearSegmentedColormap.from_list('RdPuBu', ['b', 'r'])
 
@@ -84,13 +82,15 @@ def plot_widths(xs, ys, widths, ax=None, color='b', xlim=None, ylim=None,
     return ax if fig is None else fig
 
 
-def plot_sem(x, y, sem, **kwargs):
+def plot_sem(x, y, robust=False, **kwargs):
     """
     Parameters
     ----------
     x : list | np.array()
     y : list | np.array()
-    sem
+    robust : bool
+        If False use mean + std,
+        If True median + mad
     ax
     alpha
     color
@@ -104,50 +104,15 @@ def plot_sem(x, y, sem, **kwargs):
     Adapted from http://tonysyu.github.io/plotting-error-bars.html#.VRE9msvmvEU
     """
     x, y = np.array(x), np.array(y)
-
-    # Check to see if we are already talking about a mean value here
-    if y.ndim == 2:  # not averaged yet
+    if robust:
+        m = np.nanmedian(y, axis=0)
+        std = median_abs_deviation(y, axis=0)
+    else:
         m = np.nanmean(y, axis=0)
         std = np.nanstd(y, axis=0)
-        n = y.shape[0] - np.sum(np.isnan(y), axis=0)
-        sem = std / np.sqrt(n)
-    elif y.ndim == 1:  # already averaged
-        m = y
-        sem = sem
+    n = y.shape[0] - np.sum(np.isnan(y), axis=0)
 
-    return plot_eb(x, m, sem, **kwargs)
-
-# def plot_sem(x, y, robust=False, **kwargs):
-#     """
-#     Parameters
-#     ----------
-#     x : list | np.array()
-#     y : list | np.array()
-#     robust : bool
-#         If False use mean + std,
-#         If True median + mad
-#     ax
-#     alpha
-#     color
-#     line_args
-#     err_args
-#
-#     Returns
-#     -------
-#     ax
-#
-#     Adapted from http://tonysyu.github.io/plotting-error-bars.html#.VRE9msvmvEU
-#     """
-#     x, y = np.array(x), np.array(y)
-#     if robust:
-#         m = np.nanmedian(y, axis=0)
-#         std = median_abs_deviation(y, axis=0)
-#     else:
-#         m = np.nanmean(y, axis=0)
-#         std = np.nanstd(y, axis=0)
-#     n = y.shape[0] - np.sum(np.isnan(y), axis=0)
-#
-#     return plot_eb(x, m, std / np.sqrt(n), **kwargs)
+    return plot_eb(x, m, std / np.sqrt(n), **kwargs)
 
 
 def plot_eb(x, y, yerr, ax=None, alpha=0.3, color=None, line_args=dict(),
@@ -267,11 +232,11 @@ def pcolormesh_45deg(C, ax=None, xticks=None, xticklabels=None, yticks=None,
 def pretty_plot(ax=None):
     if ax is None:
         plt.gca()
-    ax.tick_params(colors='black')
-    ax.xaxis.label.set_color('black')
-    ax.yaxis.label.set_color('black')
+    ax.tick_params(colors='dimgray')
+    ax.xaxis.label.set_color('dimgray')
+    ax.yaxis.label.set_color('dimgray')
     try:
-        ax.zaxis.label.set_color('black')
+        ax.zaxis.label.set_color('dimgray')
     except AttributeError:
         pass
     try:
@@ -279,10 +244,10 @@ def pretty_plot(ax=None):
         ax.yaxis.set_ticks_position('left')
     except ValueError:
         pass
-    ax.spines['left'].set_color('black')
-    ax.spines['bottom'].set_color('black')
-    ax.spines['right'].set_color('black')
-    ax.spines['top'].set_color('black')
+    ax.spines['left'].set_color('dimgray')
+    ax.spines['bottom'].set_color('dimgray')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
     return ax
 
 
@@ -442,24 +407,3 @@ def pretty_axes(axes, xticks=None, xticklabels=None, yticks=None,
             else:
                 axes[ii, jj].set_yticklabels(yticklabels)
                 axes[ii, jj].set_ylabel(ylabel, labelpad=ylabelpad)
-
-
-def smooth(data, window):
-    data = np.array(data)
-
-    # Check whether data is 1D (diagonal) or 2D (GAT)
-    if data.ndim == 1:
-        for t in range(data.shape[0]):  # loop through the entire dataset
-            if t <= window:  # beginning of data
-                data[t] = np.mean(data[t: (t + window + 1)])
-            elif t >= data.shape[0] - window:  # end of data
-                data[t] = np.mean(data[(t - window): t + 1])
-            else:
-                data[t] = np.mean(data[(t - window): (t + window + 1)])
-
-    elif data.ndim == 2:  # Gat matrix
-        kernel = np.ones((2 * window + 1, 2 * window + 1))
-        data = gf(data, np.mean, footprint=kernel)
-
-    return data
-

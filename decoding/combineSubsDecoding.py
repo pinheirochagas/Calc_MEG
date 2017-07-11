@@ -17,6 +17,7 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
     all_scores = []
     all_diagonals = []
     all_ypred = []
+    all_ytrue = []
 
     for c, cond in enumerate(conditions):
         for s, subject in enumerate(subjects):
@@ -29,10 +30,11 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
             all_scores.append(results['score'])
             all_diagonals.append(results['diagonal'])
             all_ypred.append(results['y_pred'])
+            all_ytrue.append(results['y_true'])
             # times = results['times_calc']
     score = results['score']
     diagonal = results['diagonal']
-    ypred = results['y_pred']
+    #ypred = results['y_pred']
     all_scores = np.array(all_scores)  # shape: subjects*n_cond, training_times, testing_times
     all_diagonals = np.array(all_diagonals)
     # all_ypred = np.array(all_ypred)
@@ -79,7 +81,7 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
     results = ({'conditions': conditions, 'all_scores': all_scores, 'all_diagonals': all_diagonals, 'group_scores': group_scores, 'sem_group_scores': sem_group_scores, 'group_diagonal': group_diagonal,
                'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat, 'p_values_gat_fdr': p_values_gat_fdr,'p_values_diagonal': p_values_diagonal, 'p_values_diagonal_fdr': p_values_diagonal_fdr,
                'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal, 'p_values_diagonal_fdr': p_values_diagonal_fdr,
-               'sfreq': sfreq, 'train_times': results['train_times'], 'test_times': results['test_times']})
+               'sfreq': sfreq, 'train_times': results['train_times'], 'test_times': results['test_times'], 'all_ypred': all_ypred, 'all_ytrue': all_ytrue})
 
     return results
 
