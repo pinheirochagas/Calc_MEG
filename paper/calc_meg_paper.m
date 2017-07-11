@@ -131,12 +131,26 @@ mean_res = [];
 for i = 1:length(sub_name_all);
     load([tfa_data_dir, sub_name_all{i}, '_TFA_cres_calc.mat'],'TFR','trialinfo');
     for cres = 1:4
-        trial_idx = trialinfo.operator ~=0 & trialinfo.corrResult == cres+2;
+        trial_idx = trialinfo.operator ~=0 & trialinfo.operand2 == cres-1;
         TFR_tpm = TFR.powspctrm(trial_idx,:,:);
         mean_res(i,:,:,cres) = squeeze(mean(TFR_tpm,1));
     end
-    
 end
+
+% Plot
+mean_res_avg = squeeze(mean(mean_res,1));
+
+colors_plot = [0 0 0; 1 0 0; 0 1 0; 0 0 1];
+
+for i = 1:size(mean_res_avg,3);
+    hold on
+    plot(mean(squeeze(mean_res_avg(:,:,i)))', 'Color', colors_plot(i,:))
+end
+
+    
+mean_res
+
+
 
 cfg=[];
 ft_multiplotTFR(cfg, TFR);

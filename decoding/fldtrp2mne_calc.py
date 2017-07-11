@@ -49,7 +49,7 @@ def fldtrp2mne_calc(filename, var, experiment):
         run = np.expand_dims(ft_data.trialinfo.run, axis=0).T
         operand1 = np.expand_dims(ft_data.trialinfo.operand1, axis=0).T
         operator = np.expand_dims(ft_data.trialinfo.operator, axis=0).T
-        operand2 = np.expand_dims(ft_data.trialinfo.operand1, axis=0).T
+        operand2 = np.expand_dims(ft_data.trialinfo.operand2, axis=0).T
         presResult = np.expand_dims(ft_data.trialinfo.presResult, axis=0).T
         delay = np.expand_dims(ft_data.trialinfo.delay, axis=0).T
         corrResult = np.expand_dims(ft_data.trialinfo.corrResult, axis=0).T
