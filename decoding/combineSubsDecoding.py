@@ -10,7 +10,7 @@ from jr.stats import parallel_stats
 
 
 
-def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance):
+def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance, complete='no'):
 
     #Load data
     # Initialize results
@@ -29,8 +29,8 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
             results = results.tolist()
             all_scores.append(results['score'])
             all_diagonals.append(results['diagonal'])
-            all_ypred.append(results['y_pred'])
-            all_ytrue.append(results['y_true'])
+            #all_ypred.append(results['y_pred'])
+            #all_ytrue.append(results['y_true'])
             # times = results['times_calc']
     score = results['score']
     diagonal = results['diagonal']
@@ -77,14 +77,41 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
         p_values_diagonal_fdr[c, :] = p_values_diagonal_fdr[c, :] / 2.
 
 
-    # Organize results
-    results = ({'conditions': conditions, 'all_scores': all_scores, 'all_diagonals': all_diagonals, 'group_scores': group_scores, 'sem_group_scores': sem_group_scores, 'group_diagonal': group_diagonal,
-               'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat, 'p_values_gat_fdr': p_values_gat_fdr,'p_values_diagonal': p_values_diagonal, 'p_values_diagonal_fdr': p_values_diagonal_fdr,
-               'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal, 'p_values_diagonal_fdr': p_values_diagonal_fdr,
-               'sfreq': sfreq, 'train_times': results['train_times'], 'test_times': results['test_times'], 'all_ypred': all_ypred, 'all_ytrue': all_ytrue})
+    if complete == 'no':
+        results = (
+        {'chance': chance,'dec_method': dec_method, 'dec_scorer': dec_scorer, 'conditions': conditions, 'subjects': subjects, 'all_scores': all_scores, 'all_diagonals': all_diagonals, 'group_scores': group_scores,
+         'sem_group_scores': sem_group_scores, 'group_diagonal': group_diagonal,
+         'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,
+         'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal,
+         'p_values_diagonal_fdr': p_values_diagonal_fdr,
+         'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,
+         'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal,
+         'p_values_diagonal_fdr': p_values_diagonal_fdr,
+         'sfreq': sfreq, 'train_times': results['train_times'], 'test_times': results['test_times']})
+    elif complete == 'yes':
+        results = (
+        {'chance': chance, 'dec_method': dec_method, 'dec_scorer': dec_scorer, 'conditions': conditions, 'subjects': subjects, 'all_scores': all_scores, 'all_diagonals': all_diagonals, 'group_scores': group_scores,
+         'sem_group_scores': sem_group_scores, 'group_diagonal': group_diagonal,
+         'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,
+         'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal,
+         'p_values_diagonal_fdr': p_values_diagonal_fdr,
+         'sem_group_diagonal': sem_group_diagonal, 'times': times, 'p_values_gat': p_values_gat,
+         'p_values_gat_fdr': p_values_gat_fdr, 'p_values_diagonal': p_values_diagonal,
+         'p_values_diagonal_fdr': p_values_diagonal_fdr,
+         'sfreq': sfreq, 'train_times': results['train_times'], 'test_times': results['test_times'], 'all_ypred': all_ypred,
+         'all_ytrue': all_ytrue})
+    else:
+        error('you can only specify yes or no fr complete')
+
 
     return results
 
+
+
+def error(message):
+    import sys
+    sys.stderr.write("error: %s\n" % message)
+    sys.exit(1)
 
 
 

@@ -27,7 +27,7 @@ from pyriemann.tangentspace import TangentSpace
 from pyriemann.estimation import (ERPCovariances, XdawnCovariances,
                                   HankelCovariances)
 
-def calcClassRiemann(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
+def calcGeneral(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
 
     # Pipeline
     clf = make_pipeline(StandardScaler(),

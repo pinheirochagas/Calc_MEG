@@ -6,44 +6,36 @@ from prepDataDecoding import prepDataDecoding
 from calcDecoding import calcDecoding
 from calcDecoding import calcDecodingAlltimes
 import numpy as np
-from classifyRiemann import classifyRiemann
+from classifyGeneral import classifyGeneral
 import pandas as pd
 from prepDataDecTFA import prepDataDecTFA
 
 # Subjects
-#subjects = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
-  #          's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-
-
 subjects = ['s02', 's03']
 
-##
-conditions = [['cres_freq_riemann', 'cres_freq_riemann']]
+# Basic parameters
+conditions = [['op2_riemann', 'op2_riemann']]
 baselinecorr = 'nobaseline'
-dec_method = 'classRiemann'
-dec_scorer = 'accuracy'
+dec_method = 'classGeneral' # class reg classGeneral
+dec_scorer = 'accuracy' # accuracy or kendall_score
 gatordiag = 'diagonal'
-decimate = 2
+decimate = 10
 
-#params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
 
 results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
-
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
-    #calcDecoding(params, dec_method, dec_scorer, gatordiag)
-    result = classifyRiemann(params['X_train'], params['y_train'])
+    result = classifyGeneral(params['X_train']._data, params['y_train'])     # or calcDecoding(params, dec_method, dec_scorer, gatordiag)
     results.loc[0] = result['Accuracy'][0]
 
 
-##########
+########## TIme frequency
 results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
 conditions = [['op2_freq_riemann', 'op2_freq_riemann']]
 for s, subject in enumerate(subjects):
     X, y, params = prepDataDecTFA(dirs, conditions[0][0], conditions[0][1], subject)
-    result = classifyRiemann(X, y, params)
+    result = classifyGeneral(X, y, params)
     results.loc[s] = result['Accuracy'][0]
 
 
@@ -68,121 +60,56 @@ for s, subject in enumerate(subjects):
 
 
 ########################################################################################################################
+# Combine results and plot
+import matplotlib.pyplot as plt
+import combineSubsDecoding
+import plotDecodingExplore
+reload(plotDecodingExplore)
 from combineSubsDecoding import combineSubsDecoding
+from plotDecodingExplore import plotDecodingExplore
 
-#Basics
+
+
+
 #List of parameters
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-subjects = ['s02', 's03']
+#subjects = ['s02', 's03']
 
 baselinecorr = 'nobaseline'
-dec_method = 'class'  # or 'class'
+dec_method = 'class'  # 'reg' or 'class'
 dec_scorer = 'accuracy'  # or 'accuracy' kendall_score
 gatordiag = 'gat'
-conditions = [['op1', 'op1']]
+conditions = [['resplock_respside', 'resplock_respside']]
 sfreq = 125
-chance = .25  # chance-level
+chance = .5  # chance-level
+
+if dec_scorer == 'kendall_score':
+    chance = 0  # chance-level
+
+complete = 'no'
 
 # Prepare results
-res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance)
+res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance, complete)
 
 # Plot
-
-plot
-
-
-# Libraries
-from __future__ import division
-import matplotlib.pyplot as plt
-from jr.plot import base, gat_plot, pretty_gat, pretty_decod, pretty_slices
-from initDirs import dirs
-import numpy as np
-
-reload(base)
-reload(gat_plot)
-
-#Times
-res['all_diagonals'].shape
-times = np.arange(res['train_times']['start'],res['train_times']['stop']+1/sfreq,1/sfreq)
-times2 = np.arange(res['train_times']['start'],res['train_times']['stop'],1/sfreq)
-times = None
-times.shape
+plotDecodingExplore(res)
+plt.close("all")
 
 
 
-# GAT individual subjects
-plt.figure(num=None, figsize=(15,12), dpi=100, facecolor='w', edgecolor='k')
-for c, cond in enumerate(conditions):
-    for s, sub in enumerate(subjects):
-        plt.subplot(4,5,s+1)
-        pretty_gat(res['all_scores'][c, s, :, :], times=times2, chance=chance, ax=None, sig=None, cmap='RdBu_r',
-                   clim=None, colorbar=True, sfreq=sfreq)
-        plt.title(cond[0] + '_'+ cond[1] + ' ' + sub)
-fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_' + 'gat_individual.png'
-plt.savefig(fname, dpi=600)
-
-# Diagonal individual subjects
-plt.figure(num=None, figsize=(15,12), dpi=100, facecolor='w', edgecolor='k')
-for c, cond in enumerate(conditions):
-    for s, sub in enumerate(subjects):
-        plt.subplot(4,5,s+1)
-        #print(times[np.where(p_values_diagonal[c, :] < .05)])
-        pretty_decod(res['all_diagonals'][c, s, :], times=times2, chance=chance, fill=True, sfreq=sfreq, xlabel='Times (s)')
-        plt.title(cond[0] + '_' + cond[1] + ' ' + sub)
-        ax = plt.gca()
-
-fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_diagonal_individual.png'
-plt.savefig(fname, dpi=600)
 
 
-#GAT group with uncorrected p values
-p_val_th = 0.01
-p_vals = res['p_values_gat']
-p_vals = res['p_values_gat_fdr']
-
-plt.figure(num=None, figsize=(7,7), dpi=100, facecolor='w', edgecolor='k')
-for c, cond in enumerate(conditions):
-    classLines = [None, None, None, None]
-    print(cond)
-    pretty_gat(res['group_scores'][c, :, :], times=times2, chance=chance, ax=None, sig=res['p_values_gat'][c,:] < p_val_th, cmap='RdBu_r',
-               colorbar=True, xlabel='Testing Time (s)', ylabel='Training Time (s)', sfreq=sfreq)
-    fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_group_gat_corrected.png'
-plt.savefig(fname, dpi=600)
-
-#GAT group with corrected p values
-plt.figure(num=None, figsize=(7,7), dpi=100, facecolor='w', edgecolor='k')
-for c, cond in enumerate(conditions):
-    print(cond)
-    pretty_gat(res['group_scores'][c, :, :], times=times2, chance=chance, ax=None, sig=res['p_values_gat_fdr'][c,:] < p_val_th, cmap='RdBu_r',
-               colorbar=True, xlabel='Testing Time (s)', ylabel='Training Time (s)', sfreq=125, test_times=None, smoothWindow=5)
-    fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_group_gat_corrected.png'
-plt.savefig(fname, dpi=600)
-
-#Diagonal group with uncorrected p values
-plt.figure(num=None, figsize=(7,4), dpi=100, facecolor='w', edgecolor='k')
-for c, cond in enumerate(conditions):
-        print (cond)
-        #print(times[np.where(p_values_diagonal[c, :] < .05)])
-        pretty_decod(res['all_diagonals'][c, :, :], times=times2, chance=chance, sig=res['p_values_diagonal'][c, :] < p_val_th,
-                 color=[1,0,0], fill=True, xlabel='Times (s)', sfreq=sfreq, smoothWindow=5)
-        fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_group_diagonal_uncorrected.png'
-plt.savefig(fname, dpi = 600)
-
-#Diagonal group with corrected p values
-plt.figure(num=None, figsize=(7,4), dpi=100, facecolor='w', edgecolor='k')
-for c, cond in enumerate(conditions):
-        print (cond)
-        #print(times[np.where(p_values_diagonal[c, :] < .05)])
-        pretty_decod(res['all_diagonals'][c, :, :], times=times2, chance=chance, sig=res['p_values_diagonal_fdr'][c, :] < p_val_th,
-                 color=[1,0,0], fill=True, xlabel='Times (s)', sfreq=sfreq)
-        fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_group_diagonal_corrected.png'
-plt.savefig(fname, dpi = 600)
 
 
-plt.axvline(.8, color='k')  # mark stimulus onset
-plt.axvline(1.6, color='k')  # mark stimulus onset
-plt.axvline(2.4, color='k')  # mark stimulus onset
-plt.axvline(3.2, color='k')  # mark stimulus onset
+
+
+
+
+
+
+
+
+
 
 
 

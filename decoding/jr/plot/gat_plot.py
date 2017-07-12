@@ -85,7 +85,7 @@ def pretty_gat(scores, times=None, chance=0, ax=None, sig=None, cmap='RdBu_r',
 
 
 def pretty_decod(scores, times=None, chance=0, ax=None, sig=None, width=3.,
-                 color='k', fill=False, xlabel='Time (sec.)', sfreq=150, alpha=.75, smoothWindow=0):
+                 color='k', fill=False, xlabel='Time (sec.)', sfreq=125, alpha=.75, smoothWindow=0):
     scores = np.array(scores)
 
     if (scores.ndim == 1) or (scores.shape[1] <= 1):
