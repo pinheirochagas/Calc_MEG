@@ -15,9 +15,9 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11'
 subjects = ['s02', 's03']
 
 # Basic parameters
-conditions = [['op2_riemann', 'op2_riemann']]
+conditions = [['cres_riemann', 'cres_riemann']]
 baselinecorr = 'nobaseline'
-dec_method = 'classGeneral' # class reg classGeneral
+dec_method = 'general' # class reg classGeneral
 dec_scorer = 'accuracy' # accuracy or kendall_score
 gatordiag = 'diagonal'
 decimate = 10
@@ -79,9 +79,9 @@ baselinecorr = 'nobaseline'
 dec_method = 'class'  # 'reg' or 'class'
 dec_scorer = 'accuracy'  # or 'accuracy' kendall_score
 gatordiag = 'gat'
-conditions = [['resplock_respside', 'resplock_respside']]
+conditions = [['resplock_cres', 'resplock_cres']]
 sfreq = 125
-chance = .5  # chance-level
+chance = .25  # chance-level
 
 if dec_scorer == 'kendall_score':
     chance = 0  # chance-level

@@ -30,8 +30,13 @@ from pyriemann.estimation import (ERPCovariances, XdawnCovariances,
 def calcGeneral(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
 
     # Pipeline
-    clf = make_pipeline(StandardScaler(),
-        UnsupervisedSpatialFilter(PCA(50), average=False),
+    # clf = make_pipeline(StandardScaler(),
+    #     UnsupervisedSpatialFilter(PCA(50), average=False),
+    #     XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
+    #     TangentSpace('logeuclid'),
+    #     svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+
+    clf = make_pipeline(UnsupervisedSpatialFilter(PCA(50), average=False),
         XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
         TangentSpace('logeuclid'),
         svm.SVC(C=1, kernel='linear', class_weight='balanced'))

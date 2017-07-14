@@ -37,7 +37,7 @@ def classifyGeneral(X, y, params):
     clfs['SimpleSVM'] = make_pipeline(Vectorizer(), svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
 
-    results = pd.DataFrame(index=range(1, 1), columns=clfs.keys())
+    results = pd.DataFrame(index=range(1), columns=clfs.keys())
 
     # Load the data
     #X = epochs._data
@@ -58,14 +58,14 @@ def classifyGeneral(X, y, params):
             pr = clfs[clf].predict(X[test])
             preds[test, jj] += pr
 
-        results.loc[clf] = accuracy_score(y, preds[:, jj])
+        results.loc[:,clf] = accuracy_score(y, preds[:, jj])
 
-    save_dir = dirs['result'] + 'individual_results/' + params['train_set'] + '_' + params['test_set'] + '/'
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-
-    fname = save_dir + params['subject'] + '_' + params['train_set'] + '_' + params['test_set'] + '_results_general.csv'
-    results.to_csv(fname)
-    print(results)
+    # save_dir = dirs['result'] + 'individual_results/' + params['train_set'] + '_' + params['test_set'] + '/'
+    # if not os.path.exists(save_dir):
+    #     os.makedirs(save_dir)
+    #
+    # fname = save_dir + params['subject'] + '_' + params['train_set'] + '_' + params['test_set'] + '_results_general.csv'
+    # results.to_csv(fname)
+    # print(results)
 
     return results
