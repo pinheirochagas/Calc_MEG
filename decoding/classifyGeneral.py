@@ -28,37 +28,56 @@ def classifyGeneral(X, y, params):
     #Define classifier
     # Classifiers
     clfs = OrderedDict()
+
     clfs['XdawnCov'] = make_pipeline(
        UnsupervisedSpatialFilter(PCA(50), average=False),
        XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
        TangentSpace('logeuclid'),
        svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
+    clfs['ERPCov'] = make_pipeline(
+        UnsupervisedSpatialFilter(PCA(70), average=False),
+        ERPCovariances(estimator='lwf'),
+        TangentSpace('logeuclid'),
+        LogisticRegression('l2'))
+
+    clfs['HankelCov'] = make_pipeline(
+        UnsupervisedSpatialFilter(PCA(70), average=False),
+        HankelCovariances(delays=[1, 8, 12, 64], estimator='oas'),
+        TangentSpace('logeuclid'),
+        LogisticRegression('l2'))
+
     clfs['SimpleSVM'] = make_pipeline(Vectorizer(), svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
+    # Define sliding window
+    offsets = np.arange(0,140,20)
+    window = 60
 
-    results = pd.DataFrame(index=range(1), columns=clfs.keys())
+    # Prelocate results
+    results = pd.DataFrame(index=range(1,len(offsets)), columns=clfs.keys())
 
-    # Load the data
-    #X = epochs._data
-    X = 1e12 * np.array(X)
+    #Prepare data
+    X_tmp = 1e12 * np.array(X)
 
+    # Prelocade predictions
     preds = np.zeros((X.shape[0], len(clfs)))
+    for offset in offsets:
+        X = X_tmp[:,:,offset:offset+window]
 
-    # define CV and prediction
-    # cv = KFold(len(y), n_folds=10, shuffle=False, random_state=4343)
-    cv = StratifiedKFold(y, 8)
+        # define CV and prediction
+        # cv = KFold(len(y), n_folds=10, shuffle=False, random_state=4343)
+        cv = StratifiedKFold(y, 8)
 
-    # iterate over models and train/test partitions
-    for jj, clf in enumerate(clfs):
-        for train, test in cv:
-            clfs[clf].fit(X[train], y[train])
+        # iterate over models and train/test partitions
+        for jj, clf in enumerate(clfs):
+            for train, test in cv:
+                clfs[clf].fit(X[train], y[train])
 
-            # get the predictions
-            pr = clfs[clf].predict(X[test])
-            preds[test, jj] += pr
+                # get the predictions
+                pr = clfs[clf].predict(X[test])
+                preds[test, jj] += pr
 
-        results.loc[:,clf] = accuracy_score(y, preds[:, jj])
+            results.loc[offset,clf] = accuracy_score(y, preds[:, jj])
 
     # save_dir = dirs['result'] + 'individual_results/' + params['train_set'] + '_' + params['test_set'] + '/'
     # if not os.path.exists(save_dir):

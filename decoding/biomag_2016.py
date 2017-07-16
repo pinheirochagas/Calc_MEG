@@ -88,12 +88,13 @@ offsets = [10, 20, 30, 40, 50]
 results = pd.DataFrame(index=range(1, 5), columns=clfs.keys() + ['Ensemble'])
 for subject in range(1, 5):
     # Load the data
-    data = loadmat('./data/meg_data_%da.mat' % subject,
+    data = loadmat('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/BIOMAG_2016_competition/data//meg_data_%da.mat' % subject,
                    squeeze_me=True, struct_as_record=False)
 
     preds = np.zeros((240, len(clfs)))
 
     for offset in offsets:
+        print(offset)
         # Epoching
         X, y, _ = epoch_data(data, window=150, offset=offset)
 
@@ -108,7 +109,7 @@ for subject in range(1, 5):
                 # get the predictions
                 pr = clfs[clf].predict_proba(X[test])[:, -1]
                 preds[test, jj] += local_debias(pr)
-
+            print(roc_auc_score(y, preds[:, jj]))
             results.loc[subject, clf] = roc_auc_score(y, preds[:, jj])
     auc = roc_auc_score(y, local_debias(preds.mean(1)))
     results.loc[subject, 'Ensemble'] = auc

@@ -1,4 +1,5 @@
 #Libraries
+from __future__ import division
 import numpy as np
 from scipy import stats
 from scipy.stats import wilcoxon
@@ -10,7 +11,7 @@ from jr.stats import parallel_stats
 
 
 
-def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, chance, complete='no'):
+def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, conditions, sfreq, complete='no'):
 
     #Load data
     # Initialize results
@@ -38,6 +39,15 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
     all_scores = np.array(all_scores)  # shape: subjects*n_cond, training_times, testing_times
     all_diagonals = np.array(all_diagonals)
     # all_ypred = np.array(all_ypred)
+
+    # chance = 0.5
+
+    # Define chance
+    if dec_scorer == 'kendall_score':
+        chance = 0  # chance-level
+    else:
+        chance = 1 / len(np.unique(results['y_true']))
+
 
     # Reshape and average data
     all_scores = np.reshape(all_scores, (len(conditions), len(subjects), score.shape[0], score.shape[1]))  # n_cond, n_subj, training_times, testing_times

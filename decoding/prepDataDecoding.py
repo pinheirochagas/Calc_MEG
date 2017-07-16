@@ -68,8 +68,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -.2, 'stop': 4}  # 'length': 0.05 defonce memory!
             test_times = train_times
         elif train_set == 'cres_riemann':
-            #fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
-            #epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc.pick_types(meg='grad')
             train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
             X_train = epoch_calc[train_index]
             X_train.crop(1.6, 3.2)
@@ -249,7 +248,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
             epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
             epoch_calc_resplock.decimate(decimate)
-            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['absdeviant'] != 0)
+            train_index = (info_calc_resplock['operator'] != 0) & (info_calc_resplock['absdeviant'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['absdeviant'])
             y_train = y_train.astype(np.float64)
@@ -261,7 +260,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
             epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
             epoch_calc_resplock.decimate(decimate)
-            train_index = (info_calc_resplock['accuracy'] == 1) & (info_calc_resplock['operator'] != 0) & (info_calc_resplock['deviant'] != 0)
+            train_index = (info_calc_resplock['operator'] != 0) & (info_calc_resplock['deviant'] != 0)
             X_train = epoch_calc_resplock[train_index]
             y_train = np.array(info_calc_resplock[train_index]['deviant'])
             y_train = y_train.astype(np.float64)
@@ -394,7 +393,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
             epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
             epoch_calc_reslock.decimate(decimate)
-            train_index = info_calc_reslock['operator'] != 0
+            train_index = (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] != 0)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['absdeviant'])
             y_train = y_train.astype(np.float64)
@@ -406,7 +405,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
             epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
             epoch_calc_reslock.decimate(decimate)
-            train_index = info_calc_reslock['operator'] != 0
+            train_index = (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] != 0)
             X_train = epoch_calc_reslock[train_index]
             y_train = np.array(info_calc_reslock[train_index]['deviant'])
             y_train = y_train.astype(np.float64)

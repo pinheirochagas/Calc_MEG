@@ -11,13 +11,16 @@ import pandas as pd
 from prepDataDecTFA import prepDataDecTFA
 from initDirs import dirs
 import os
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 # Subjects
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
 #subjects = ['s02', 's03']
 
 # Basic parameters
-conditions = [['op2_riemann', 'op2_riemann']]
+conditions = [['cres_riemann', 'cres_riemann']]
 baselinecorr = 'nobaseline'
 dec_method = 'classGeneral' # class reg classGeneral
 dec_scorer = 'accuracy' # accuracy or kendall_score
@@ -35,11 +38,24 @@ save_dir = dirs['result'] + 'individual_results/' + params['train_set'] + '_' + 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 
-fname = save_dir + '_' + params['train_set'] + '_' + params['test_set'] + '_results_XdawnCov_SimpleSVM.csv'
+fname = save_dir + '_' + params['train_set'] + '_' + params['test_set'] + '_results_XdawnCov_SimpleSVM_with_offsets.csv'
 results.to_csv(fname)
 
 ### Plot
-plt.savefig(save_dir + 'results_XdawnCov_SimpleSVM.png')
+#sns.set_style("whitegrid")
+sns.boxplot(data=results, color=[.7, .7, .7])
+sns.swarmplot(data=results, size=7)
+plt.savefig(save_dir + 'results_XdawnCov_ERPCov_HankelCov_SimpleSVM_1600ms.png')
+
+
+
+
+
+
+
+
+
+
 
 
 ########## Time frequency
