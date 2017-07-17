@@ -21,7 +21,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="createJobsSoma.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createJobsSoma.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
@@ -103,15 +103,9 @@
       <file leaf-file-name="calcDecoding.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/calcDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
+            <state relative-caret-position="980">
               <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-              <folding>
-                <element signature="e#70#80#0" expanded="true" />
-                <marker date="1500277654663" expanded="true" signature="1347:2399" ph="..." />
-                <marker date="1500277654663" expanded="true" signature="1522:1632" ph="..." />
-                <marker date="1500277654663" expanded="true" signature="2435:3109" ph="..." />
-                <marker date="1500277654663" expanded="true" signature="2498:3090" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,41 +123,19 @@
       <file leaf-file-name="GATclassifiers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GATclassifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="-1391">
               <caret line="50" column="40" lean-forward="false" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
               <folding>
                 <element signature="e#62#80#0" expanded="true" />
-                <marker date="1500277654645" expanded="true" signature="1320:2887" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="1613:1640" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="1671:1739" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="1770:1827" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="2270:2454" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="2498:2680" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="2976:5155" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3044:3098" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3119:3176" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3218:3295" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3331:3358" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3389:3548" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3579:3707" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="3769:4065" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="4111:4175" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="4538:4722" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="4766:4948" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="5343:5377" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="5623:5697" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="5733:5813" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="6281:6465" ph="..." />
-                <marker date="1500277654645" expanded="true" signature="6509:6691" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prepDataDecoding.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/prepDataDecoding.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3148">
+            <state relative-caret-position="3700">
               <caret line="239" column="71" lean-forward="false" selection-start-line="239" selection-start-column="64" selection-end-line="239" selection-end-column="71" />
               <folding />
             </state>
@@ -244,10 +216,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1855" />
-    <option name="height" value="1204" />
+    <option name="x" value="468" />
+    <option name="y" value="193" />
+    <option name="width" value="1136" />
+    <option name="height" value="1176" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -549,13 +521,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1204" extended-state="6" />
+    <frame x="468" y="193" width="1136" height="1176" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19071311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31651375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839963" sideWeight="0.4855187" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2932138" sideWeight="0.20577872" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33745247" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34166667" sideWeight="0.7942213" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -838,38 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GATclassifiers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="50" column="40" lean-forward="false" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
-          <folding>
-            <element signature="e#62#80#0" expanded="true" />
-            <marker date="1500277654645" expanded="true" signature="1320:2887" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="1613:1640" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="1671:1739" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="1770:1827" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="2270:2454" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="2498:2680" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="2976:5155" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3044:3098" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3119:3176" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3218:3295" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3331:3358" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3389:3548" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3579:3707" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="3769:4065" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="4111:4175" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="4538:4722" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="4766:4948" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="5343:5377" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="5623:5697" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="5733:5813" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="6281:6465" ph="..." />
-            <marker date="1500277654645" expanded="true" signature="6509:6691" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fldtrp2python.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -882,20 +822,6 @@
         <state relative-caret-position="861">
           <caret line="59" column="58" lean-forward="false" selection-start-line="59" selection-start-column="58" selection-end-line="59" selection-end-column="58" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calcDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="e#70#80#0" expanded="true" />
-            <marker date="1500277654663" expanded="true" signature="1347:2399" ph="..." />
-            <marker date="1500277654663" expanded="true" signature="1522:1632" ph="..." />
-            <marker date="1500277654663" expanded="true" signature="2435:3109" ph="..." />
-            <marker date="1500277654663" expanded="true" signature="2498:3090" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -926,18 +852,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prepDataDecoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3148">
-          <caret line="239" column="71" lean-forward="false" selection-start-line="239" selection-start-column="64" selection-end-line="239" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/createJobsSoma.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="21" column="31" lean-forward="false" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calcDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="980">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GATclassifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1391">
+          <caret line="50" column="40" lean-forward="false" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
+          <folding>
+            <element signature="e#62#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/prepDataDecoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3700">
+          <caret line="239" column="71" lean-forward="false" selection-start-line="239" selection-start-column="64" selection-end-line="239" selection-end-column="71" />
           <folding />
         </state>
       </provider>
