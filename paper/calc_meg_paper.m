@@ -137,49 +137,6 @@ for i = 1:length(sub_name_all);
     end
 end
 
-% Plot
-mean_res_avg = squeeze(mean(mean_res,1));
-
-colors_plot = [0 0 0; 1 0 0; 0 1 0; 0 0 1];
-
-for i = 1:size(mean_res_avg,3);
-    hold on
-    plot(mean(squeeze(mean_res_avg(:,:,i)))', 'Color', colors_plot(i,:))
-end
-
-    
-mean_res
-
-
-
-cfg=[];
-ft_multiplotTFR(cfg, TFR);
-
-
-[a,b] = closestMultipliers(204)
-for i=1:size(TFR.powspctrm,2)
-    subplot(a,b,i)
-    hold on
-    plot(mean(squeeze(TFR.powspctrm(:,i,:)),1))
-    set(gca,'Visible','off')
-end
-
-
-mean_chan = squeeze(mean(TFR.powspctrm,2));
-imagesc(mean_chan(:,7:8))
-
-
-plot(mean(mean_chan,1))
-
-
-
-
-
-
-
-
-end
-
 
 
 %% Explore TF analysis
@@ -197,9 +154,6 @@ cfg.keepindividual = 'yes';
     data.(sub_name_all{6}), data.(sub_name_all{7}), data.(sub_name_all{8}), data.(sub_name_all{9}), data.(sub_name_all{10}), ...
     data.(sub_name_all{11}), data.(sub_name_all{12}), data.(sub_name_all{13}), data.(sub_name_all{14}), data.(sub_name_all{15}), ...
     data.(sub_name_all{16}), data.(sub_name_all{17}), data.(sub_name_all{18}), data.(sub_name_all{19}), data.(sub_name_all{20}));
-
-
-
 
 load SensorClassification;
 
@@ -301,7 +255,26 @@ cfg.layout   = 'neuromag306cmb.lay'; % specify the layout file that should be us
 ft_databrowser(cfg, comp)
 
 
-%% Cosmo time-frequency-space searchlight LDA
+
+%% Decoding from MNE-Python
+% Load data
+conditions = {'op1_op1', 'op2_op2', 'addsub_addsub', 'cres_cres'};
+baselinecorr = 'nobaseline';
+dec_method = 'class'; % class reg classGeneral
+dec_scorer = 'accuracy'; % accuracy or kendall_score
+gatordiag = 'gat';
+decimate = 2;
+
+for i = 1:length(conditions)
+    res.(dec_method).(conditions{i}) = load([dec_res_dir_group conditions{i} '/' conditions{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+end
+%% Plot
+decodingPlot()
+
+
+
+
+%% Cosmo decoding time-frequency-space searchlight LDA
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'low', 10, 1, 1, 5);
@@ -576,6 +549,10 @@ caxis([-.05 .05])
 title(fieldnames_RSA{i}, 'interpreter', 'none')
 % savePNG(gcf,200, [searchlight_result_dir 'figures/RSA_all_DSM_mr_' fieldnames_RSA{i} '_best_channels_topo_t1.png'])
 % savePNG(gcf,200, [searchlight_result_dir 'figures/RSA_all_DSM_mr_' fieldnames_RSA{i} '_best_channels_topo_t2.png'])
+
+
+
+
 
 
 %% END

@@ -16,7 +16,7 @@ import scipy.io
 ### Combine results and plot
 #List of parameters
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-subjects = ['s02', 's03']
+#subjects = ['s02', 's03']
 
 baselinecorr = 'nobaseline'
 dec_method = 'class'  # 'reg' or 'class'
@@ -24,10 +24,12 @@ dec_scorer = 'accuracy'  # or 'accuracy' kendall_score
 gatordiag = 'gat'
 sfreq = 125
 
-conditions = [['resplock_deviant', 'resplock_deviant'], ['resplock_pres', 'resplock_pres'],
-              ['resplock_op2', 'resplock_op2'], ['resplock_op1', 'resplock_op1']]
+# conditions = [['op1', 'op1'], ['resultlock_op1', 'resultlock_op1'], ['resultlock_op2', 'resultlock_op2'], ['resultlock_pres', 'resultlock_pres'],
+#               ['resplock_op1', 'resplock_op1'],['resplock_op2', 'resplock_op2'],['resplock_pres', 'resplock_pres']]
 
-conditions = [['resultlock_deviant', 'resultlock_deviant']]
+#conditions = [['resultlock_deviant', 'resultlock_deviant']]
+
+conditions = [['resplock_respside', 'resplock_respside'], ['resplock_choice', 'resplock_choice']]
 
 
 for i in range(len(conditions)):
