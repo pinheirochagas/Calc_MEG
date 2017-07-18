@@ -67,6 +67,17 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': -.2, 'stop': 4}  # 'length': 0.05 defonce memory!
             test_times = train_times
+
+        elif train_set == 'cres_all':
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 4}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
         elif train_set == 'cres_riemann':
             epoch_calc.pick_types(meg='grad')
             train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)

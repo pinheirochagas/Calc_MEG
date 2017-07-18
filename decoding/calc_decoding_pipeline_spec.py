@@ -12,15 +12,15 @@ from prepDataDecTFA import prepDataDecTFA
 from initDirs import dirs
 import os
 import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 
 
 # Subjects
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-#subjects = ['s02', 's03']
+subjects = ['s02']
 
 # Basic parameters
-conditions = [['cres_riemann', 'cres_riemann']]
+conditions = [['cres', 'cres']]
 baselinecorr = 'nobaseline'
 dec_method = 'classGeneral' # class reg classGeneral
 dec_scorer = 'accuracy' # accuracy or kendall_score

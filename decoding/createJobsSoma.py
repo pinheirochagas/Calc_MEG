@@ -12,14 +12,14 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 
 #subjects = ['s03']
 
-conditions = [['cres_len200ms', 'cres_len200ms'], ['op2_len200ms', 'op2_len200ms']]
+conditions = [['cres_all', 'cres_all']]
 
 
 baselinecorr = 'nobaseline'
-# dec_method = 'class'
-# dec_scorer = 'accuracy'
-dec_method = 'reg'
-dec_scorer = 'kendall_score'
+dec_method = 'class'
+dec_scorer = 'accuracy'
+# dec_method = 'reg'
+# dec_scorer = 'kendall_score'
 gatordiag = 'gat'
 decimate = 2
 
