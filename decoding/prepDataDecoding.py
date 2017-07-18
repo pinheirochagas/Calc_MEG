@@ -121,7 +121,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -.2, 'stop': 3.2, 'length': 0.2}
+            train_times = {'start': 1.5, 'stop': 3.2, 'length': 0.2, 'step': 0.05}
             test_times = train_times
 
         elif train_set == 'cres_alltimes':
@@ -159,7 +159,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -.2, 'stop': 3.2, 'length': 0.2}
+            train_times = {'start': 1.5, 'stop': 3.2, 'length': 0.2, 'step': 0.05}
             test_times = train_times
 
         elif train_set == 'op2_riemann':

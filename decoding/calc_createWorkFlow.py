@@ -93,7 +93,7 @@ def calc_createWorkFlowRiemann(conditions, subjects, baselinecorr, dec_method, d
 
     for i in range(len(Listfile)):
         JobVar = Job(command = ['python', Listfile[i]], name = ListJobName[i],
-                     native_specification = '-l walltime=30:00:00, -l nodes=1:ppn=2')
+                     native_specification = '-l walltime=60:00:00, -l nodes=1:ppn=2')
                      #native_specification = '-l walltime=1:00:00, -l nodes=2:ppn=16,pmem=8gb,pvmem=9gb')
         jobs.append(JobVar)
 

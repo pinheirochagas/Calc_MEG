@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 from jr.plot import base, gat_plot, pretty_gat, pretty_decod, pretty_slices
 from initDirs import dirs
 import numpy as np
-
-
+import os
 
 def plotDecodingExplore(res, p_val_th=0.05, smoothWindow=5):
 
@@ -28,7 +27,12 @@ def plotDecodingExplore(res, p_val_th=0.05, smoothWindow=5):
     times = np.arange(res['train_times']['start'],res['train_times']['stop']+1/sfreq,1/sfreq)
     if times.shape[0] > res['all_diagonals'].shape[2]:
         times = np.arange(res['train_times']['start'],res['train_times']['stop'],1/sfreq)
+    times = None
 
+    # Crete dir if it doesn't exist
+    save_dir = dirs['gp_result'] + conditions[0][0] + '_' + conditions[0][1]
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
 
     # GAT individual subjects
     plt.figure(num=None, figsize=(15,12), dpi=dpi, facecolor=facecolor, edgecolor=edgecolor)
@@ -51,7 +55,6 @@ def plotDecodingExplore(res, p_val_th=0.05, smoothWindow=5):
             plt.title(cond[0] + '_' + cond[1] + ' ' + sub)
     fname = dirs['gp_result'] + cond[0] + '_' + cond[1] + '/' + cond[0] + '_' + cond[1] + '_' + dec_method + '_' + dec_scorer + '_' + 'gat_individual.png'
     plt.savefig(fname, dpi=600)
-
 
     #GAT group with uncorrected p values
     plt.figure(num=None, figsize=(10,10), dpi=dpi, facecolor=facecolor, edgecolor=edgecolor)

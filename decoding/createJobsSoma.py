@@ -11,11 +11,8 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 # subjects = ['s03', 's09', 's21']
 
 #subjects = ['s03']
-conditions = [['resultlock_pres_len200ms', 'resultlock_pres_len200ms'], ['resultlock_cres_len200ms', 'resultlock_cres_len200ms'],
-              ['resultlock_pres_len200ms', 'resultlock_pres_len200ms'], ['resultlock_absdeviant_len200ms', 'resultlock_absdeviant_len200ms'],
-              ['resultlock_deviant_len200ms', 'resultlock_deviant_len200ms'], ['resplock_cres_len200ms', 'resplock_cres_len200ms'],
-              ['resplock_absdeviant_len200ms', 'resplock_absdeviant_len200ms'], ['resplock_deviant_len200ms', 'resplock_deviant_len200ms']]
 
+conditions = [['cres_len200ms', 'cres_len200ms'], ['op2_len200ms', 'op2_len200ms']]
 
 
 baselinecorr = 'nobaseline'
@@ -52,3 +49,9 @@ for i in range(0,len(conditions)):
 #               ['resplock_deviant', 'resplock_deviant'], ['resplock_pres', 'resplock_pres'], ['resplock_cres', 'resplock_cres'],
 #               ['resplock_op2', 'resplock_op2'], ['resplock_addsub', 'resplock_addsub'], ['resplock_op1', 'resplock_op1'], ['vsa', 'vsa'],
 #               ['vsa', 'addsub'], ['addsub', 'vsa'], ['resultlock_cres', 'cres'], ['op1', 'cres'], ['op1', 'resultlock_pres']]
+
+
+# conditions = [['resultlock_pres_len200ms', 'resultlock_pres_len200ms'], ['resultlock_cres_len200ms', 'resultlock_cres_len200ms'],
+#               ['resultlock_pres_len200ms', 'resultlock_pres_len200ms'], ['resultlock_absdeviant_len200ms', 'resultlock_absdeviant_len200ms'],
+#               ['resultlock_deviant_len200ms', 'resultlock_deviant_len200ms'], ['resplock_cres_len200ms', 'resplock_cres_len200ms'],
+#               ['resplock_absdeviant_len200ms', 'resplock_absdeviant_len200ms'], ['resplock_deviant_len200ms', 'resplock_deviant_len200ms']]
