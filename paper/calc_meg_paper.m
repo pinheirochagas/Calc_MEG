@@ -9,9 +9,9 @@ cosmo_set_path()
 
 %%  List subjects
 sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
-sub_name_all = {'s22'};
-
-sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
+% sub_name_all = {'s22'};
+% 
+% sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
 %% Add accuracy to all subjects
 addAccuracy(sub_name_all) % This also corrects the RT by the visual delay
@@ -26,10 +26,17 @@ for subj = 1:length(sub_name_all)
     downsampleLowpass(data, par, 30, 250, 'vsa')
 end
 
-%% Time-locked to C and to response
+%% Time-locked to C and to response lp data
 for subj = 1:length(sub_name_all)
     load([data_dir sub_name_all{subj}, '_calc_lp30.mat'])
     lost_trials(subj,:) = timelock(data, sub_name_all{subj}, 'response');
+    timelock(data, sub_name_all{subj}, 'result')
+end
+
+%% Time-locked to C and to response AICA data
+for subj = 1:length(sub_name_all)
+    load([data_dir sub_name_all{subj}, '_calc_AICA_acc.mat'])
+%     lost_trials(subj,:) = timelock(data, sub_name_all{subj}, 'result');
     timelock(data, sub_name_all{subj}, 'result')
 end
 
@@ -89,15 +96,16 @@ end
 
 
 %% Time-frequency
-for i = length(sub_name);
-    load([data_dir, sub_name{i}, '_calc_AICA.mat'])
+for i = length(sub_name_all);
+    load([data_dir, sub_name_all{i}, '_calc_AICA_TLresult.mat'])
     [TFR, trialinfo] = ftTFAlow(data);
-    save([tfa_data_dir, sub_name{i}, '_TFA_low.mat'],'TFR','trialinfo','-v7.3');
+    save([tfa_data_dir, sub_name_all{i}, '_TFA_low_TLresult.mat'],'TFR','trialinfo','-v7.3');
     [TFR, trialinfo] = ftTFAhigh(data);
-    save([tfa_data_dir, sub_name{i}, '_TFA_high.mat'],'TFR','trialinfo','-v7.3');
+    save([tfa_data_dir, sub_name_all{i}, '_TFA_high_TLresult.mat'],'TFR','trialinfo','-v7.3');
     clear('data', 'TFR', 'trialinfo')
 end
 
+% All frquencies
 for i = 1:length(sub_name_all);
     load([data_dir, sub_name_all{i}, '_calc_AICA_acc.mat'])
     data = filterData(data, 'calc');
@@ -280,6 +288,8 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low', 10, 1, 1, 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'low', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResultnoZero', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
+
 
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'high', 10, 1, 1, 5);
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'high', 10, 1, 1, 5);

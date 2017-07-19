@@ -13,7 +13,8 @@ cfg.keeptrials   ='yes';
 cfg.trackdatainfo='yes';                   
 cfg.channel      = All2; 
 cfg.foi          = 34:2:100;                       % frequencies of interest [34 to 100 in steps of 2Hz]
-cfg.toi          = -0.5:0.04:4.5;                  % time on which the window is centered = from -0.5s to 4.2s in steps of 0.04s
+cfg.toi          = -0.2:0.04:.8;             % time on which the window is centered = from -0.8s to 1.2s in steps of 0.04 s
+%cfg.toi          = -0.5:0.04:4.5;             % time on which the window is centered = from -0.8s to 1.2s in steps of 0.04 s
 cfg.t_ftimwin    = 0.2*ones(length(cfg.foi),1);    % length of time window = fixed to 200 ms
 cfg.tapsmofrq    = cfg.foi/5;                      % frequency smoothing 20 % 
 cfg.taper        = 'dpss';

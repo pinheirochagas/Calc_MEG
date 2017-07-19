@@ -44,7 +44,7 @@ function [lost_trials, data] = timelock(data, subject, position)
         end
 
         lost_trials = [length(good_trials) sum(good_trials) 1-sum(good_trials)/length(good_trials)]; 
-        save([data_dir subject '_' 'calc' '_lp30_TLresponse.mat'], 'data')   % Save the structure in MAT file
+        save([data_dir subject '_' 'calc' '_AICA_TLresponse.mat'], 'data')   % Save the structure in MAT file
 
 
     elseif strcmp(position, 'result')
@@ -71,7 +71,7 @@ function [lost_trials, data] = timelock(data, subject, position)
         end
         % Save
         lost_trials = 0; 
-        save([data_dir subject '_' 'calc' '_lp30_TLresult.mat'], 'data')   % Save the structure in MAT file
+        save([data_dir subject '_' 'calc' '_AICA_TLresult.mat'], 'data')   % Save the structure in MAT file
 
         
     elseif strcmp(position, '3')       
