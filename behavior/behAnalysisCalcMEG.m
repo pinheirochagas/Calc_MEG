@@ -1,7 +1,7 @@
-function behAnalysisCalcMEG(subs)
+function trialinfoAll = behAnalysisCalcMEG(subs, condition)
 
 %% Paths
-InitializeDirsMEGcalc	
+InitDirsMEGcalc	
 figures_path = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/results/behavior/';
 
 %% Load response key
@@ -10,42 +10,21 @@ load('response_key.mat')
 %% Loop accross subjects
 for sub = 1:length(subs)
     %% Load data
-    load([data_dir subs{sub} '_calc.mat'])
+    load([data_dir subs{sub} '_calc_lp30.mat'])
     trialinfo = cell2mat(struct2cell(data.trialinfo))'; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
-    
-    %% Add accuracy
-    for ii = 1:size(trialinfo,1)
-        if response(sub,2) == 1
-            if trialinfo(ii,1) < 6
-                if (trialinfo(ii,8) == 0 && trialinfo(ii,11) == -1) || (trialinfo(ii,8) ~= 0 && trialinfo(ii,11) == 1)
-                    trialinfo(ii,12) = 1;
-                else
-                    trialinfo(ii,12) = 0;
-                end
-            else
-                if (trialinfo(ii,8) == 0 && trialinfo(ii,11) == 1) || (trialinfo(ii,8) ~= 0 && trialinfo(ii,11) == -1)
-                    trialinfo(ii,12) = 1;
-                else
-                    trialinfo(ii,12) = 0;
-                end
-            end
-        else
-            if trialinfo(ii,1) < 6
-                if (trialinfo(ii,8) == 0 && trialinfo(ii,11) == 1) || (trialinfo(ii,8) ~= 0 && trialinfo(ii,11) == -1)
-                    trialinfo(ii,12) = 1;
-                else
-                    trialinfo(ii,12) = 0;
-                end
-            else
-                if (trialinfo(ii,8) == 0 && trialinfo(ii,11) == -1) || (trialinfo(ii,8) ~= 0 && trialinfo(ii,11) == 1)
-                    trialinfo(ii,12) = 1;
-                else
-                    trialinfo(ii,12) = 0;
-                end
-            end
-        end
-    end
-    
+    % Take only correct trials 
+    trialinfo = trialinfo(trialinfo(:,12) == 1,:);
+    % Select calc or comp
+    if strcmp(condition, 'calc')
+        trialinfo = trialinfo(trialinfo(:,3) ~= 0,:);
+    elseif strcmp(condition, 'comp')
+        trialinfo = trialinfo(trialinfo(:,3) == 0,:);
+    elseif strcmp(condition, 'add')
+        trialinfo = trialinfo(trialinfo(:,3) == 1,:);
+    elseif strcmp(condition, 'sub')
+        trialinfo = trialinfo(trialinfo(:,3) == -1,:);
+    end      
+   
     %% Trimming
     RTmax = data.time(end);
     %% Math
@@ -76,7 +55,7 @@ for sub = 1:length(subs)
         title(beh_var_names{ss})
         axis square
     end
-    savePNG(gcf,200, [figures_path 'rt_effect_' subs{sub} '_.png'])
+    savePNG(gcf,200, [beh_res_dir_group 'rt_effect_' subs{sub} '_' condition '_.png'])
     close all
     %% Put together
     trialinfoAll{sub} = trialinfo;
@@ -101,9 +80,8 @@ for ss = 1:length(beh_var_num)
     title(beh_var_names{ss})
     axis square
 end
-savePNG(gcf,200, [figures_path 'rt_effect_all_.png'])
-save([figures_path 'behavior_data_processed.m'] , 'trialinfoAll', 'trialinfoALL', 'RTextremeAll')
-
+savePNG(gcf,200, [beh_res_dir_group 'rt_effect_all_' condition '.png'])
+save([beh_res_dir_group 'behavior_data_processed_' condition '.mat'] , 'trialinfoAll', 'trialinfoALL', 'RTextremeAll')
 
 end
 

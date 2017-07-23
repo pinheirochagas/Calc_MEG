@@ -43,43 +43,56 @@ end
 %% Global field power
 GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
 
-data_all = struct;
-cfg = [];
-cfg.keeptrials = 'no';
-for subj = 1:length(sub_name_all);
-    load([data_dir sub_name_all{subj} '_calc_lp30.mat'])
-    data = filterData(data, 'calc');
-    data_all.(sub_name_all{subj}) = ft_timelockanalysis(cfg, data);
-end
+gfp_mag = globalFieldPower(sub_name_all, 'Mag2');
+gfp_grad1 = globalFieldPower(sub_name_all, 'Grad2_1');
+gfp_grad2 = globalFieldPower(sub_name_all, 'Grad2_2');
+gfp_all = globalFieldPower(sub_name_all, 'All2');
 
-cfg = [];
-cfg.keepindividual = 'no';
-[data_grandavg] = ft_timelockgrandaverage(cfg, data_all.(sub_name_all{1}), data_all.(sub_name_all{2}), data_all.(sub_name_all{3}), data_all.(sub_name_all{4}), data_all.(sub_name_all{5}), ...
-    data_all.(sub_name_all{6}), data_all.(sub_name_all{7}), data_all.(sub_name_all{8}), data_all.(sub_name_all{9}), data_all.(sub_name_all{10}), ...
-    data_all.(sub_name_all{11}), data_all.(sub_name_all{12}), data_all.(sub_name_all{13}), data_all.(sub_name_all{14}), data_all.(sub_name_all{15}), ...
-    data_all.(sub_name_all{16}), data_all.(sub_name_all{17}), data_all.(sub_name_all{18}), data_all.(sub_name_all{19}), data_all.(sub_name_all{20}));
+plot(mean([zscore(gfp_mag.avg);zscore(gfp_grad1.avg);zscore(gfp_grad2.avg)],1))
 
-% Global field power
-cfg = [];
-cfg.methods = 'power';
-[gmf] = ft_globalmeanfield(cfg, data_grandavg);
 
-LineCol = [0 0 0];
+% Plot GFP
+figureDim = [0 0 .5 .5];
+figure('units','normalized','outerposition',figureDim)
+LineCol = [.5 .5 .5];
 LineWidthMark = 1;
-plot(gmf.time, gmf.avg, 'LineWidth', 3)
+hold on
+ylim([0 .4])
+%plot(gfp_mag.time, gfp_mag.avg, 'LineWidth', 3)
+%plot(gfp_grad1.time, gfp_grad1.avg, 'LineWidth', 3)
+%plot(gfp_grad2.time, gfp_grad2.avg, 'LineWidth', 3)
 line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([3.6 3.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-title('Global field power')
-savePNG(gcf,200, [GFP_result_dir 'gfp_lp30.png'])
-
+plot(gfp_all.time, gfp_all.avg, 'LineWidth', 4, 'Color', 'k')
+xlabel('Time (s)')
+ylabel('GFP (z-score)')
+set(gca, 'FontSize', 20)
+xlim([-.25 4.25])
+box on
+savePNG(gcf,200, [GFP_result_dir 'gfp_lp30_zscore' '_' 'All2' '.png'])
 
 
 %% Behavior analysis
-behAnalysisCalcMEG(sub_name)
+beh_calc = behAnalysisCalcMEG(sub_name_all, 'calc');
+beh_comp = behAnalysisCalcMEG(sub_name_all, 'comp');
+beh_add = behAnalysisCalcMEG(sub_name_all, 'add');
+beh_sub = behAnalysisCalcMEG(sub_name_all, 'sub');
+
+% Analyse deviant 
+condition = 'calc';
+beh_data = load([beh_res_dir_group 'behavior_data_processed_' condition '.mat']);
+[group, ind] = behStats(beh_data.trialinfoAll);
+
+for i=1:length(beh_data.trialinfoAll)
+    subplot(5,4,i)
+    boxplot(beh_data.trialinfoAll{i}(:,10), beh_data.trialinfoAll{i}(:,9))
+end
+
+
 
 %% ERF - to complete
 % Load all data from all subjects (needs at least 30 gb free in disk space)
@@ -90,6 +103,93 @@ for subj = 1:length(sub_name)
     dataAll.(sub_name{subj}) = data;
     clear data
 end
+
+cfg = []
+[data_timelock] = ft_timelockanalysis(cfg, data)
+cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
+cfg.xlim = [0 .02];
+
+ft_topoplotER(cfg, data_timelock)
+
+
+
+
+
+data_erf = [data_root_dir 'data/erf/'];
+
+data_all = struct;
+cfg = [];
+cfg.keeptrials = 'no';
+for subj = 1:length(sub_name_all);
+    load([data_dir sub_name_all{subj} '_calc_lp30.mat'])
+    data = filterData(data, 'calc');
+    data_all.(sub_name_all{subj}) = ft_timelockanalysis(cfg, data);
+end
+
+cfg = [];
+cfg.keepindividual = 'yes';
+[data_grandavg] = ft_timelockgrandaverage(cfg, data_all.(sub_name_all{1}), data_all.(sub_name_all{2}), data_all.(sub_name_all{3}), data_all.(sub_name_all{4}), data_all.(sub_name_all{5}), ...
+    data_all.(sub_name_all{6}), data_all.(sub_name_all{7}), data_all.(sub_name_all{8}), data_all.(sub_name_all{9}), data_all.(sub_name_all{10}), ...
+    data_all.(sub_name_all{11}), data_all.(sub_name_all{12}), data_all.(sub_name_all{13}), data_all.(sub_name_all{14}), data_all.(sub_name_all{15}), ...
+    data_all.(sub_name_all{16}), data_all.(sub_name_all{17}), data_all.(sub_name_all{18}), data_all.(sub_name_all{19}), data_all.(sub_name_all{20}));
+
+save([data_erf 'data_grandavg.mat'], 'data_grandavg')
+
+
+
+cfg = []
+cfg.layout    = 'neuromag306cmb.lay'; % specify the layout file that should be used for plotting
+cfg.xlim = [-0.4:0.2:4.4];
+          
+data_tmp = ft_combineplanar(cfgcmb, data_grandavg);
+data_tmp.avg = squeeze(mean(data_tmp.trial(:,1:102,:),1));
+data_tmp.label = data_tmp.label(1:102);
+ 
+ft_topoplotER(cfg, data_tmp)
+
+
+cfg = []
+cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
+cfg.xlim = [-0.4:0.2:4.4];
+
+data_tmp = ft_combineplanar(cfgcmb, data_grandavg);
+data_tmp.avg = squeeze(mean(data_tmp.trial(:,103:end,:),1));
+data_tmp.label = data_tmp.label(103:end);
+
+ft_topoplotER(cfg, data_tmp)
+
+
+
+% Plot some topographies
+cfg = []
+cfg.layout    = 'neuromag306cmb.lay'; % specify the layout file that should be used for plotting
+cfg.xlim = [4 4.5];
+
+field_plots = fieldnames(avgERFallGavg.addsub.operand2);
+
+for i = 1:length(field_plots)
+    subplot(1,4,i)
+    cfgcmb = [];
+    data_tmp = ft_combineplanar(cfgcmb, avgERFallGavg.addsub.operand2.(field_plots{i}));
+    data_tmp.avg = squeeze(mean(data_tmp.trial(:,1:102,:),1));
+    data_tmp.label = data_tmp.label(1:102);
+    ft_topoplotER(cfg, data_tmp)
+    colormap(flip(cbrewer2('RdBu')))
+end
+
+cfg = []
+cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
+cfg.xlim = [1.6 1.8];
+
+data_tmp2 = avgERFallGavg.addsub.operand2.(field_plots{i});
+ft_topoplotER(cfg, data)
+
+
+
+
+tpm = ft_combineplanar(cfg, ERF_diff);
+
+
 
 %% Sources
 

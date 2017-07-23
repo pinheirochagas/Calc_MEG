@@ -12,8 +12,10 @@ if strcmp(gatordiag, 'diag')
     decodingPlotDiag(res)
 elseif strcmp(gatordiag, 'gat')
     decodingPlotGat(res)
+elseif strcmp(gatordiag, 'RSA')
+    RSAplot(res)
 end
-        
+
 
     function decodingPlotDiag(res)
         %% Prepare data
@@ -24,15 +26,15 @@ end
             times = data.train_times.start:1/double(data.sfreq):data.train_times.stop+1/double(data.sfreq);
         end
         
-      
+        
         plt = shadedErrorBar(times,data_avg,data_sem, {'color', coloR, 'LineWidth',LineWidthLine});
         hold on
         plot(times,data_avg,'k','LineWidth',1.5)
-
-
+        
+        
     end
-        
-        
+
+
 
 
     function decodingPlotGat(res)
