@@ -304,3 +304,10 @@ calc_dec_wTask_CR(root_dir,['addsub', 'addsub'],'s01','class')
 
 ##############################################################
 
+
+cmap = plt.get_cmap('gist_rainbow')
+analyses = []
+
+for ii in range(100):
+    color = np.array(cmap(float(ii) / 100))
+    analyses[ii] = color

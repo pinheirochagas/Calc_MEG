@@ -42,17 +42,15 @@ end
 
 %% Global field power
 GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
-
-gfp_mag = globalFieldPower(sub_name_all, 'Mag2');
-gfp_grad1 = globalFieldPower(sub_name_all, 'Grad2_1');
-gfp_grad2 = globalFieldPower(sub_name_all, 'Grad2_2');
-gfp_all = globalFieldPower(sub_name_all, 'All2');
-
-plot(mean([zscore(gfp_mag.avg);zscore(gfp_grad1.avg);zscore(gfp_grad2.avg)],1))
-
+% gfp_mag = globalFieldPower(sub_name_all, 'Mag2');
+% gfp_grad1 = globalFieldPower(sub_name_all, 'Grad2_1');
+% gfp_grad2 = globalFieldPower(sub_name_all, 'Grad2_2');
+% gfp_all = globalFieldPower(sub_name_all, 'All2');
+gfp_all = load([GFP_result_dir 'gfp_All2.mat'], 'data_grandavg');
+gfp_all = gfp_all.data_grandavg;
 
 % Plot GFP
-figureDim = [0 0 .5 .5];
+figureDim = [0 0 .5 .3];
 figure('units','normalized','outerposition',figureDim)
 LineCol = [.5 .5 .5];
 LineWidthMark = 1;
@@ -71,10 +69,10 @@ plot(gfp_all.time, gfp_all.avg, 'LineWidth', 4, 'Color', 'k')
 xlabel('Time (s)')
 ylabel('GFP (z-score)')
 set(gca, 'FontSize', 20)
-xlim([-.25 4.25])
+xlim([-.2 4.2])
+set(gca, 'XTick', 0:.4:4.2);
 box on
-savePNG(gcf,200, [GFP_result_dir 'gfp_lp30_zscore' '_' 'All2' '.png'])
-
+save2pdf([GFP_result_dir 'gfp_lp30_zscore' '_' 'All2' '.pdf'], gcf, 600)
 
 %% Behavior analysis
 beh_calc = behAnalysisCalcMEG(sub_name_all, 'calc');
@@ -93,65 +91,47 @@ for i=1:length(beh_data.trialinfoAll)
 end
 
 
-
 %% ERF - to complete
-% Load all data from all subjects (needs at least 30 gb free in disk space)
-for subj = 1:length(sub_name)
-    load([data_dir sub_name{subj} '_calc.mat'])
-    data.trialinfoCustom = data.trialinfo;
-    data.trialinfo = cell2mat(struct2cell(data.trialinfo))'; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
-    dataAll.(sub_name{subj}) = data;
-    clear data
-end
-
-cfg = []
-[data_timelock] = ft_timelockanalysis(cfg, data)
-cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
-cfg.xlim = [0 .02];
-
-ft_topoplotER(cfg, data_timelock)
-
-
-
-
-
+%data_grandavg = grandAVGall(sub_name_all);
 data_erf = [data_root_dir 'data/erf/'];
+load([data_erf 'data_grandavg.mat'])
 
-data_all = struct;
+% Plot topographies
+% Combine gradiometers
 cfg = [];
-cfg.keeptrials = 'no';
-for subj = 1:length(sub_name_all);
-    load([data_dir sub_name_all{subj} '_calc_lp30.mat'])
-    data = filterData(data, 'calc');
-    data_all.(sub_name_all{subj}) = ft_timelockanalysis(cfg, data);
-end
-
-cfg = [];
-cfg.keepindividual = 'yes';
-[data_grandavg] = ft_timelockgrandaverage(cfg, data_all.(sub_name_all{1}), data_all.(sub_name_all{2}), data_all.(sub_name_all{3}), data_all.(sub_name_all{4}), data_all.(sub_name_all{5}), ...
-    data_all.(sub_name_all{6}), data_all.(sub_name_all{7}), data_all.(sub_name_all{8}), data_all.(sub_name_all{9}), data_all.(sub_name_all{10}), ...
-    data_all.(sub_name_all{11}), data_all.(sub_name_all{12}), data_all.(sub_name_all{13}), data_all.(sub_name_all{14}), data_all.(sub_name_all{15}), ...
-    data_all.(sub_name_all{16}), data_all.(sub_name_all{17}), data_all.(sub_name_all{18}), data_all.(sub_name_all{19}), data_all.(sub_name_all{20}));
-
-save([data_erf 'data_grandavg.mat'], 'data_grandavg')
-
-
-
-cfg = []
-cfg.layout    = 'neuromag306cmb.lay'; % specify the layout file that should be used for plotting
-cfg.xlim = [-0.4:0.2:4.4];
-          
-data_tmp = ft_combineplanar(cfgcmb, data_grandavg);
+data_tmp = ft_combineplanar(cfg, data_grandavg);
 data_tmp.avg = squeeze(mean(data_tmp.trial(:,1:102,:),1));
 data_tmp.label = data_tmp.label(1:102);
- 
+
+% Plot
+cfg = [];
+cfg.layout    = 'neuromag306cmb.lay'; % specify the layout file that should be used for plotting
+cfg.xlim = [0:.2:4];
+cfg.zlim = [0.0374    0.3] * 1.0e-11
+cfg.comment = 'xlim';
+cfg.commentpos = 'title'
+cfg.marker = 'off'
+% cfg.colorbar = 'SouthOutside'
 ft_topoplotER(cfg, data_tmp)
+% colormap(cbrewer2('Blues'))
+colormap('viridis')
 
 
-cfg = []
+% save2pdf([erf_result_dir 'topo_GFP' '.pdf'], gcf, 600)
+print(gcf, [erf_result_dir 'topo_GFP' '.eps'], '-depsc', '-painters')
+
+% Save colorbar
+colorbar
+colormap(cbrewer2('Blues'))
+caxis(cfg.zlim)
+set(gca,'FontSize', 20)
+
+save2pdf([erf_result_dir 'topo_GFP_colormap' '.pdf'], gcf, 600)
+
+% Plot magnetometers
+cfg = [];
 cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
 cfg.xlim = [-0.4:0.2:4.4];
-
 data_tmp = ft_combineplanar(cfgcmb, data_grandavg);
 data_tmp.avg = squeeze(mean(data_tmp.trial(:,103:end,:),1));
 data_tmp.label = data_tmp.label(103:end);
@@ -174,7 +154,6 @@ for i = 1:length(field_plots)
     data_tmp.avg = squeeze(mean(data_tmp.trial(:,1:102,:),1));
     data_tmp.label = data_tmp.label(1:102);
     ft_topoplotER(cfg, data_tmp)
-    colormap(flip(cbrewer2('RdBu')))
 end
 
 cfg = []
@@ -366,21 +345,70 @@ ft_databrowser(cfg, comp)
 
 %% Decoding from MNE-Python
 % Load data
-conditions = {'op1_op1', 'op2_op2', 'addsub_addsub', 'cres_cres'};
+conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres'};
+
+conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_op2_resultlock_op2', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
+                'resultlock_pres_resultlock_pres', 'resultlock_absdeviant_resultlock_absdeviant', 'resultlock_absdeviant_resultlock_absdeviant', 'resultlock_absdeviant_resultlock_absdeviant'};
+            
+conditions_RT = {'resplock_op1_resplock_op1', 'resplock_op2_resplock_op2', 'resplock_op2_resplock_op2', 'resplock_cres_resplock_cres', ...
+                'resplock_pres_resplock_pres', 'resplock_absdeviant_resplock_absdeviant', 'resplock_choice_resplock_choice', 'resplock_respside_resplock_respside'};
+
 baselinecorr = 'nobaseline';
 dec_method = 'class'; % class reg classGeneral
 dec_scorer = 'accuracy'; % accuracy or kendall_score
 gatordiag = 'gat';
-decimate = 2;
 
-for i = 1:length(conditions)
-    res.(dec_method).(conditions{i}) = load([dec_res_dir_group conditions{i} '/' conditions{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+for i = 1:length(conditions_A)
+    res.(dec_method).a.(conditions_A{i}) = load([dec_res_dir_group conditions_A{i} '/' conditions_A{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+    res.(dec_method).c.(conditions_C{i}) = load([dec_res_dir_group conditions_C{i} '/' conditions_C{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+    res.(dec_method).rt.(conditions_RT{i}) = load([dec_res_dir_group conditions_RT{i} '/' conditions_RT{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
 end
+
 %% Plot
-decodingPlot()
+colors = vega10(length(conditions_A));
+
+% Timelock to A
+figureDim = [0 0 .6 1];
+figure('units','normalized','outerposition',figureDim)
+y_lims = zeros(length(conditions_A),2,1);
+for i=1:length(conditions_A)
+    subplot(length(conditions_A),1,i)
+    y_lims(i,:) = mvpaPlot(res.(dec_method).a.(conditions_A{i}), 'diag', colors(i,:), [-.2 3.2], [], 'A');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+end
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
+
+% Timelock to C
+figureDim = [0 0 .6/3.4 1];
+figure('units','normalized','outerposition',figureDim)
+for i=1:length(conditions_C)
+    subplot(length(conditions_C),1,i)
+    mvpaPlot(res.(dec_method).c.(conditions_C{i}), 'diag', colors(i,:), [-.2 .8], y_lims(i,:), 'C');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+end
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
+
+
+% Timelock to RT
+figureDim = [0 0 .6/3.4 .5];
+figure('units','normalized','outerposition',figureDim)
+for i=1:length(conditions_RT)
+    subplot(length(conditions_RT),1,i)
+    y_lims(i,:) = mvpaPlot(res.(dec_method).rt.(conditions_RT{i}), 'diag', colors(i,:), [-.8 .1], y_lims(i,:), 'RT');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+end
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_RT.pdf'], gcf, 600)
 
 
 
+save2pdf([dec_res_dir_group 'decoding_class.pdf'], gcf, 600)
+
+
+
+vega10(5)
 
 %% Cosmo decoding time-frequency-space searchlight LDA
 searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'low', 10, 1, 1, 5);
@@ -871,4 +899,24 @@ end
 % RSAplot(RSAres,cdcol.scarlet)
 % savePNG(gcf,200, [rsa_result_dir 'plots/calc_RSA1.png'])
 %
+
+
+
+
+
+% Load all data from all subjects (needs at least 30 gb free in disk space)
+% for subj = 1:length(sub_name)
+%     load([data_dir sub_name{subj} '_calc.mat'])
+%     data.trialinfoCustom = data.trialinfo;
+%     data.trialinfo = cell2mat(struct2cell(data.trialinfo))'; % To make trialinfo compatible with new fieldtrip. This simple converts the separate fields into a single matrix: each field is a column
+%     dataAll.(sub_name{subj}) = data;
+%     clear data
+% end
+% 
+% cfg = []
+% [data_timelock] = ft_timelockanalysis(cfg, data)
+% cfg.layout    = 'neuromag306mag.lay'; % specify the layout file that should be used for plotting
+% cfg.xlim = [0 .02];
+% 
+% ft_topoplotER(cfg, data_timelock)
 

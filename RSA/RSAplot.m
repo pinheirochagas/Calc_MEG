@@ -47,6 +47,8 @@ time_rsa(~sig_tp_RSA) = nan;
 data_avg(~sig_tp_RSA) = nan;
 area(time_rsa,data_avg, 'FaceColor', coloR, 'LineStyle', 'none')
 
+
+
 set(gca, 'FontSize', 18)
 box on
 
