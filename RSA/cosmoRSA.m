@@ -26,7 +26,7 @@ load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'])
 
 measure_args=struct();
 %% Results model regressing out everything else
-if strcmp(operation, 'addsub') == 1
+if strcmp(operation, 'calc') == 1
     predictors = {'operator', 'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_mag', 'result_vis'};
     measure_args.glm_dsm = {RDM.(predictors{1}), RDM.(predictors{2}), RDM.(predictors{3}), RDM.(predictors{4}), RDM.(predictors{5}), RDM.(predictors{6}), RDM.(predictors{7})} ;
 elseif strcmp(operation, 'add') == 1

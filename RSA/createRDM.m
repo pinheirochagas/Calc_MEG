@@ -168,7 +168,7 @@ for i = 1:size(RDM.addsub_op1_mag,1)
     end
 end
 
-%% Operand 1
+%% Operand 2
 RDM.addsub_op2_mag = zeros(length(allop_add));
 for i = 1:size(RDM.addsub_op2_mag,1)
     for j = 1:size(RDM.add_op1_mag,2)
@@ -216,7 +216,7 @@ for i = 1:size(RDM.add_result_vis,1)
 end
 
 %% Save 
-save([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM')
+save([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM', 'allop', 'allop_add', 'allop_sub')
 
 
 %% Plotting
@@ -240,6 +240,6 @@ for s = 1:length(fieldnames_RSA_plot)
 %     set(gca,'YTickLabel',[], 'XTickLabel', []);
     colorbar('YTickLabel',[]);
     colormap(cbrewer2(colors_RSA_plot{s}))
-    savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matrices' fieldnames_RSA_plot{s} '.png'])
+    %savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matrices' fieldnames_RSA_plot{s} '.png'])
 end
 % Save

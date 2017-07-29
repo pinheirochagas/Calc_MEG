@@ -116,6 +116,30 @@ function [lost_trials, data] = timelock(data, subject, position)
         
         % Save
         lost_trials = 0; 
+        
+ elseif strcmp(position, 'A')       
+        % Time-lock and concatenate to 2nd operand
+        for i = 1:length(data.trial)
+            time_epoch = [-.2 3.2];
+            
+            timeStart = find(data.time{1} > time_epoch(1)); timeStart = timeStart(1);
+            timeStop = find(data.time{1} > time_epoch(2)); timeStop = timeStop(1);
+            
+            locked_data{i} = data.trial{i}(:,timeStart:timeStop);
+            locked_data_ECGEOG{i} = data.ECGEOG{i}(:,timeStart:timeStop);
+        end
+        
+        data.trial = locked_data;
+        data.ECGEOG = locked_data_ECGEOG;
+
+        % Correct time
+        data.time = {};
+        for i = 1:length(data.trial)
+            data.time{i} = time_epoch(1):1/data.fsample:time_epoch(2);
+        end
+        
+        % Save
+        lost_trials = 0; 
 
         
     end

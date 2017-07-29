@@ -1,24 +1,32 @@
-function y_lim = mvpaPlot(res, gatordiag, color_plot, x_lim, y_lim, timelock)
+function y_lim = mvpaPlot(res, gatdiagorRSA, color_plot, x_lim, y_lim, timelock)
 
 %% Plotting
-if strcmp(gatordiag, 'diag')
-    decodingPlotDiag(res)
-elseif strcmp(gatordiag, 'gat')
+if strcmp(gatdiagorRSA, 'diag') == 1 || strcmp(gatdiagorRSA, 'RSA')
+    decodingPlotDiag(res, gatdiagorRSA)
+elseif strcmp(gatdiagorRSA, 'gat')
     decodingPlotGat(res)
 end
         
     %% Plot diagonal
-    function decodingPlotDiag(res)    
+    function decodingPlotDiag(res, gatdiagorRSA)    
         % Define plot parameters        
         LineWidthLine = 1;
         LineWidthLineThick = 3;
+        LineCol = [.5 .5 .5];
 
         % Get data
-        chance = res.chance;
-        data = squeeze(res.all_diagonals);
-        times_plot = res.times(1:size(data,2));
-        sig_plot = res.p_values_diagonal_fdr<0.05;
-        
+        if strcmp(gatdiagorRSA, 'diag') == 1 
+            chance = res.chance;
+            data = squeeze(res.all_diagonals);
+            times_plot = res.times(1:size(data,2));
+            sig_plot = res.p_values_diagonal_fdr<0.05;
+        elseif strcmp(gatdiagorRSA, 'RSA') == 1 
+            chance = 0;
+            data = res.ds_stacked_RSA.samples;
+            times_plot = res.timevect;
+            sig_plot = res.sig_tp_RSA;  
+        end
+             
         % Average data
         data_avg = mean(data,1);
         data_sem = std(data)/sqrt(size(data,1));
@@ -37,7 +45,7 @@ end
         % result
         hold on
         plt = shadedErrorBar(times_plot,data_avg,data_sem, {'color', color_plot, 'LineWidth',0.001});
-        plot(times_plot,data_avg,'LineWidth',LineWidthLine, 'Color', 'k')
+        plot(times_plot,data_avg,'LineWidth',LineWidthLine, 'Color', LineCol)
         plt.patch.FaceAlpha = 1;
         
         % Highlight significant time points
@@ -55,7 +63,7 @@ end
         LineCol = [.5 .5 .5];
         % Plot
         xlim(x_lim)
-        if isempty(y_lim) == 1
+        if sum(y_lim) == 0
             y_lim = [round((min(data_avg)-max(data_sem))*100)/100  round((max(data_avg)+max(data_sem))*100)/100];
             ylim(y_lim)
         else
@@ -63,9 +71,9 @@ end
         end
         %box on
         
-        set(gca, 'YTick', [chance y_lim(end)]);
+        set(gca, 'YTick', [y_lim(1) chance y_lim(end)]);
         set(gca, 'XTickLabel', '');
-        set(gca, 'YTickLabel', [chance y_lim(end)]);
+        set(gca, 'YTickLabel', {'', chance, y_lim(end)});
        
         if strcmp(timelock, 'A') == 1
             x_ticks = [x_lim(1) 0:.4:x_lim(end)];
@@ -79,12 +87,12 @@ end
             x_ticks = [x_lim(1) 0:.4:x_lim(end)];
             line(xlim,[chance chance], 'Color', LineCol, 'LineWidth', LineWidthMark);
             line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-            set(gca, 'YTickLabel', '');    
+%             set(gca, 'YTickLabel', '');    
         elseif strcmp(timelock, 'RT') == 1
             x_ticks = [x_lim(1):.4:x_lim(end)];
             line(xlim,[chance chance], 'Color', LineCol, 'LineWidth', LineWidthMark);
             line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-            set(gca, 'YTickLabel', '');    
+%             set(gca, 'YTickLabel', '');    
         else
         end
         

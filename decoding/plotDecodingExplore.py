@@ -130,7 +130,7 @@ def addLines(plot, conditions, gatordiag):
 
 def getfigsize(conditions):
     if conditions[0][0] == conditions[0][1]:
-        if conditions[0][0] == 'op1' or conditions[0][0] == 'op2' or conditions[0][0] == 'cres' or conditions[0][0] == 'addsub':
+        if conditions[0][0] == 'op1' or conditions[0][0] == 'op2' or conditions[0][0] == 'cres' or conditions[0][0] == 'addsub' or conditions[0][0] == 'deviant' or conditions[0][0] == 'absdeviant' or conditions[0][0] == 'pres' or conditions[0][0] == 'choice' or conditions[0][0] == 'respside':
             figsize =(16,4)
         else:
             figsize =(5,4)
