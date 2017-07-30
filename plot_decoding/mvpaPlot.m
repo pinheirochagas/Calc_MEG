@@ -16,7 +16,7 @@ end
 
         % Get data
         if strcmp(gatdiagorRSA, 'diag') == 1 
-            chance = res.chance;
+            chance = double(res.chance);
             data = squeeze(res.all_diagonals);
             times_plot = res.times(1:size(data,2));
             sig_plot = res.p_values_diagonal_fdr<0.05;

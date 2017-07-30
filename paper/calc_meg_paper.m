@@ -11,7 +11,7 @@ cosmo_set_path()
 sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
 % sub_name_all = {'s22'};
 % 
-% sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
+sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
 %% Add accuracy to all subjects
 addAccuracy(sub_name_all) % This also corrects the RT by the visual delay
@@ -429,6 +429,142 @@ for i=1:length(conditions_RT)
     end
 end
 save2pdf([dec_res_dir_group 'decoding_' dec_method '_RT.pdf'], gcf, 600)
+
+%% Decoding regression MNE-Python
+% Load data
+conditions_A = {'op1_op1', 'op2_op2', 'pres_pres', 'cres_cres', 'absdeviant_absdeviant'};
+
+conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
+                'resultlock_pres_resultlock_pres', 'resultlock_absdeviant_resultlock_absdeviant'};
+            
+conditions_RT = {'resplock_op1_resplock_op1','resplock_op2_resplock_op2', 'resplock_cres_resplock_cres', ...
+                'resplock_pres_resplock_pres', 'resplock_absdeviant_resplock_absdeviant'};
+
+baselinecorr = 'nobaseline';
+dec_method = 'reg'; % class reg classGeneral
+dec_scorer = 'kendall_score'; % accuracy or kendall_score
+gatordiag = 'gat';
+
+for i = 1:length(conditions_A)
+    res.(dec_method).a.(conditions_A{i}) = load([dec_res_dir_group conditions_A{i} '/' conditions_A{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+    res.(dec_method).c.(conditions_C{i}) = load([dec_res_dir_group conditions_C{i} '/' conditions_C{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+    res.(dec_method).rt.(conditions_RT{i}) = load([dec_res_dir_group conditions_RT{i} '/' conditions_RT{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+end
+
+%% Plot
+colors = parula(8);
+colors = colors([1 3:6],:)
+
+% Predefine some y_lim
+y_lims = zeros(length(conditions_A),2,1);
+
+% Timelock to A
+figureDim = [0 0 .6 1*(5/8)];
+figure('units','normalized','outerposition',figureDim)
+x_lim = [-.2 3.2];
+for i=1:length(conditions_A)
+    subplot(length(conditions_A),1,i)
+    y_lims(i,:) = mvpaPlot(res.(dec_method).a.(conditions_A{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'A');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+    set(gca,'FontSize',18) % stretch its width and height
+    if i == length(conditions_A)
+        set(gca,'XColor','k')
+        set(gca, 'XTickLabel', [x_lim(1) 0:.4:x_lim(end)])
+        xlabel('Time (s)')
+    end
+end
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
+
+% Timelock to C
+figureDim = [0 0 .6/3.4 1*(5/8)];
+figure('units','normalized','outerposition',figureDim)
+x_lim = [-.2 .8];
+for i=1:length(conditions_C)
+    subplot(length(conditions_C),1,i)
+    mvpaPlot(res.(dec_method).c.(conditions_C{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'C');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+    set(gca,'FontSize',18) % stretch its width and height
+    if i == length(conditions_A)
+        set(gca,'XColor','k')
+        set(gca, 'XTickLabel', [x_lim(1) 0:.4:x_lim(end)])
+        xlabel('Time (s)')
+    end
+end
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
+
+
+% Timelock to RT
+figureDim = [0 0 .6/3.4 1*(5/8)];
+figure('units','normalized','outerposition',figureDim)
+x_lim = [-.8 .1];
+for i=1:length(conditions_RT)
+    subplot(length(conditions_RT),1,i)
+    y_lims(i,:) = mvpaPlot(res.(dec_method).rt.(conditions_RT{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'RT');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+    set(gca,'FontSize',18) % stretch its width and height
+    if i == length(conditions_A)
+        set(gca,'XColor','k')
+        set(gca, 'XTickLabel', [x_lim(1):.4:x_lim(end)])
+        xlabel('Time (s)')
+    end
+end
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_RT.pdf'], gcf, 600)
+
+
+%% GAT
+gat_fields_plot = {'op1_op1', 'addsub_addsub', 'op2_op2', 'resultlock_pres_resultlock_pres'};
+time_lock = {'a', 'a', 'a', 'c'};
+
+event_st = [0 .8 1.6 0];
+data_all = [];
+
+for i = 1:length(gat_fields_plot)
+    data_plot = res.(dec_method).(time_lock{i}).(gat_fields_plot{i});
+
+    chance = double(data_plot.chance);    
+    
+    data_sig = squeeze(data_plot.p_values_gat);
+    data = squeeze(data_plot.group_scores);
+    data(data_sig>0.05 | data<chance) = nan;
+
+    % Crop data
+    windown = 0.8;
+    time_start = [(abs(res2.times(1))+event_st(i))*sfreq];
+    time_crop = time_start:time_start+abs(res2.times(1))+windown*sfreq;
+    data = data(time_crop,time_crop);
+    data = (data-chance)/chance;
+
+    %% Append data
+    data_all = [data_all, data];
+end
+
+figureDim = [0 0 .6 .35];
+figure('units','normalized','outerposition',figureDim)
+
+imagesc(data_all)
+set(gca,'YDir','normal')
+colormap(viridis_white)
+
+set(gca, 'XTick', 0:50:400);
+set(gca, 'XTickLabel', 0:0.4:4);
+set(gca, 'YTick', 0:50:100);
+set(gca, 'YTickLabel', 0:0.4:1);
+set(gca, 'FontSize', 20);
+xlabel('Test times (s)')
+ylabel('Train times (s)')
+colorbar 
+
+save2pdf([dec_res_dir_group 'decoding_gat_full.pdf'], gcf, 600)
+
+
+times = [times(1)+.8 * res.class.a.op2_op2.sfreq:
+
+
+
+
 
 
 

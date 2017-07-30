@@ -30,7 +30,7 @@ sfreq = 125
 
 #conditions = [['resultlock_deviant', 'resultlock_deviant']]
 
-conditions = [['pres', 'pres'], ['deviant', 'deviant'], ['absdeviant', 'absdeviant']]
+conditions = [['resultlock_cres', 'resultlock_cres']]
 
 
 for i in range(len(conditions)):
