@@ -7,6 +7,7 @@ load([rsa_result_dir 'stim_matrices/allop.mat'])
 load([rsa_result_dir 'stim_matrices/allop_cres_3456.mat'])
 
 
+
 %% Operand 1
 RDM.op1_mag = zeros(32);
 for i = 1:size(RDM.op1_mag,1)
@@ -243,3 +244,89 @@ for s = 1:length(fieldnames_RSA_plot)
     %savePNG(gcf,200, [rsa_result_dir 'stim_matrices/calc_RDM_matrices' fieldnames_RSA_plot{s} '.png'])
 end
 % Save
+
+
+
+%% Add matrices excludinf ZEROS
+load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'])
+load([rsa_result_dir 'stim_matrices/allop.mat'])
+
+for i = 1:length(allop)
+    if strcmp('0', allop{i}(3)) == 1
+       idx_noZero(i) = 0;
+    else
+       idx_noZero(i) = 1;
+    end
+end
+allop_noZero = allop(idx_noZero == 1);
+
+
+
+%% Operand 1
+RDM.op1_mag_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.op1_mag_noZero,1)
+    for j = 1:size(RDM.op1_mag_noZero,2)
+        RDM.op1_mag_noZero(i,j) = abs(str2num(allop_noZero{i}(1)) - str2num(allop_noZero{j}(1)));
+    end
+end
+
+%% Operand 2
+RDM.op2_mag_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.op2_mag_noZero,1)
+    for j = 1:size(RDM.op2_mag_noZero,2)
+        RDM.op2_mag_noZero(i,j) = abs(str2num(allop_noZero{i}(3)) - str2num(allop_noZero{j}(3)));
+    end
+end
+
+%% Operator
+RDM.operator_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.operator_noZero,1)
+    for j = 1:size(RDM.operator_noZero,2)
+        RDM.operator_noZero(i,j) = allop_noZero{i}(2) ~= allop_noZero{j}(2);
+    end
+end
+
+%% Result
+RDM.result_mag_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.result_mag_noZero,1)
+    for j = 1:size(RDM.result_mag_noZero,2)
+        RDM.result_mag_noZero(i,j) = abs(str2num(allop_noZero{i}) - str2num(allop_noZero{j}));
+    end
+end
+
+
+%% Visual models
+addpath '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/stimuli_analises/image_similarity_toolbox-master/'
+imageDir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/stimuli_analises/images/'
+[F word_map RDM_visual img_categories] = img_sim(imageDir, 8, 1, 1, 1, 5)
+
+
+%%
+RDM.op1_vis_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.op1_vis_noZero,1)
+    for j = 1:size(RDM.op1_vis_noZero,2)
+        RDM.op1_vis_noZero(i,j) = RDM_visual(str2num(allop_noZero{i}(1))+1,str2num(allop_noZero{j}(1))+1);
+    end
+end
+
+%% Operand 2
+RDM.op2_vis_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.op2_vis_noZero,1)
+    for j = 1:size(RDM.op2_vis_noZero,2)
+        RDM.op2_vis_noZero(i,j) = RDM_visual(str2num(allop_noZero{i}(3))+1,str2num(allop_noZero{j}(3))+1);
+    end
+end
+
+%% Result
+RDM.result_vis_noZero = zeros(length(allop_noZero));
+for i = 1:size(RDM.result_vis_noZero,1)
+    for j = 1:size(RDM.result_vis_noZero,2)
+        RDM.result_vis_noZero(i,j) = RDM_visual(str2num(allop_noZero{i})+1,str2num(allop_noZero{j})+1);
+    end
+end
+
+save([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM', 'allop', 'allop_add', 'allop_sub', 'allop_noZero')
+
+
+
+

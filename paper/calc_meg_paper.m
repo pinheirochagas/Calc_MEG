@@ -345,13 +345,13 @@ ft_databrowser(cfg, comp)
 
 %% Decoding from MNE-Python
 % Load data
-conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'cres_cres', 'absdeviant_absdeviant', 'choice_choice', 'respside_respside'};
+conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'cres_cres', 'choice_choice', 'respside_respside'};
 
 conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_addsub_resultlock_addsub', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
-                'resultlock_pres_resultlock_pres', 'resultlock_absdeviant_resultlock_absdeviant', 'resultlock_choice_resultlock_choice', 'resultlock_respside_resultlock_respside'};
+                'resultlock_pres_resultlock_pres', 'resultlock_choice_resultlock_choice', 'resultlock_respside_resultlock_respside'};
             
 conditions_RT = {'resplock_op1_resplock_op1', 'resplock_addsub_resplock_addsub', 'resplock_op2_resplock_op2', 'resplock_cres_resplock_cres', ...
-                'resplock_pres_resplock_pres', 'resplock_absdeviant_resplock_absdeviant', 'resplock_choice_resplock_choice', 'resplock_respside_resplock_respside'};
+                'resplock_pres_resplock_pres', 'resplock_choice_resplock_choice', 'resplock_respside_resplock_respside'};
 
 baselinecorr = 'nobaseline';
 dec_method = 'class'; % class reg classGeneral
@@ -371,12 +371,11 @@ colors = parula(length(conditions_A));
 y_lims = zeros(length(conditions_A),2,1);
 y_lims(4,:) = [0.20 .30];
 y_lims(5,:) = [0.22 .32];
-y_lims(6,:) = [0.20 .30];
-y_lims(7,:) = [0.47 .69];
-y_lims(8,:) = [0.46 .93];
+y_lims(6,:) = [0.47 .69];
+y_lims(7,:) = [0.46 .93];
 
 % Timelock to A
-figureDim = [0 0 .6 1];
+figureDim = [0 0 .6 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 3.2];
 for i=1:length(conditions_A)
@@ -394,7 +393,7 @@ end
 save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
 
 % Timelock to C
-figureDim = [0 0 .6/3.4 1];
+figureDim = [0 0 .6/3.4 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 .8];
 for i=1:length(conditions_C)
@@ -413,7 +412,7 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
 
 
 % Timelock to RT
-figureDim = [0 0 .6/3.4 1];
+figureDim = [0 0 .6/3.4 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.8 .1];
 for i=1:length(conditions_RT)
@@ -679,18 +678,22 @@ for subj = 1:length(sub_name)
 end
 
 
-%% Calculate RSA - multiple regression
+%% Calculate RSA - single or multiple regression
 operation = 'calc';
 timesphere = 2;
+single_or_mr = 'mr';
+
 for subj = 1:length(sub_name_all)
     % Load data and convert to cosmo
-    load([data_dir sub_name_all{subj} '_calc_lp30.mat'])
+    load([data_dir sub_name_all{subj} '_calc_lp30.mat']) % lp30
     % Select trials
     data = filterData(data, operation);
     % Crop data
     [~, data] = timelock(data, sub_name_all{subj}, 'A');
     % Downsample data
     data = calc_downsample(data, 125);
+    % Scaler - z-score channels to put mag and grad in the same scale
+%     data = calc_scaler(data);
     % Convert to cosmo MVPA
     data_cosmo = calcConvertCOSMO(data);
     % Organize trialinfo and leave only the stim field
@@ -699,10 +702,11 @@ for subj = 1:length(sub_name_all)
     data_cosmo.sa = [];
     data_cosmo.sa.stim = stim';
     % Run RSA
-    cosmoRSA(sub_name_all{subj}, data_cosmo, timesphere, operation)
+    cosmoRSA(sub_name_all{subj}, data_cosmo, timesphere, operation, single_or_mr)
 end
 
-% Load all data
+clear RSA_all
+% Load all data MR
 for p = 1:length(sub_name_all)
     load([rsa_result_dir 'RSA_all_DSM_mr_' operation '_tbin' num2str(timesphere) '_' sub_name_all{p} '.mat'])
     fieldnames_RSA = RSA.predictors;
@@ -719,11 +723,24 @@ for f = 1:length(fieldnames_RSA);
     RSAstats(RSA_all.(operation).(fieldnames_RSA{f}), [operation '_' fieldnames_RSA{f}])
 end
 
+% Load all data single regression
+for p = 1:length(sub_name_all)
+    load([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' sub_name_all{p} '.mat'])
+    fieldnames_RSA = fieldnames(RSA);
+    for f = 1:length(fieldnames_RSA);
+        RSA_all.(operation).(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
+    end
+end
 
-%% Plot results
+% Calculate stats
+for f = 1:length(fieldnames_RSA);
+    RSAstats(RSA_all.(operation).(fieldnames_RSA{f}), [operation '_' fieldnames_RSA{f}])
+end
+
+%% Plot results - MR
 fieldnames_RSA = {'op1_vis' 'op1_mag' 'operator' 'op2_vis' 'op2_mag' 'result_vis' 'result_mag'};
-colors = viridis(length(fieldnames_RSA_plot)); % Or substitute it with 8
-
+% fieldnames_RSA = {'op1_vis_noZero' 'op1_mag_noZero' 'operator_noZero' 'op2_vis_noZero' 'op2_mag_noZero' 'result_vis_noZero' 'result_mag_noZero'};
+colors = viridis(length(fieldnames_RSA)); % Or substitute it with 8
 
 % Predefine some y_lim
 y_lims = zeros(length(conditions_A),2,1);
@@ -747,9 +764,9 @@ for i=1:length(fieldnames_RSA)
 end
 save2pdf([rsa_result_dir 'plots/calc_RSA_mr.pdf'], gcf, 600)
 
+
 %% Plot correspondent matrices
 load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM', 'allop')
-
 
 fieldnames_RSA_plot = {'op1_vis' 'op1_mag' 'operator' 'op2_vis' 'op2_mag' 'result_vis' 'result_mag'};
 colors_RSA_plot = {'RdPu' 'Greys' 'Oranges' 'Greys' 'BuGn' 'Greys' 'Greys'};
@@ -780,6 +797,62 @@ colorbar('Location','South')
 colormap(viridis)
 set(gca,'FontSize', 20)
 save2pdf([rsa_result_dir 'plots/RDM_matrices_colorbar.pdf'], gcf, 600)
+
+
+%% Plot colorbar matrices
+colorbar('Location','South')
+colormap(viridis)
+set(gca,'FontSize', 20)
+save2pdf([rsa_result_dir 'plots/RDM_matrices_colorbar.pdf'], gcf, 600)
+
+
+%% Plot results - single regression
+fieldnames_RSA = {'op1_mag' 'op2_mag' 'op1_vis' 'op2_vis' 'op1_magregop1_vis' 'op2_magregop2_vis' 'op1_visregop1_mag' 'op2_visregop2_mag'};
+fieldnames_RSA = {'op1_mag' 'op1_vis' 'op1_magregop1_vis' 'op1_visregop1_mag'};
+fieldnames_RSA = {'op2_mag' 'op2_vis' 'op2_magregop2_vis' 'op2_visregop2_mag'};
+
+colors = viridis(length(fieldnames_RSA)); % Or substitute it with 8
+% Predefine some y_lim
+y_lims = zeros(length(fieldnames_RSA),2,1);
+y_lims = repmat([-0.05 .18], length(fieldnames_RSA),1);
+
+% Timelock to A
+figureDim = [0 0 .5 1*4/8];
+figure('units','normalized','outerposition',figureDim)
+x_lim = [-.2 3.2];
+for i=1:length(fieldnames_RSA)
+    load([rsa_result_dir 'group_rsa/RSA_stats_model_', [operation '_' fieldnames_RSA{i}], '_all_DSM.mat'], 'RSAres');
+    subplot(length(fieldnames_RSA),1,i)  
+    y_lims(i,:) = mvpaPlot(RSAres, 'RSA', colors(i,:), x_lim, y_lims(i,:), 'A');
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+    set(gca,'FontSize',18) % stretch its width and height
+    if i == length(fieldnames_RSA)
+        set(gca,'XColor','k')
+        set(gca, 'XTickLabel', [x_lim(1) 0:.4:x_lim(end)])
+        xlabel('Time (s)')
+    end
+end
+save2pdf([rsa_result_dir 'plots/calc_RSA_mr_op1.pdf'], gcf, 600)
+
+
+%% Plot empty matrix
+figureDim = [0 0 .5 .5];
+figure('units','normalized','outerposition',figureDim)
+imagesc(zeros(32))
+axis square
+set(gca,'XTick',1:1:32)
+set(gca,'XTickLabel',allop);
+set(gca,'XaxisLocation','top')
+set(gca,'XTickLabelRotation',-90)
+set(gca,'YTick',1:1:32)
+set(gca,'YTickLabel',allop);
+colormap(viridis_white)
+set(gca,'FontSize', 10)
+grid on
+
+save2pdf([rsa_result_dir 'plots/RDM_matrices_blanc.pdf'], gcf, 600)
+
 
 
 %% RSA searchlight TF cosmo

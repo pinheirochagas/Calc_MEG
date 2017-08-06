@@ -16,6 +16,10 @@ elseif strcmp(conds, 'calc')
     conds_idx = trialinfo.operator ~= 0;
     labels(:,1) = trialinfo.corrResult(conds_idx);   
     
+elseif strcmp(conds, 'calc_noZero')
+    conds_idx = trialinfo.operator ~= 0 & trialinfo.operand2 ~= 0;
+    labels(:,1) = trialinfo.corrResult(conds_idx); 
+    
 elseif strcmp(conds, 'add')
     conds_idx = trialinfo.operator == 1;
     labels(:,1) = trialinfo.corrResult(conds_idx);      
