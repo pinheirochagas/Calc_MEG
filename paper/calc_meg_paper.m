@@ -9,9 +9,6 @@ cosmo_set_path()
 
 %%  List subjects
 sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
-% sub_name_all = {'s22'};
-% 
-sub_name = {'s03','s04','s05','s06','s07','s08','s09','s10','s11','s13','s14','s15','s16','s17','s18','s19','s22'};
 
 %% Add accuracy to all subjects
 addAccuracy(sub_name_all) % This also corrects the RT by the visual delay
@@ -116,7 +113,6 @@ ft_topoplotER(cfg, data_tmp)
 % colormap(cbrewer2('Blues'))
 colormap('viridis')
 
-
 % save2pdf([erf_result_dir 'topo_GFP' '.pdf'], gcf, 600)
 print(gcf, [erf_result_dir 'topo_GFP' '.eps'], '-depsc', '-painters')
 
@@ -137,8 +133,6 @@ data_tmp.avg = squeeze(mean(data_tmp.trial(:,103:end,:),1));
 data_tmp.label = data_tmp.label(103:end);
 
 ft_topoplotER(cfg, data_tmp)
-
-
 
 % Plot some topographies
 cfg = []
@@ -162,9 +156,6 @@ cfg.xlim = [1.6 1.8];
 
 data_tmp2 = avgERFallGavg.addsub.operand2.(field_plots{i});
 ft_topoplotER(cfg, data)
-
-
-
 
 tpm = ft_combineplanar(cfg, ERF_diff);
 
@@ -274,8 +265,6 @@ cfg.method = 'runica';
 cfg.runica.pca = 60;
 comp = ft_componentanalysis(cfg, data);
 
-
-
 data_reshape = cell2mat(arrayfun(@(x)permute(x{:},[1 3 2]),comp.trial,'UniformOutput',false));
 
 colors_plot = parula(20);
@@ -292,11 +281,7 @@ for i=1:20
 end
 savePNG(gcf,200, [ICA_result_dir sub_name_all{7} 'comp_0-20_avg.png'])
 
-
-
-
 a = squeeze(data_reshape(1,:,:));
-
 
 comp.topolabel == SensorClassification.Mag2
 
@@ -308,15 +293,8 @@ grad1 = 1:3:306
 grad2 = 2:3:306
 mag = 3:3:306
 
-
-
-
-
-
 SensorClassification = load('SensorClassification.mat')
 SensorClassification.Mag2
-
-
 
 cfg           = [];
 cfg.component = [1:20];       % specify the component(s) that should be plotted
@@ -340,7 +318,6 @@ cfg.channel  = [2:5 15:18]; % components to be plotted
 cfg.viewmode = 'component';
 cfg.layout   = 'neuromag306cmb.lay'; % specify the layout file that should be used for plotting
 ft_databrowser(cfg, comp)
-
 
 
 %% Decoding from MNE-Python
@@ -559,125 +536,6 @@ colorbar
 save2pdf([dec_res_dir_group 'decoding_gat_full.pdf'], gcf, 600)
 
 
-times = [times(1)+.8 * res.class.a.op2_op2.sfreq:
-
-
-
-
-
-
-
-%% Cosmo decoding time-frequency-space searchlight LDA
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'low', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'low', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'low', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResultnoZero', 'low', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
-
-
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'high', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'high', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'high', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'high', 10, 1, 1, 5);
-
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
-searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 1, 5);
-
-
-%% Vizualize searchlight
-sl.op1_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat']);
-sl.op2_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat']);
-sl.cres_low = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']);
-sl.op_low = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']);
-
-sl.op1_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat']);
-sl.op2_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_high_freq.mat']);
-sl.cres_high = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']);
-sl.op_high = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_high_freq.mat']);
-
-names_sl = fieldnames(sl);
-
-% Plot
-cfg = [];
-cfg.layout = 'neuromag306cmb.lay';
-
-figureDim = [0 0 0.7 1];
-for i=1:length(names_sl)
-    figure('units','normalized','outerposition',figureDim)
-    ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
-    colormap(flip(cbrewer2('RdBu')))
-    savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
-end
-
-%% Some individual plots
-corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat'])
-
-cfg = [];
-cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
-
-ft_multiplotTFR(cfg, operand2_lf.searchlight_ft_allsub);
-save2pdf([searchlight_result_dir 'searchlight_op2_low_best.pdf'], gcf, 600)
-caxis([.24 .30])
-
-
-operand1_lf =  operand1_lf.searchlight_ft_allsub;
-
-operand1_lf.meanall = squeeze(mean(operand1_lf.powspctrm,1));
-operand1_lf.meanall(operand1_lf.meanall(:) < .25) = nan;
-imagesc(operand1_lf.meanall)
-caxis([.24 .3])
-
-operand2_lf =  operand1_lf.searchlight_ft_allsub;
-operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
-
-
-
-ft_multiplotTFR(cfg, sl.(names_sl{1}).searchlight_ft_allsub);
-colorbar
-title('')
-set(gca, 'FontSize', 30)
-LineWidthMark = 2; LineCol = [1 1 1];
-line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-ylabel('Frequency (Hz)')
-xlabel('Time (sec.)')
-savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{1} '_bestchan2.png'])
-
-
-%% Cosmo simple decoding - to be completed
-% Load all data from all subjects (needs at least 30 gb free in disk space)
-for subj = 2:length(sub_name)
-    load([data_dir sub_name{subj} '_calc_BR.mat'])
-    % z-score each channel for later PCA
-    
-    % Convert to cosmo MVPA
-    data_cosmo = calcConvertCOSMO(data);
-    % Organize trialinfo
-    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
-    data_cosmo.sa.stim = stim;
-    data_cosmo.sa.stimfull = stimfull;
-    sa = data_cosmo.sa;
-    save([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'data_cosmo', 'sa', '-v7.3');
-end
-
-%% Count number of events per subject
-for subj = 1:length(sub_name)
-    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'sa');
-    tab_stim = tabulate(sa.stim(sa.operator ~= 0));
-    tab_stim_all(:,subj) = cell2mat(tab_stim(:,2));
-end
-
-%% Run PCA
-for subj = 1:length(sub_name)
-    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
-    dt_cosmo_pca = PCAforcosmo(data_cosmo);
-end
-
-
 %% Calculate RSA - single or multiple regression
 operation = 'calc';
 timesphere = 2;
@@ -771,10 +629,11 @@ load([rsa_result_dir 'stim_matrices/calc_RDM_matrices.mat'], 'RDM', 'allop')
 fieldnames_RSA_plot = {'op1_vis' 'op1_mag' 'operator' 'op2_vis' 'op2_mag' 'result_vis' 'result_mag'};
 colors_RSA_plot = {'RdPu' 'Greys' 'Oranges' 'Greys' 'BuGn' 'Greys' 'Greys'};
 
-figureDim = [0 0 .3 1*7/8];
+figureDim = [0 0 1*7/8 .3];
 figure('units','normalized','outerposition',figureDim)
 for s = 1:length(fieldnames_RSA_plot)
-    subplot(length(fieldnames_RSA_plot),1,s)
+    subplot(1,length(fieldnames_RSA_plot),s)
+%     subplot(length(fieldnames_RSA_plot),1,s)
     imagesc(RDM.(fieldnames_RSA_plot{s}))
 %     title(fieldnames_RDM{s}, 'interpreter', 'none')
     axis square
@@ -788,7 +647,7 @@ for s = 1:length(fieldnames_RSA_plot)
     %colorbar('YTickLabel',[]);
     colormap(viridis)
     sub_pos = get(gca,'position'); % get subplot axis position
-    set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
+    set(gca,'position',sub_pos.*[1 1 1.2 1]) % stretch its width and height
 end
 save2pdf([rsa_result_dir 'plots/RDM_matrices.pdf'], gcf, 600)
 
@@ -808,8 +667,9 @@ save2pdf([rsa_result_dir 'plots/RDM_matrices_colorbar.pdf'], gcf, 600)
 
 %% Plot results - single regression
 fieldnames_RSA = {'op1_mag' 'op2_mag' 'op1_vis' 'op2_vis' 'op1_magregop1_vis' 'op2_magregop2_vis' 'op1_visregop1_mag' 'op2_visregop2_mag'};
-fieldnames_RSA = {'op1_mag' 'op1_vis' 'op1_magregop1_vis' 'op1_visregop1_mag'};
-fieldnames_RSA = {'op2_mag' 'op2_vis' 'op2_magregop2_vis' 'op2_visregop2_mag'};
+fieldnames_RSA = {'op1_vis' 'op1_mag' 'op1_magregop1_vis' 'op1_visregop1_mag'};
+fieldnames_RSA = {'op2_vis' 'op2_mag' 'op2_magregop2_vis' 'op2_visregop2_mag'};
+fieldnames_RSA = {'result_vis' 'result_mag' 'operator' 'result_mag_reg_operator'};
 
 colors = viridis(length(fieldnames_RSA)); % Or substitute it with 8
 % Predefine some y_lim
@@ -833,7 +693,7 @@ for i=1:length(fieldnames_RSA)
         xlabel('Time (s)')
     end
 end
-save2pdf([rsa_result_dir 'plots/calc_RSA_mr_op1.pdf'], gcf, 600)
+save2pdf([rsa_result_dir 'plots/calc_RSA_mr_op2.pdf'], gcf, 600)
 
 
 %% Plot empty matrix
@@ -853,6 +713,103 @@ grid on
 
 save2pdf([rsa_result_dir 'plots/RDM_matrices_blanc.pdf'], gcf, 600)
 
+%% Correlate RDM matrices
+% Vectorize and zscore matrices
+fieldnames_RDM = fieldnames(RDM);
+RDM_vector = [];
+for i = 1:7
+    matrix_tmp = RDM.(fieldnames_RDM{i})+0.0001;
+    RDM_vector(:,i) = matrix_tmp(find(triu(matrix_tmp, 1)));
+end
+
+c = cosmo_corr(RDM_vector, 'Spearman');
+imagesc(c);
+colormap(viridis);
+set(gca, 'XTickLabel', fieldnames_RDM(1:7), 'TickLabelInterpreter', 'none')
+set(gca,'XaxisLocation','top')
+set(gca, 'YTickLabel', fieldnames_RDM(1:7))
+
+
+
+%% Cosmo decoding time-frequency-space searchlight LDA
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResultnoZero', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
+
+
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'corrResult', 'high', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand1', 'high', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operand2', 'high', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'operator', 'high', 10, 1, 1, 5);
+
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'low', 10, 1, 1, 5);
+searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 1, 5);
+
+
+%% Vizualize searchlight
+sl.op1_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat']);
+sl.op2_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat']);
+sl.cres_low = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']);
+sl.op_low = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']);
+
+sl.op1_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat']);
+sl.op2_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_high_freq.mat']);
+sl.cres_high = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat']);
+sl.op_high = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_high_freq.mat']);
+
+names_sl = fieldnames(sl);
+
+% Plot
+cfg = [];
+cfg.layout = 'neuromag306cmb.lay';
+
+figureDim = [0 0 0.7 1];
+for i=1:length(names_sl)
+    figure('units','normalized','outerposition',figureDim)
+    ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
+    colormap(flip(cbrewer2('RdBu')))
+    savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
+end
+
+%% Some individual plots
+corrResult = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_high_freq.mat'])
+
+cfg = [];
+cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
+
+ft_multiplotTFR(cfg, operand2_lf.searchlight_ft_allsub);
+save2pdf([searchlight_result_dir 'searchlight_op2_low_best.pdf'], gcf, 600)
+caxis([.24 .30])
+
+
+operand1_lf =  operand1_lf.searchlight_ft_allsub;
+
+operand1_lf.meanall = squeeze(mean(operand1_lf.powspctrm,1));
+operand1_lf.meanall(operand1_lf.meanall(:) < .25) = nan;
+imagesc(operand1_lf.meanall)
+caxis([.24 .3])
+
+operand2_lf =  operand1_lf.searchlight_ft_allsub;
+operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
+
+
+
+ft_multiplotTFR(cfg, sl.(names_sl{1}).searchlight_ft_allsub);
+colorbar
+title('')
+set(gca, 'FontSize', 30)
+LineWidthMark = 2; LineCol = [1 1 1];
+line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+ylabel('Frequency (Hz)')
+xlabel('Time (sec.)')
+savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{1} '_bestchan2.png'])
 
 
 %% RSA searchlight TF cosmo
@@ -955,6 +912,36 @@ title(fieldnames_RSA{i}, 'interpreter', 'none')
 
 
 %% END
+
+
+%% Cosmo simple decoding - to be completed
+% Load all data from all subjects (needs at least 30 gb free in disk space)
+for subj = 2:length(sub_name)
+    load([data_dir sub_name{subj} '_calc_BR.mat'])
+    % z-score each channel for later PCA
+    
+    % Convert to cosmo MVPA
+    data_cosmo = calcConvertCOSMO(data);
+    % Organize trialinfo
+    [stim, stimfull] = comoOrganizeTrialInfo(data_cosmo.sa);
+    data_cosmo.sa.stim = stim;
+    data_cosmo.sa.stimfull = stimfull;
+    sa = data_cosmo.sa;
+    save([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'data_cosmo', 'sa', '-v7.3');
+end
+
+%% Count number of events per subject
+for subj = 1:length(sub_name)
+    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat'], 'sa');
+    tab_stim = tabulate(sa.stim(sa.operator ~= 0));
+    tab_stim_all(:,subj) = cell2mat(tab_stim(:,2));
+end
+
+%% Run PCA
+for subj = 1:length(sub_name)
+    load([data_root_dir 'data/cosmo_mvpa/' sub_name{subj} '_calc_cosmo.mat']);
+    dt_cosmo_pca = PCAforcosmo(data_cosmo);
+end
 
 %% Plot single subjects
 for i=1:length(sub_name)

@@ -58,6 +58,10 @@ predictors = {'operator', 'op1_mag', 'op1_vis', 'op2_mag', 'op2_vis', 'result_ma
 %% Define measures and argumnts
 measure=@cosmo_target_dsm_corr_measure;
 measure_args=struct();
+measure_args.type='Spearman'; %correlation type between target and MEG dsms
+measure_args.metric='Spearman'; %metric to use to compute MEG dsm % mahalanobis
+measure_args.center_data=true; %removes the mean pattern before correlating
+
 measure_args.glm_dsm = {RDM.(predictors{1}), RDM.(predictors{2}), RDM.(predictors{3}), RDM.(predictors{4}), RDM.(predictors{5}), RDM.(predictors{6}), RDM.(predictors{7})} ;
 
 %% Run searchlight
@@ -70,6 +74,6 @@ display(['RSA searchlight in subject ' subject ' completed in ' num2str(time_ela
 
 %% Save
 save([rsa_result_dir subject '_RSA_searchlight_all_DSM' '_ch' num2str(spacesphere)...
-    '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '_' fq_range '_freq.mat'], 'RSA');
+    '_tbin' num2str(timesphere) '_frbin' num2str(freqsphere) '_' fq_range '_freq_spearman.mat'], 'RSA');
 
 end
