@@ -12,23 +12,31 @@ from prepDataDecTFA import prepDataDecTFA
 
 # Subjects
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
-subjects = ['s02', 's03']
 
 # Basic parameters
-conditions = [['cres_riemann', 'cres_riemann']]
+conditions = [['resultlock_pres_i', 'resultlock_pres_i']]
 baselinecorr = 'nobaseline'
-dec_method = 'general' # class reg classGeneral
+dec_method = 'class' # class reg classGeneral
 dec_scorer = 'accuracy' # accuracy or kendall_score
-gatordiag = 'diagonal'
-decimate = 10
+gatordiag = 'gat'
+decimate = 2
 
-
-results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
-    result = classifyGeneral(params['X_train']._data, params['y_train'])     # or calcDecoding(params, dec_method, dec_scorer, gatordiag)
-    results.loc[0] = result['Accuracy'][0]
+    calcDecoding(params, dec_method, dec_scorer, gatordiag)     # or calcDecoding(params, dec_method, dec_scorer, gatordiag)
 
+conditions = [['resultlock_pres_c', 'resultlock_pres_c']]
+for s, subject in enumerate(subjects):
+    params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
+    calcDecoding(params, dec_method, dec_scorer, gatordiag)     # or calcDecoding(params, dec_method, dec_scorer, gatordiag)
+
+
+## Save trialinfo pres - isso é uma gambiarra. Tenho que achar a maneira correta de salvar trialinfo para cada sujeito e deixar no output do classifier.
+for s, subject in enumerate(subjects):
+    params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
+    fname = dirs['result'] + '/group_results/' + conditions[0][0] + '_' + conditions[0][1] + '/' + subject + '_' + conditions[0][0] + '_' + conditions[0][1] + '_trialinfo.csv'
+    X_train_info = params['X_train_info']
+    X_train_info.to_csv(fname)
 
 ########## TIme frequency
 results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})

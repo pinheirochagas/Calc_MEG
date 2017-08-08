@@ -58,6 +58,7 @@ plt.savefig(save_dir + 'results_XdawnCov_ERPCov_HankelCov_SimpleSVM_1600ms.png')
 
 
 
+
 ########## Time frequency
 # results = pd.DataFrame(index=range(1, 1), columns={'Accuracy'})
 # conditions = [['op2_freq_riemann', 'op2_freq_riemann']]

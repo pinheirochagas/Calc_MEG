@@ -390,6 +390,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': np.min(epoch_calc_resplock.times), 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
+
         elif train_set == 'resplock_op1':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
             epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
@@ -402,6 +403,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': np.min(epoch_calc_resplock.times), 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
+
         elif train_set == 'resplock_op2':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
             epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
@@ -414,6 +416,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': np.min(epoch_calc_resplock.times), 'stop': np.max(epoch_calc_resplock.times)}
             test_times = train_times
+
         elif train_set == 'resplock_addsub':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresponse.mat'  # make this dynamic
             epoch_calc_resplock, info_calc_resplock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
@@ -466,6 +469,35 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = y_train
             train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
             test_times = train_times
+            X_train_info = info_calc_reslock[train_index]
+
+        elif train_set == 'resultlock_pres_c':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            train_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] == 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['presResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
+            test_times = train_times
+            X_train_info = info_calc_reslock[train_index]
+
+        elif train_set == 'resultlock_pres_i':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            train_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['presResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
+            test_times = train_times
+            X_train_info = info_calc_reslock[train_index]
 
         elif train_set == 'resultlock_pres_len200ms':
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
@@ -688,13 +720,19 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
     print(test_set)
     print('done')
 
+    # Check if trialinfo has been defined
+    try:
+        print(X_train_info)
+    except:
+        X_train_info = []
+
     # Organize parameters
     params = {'subject': subject, 'baseline_correction': baselinecorr,
              'train_set': train_set, 'test_set': test_set,
               'train_times': train_times, 'test_times': test_times,
               'times_calc': epoch_calc.times,
               'mode': mode,'baseline': baseline, 'decimate': decimate,
-              'X_train': X_train, 'y_train': y_train, 'X_test': X_test, 'y_test': y_test}
+              'X_train': X_train, 'y_train': y_train, 'X_test': X_test, 'y_test': y_test, 'X_train_info': X_train_info}
 
     print(params)
 

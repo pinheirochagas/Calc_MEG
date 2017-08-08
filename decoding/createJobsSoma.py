@@ -12,7 +12,7 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 
 #subjects = ['s03']
 
-conditions = [['cres_all', 'cres_all']]
+conditions = [['resultlock_pres_c', 'resultlock_pres_c'], ['resultlock_pres_i', 'resultlock_pres_i']]
 
 
 baselinecorr = 'nobaseline'

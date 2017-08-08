@@ -20,8 +20,8 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11'
 #subjects = ['s02', 's03', 's04', 's05', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
 
 baselinecorr = 'nobaseline'
-dec_method = 'reg'  # 'reg' or 'class'
-dec_scorer = 'kendall_score'  # or 'accuracy' kendall_score
+dec_method = 'class'  # 'reg' or 'class'
+dec_scorer = 'accuracy'  # or 'accuracy' kendall_score
 gatordiag = 'gat'
 sfreq = 125
 
@@ -30,15 +30,15 @@ sfreq = 125
 
 #conditions = [['resultlock_deviant', 'resultlock_deviant']]
 
-conditions = [['resultlock_cres', 'resultlock_cres']]
+conditions = [['resultlock_pres', 'resultlock_pres']]
 
-
+complete = 'yes'
 for i in range(len(conditions)):
     condition = conditions[i]
-    res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, [condition], sfreq)
-    plotDecodingExplore(res)
+    res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, [condition], sfreq, complete)
+    #plotDecodingExplore(res)
     # Prepare results
-    fname = dirs['gp_result'] + [condition][0][0] + '_' + [condition][0][1] + '/' + [condition][0][0] + '_' + [condition][0][1] + '_' + dec_method + '_' + dec_scorer + '_' + 'results'
+    fname = dirs['gp_result'] + [condition][0][0] + '_' + [condition][0][1] + '/' + [condition][0][0] + '_' + [condition][0][1] + '_' + dec_method + '_' + dec_scorer + '_' + 'results' + '_' + complete
     np.save(fname, res)
     fname_mat = fname + '.mat'
     scipy.io.savemat(fname_mat, res)

@@ -30,15 +30,18 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
             results = results.tolist()
             all_scores.append(results['score'])
             all_diagonals.append(results['diagonal'])
-            #all_ypred.append(results['y_pred'])
-            #all_ytrue.append(results['y_true'])
+            all_ypred.append(results['y_pred'])
+            all_ytrue.append(results['y_true'])
             # times = results['times_calc']
     score = results['score']
     diagonal = results['diagonal']
     #ypred = results['y_pred']
     all_scores = np.array(all_scores)  # shape: subjects*n_cond, training_times, testing_times
     all_diagonals = np.array(all_diagonals)
-    # all_ypred = np.array(all_ypred)
+
+    # Workaround to convert list with different dimentions in an array of arrays
+    all_ypred.insert(0, [])
+    all_ytrue.insert(0, [])
 
     # chance = 0.5
 

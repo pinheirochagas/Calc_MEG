@@ -112,7 +112,7 @@ def addLines(plot, conditions, gatordiag):
                 plot.axvline(2.4, color=color_line, linestyle='-')  # mark stimulus onset
             elif conditions[0][0] == 'resultlock_op1' or conditions[0][0] == 'resultlock_addsub' or conditions[0][0] == 'resultlock_op2' or conditions[0][0] == 'resultlock_cres' or conditions[0][0] == 'resultlock_pres'\
                     or conditions[0][0] == 'resultlock_absdeviant' or conditions[0][0] == 'resultlock_deviant':
-                plot.axvline(.4, color=color_line, linestyle='-')  # mark stimulus onset
+                plot.axvline(0, color=color_line, linestyle='-')  # mark stimulus onset
 
     else:
         if conditions[0][0] == conditions[0][1]:
@@ -125,8 +125,8 @@ def addLines(plot, conditions, gatordiag):
                 plot.axhline(2.4, color=color_line, linestyle='-')  # mark stimulus onset
             elif conditions[0][0] == 'resultlock_op1' or conditions[0][0] == 'resultlock_addsub' or conditions[0][0] == 'resultlock_op2' or conditions[0][0] == 'resultlock_cres' or conditions[0][0] == 'resultlock_pres'\
                     or conditions[0][0] == 'resultlock_absdeviant' or conditions[0][0] == 'resultlock_deviant':
-                plot.axvline(.4, color=color_line, linestyle='-')  # mark stimulus onset
-                plot.axhline(.4, color=color_line, linestyle='-')  # mark stimulus onset
+                plot.axvline(0, color=color_line, linestyle='-')  # mark stimulus onset
+                plot.axhline(0, color=color_line, linestyle='-')  # mark stimulus onset
 
 def getfigsize(conditions):
     if conditions[0][0] == conditions[0][1]:

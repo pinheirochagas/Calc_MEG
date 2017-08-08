@@ -417,8 +417,8 @@ conditions_RT = {'resplock_op1_resplock_op1','resplock_op2_resplock_op2', 'respl
                 'resplock_pres_resplock_pres', 'resplock_absdeviant_resplock_absdeviant'};
 
 baselinecorr = 'nobaseline';
-dec_method = 'reg'; % class reg classGeneral
-dec_scorer = 'kendall_score'; % accuracy or kendall_score
+dec_method = 'class'; % class reg classGeneral
+dec_scorer = 'accuracy'; % accuracy or kendall_score
 gatordiag = 'gat';
 
 for i = 1:length(conditions_A)
@@ -426,6 +426,7 @@ for i = 1:length(conditions_A)
     res.(dec_method).c.(conditions_C{i}) = load([dec_res_dir_group conditions_C{i} '/' conditions_C{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
     res.(dec_method).rt.(conditions_RT{i}) = load([dec_res_dir_group conditions_RT{i} '/' conditions_RT{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
 end
+
 
 %% Plot
 colors = parula(8);
@@ -535,6 +536,39 @@ colorbar
 
 save2pdf([dec_res_dir_group 'decoding_gat_full.pdf'], gcf, 600)
 
+
+%% Get timings decoding
+times_sig = struct;
+peak_sig = struct;
+for i = 1:length(fieldnames(res))
+    fieldnames_met = fieldnames(res);
+    for ii = 1:length(fieldnames(res.(fieldnames_met{i})))
+        fieldnames_tl = fieldnames(res.(fieldnames_met{i}));
+        for iii = 1:length(fieldnames(res.(fieldnames_met{i}).(fieldnames_tl{ii})))
+            fieldnames_cond = fieldnames(res.(fieldnames_met{i}).(fieldnames_tl{ii}));
+            res_tmp = res.(fieldnames_met{i}).(fieldnames_tl{ii}).(fieldnames_cond{iii});
+            chance = double(res_tmp.chance);
+            data = squeeze(res_tmp.all_diagonals);
+            times_plot = res_tmp.times(1:size(data,2));
+            sig_plot = res_tmp.p_values_diagonal_fdr<0.05;
+            data_avg = mean(data,1);    
+            times_sig.(fieldnames_met{i}).(fieldnames_tl{ii}).(fieldnames_cond{iii}) = times_plot(find(sig_plot==1 & data_avg>chance))';
+            [~,idx_max] = max(data_avg);
+            peak_sig.(fieldnames_met{i}).(fieldnames_tl{ii}).(fieldnames_cond{iii}) = times_plot(idx_max);
+        end
+    end
+end
+            
+            
+for i = 1:length(conditions_A)
+    res_tmp = res.(dec_method).a.(conditions_A{i});
+    chance = double(res_tmp.chance);
+    data = squeeze(res_tmp.all_diagonals);
+    times_plot = res_tmp.times(1:size(data,2));
+    sig_plot = res_tmp.p_values_diagonal_fdr<0.05;
+    data_avg = mean(data,1);
+    times_sig.(dec_method).a.(conditions_A{i}) = times_plot(find(sig_plot==1 & data_avg>chance))';
+end
 
 %% Calculate RSA - single or multiple regression
 operation = 'calc';
@@ -907,7 +941,40 @@ title(fieldnames_RSA{i}, 'interpreter', 'none')
 % savePNG(gcf,200, [searchlight_result_dir 'figures/RSA_all_DSM_mr_' fieldnames_RSA{i} '_best_channels_topo_t2.png'])
 
 
+%% Look specifically at the presented result
+resultlock_pres = load([dec_res_dir_group 'resultlock_pres_resultlock_pres' '/' 'resultlock_pres_resultlock_pres' '_' dec_method '_' dec_scorer '_' 'results_yes.mat']);
+% Correct for numpy craziness when appending arrays with different dimensions
+resultlock_pres.all_ytrue = resultlock_pres.all_ytrue(2:end);
+resultlock_pres.all_ypred = resultlock_pres.all_ypred(2:end);
 
+% Load trialinfo
+for i=1:length(sub_name_all)
+   trialinfo_pres{i} = readtable([dec_res_dir_group 'resultlock_pres_resultlock_pres' '/' sub_name_all{i} '_resultlock_pres_resultlock_pres' '_trialinfo.csv']);
+end
+
+% Get the diagonal of each trial
+for i=1:length(resultlock_pres.all_ypred)
+    for ii = 1:size(resultlock_pres.all_ypred{i},3)
+        diag_pres{i}(ii,:) = diag(resultlock_pres.all_ypred{i}(:,:,ii));
+    end
+end
+
+% Get the accuracy of each trial
+for i=1:length(resultlock_pres.all_ypred)
+    for ii = 1:length(resultlock_pres.all_ytrue{i})
+        acc_pres{i}(ii,:) = diag_pres{i}(ii,:) == resultlock_pres.all_ytrue{i}(ii);
+    end
+end
+
+% Average accuracy separately for correct and incorrect pres
+for i=1:length(acc_pres)
+    mean_acc_pres_c(i,:) = mean(acc_pres{i}(trialinfo_pres{i}.absdeviant==0,:),1);
+    mean_acc_pres_i(i,:) = mean(acc_pres{i}(trialinfo_pres{i}.absdeviant~=0,:),1);
+end
+
+hold on
+plot(mean(mean_acc_pres_c,1))
+plot(mean(mean_acc_pres_i,1))
 
 
 

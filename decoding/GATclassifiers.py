@@ -128,7 +128,7 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
 
     # Learning process
     gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'], test_times=params['test_times'],
-                                   scorer=scorer, predict_mode=predict_mode, predict_method=predict_method, n_jobs=1)
+                                   scorer=scorer, predict_mode=predict_mode, predict_method=predict_method, n_jobs=-1)
 
 
     # Determine whether to generalize only across time or also across conditions
