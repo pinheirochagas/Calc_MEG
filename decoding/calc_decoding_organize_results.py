@@ -30,15 +30,15 @@ sfreq = 125
 
 #conditions = [['resultlock_deviant', 'resultlock_deviant']]
 
-conditions = [['resultlock_pres', 'resultlock_pres']]
+conditions = [['pres', 'pres']]
 
-complete = 'yes'
+complete = 'no'
 for i in range(len(conditions)):
     condition = conditions[i]
     res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, [condition], sfreq, complete)
     #plotDecodingExplore(res)
     # Prepare results
-    fname = dirs['gp_result'] + [condition][0][0] + '_' + [condition][0][1] + '/' + [condition][0][0] + '_' + [condition][0][1] + '_' + dec_method + '_' + dec_scorer + '_' + 'results' + '_' + complete
+    fname = dirs['gp_result'] + [condition][0][0] + '_' + [condition][0][1] + '/' + [condition][0][0] + '_' + [condition][0][1] + '_' + dec_method + '_' + dec_scorer + '_' + 'results' + '_'
     np.save(fname, res)
     fname_mat = fname + '.mat'
     scipy.io.savemat(fname_mat, res)

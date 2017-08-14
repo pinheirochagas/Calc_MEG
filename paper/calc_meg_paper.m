@@ -80,12 +80,24 @@ beh_sub = behAnalysisCalcMEG(sub_name_all, 'sub');
 % Analyse deviant 
 condition = 'calc';
 beh_data = load([beh_res_dir_group 'behavior_data_processed_' condition '.mat']);
-[group, ind] = behStats(beh_data.trialinfoAll);
+[group, ind, avg_deviant_cat] = behStats(beh_data.trialinfoAll);
 
 for i=1:length(beh_data.trialinfoAll)
     subplot(5,4,i)
     boxplot(beh_data.trialinfoAll{i}(:,10), beh_data.trialinfoAll{i}(:,9))
 end
+
+% Group stats for correct vs. incorrect 
+correct = avg_deviant_cat(:,1);
+incorrect = mean(avg_deviant_cat(:,2:end),2);
+correct_incorrect = [correct, incorrect];
+[stats,varargout] = mes1way(correct_incorrect, 'eta2');
+[mean(correct_incorrect) std(correct_incorrect)] 
+
+% Group stats incorrect only
+avg_deviant_cat_inc = avg_deviant_cat(:,2:end)
+[stats,varargout] = mes1way(avg_deviant_cat_inc, 'eta2');
+[mean(avg_deviant_cat_inc) std(avg_deviant_cat_inc)]
 
 
 %% ERF - to complete
@@ -322,7 +334,7 @@ ft_databrowser(cfg, comp)
 
 %% Decoding from MNE-Python
 % Load data
-conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'cres_cres', 'choice_choice', 'respside_respside'};
+conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'pres_pres', 'choice_choice', 'respside_respside'};
 
 conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_addsub_resultlock_addsub', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
                 'resultlock_pres_resultlock_pres', 'resultlock_choice_resultlock_choice', 'resultlock_respside_resultlock_respside'};
@@ -367,7 +379,7 @@ for i=1:length(conditions_A)
         xlabel('Time (s)')
     end
 end
-save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_As.pdf'], gcf, 600)
 
 % Timelock to C
 figureDim = [0 0 .6/3.4 1*(7/8)];
@@ -389,7 +401,7 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
 
 
 % Timelock to RT
-figureDim = [0 0 .6/3.4 1*(7/8)];
+figureDim = [0 0 .6/3.5 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.8 .1];
 for i=1:length(conditions_RT)
@@ -408,17 +420,17 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_RT.pdf'], gcf, 600)
 
 %% Decoding regression MNE-Python
 % Load data
-conditions_A = {'op1_op1', 'op2_op2', 'pres_pres', 'cres_cres', 'absdeviant_absdeviant'};
+conditions_A = {'op1_op1', 'op2_op2', 'cres_cres', 'pres_pres'};
 
-conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
-                'resultlock_pres_resultlock_pres', 'resultlock_absdeviant_resultlock_absdeviant'};
+conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_op2_resultlock_op2', 'resultlock_pres_resultlock_pres', ...
+    'resultlock_cres_resultlock_cres'};
             
-conditions_RT = {'resplock_op1_resplock_op1','resplock_op2_resplock_op2', 'resplock_cres_resplock_cres', ...
-                'resplock_pres_resplock_pres', 'resplock_absdeviant_resplock_absdeviant'};
+conditions_RT = {'resplock_op1_resplock_op1','resplock_op2_resplock_op2', 'resplock_pres_resplock_pres', ...
+    'resplock_cres_resplock_cres'};
 
 baselinecorr = 'nobaseline';
-dec_method = 'class'; % class reg classGeneral
-dec_scorer = 'accuracy'; % accuracy or kendall_score
+dec_method = 'reg'; % class reg classGeneral
+dec_scorer = 'kendall_score'; % accuracy or kendall_score
 gatordiag = 'gat';
 
 for i = 1:length(conditions_A)
@@ -429,14 +441,14 @@ end
 
 
 %% Plot
-colors = parula(8);
-colors = colors([1 3:6],:)
+colors = parula(7);
+colors = colors([1 3:5],:)
 
 % Predefine some y_lim
 y_lims = zeros(length(conditions_A),2,1);
 
 % Timelock to A
-figureDim = [0 0 .6 1*(5/8)];
+figureDim = [0 0 .6 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 3.2];
 for i=1:length(conditions_A)
@@ -454,7 +466,7 @@ end
 save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
 
 % Timelock to C
-figureDim = [0 0 .6/3.4 1*(5/8)];
+figureDim = [0 0 .6/3.4 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 .8];
 for i=1:length(conditions_C)
@@ -473,7 +485,7 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
 
 
 % Timelock to RT
-figureDim = [0 0 .6/3.4 1*(5/8)];
+figureDim = [0 0 .6/3.5 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.8 .1];
 for i=1:length(conditions_RT)
@@ -942,7 +954,7 @@ title(fieldnames_RSA{i}, 'interpreter', 'none')
 
 
 %% Look specifically at the presented result
-resultlock_pres = load([dec_res_dir_group 'resultlock_pres_resultlock_pres' '/' 'resultlock_pres_resultlock_pres' '_' dec_method '_' dec_scorer '_' 'results_yes.mat']);
+resultlock_pres = load([dec_res_dir_group 'resultlock_rpres_resultlock_pres' '/' 'resultlock_pres_resultlock_pres' '_' dec_method '_' dec_scorer '_' 'results_yes.mat']);
 % Correct for numpy craziness when appending arrays with different dimensions
 resultlock_pres.all_ytrue = resultlock_pres.all_ytrue(2:end);
 resultlock_pres.all_ypred = resultlock_pres.all_ypred(2:end);

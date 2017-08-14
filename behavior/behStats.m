@@ -1,4 +1,4 @@
-function [group, ind] = behStats(beh_data)
+function [group, ind, avg_deviant_cat] = behStats(beh_data)
 
 deviant = unique(beh_data{1}(:,9));
 for i = 1:length(beh_data)
@@ -11,7 +11,8 @@ avg_deviant_cat = horzcat(avg_deviant{:});
 mean_deviant = mean(avg_deviant_cat,2);
 sem_deviant = sem(avg_deviant_cat,2);
 
-[p,tbl,stats] = anova1(avg_deviant_cat', [], 'off');
+avg_deviant_cat = avg_deviant_cat';
+[p,tbl,stats] = anova1(avg_deviant_cat, [], 'off');
 group.p = p;
 group.tbl = tbl;
 group.stats = stats;
@@ -29,6 +30,5 @@ end
 ind.p = p_i;
 ind.tbl = tbl_i;
 ind.stats = stats_i;
-
 end
 
