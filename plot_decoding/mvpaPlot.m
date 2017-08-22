@@ -20,6 +20,7 @@ end
             data = squeeze(res.all_diagonals);
             times_plot = res.times(1:size(data,2));
             sig_plot = res.p_values_diagonal_fdr<0.05;
+%              sig_plot = res.p_values_diagonal<0.05;
         elseif strcmp(gatdiagorRSA, 'RSA') == 1 
             chance = 0;
             data = res.ds_stacked_RSA.samples;

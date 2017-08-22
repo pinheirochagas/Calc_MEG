@@ -335,6 +335,7 @@ ft_databrowser(cfg, comp)
 %% Decoding from MNE-Python
 % Load data
 conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'pres_pres', 'choice_choice', 'respside_respside'};
+% conditions_A = {'op1_op1', 'addsub_addsub', 'op2_123_op2_123', 'cres_cres', 'pres_pres', 'choice_choice', 'respside_respside'};
 
 conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_addsub_resultlock_addsub', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
                 'resultlock_pres_resultlock_pres', 'resultlock_choice_resultlock_choice', 'resultlock_respside_resultlock_respside'};
@@ -353,6 +354,38 @@ for i = 1:length(conditions_A)
     res.(dec_method).rt.(conditions_RT{i}) = load([dec_res_dir_group conditions_RT{i} '/' conditions_RT{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
 end
 
+%% Compare conditions
+res.class.a.op1_op1.times
+time_window = [0, .800];
+onsets = [0, 1.6];
+
+data_op1 = squeeze(res.class.a.op1_op1.all_diagonals);
+data_op2 = squeeze(res.class.a.op2_op2.all_diagonals);
+
+times_op1 = find(res.class.a.op1_op1.times >= time_window(1)+onsets(1) & res.class.a.op1_op1.times <= time_window(2)+onsets(1));
+times_op2 = find(res.class.a.op1_op1.times >= time_window(1)+onsets(2) & res.class.a.op1_op1.times <= time_window(2)+onsets(2));
+
+% Plot average decoding 
+boxplot([mean(data_op1(:,times_op1),2), mean(data_op2(:,times_op2),2)])
+box on
+set(gca, 'FontSize', 20)
+line(xlim, [.25 .25], 'Color', [.5 .5 .5], 'LineWidth', 1);
+anova1([mean(data_op1(:,times_op1),2), mean(data_op2(:,times_op2),2)])
+
+% Plot time course
+data_op1_avg = mean(data_op1(:,times_op1),1);
+data_op1_sem = std(data_op1(:,times_op1))/sqrt(size(data_op1(:,times_op1),1));
+data_op2_avg = mean(data_op2(:,times_op2),1);
+data_op2_sem = std(data_op2(:,times_op2))/sqrt(size(data_op2(:,times_op2),1));
+
+hold on
+plt = shadedErrorBar(linspace(0, 0.8, 100),data_op1_avg,data_op1_sem, {'color', 'b', 'LineWidth',0.001});
+plt = shadedErrorBar(linspace(0, 0.8, 100),data_op2_avg,data_op2_sem, {'color', 'r', 'LineWidth',0.001});
+box on
+set(gca, 'FontSize', 20)
+line(xlim, [.25 .25], 'Color', [.5 .5 .5], 'LineWidth', 1);
+
+
 %% Plot
 colors = parula(length(conditions_A));
 
@@ -367,7 +400,7 @@ y_lims(7,:) = [0.46 .93];
 figureDim = [0 0 .6 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 3.2];
-for i=1:length(conditions_A)
+for i=2:length(conditions_A)
     subplot(length(conditions_A),1,i)
     y_lims(i,:) = mvpaPlot(res.(dec_method).a.(conditions_A{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'A');
     sub_pos = get(gca,'position'); % get subplot axis position
@@ -379,7 +412,7 @@ for i=1:length(conditions_A)
         xlabel('Time (s)')
     end
 end
-save2pdf([dec_res_dir_group 'decoding_' dec_method '_As.pdf'], gcf, 600)
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
 
 % Timelock to C
 figureDim = [0 0 .6/3.4 1*(7/8)];
@@ -582,6 +615,46 @@ for i = 1:length(conditions_A)
     times_sig.(dec_method).a.(conditions_A{i}) = times_plot(find(sig_plot==1 & data_avg>chance))';
 end
 
+
+%% Plot decoding ERPCov Riemannian
+riemann_dec = {'op1_riemann_op1_riemann', 'addsub_riemann_addsub_riemann', 'op2_riemann_op2_riemann', 'cres_riemann_cres_riemann'};
+colors_plot = viridis(7);
+colors_plot = colors_plot(1:4,:);
+
+figureDim = [0 0 1 .43];
+figure('units','normalized','outerposition',figureDim)
+for i = 1:length(riemann_dec)
+    subplot(1,length(riemann_dec),i)
+    data_tmp = csvread([dec_res_dir_ind riemann_dec{i} '/' riemann_dec{i} '_results_ERPcov_with_offsets.csv'], 1,1);
+    prettyBoxPlot(data_tmp, [colors_plot(i,:); colors_plot(i,:)],  {'0 - 800 ms', '800 - 1,600 ms'}, '', 'Positions', [1 2])
+    set(gca, 'XTickLabelRotation', 0)
+    set(gca, 'FontSize', 17)
+    if i == 2
+        ylim([.44 1])
+        
+    else
+        ylim([.18 .8])
+        set(gca, 'YTick', -.25:.1:.8);
+    end
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1.1 1]) % stretch its width and height
+end
+
+% Add chance lines
+all_axes = get(gcf,'Children');
+for i = 1:length(all_axes)
+    if i == 3
+        line(xlim, [.5 .5], 'Color', [.5 .5 .5], 'LineWidth', 1, 'LineStyle', ':', 'Parent', all_axes(i));
+    else
+        line(xlim, [.25 .25], 'Color', [.5 .5 .5], 'LineWidth', 1, 'LineStyle', ':', 'Parent', all_axes(i));
+        
+    end
+end
+    
+% Save
+save2pdf([dec_res_dir_group 'decoding_ERPCov.pdf'], gcf, 600)
+
+
 %% Calculate RSA - single or multiple regression
 operation = 'calc';
 timesphere = 2;
@@ -775,6 +848,25 @@ set(gca, 'XTickLabel', fieldnames_RDM(1:7), 'TickLabelInterpreter', 'none')
 set(gca,'XaxisLocation','top')
 set(gca, 'YTickLabel', fieldnames_RDM(1:7))
 
+%% Get some timings
+fieldnames_RSA = {'op1_mag' 'op2_mag' 'op1_vis' 'op2_vis' 'op1_magregop1_vis' 'op2_magregop2_vis' 'op1_visregop1_mag' 'op2_visregop2_mag'};
+
+times_sig_rsa = struct;
+peak_sig_rsa = struct;
+for i=1:length(fieldnames_RSA)
+    load([rsa_result_dir 'group_rsa/RSA_stats_model_', [operation '_' fieldnames_RSA{i}], '_all_DSM.mat'], 'RSAres');
+    times_sig_rsa.(fieldnames_RSA{i}) = RSAres.timevect(RSAres.sig_tp_RSA == 1)';
+    data_avg = mean(RSA_res.(fieldnames_RSA{i}).ds_stacked_RSA.samples)
+    [~, max_idx] = max(data_avg);
+    peak_sig_rsa.(fieldnames_RSA{i}) = RSAres.timevect(max_idx);
+end
+
+mean(RSA_res.op1_mag.ds_stacked_RSA.samples)
+
+RSA_res.op1_vis.timevect(RSA_res.op1_vis.sig_tp_RSA == 1)
+
+RSA_res.op1_mag.timevect(RSA_res.op1_mag.sig_tp_RSA == 1)
+
 
 
 %% Cosmo decoding time-frequency-space searchlight LDA
@@ -797,9 +889,9 @@ searchlight_ft_allsub = cosmoSearchLight(sub_name, 'presResult', 'high', 10, 1, 
 
 %% Vizualize searchlight
 sl.op1_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_low_freq.mat']);
+sl.op_low = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']);
 sl.op2_low = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_low_freq.mat']);
 sl.cres_low = load([searchlight_result_dir 'searchlight_ft_allsub_corrResult_lda_ch10_tbin1_frbin1_low_freq.mat']);
-sl.op_low = load([searchlight_result_dir 'searchlight_ft_allsub_operator_lda_ch10_tbin1_frbin1_low_freq.mat']);
 
 sl.op1_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand1_lda_ch10_tbin1_frbin1_high_freq.mat']);
 sl.op2_high = load([searchlight_result_dir 'searchlight_ft_allsub_operand2_lda_ch10_tbin1_frbin1_high_freq.mat']);
@@ -815,7 +907,7 @@ cfg.layout = 'neuromag306cmb.lay';
 figureDim = [0 0 0.7 1];
 for i=1:length(names_sl)
     figure('units','normalized','outerposition',figureDim)
-    ft_multiplotTFR(cfg, sl.(names_sl{2}).searchlight_ft_allsub);
+    ft_multiplotTFR(cfg, sl.(names_sl{1}).searchlight_ft_allsub);
     colormap(flip(cbrewer2('RdBu')))
     savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
 end
@@ -841,12 +933,23 @@ caxis([.24 .3])
 operand2_lf =  operand1_lf.searchlight_ft_allsub;
 operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
 
+%% Manually plot most interesting channels
+cfg = [];
+cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
+cfg.xlim = [-.200 3.2];
+cfg.zlim = [.48 .60];
+cfg.showoutline = 'yes'
+cfg.colorbar = 'yes'
+cfg.colormap = viridis
 
+i = 2
+ft_multiplotTFR(cfg, sl.(names_sl{i}).searchlight_ft_allsub);
+save2pdf([searchlight_result_dir 'figures/' names_sl{i} '_allchan.pdf'], gcf, 600)   
 
-ft_multiplotTFR(cfg, sl.(names_sl{1}).searchlight_ft_allsub);
-colorbar
 title('')
-set(gca, 'FontSize', 30)
+xlim([-0.2 3.2])
+set(gca, 'XTick', [-.200 0:0.4:3.2]);
+set(gca, 'FontSize', 20)
 LineWidthMark = 2; LineCol = [1 1 1];
 line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
@@ -854,8 +957,9 @@ line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 ylabel('Frequency (Hz)')
-xlabel('Time (sec.)')
-savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{1} '_bestchan2.png'])
+xlabel('Time (s)')
+save2pdf([searchlight_result_dir 'figures/' names_sl{i} '_bestchan.pdf'], gcf, 600)   
+close all
 
 
 %% RSA searchlight TF cosmo
@@ -879,8 +983,8 @@ for subj = 1:length(sub_name)
 end
 
 % Load all data
-for p = 1:length(sub_name)
-    load([rsa_result_dir sub_name{p} '_RSA_searchlight_all_DSM_ch10_tbin2_frbin1_low_freq.mat']);
+for p = 1:length(sub_name_all)
+    load([rsa_result_dir sub_name_all{p} '_RSA_searchlight_all_DSM_ch10_tbin2_frbin1_low_freq.mat']);
     fieldnames_RSA = RSA.predictors;
     for f = 1:length(fieldnames_RSA);
         RSA_all.(fieldnames_RSA{f}){p}=RSA.result_reg_everything;
@@ -908,7 +1012,7 @@ end
 cfg = [];
 cfg.layout = 'neuromag306cmb.lay';
 cfg.showoutline = 'yes';
-cfg.box = 'yes';
+cfg.box = 'no';
 cfg.showlabels = 'no';
 cfg.colorbar = 'yes';
 
@@ -924,7 +1028,7 @@ end
 
 
 %% Manual plotting selecting channels
-i = 6;
+i = 1;
 figureDim = [0 0 .6 .7];
 data_tmp = ds_stacked_RSA_ft.(fieldnames_RSA{i});
 ft_multiplotTFR(cfg, data_tmp);

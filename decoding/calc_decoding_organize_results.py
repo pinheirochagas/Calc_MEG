@@ -30,13 +30,13 @@ sfreq = 125
 
 #conditions = [['resultlock_deviant', 'resultlock_deviant']]
 
-conditions = [['pres', 'pres']]
+conditions = [['op2_123', 'op2_123']]
 
 complete = 'no'
 for i in range(len(conditions)):
     condition = conditions[i]
     res = combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordiag, [condition], sfreq, complete)
-    #plotDecodingExplore(res)
+    plotDecodingExplore(res)
     # Prepare results
     fname = dirs['gp_result'] + [condition][0][0] + '_' + [condition][0][1] + '/' + [condition][0][0] + '_' + [condition][0][1] + '_' + dec_method + '_' + dec_scorer + '_' + 'results' + '_'
     np.save(fname, res)

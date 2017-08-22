@@ -6,7 +6,7 @@ from initDirs import dirs
 import numpy as np
 import os
 
-def plotDecodingExplore(res, p_val_th=0.05, smoothWindow=5):
+def plotDecodingExplore(res, p_val_th=0.05, smoothWindow=0):
 
     # Define basic parameters
     dpi = 100

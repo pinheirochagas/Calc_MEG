@@ -69,14 +69,24 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -.2, 'stop': 4}  # 'length': 0.05 defonce memory!
             test_times = train_times
 
-        elif train_set == 'cres_all':
-            train_index = info_calc['operator'] != 0
+        elif train_set == 'cres_add_all':
+            train_index = info_calc['operator'] == 1
             X_train = epoch_calc[train_index]
             y_train = np.array(info_calc[train_index]['corrResult'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -.2, 'stop': 4}  # 'length': 0.05 defonce memory!
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'cres_sub_all':
+            train_index = info_calc['operator'] == -1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
 
         elif train_set == 'pres':
@@ -94,6 +104,30 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
             X_train = epoch_calc[train_index]
             X_train.crop(1.6, 3.2)
+            y_train = np.array(info_calc[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'cres_riemann_add':
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] == 1
+            X_train = epoch_calc[train_index]
+            X_train.crop(0, 3.2)
+            y_train = np.array(info_calc[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'cres_riemann_sub':
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] == -1
+            X_train = epoch_calc[train_index]
+            X_train.crop(0, 3.2)
             y_train = np.array(info_calc[train_index]['corrResult'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
@@ -119,12 +153,24 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             epoch_calc.pick_types(meg='grad')
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]
-            #X_train.crop(.8, 1.2)
+            X_train.crop(1.6, 3.2)
             y_train = np.array(info_calc[train_index]['operator'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = y_train
-            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            train_times = {'start': .8, 'stop': 1.6}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'addsub_riemann_1600_3200':
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            X_train.crop(.2, 2.4)
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': .8, 'stop': 1.6}  # 'length': 0.05 defonce memory!
             test_times = train_times
 
         elif train_set == 'cres_len100ms':
@@ -177,6 +223,16 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
 
+        elif train_set == 'op2_123':
+            train_index = (info_calc['operator'] != 0) & (info_calc['operand2'] != 0)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
         elif train_set == 'op2_len200ms':
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]
@@ -191,7 +247,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             epoch_calc.pick_types(meg='grad')
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]
-            X_train.crop(1.6, 2.4)
+            X_train.crop(1.6, 3.2)
             y_train = np.array(info_calc[train_index]['operand2'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
@@ -222,7 +278,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
         elif train_set == 'op1_riemann':
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]
-            X_train.crop(.4, .8)
+            X_train.crop(0, 1.6)
             y_train = np.array(info_calc[train_index]['operand1'])
             y_train = y_train.astype(np.float64)
             X_test = X_train

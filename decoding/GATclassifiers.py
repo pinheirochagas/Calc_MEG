@@ -11,6 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 #from sklearn.model_selection import StratifiedKFold
 from sklearn.cross_validation import StratifiedKFold
+from sklearn.linear_model import LogisticRegression
 
 from sklearn.metrics import roc_auc_score
 from jr.gat.scorers import scorer_auc
@@ -36,10 +37,16 @@ def calcGeneral(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
     #     TangentSpace('logeuclid'),
     #     svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
-    clf = make_pipeline(UnsupervisedSpatialFilter(PCA(50), average=False),
-        XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
+    # clf = make_pipeline(UnsupervisedSpatialFilter(PCA(50), average=False),
+    #     XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
+    #     TangentSpace('logeuclid'),
+    #     svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+
+    clf = make_pipeline(StandardScaler(),
+        UnsupervisedSpatialFilter(PCA(70), average=False),
+        ERPCovariances(estimator='lwf'),
         TangentSpace('logeuclid'),
-        svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+        LogisticRegression('l2'))
 
     # Cross validation scheme
     cv = StratifiedKFold(y_train, 8)
