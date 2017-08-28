@@ -134,5 +134,7 @@ def getfigsize(conditions):
             figsize =(16,4)
         else:
             figsize =(5,4)
+    else:
+        figsize = (5, 4)
 
     return figsize

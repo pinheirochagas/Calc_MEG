@@ -8,6 +8,10 @@ from scipy.stats import mannwhitneyu
 from stats import _my_wilcoxon
 from initDirs import dirs
 from jr.stats import parallel_stats
+from jr.stats import stats_tfce
+
+
+
 
 
 
@@ -86,8 +90,16 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
         p_values_diagonal_fdr[c, :] = parallel_stats(all_diagonals[c, :, :] - chance, function=_my_wilcoxon, correction='FDR', n_jobs=-1)
 
         # Get one-sided p-value
+        p_values_gat[c, :] = p_values_gat[c, :] / 2.
+        p_values_gat_fdr[c, :] = p_values_gat_fdr[c, :] / 2.
         p_values_diagonal[c, :] = p_values_diagonal[c, :] / 2.
         p_values_diagonal_fdr[c, :] = p_values_diagonal_fdr[c, :] / 2.
+
+        # print('calculating stats for condition' + '_' + cond[0] + '_' + cond[1])
+        # p_values_gat[c, :, :] = stats_tfce(all_scores[c, :, :, :] - chance, n_jobs=-6)
+        # p_values_diagonal[c, :] = stats_tfce(all_diagonals[c, :, :] - chance,  n_jobs=-6)
+
+
 
 
     if complete == 'no':

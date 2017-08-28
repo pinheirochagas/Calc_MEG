@@ -53,6 +53,7 @@ def stats_tfce(X, n_permutations=2**10,
     X = np.array(X)
     T_obs_, clusters, p_values, _ = spatio_temporal_cluster_1samp_test(
             X,
+            tail=1,
             out_type='mask',
             stat_fun=_stat_fun,
             n_permutations=n_permutations,

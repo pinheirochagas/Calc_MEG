@@ -697,12 +697,43 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             X_train = epoch_calc
             y_train = np.array(info_calc['operand1'])
             y_train = y_train.astype(np.float64)
-            test_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6)
+            test_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0)
             X_test = epoch_calc_reslock[test_index]
             y_test = np.array(info_calc_reslock[test_index]['presResult'])
             y_test = y_test.astype(np.float64)
             train_times = {'start': -0.2, 'stop': 0.8}
             test_times = {'start': -0.2, 'stop': 0.8}
+
+        elif (train_set == 'op1') & (test_set == 'resultlock_pres_c'):
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            #train_index = info_calc['operand1'] != info_calc['presResult']
+            X_train = epoch_calc
+            y_train = np.array(info_calc['operand1'])
+            y_train = y_train.astype(np.float64)
+            test_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] == 0)
+            X_test = epoch_calc_reslock[test_index]
+            y_test = np.array(info_calc_reslock[test_index]['presResult'])
+            y_test = y_test.astype(np.float64)
+            train_times = {'start': -0.2, 'stop': 0.8}
+            test_times = {'start': -0.2, 'stop': 0.8}
+
+        elif (train_set == 'op1') & (test_set == 'resultlock_pres_i'):
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            #train_index = info_calc['operand1'] != info_calc['presResult']
+            X_train = epoch_calc
+            y_train = np.array(info_calc['operand1'])
+            y_train = y_train.astype(np.float64)
+            test_index = (info_calc_reslock['presResult'] >= 3) & (info_calc_reslock['presResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] != 0)
+            X_test = epoch_calc_reslock[test_index]
+            y_test = np.array(info_calc_reslock[test_index]['presResult'])
+            y_test = y_test.astype(np.float64)
+            train_times = {'start': -0.2, 'stop': 0.8}
+            test_times = {'start': -0.2, 'stop': 0.8}
+
         elif (train_set == 'op1') & (test_set == 'cres'):
             #mode = 'cross-validation' # just to see what happens
             epoch_cres = epoch_calc.copy()
@@ -720,7 +751,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             # Update params
             train_times = {'start': np.min(epoch_calc.times), 'stop': np.max(epoch_calc.times)}
             test_times = {'start': np.min(epoch_cres.times), 'stop': np.max(epoch_cres.times)}
-        elif (train_set == 'resultlock_cres') & (test_set == 'cres'):
+
+        elif (train_set == 'resultlock_cres') & (test_set == 'cres_-200_800'):
             fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
             epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
             epoch_calc_reslock.decimate(decimate)
@@ -731,15 +763,94 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_train = np.array(info_calc_reslock[train_index]['corrResult'])
             y_train = y_train.astype(np.float64)
 
+            # Test
+            epoch_cres = epoch_calc.copy()
+            epoch_cres.crop(-.2, .8)
+
             test_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
-            X_test = epoch_calc[test_index]
-            y_test = np.array(info_calc_reslock[test_index]['corrResult'])
+            X_test = epoch_cres[test_index]
+            y_test = np.array(info_calc[test_index]['corrResult'])
+            y_test = y_test.astype(np.float64)
+
+            train_times = {'start': -.2, 'stop': .8}
+            test_times = train_times
+            mode = 'cross-validation'
+
+        elif (train_set == 'resultlock_cres') & (test_set == 'cres_800_1600'):
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            # Set train and test set
+            train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0)
+            #train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['deviant'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+
+            # Test
+            epoch_cres = epoch_calc.copy()
+            epoch_cres.crop(.8, 1.6)
+            epoch_cres.times = np.arange(0, 0.8008, 0.008) # This depends on the decimate factor and fsample
+
+            test_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
+            X_test = epoch_cres[test_index]
+            y_test = np.array(info_calc[test_index]['corrResult'])
             y_test = y_test.astype(np.float64)
 
             train_times = {'start': 0, 'stop': .8}
-            test_times = {'start': 1.5, 'stop': 3.2}
-            #train_times = {'start': 0, 'stop': .1}
-            #test_times = {'start': 1.5, 'stop': 1.6}
+            test_times = train_times
+            mode = 'cross-validation'
+
+        elif (train_set == 'resultlock_cres') & (test_set == 'cres_1600_2400'):
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            # Set train and test set
+            train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0)
+            #train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['deviant'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+
+            # Test
+            epoch_cres = epoch_calc.copy()
+            epoch_cres.crop(1.6, 2.4)
+            epoch_cres.times = epoch_cres.times = np.arange(0, 0.8008, 0.008) # This depends on the decimate factor and fsample
+
+            test_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
+            X_test = epoch_cres[test_index]
+            y_test = np.array(info_calc[test_index]['corrResult'])
+            y_test = y_test.astype(np.float64)
+
+            train_times = {'start': 0, 'stop': .8}
+            test_times = train_times
+            mode = 'cross-validation'
+
+        elif (train_set == 'resultlock_cres') & (test_set == 'cres_2400_3200'):
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            # Set train and test set
+            train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0)
+            #train_index = (info_calc_reslock['corrResult'] >= 3) & (info_calc_reslock['corrResult'] <= 6) & (info_calc_reslock['operator'] != 0) & (info_calc_reslock['deviant'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            y_train = np.array(info_calc_reslock[train_index]['corrResult'])
+            y_train = y_train.astype(np.float64)
+
+            # Test
+            epoch_cres = epoch_calc.copy()
+            epoch_cres.crop(2.4, 3.2)
+            epoch_cres.times = epoch_cres.times = np.arange(0, 0.8008, 0.008) # This depends on the decimate factor and fsample
+
+            test_index = (info_calc['corrResult'] >= 3) & (info_calc['corrResult'] <= 6) & (info_calc['operator'] != 0)
+            X_test = epoch_cres[test_index]
+            y_test = np.array(info_calc[test_index]['corrResult'])
+            y_test = y_test.astype(np.float64)
+
+            train_times = {'start': 0, 'stop': .8}
+            test_times = train_times
+            mode = 'cross-validation'
+
 
         elif (train_set == 'vsa') & (test_set == 'addsub'):
             train_index = info_vsa['congruency'] == 1

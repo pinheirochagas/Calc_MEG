@@ -354,6 +354,20 @@ for i = 1:length(conditions_A)
     res.(dec_method).rt.(conditions_RT{i}) = load([dec_res_dir_group conditions_RT{i} '/' conditions_RT{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
 end
 
+
+% Add the cross-condition 
+conditions_C2 = {'op1_resultlock_pres', 'op1_resultlock_pres_i', 'op1_resultlock_pres_c'};
+
+baselinecorr = 'nobaseline';
+dec_method = 'class'; % class reg classGeneral
+dec_scorer = 'accuracy'; % accuracy or kendall_score
+gatordiag = 'gat';
+
+for i = 1:length(conditions_C2)
+    res.class_mean_pred.c.(conditions_C2{i}) = load([dec_res_dir_group conditions_C2{i} '/' conditions_C2{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+end
+
+
 %% Compare conditions
 res.class.a.op1_op1.times
 time_window = [0, .800];
@@ -536,50 +550,120 @@ end
 save2pdf([dec_res_dir_group 'decoding_' dec_method '_RT.pdf'], gcf, 600)
 
 
-%% GAT
+%% GAT 
 gat_fields_plot = {'op1_op1', 'addsub_addsub', 'op2_op2', 'resultlock_pres_resultlock_pres'};
 time_lock = {'a', 'a', 'a', 'c'};
 
 event_st = [0 .8 1.6 0];
 data_all = [];
 
+c_axis = [.25 .28; .50 .60; .25 .3; .25 .28];
+
+figureDim = [0 0 .8 .5];
+figure('units','normalized','outerposition',figureDim)
 for i = 1:length(gat_fields_plot)
     data_plot = res.(dec_method).(time_lock{i}).(gat_fields_plot{i});
 
     chance = double(data_plot.chance);    
-    
-    data_sig = squeeze(data_plot.p_values_gat);
+
+    data_sig = squeeze(data_plot.p_values_gat/2); % one tailed
     data = squeeze(data_plot.group_scores);
     data(data_sig>0.05 | data<chance) = nan;
+%     data(data_sig>0.05) = nan;
 
     % Crop data
     windown = 0.8;
-    time_start = [(abs(res2.times(1))+event_st(i))*sfreq];
-    time_crop = time_start:time_start+abs(res2.times(1))+windown*sfreq;
+    time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
+    time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
     data = data(time_crop,time_crop);
-    data = (data-chance)/chance;
+%     data = (data-chance)/chance;
+    
+    % Plot
+    subplot(1,length(gat_fields_plot), i)
+    imagesc(data)
+    axis square
+    set(gca,'YDir','normal')
+    set(gca, 'XTick', 0:50:400);
+    set(gca, 'XTickLabel', 0:0.4:8);
+    set(gca, 'YTick', 0:50:100);
+    set(gca, 'FontSize', 18);
+    %xlabel('Test times (s)')
+    set(gca, 'YTickLabel', '');
 
-    %% Append data
-    data_all = [data_all, data];
+    if i == 1
+        ylabel('Train times (s)')
+    else
+    end
+    
+    h = colorbar('Location', 'NorthOutside');
+    set(h,'fontsize',14);
+    x_lim = xlim;
+    y_lim = ylim;
+    caxis(c_axis(i,:))
+    line([x_lim(1) y_lim(2)], [x_lim(1) y_lim(2)], 'LineWidth', 1, 'Color', [.7 .7 .7])
+
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1.27 1]) % stretch its width and height
+
 end
-
-figureDim = [0 0 .6 .35];
-figure('units','normalized','outerposition',figureDim)
-
-imagesc(data_all)
-set(gca,'YDir','normal')
 colormap(viridis_white)
+save2pdf([dec_res_dir_group 'decoding_gat_full_sep.pdf'], gcf, 600)
 
-set(gca, 'XTick', 0:50:400);
-set(gca, 'XTickLabel', 0:0.4:4);
-set(gca, 'YTick', 0:50:100);
-set(gca, 'YTickLabel', 0:0.4:1);
-set(gca, 'FontSize', 20);
-xlabel('Test times (s)')
-ylabel('Train times (s)')
-colorbar 
 
-save2pdf([dec_res_dir_group 'decoding_gat_full.pdf'], gcf, 600)
+%% 
+gat_fields_plot = {'op1_resultlock_pres','op1_resultlock_pres_c', 'op1_resultlock_pres_i'};
+
+event_st = [0 0 0 0];
+
+c_axis = [.25 .29; .25 .29; .25 .29];
+
+figureDim = [0 0 .8 .6];
+figure('units','normalized','outerposition',figureDim)
+for i = 1:length(gat_fields_plot)
+    data_plot = res.class_mean_pred.c.(gat_fields_plot{i});
+
+    chance = double(data_plot.chance);    
+
+    data_sig = squeeze(data_plot.p_values_gat/2); % one tailed
+    data = squeeze(data_plot.group_scores);
+    data(data_sig>0.05 | data<chance) = nan;
+    
+    % Crop data
+    windown = 0.8;
+    time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
+    time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
+    data = data(time_crop,time_crop);
+    
+    % Plot
+    subplot(1,length(gat_fields_plot), i)
+    imagesc(data)
+    axis square
+    set(gca,'YDir','normal')
+    set(gca, 'XTick', 0:12.5:400);
+    set(gca, 'XTickLabel', 0:0.1:8);
+    set(gca, 'YTick', 0:12.5:100);
+    set(gca, 'FontSize', 18);
+    %xlabel('Test times (s)')
+    set(gca, 'YTickLabel', '');
+
+    if i == 1
+        ylabel('Train times (s)')
+    else
+    end
+    
+    h = colorbar('Location', 'NorthOutside');
+    set(h,'fontsize',14);
+    x_lim = xlim;
+    y_lim = ylim;
+    caxis(c_axis(i,:))
+    line([x_lim(1) y_lim(2)], [x_lim(1) y_lim(2)], 'LineWidth', 1, 'Color', [.7 .7 .7])
+
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1.27 1]) % stretch its width and height
+
+end
+colormap(viridis_white)
+save2pdf([dec_res_dir_group 'decoding_gat_op1_pres_i_c.pdf'], gcf, 600)
 
 
 %% Get timings decoding
@@ -1094,7 +1178,62 @@ plot(mean(mean_acc_pres_i,1))
 
 
 
+%% GAT concatenate
+gat_fields_plot = {'op1_op1', 'addsub_addsub', 'op2_op2', 'resultlock_pres_resultlock_pres'};
+time_lock = {'a', 'a', 'a', 'c'};
+
+event_st = [0 .8 1.6 0];
+data_all = [];
+
+for i = 1:length(gat_fields_plot)
+    data_plot = res.(dec_method).(time_lock{i}).(gat_fields_plot{i});
+
+    chance = double(data_plot.chance);    
+    
+    data_sig = squeeze(data_plot.p_values_gat/2);
+    data = squeeze(data_plot.group_scores);
+    data(data_sig>0.05 | data<chance) = nan;
+
+    % Crop data
+    windown = 0.8;
+    time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
+    time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
+    data = data(time_crop,time_crop);
+    data = (data-chance)/chance;
+
+    %% Append data
+    data_all = [data_all, data];
+end
+
+figureDim = [0 0 .6 .35];
+figure('units','normalized','outerposition',figureDim)
+
+imagesc(data_all)
+set(gca,'YDir','normal')
+colormap(viridis_white)
+
+
+set(gca, 'XTick', 0:50:400);
+set(gca, 'XTickLabel', 0:0.4:8);
+set(gca, 'YTick', 0:50:100);
+set(gca, 'YTickLabel', 0:0.4:1);
+set(gca, 'FontSize', 20);
+xlabel('Test times (s)')
+ylabel('Train times (s)')
+colorbar
+x_lim = xlim
+y_lim = ylim
+caxis([0 .2])
+
+line([x_lim(1) y_lim(2)], [x_lim(1) y_lim(2)], 'LineWidth', 1, 'Color', [0 0 0])
+line([-.20 -.200], y_lim, 'LineWidth', 1, 'Color', [1 1 1])
+
+
+save2pdf([dec_res_dir_group 'decoding_gat_full.pdf'], gcf, 600)
+
 %% END
+
+
 
 
 %% Cosmo simple decoding - to be completed
