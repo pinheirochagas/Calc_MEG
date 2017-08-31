@@ -35,8 +35,11 @@ def classifyGeneral(X, y):
         TangentSpace('logeuclid'),
         svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
-    # Define sliding window, if epoch size is 1,600 ms and smapling rate 125Hz
-    offsets = np.arange(0,400, 100)
+    # Define sliding window,
+    offsets = np.arange(0,400, 100)  # if epoch size is 3,200 ms and sampling rate 125Hz
+    window = 100
+
+    offsets = np.arange(0,200, 100)  # if epoch size is 3,200 ms and sampling rate 125Hz
     window = 100
 
     # offsets = np.arange(0,100, 100)
@@ -45,7 +48,8 @@ def classifyGeneral(X, y):
     # offsets = np.arange(0,50, 12)
     # window = 12
 
-    columns = ['ERPCov_0-800', 'ERPCov_800-1600', 'ERPCov_1600-2400', 'ERPCov_2400-3200']
+    #columns = ['ERPCov_0-800', 'ERPCov_800-1600', 'ERPCov_1600-2400', 'ERPCov_2400-3200']
+    columns = ['ERPCov_0-800', 'ERPCov_800-1600']
 
     # Prelocate results
     results = pd.DataFrame(columns=columns)

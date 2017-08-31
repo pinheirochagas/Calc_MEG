@@ -368,13 +368,13 @@ for i = 1:length(conditions_C2)
 end
 
 
-%% Compare conditions
+%% Compare decoding accuracies of operand 1 and operand 2
 res.class.a.op1_op1.times
-time_window = [0, .800];
+time_window = [.4, .800];
 onsets = [0, 1.6];
 
-data_op1 = squeeze(res.class.a.op1_op1.all_diagonals);
-data_op2 = squeeze(res.class.a.op2_op2.all_diagonals);
+data_op1 = squeeze(res.class.a.op1_op1.all_diagonals)/.25;
+data_op2 = squeeze(res.class.a.op2_123_op2_123.all_diagonals)/.33;
 
 times_op1 = find(res.class.a.op1_op1.times >= time_window(1)+onsets(1) & res.class.a.op1_op1.times <= time_window(2)+onsets(1));
 times_op2 = find(res.class.a.op1_op1.times >= time_window(1)+onsets(2) & res.class.a.op1_op1.times <= time_window(2)+onsets(2));
@@ -385,6 +385,8 @@ box on
 set(gca, 'FontSize', 20)
 line(xlim, [.25 .25], 'Color', [.5 .5 .5], 'LineWidth', 1);
 anova1([mean(data_op1(:,times_op1),2), mean(data_op2(:,times_op2),2)])
+[stats,varargout] = mes1way([mean(data_op1(:,times_op1),2), mean(data_op2(:,times_op2),2)], 'eta2');
+
 
 % Plot time course
 data_op1_avg = mean(data_op1(:,times_op1),1);
@@ -991,7 +993,7 @@ cfg.layout = 'neuromag306cmb.lay';
 figureDim = [0 0 0.7 1];
 for i=1:length(names_sl)
     figure('units','normalized','outerposition',figureDim)
-    ft_multiplotTFR(cfg, sl.(names_sl{1}).searchlight_ft_allsub);
+    ft_multiplotTFR(cfg, sl.(names_sl{i}).searchlight_ft_allsub);
     colormap(flip(cbrewer2('RdBu')))
     savePNG(gcf,200, [searchlight_result_dir 'figures/' names_sl{i} '.png'])
 end
@@ -1021,12 +1023,12 @@ operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
 cfg = [];
 cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
 cfg.xlim = [-.200 3.2];
-cfg.zlim = [.48 .60];
+cfg.zlim = [.24 .28]; % 
 cfg.showoutline = 'yes'
 cfg.colorbar = 'yes'
 cfg.colormap = viridis
 
-i = 2
+i = 4
 ft_multiplotTFR(cfg, sl.(names_sl{i}).searchlight_ft_allsub);
 save2pdf([searchlight_result_dir 'figures/' names_sl{i} '_allchan.pdf'], gcf, 600)   
 

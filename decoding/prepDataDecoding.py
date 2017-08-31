@@ -135,6 +135,21 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
 
+        elif train_set == 'absdeviant_riemann':
+            fname_calc = dirs['data'] + subject + '_calc_lp30_TLresult.mat'  # make this dynamic
+            epoch_calc_reslock, info_calc_reslock = fldtrp2mne_calc(fname_calc, 'data', 'calc')
+            epoch_calc_reslock.decimate(decimate)
+            epoch_calc_reslock.pick_types(meg='grad')
+            train_index = (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] != 0)
+            X_train = epoch_calc_reslock[train_index]
+            X_train.crop(1.6, 3.2)
+            y_train = np.array(info_calc_reslock[train_index]['absdeviant'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': np.min(epoch_calc_reslock.times), 'stop': np.max(epoch_calc_reslock.times)}
+            test_times = train_times
+
         elif train_set == 'cres_aCSC':
             fname_calc = dirs['data'] + subject + '_calc_AICA_acc.mat'  # make this dynamic
             epoch_calc, info_calc = fldtrp2mne_calc(fname_calc, 'data', 'calc')
