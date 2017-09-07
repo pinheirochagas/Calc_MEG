@@ -36,11 +36,11 @@ def classifyGeneral(X, y):
         svm.SVC(C=1, kernel='linear', class_weight='balanced'))
 
     # Define sliding window,
-    offsets = np.arange(0,400, 100)  # if epoch size is 3,200 ms and sampling rate 125Hz
-    window = 100
+    # offsets = np.arange(0,400, 100)  # if epoch size is 3,200 ms and sampling rate 125Hz
+    # window = 100
 
-    offsets = np.arange(0,200, 100)  # if epoch size is 3,200 ms and sampling rate 125Hz
-    window = 100
+    # offsets = np.arange(0,100, 50)  # if epoch size is 1.6 ms and sampling rate 125Hz
+    # window = 50
 
     # offsets = np.arange(0,100, 100)
     # window = 10
@@ -49,7 +49,7 @@ def classifyGeneral(X, y):
     # window = 12
 
     #columns = ['ERPCov_0-800', 'ERPCov_800-1600', 'ERPCov_1600-2400', 'ERPCov_2400-3200']
-    columns = ['ERPCov_0-800', 'ERPCov_800-1600']
+    columns = ['ERPCov_0-400', 'ERPCov_400-800']  # these columns should be = len(offsets)
 
     # Prelocate results
     results = pd.DataFrame(columns=columns)

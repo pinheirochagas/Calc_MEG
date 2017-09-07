@@ -42,7 +42,9 @@ GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
 % gfp_mag = globalFieldPower(sub_name_all, 'Mag2');
 % gfp_grad1 = globalFieldPower(sub_name_all, 'Grad2_1');
 % gfp_grad2 = globalFieldPower(sub_name_all, 'Grad2_2');
-% gfp_all = globalFieldPower(sub_name_all, 'All2');
+ gfp_all = globalFieldPower(sub_name_all, 'All2');
+
+
 gfp_all = load([GFP_result_dir 'gfp_All2.mat'], 'data_grandavg');
 gfp_all = gfp_all.data_grandavg;
 

@@ -142,7 +142,7 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             epoch_calc_reslock.pick_types(meg='grad')
             train_index = (info_calc_reslock['operator'] != 0) & (info_calc_reslock['absdeviant'] != 0)
             X_train = epoch_calc_reslock[train_index]
-            X_train.crop(1.6, 3.2)
+            X_train.crop(0, .8)
             y_train = np.array(info_calc_reslock[train_index]['absdeviant'])
             y_train = y_train.astype(np.float64)
             X_test = X_train
@@ -236,6 +236,26 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             X_test = X_train
             y_test = y_train
             train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'op2_add':
+            train_index = info_calc['operator'] == 1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'op2_sub':
+            train_index = info_calc['operator'] == -1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
             test_times = train_times
 
         elif train_set == 'op2_123':
@@ -914,6 +934,36 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             # Update params
             train_times = {'start': 0.7, 'stop': 3.2}
             test_times = {'start': -0.1, 'stop': 1.5}
+
+        elif (train_set == 'op2_add') & (test_set == 'op2_sub'):
+            train_index = info_calc['operator'] == 1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+
+            test_index = info_calc['operator'] == -1
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operand2'])
+            y_test = y_test.astype(np.float64)
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif (train_set == 'op2_sub') & (test_set == 'op2_add'):
+            train_index = info_calc['operator'] == -1
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            y_train = y_train.astype(np.float64)
+
+            test_index = info_calc['operator'] == 1
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operand2'])
+            y_test = y_test.astype(np.float64)
+            train_times = {'start': 1.6, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+
+
+
     print(train_set)
     print(test_set)
     print('done')
