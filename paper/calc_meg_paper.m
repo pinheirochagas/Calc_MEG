@@ -102,6 +102,10 @@ avg_deviant_cat_inc = avg_deviant_cat(:,2:end)
 [mean(avg_deviant_cat_inc) std(avg_deviant_cat_inc)]
 
 
+parity_same = [[avg_deviant_cat_inc(:,1); avg_deviant_cat_inc(:,3)],[avg_deviant_cat_inc(:,2); avg_deviant_cat_inc(:,4)]]
+a = mes(parity_same(:,1),parity_same(:,2), 'hedgesg')
+
+
 %% ERF - to complete
 %data_grandavg = grandAVGall(sub_name_all);
 data_erf = [data_root_dir 'data/erf/'];
@@ -172,6 +176,65 @@ data_tmp2 = avgERFallGavg.addsub.operand2.(field_plots{i});
 ft_topoplotER(cfg, data)
 
 tpm = ft_combineplanar(cfg, ERF_diff);
+
+%% GFP problem-size effect operand 2
+gfp_op2_add = load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/calc_gfp_add_operand2.mat');
+gfp_op2_add = gfp_op2_add.GFPallGavg.add;
+gfp_op2_sub = load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/calc_gfp_sub_operand2.mat');
+gfp_op2_sub = gfp_op2_sub.GFPallGavg.sub;
+
+% List fieldnames 
+op2_fields_add = fieldnames(gfp_op2_add.operand2);
+op2_fields_sub = fieldnames(gfp_op2_sub.operand2);
+
+% Get times, from whatever condition
+time_window = [1.5 3.2];
+fsample = 250;
+times = gfp_op2_add.operand2.operand20.time;
+times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
+
+
+figureDim = [0 0 1 .3];
+figure('units','normalized','outerposition',figureDim)
+
+% Additions
+subplot(1,2,1)
+color_plot = cbrewer2('Blues',8);
+color_plot = color_plot(2:2:8,:);
+xlim([1.5 3.2])
+ylim([-2 5.5])
+line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+
+for i=1:length(op2_fields_add)
+    hold on
+    mean_gfp = zscore(squeeze(mean(gfp_op2_add.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
+    sem_gfp = squeeze(sem(gfp_op2_add.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1));
+%     plt = shadedErrorBar(times_plot,mean_gfp,sem_gfp, {'color', color_plot(i,:), 'LineWidth',1});
+%     plt.patch.FaceAlpha = .5;
+    plot(times(times_idx), mean_gfp', 'Color', color_plot(i,:), 'LineWidth',2)
+end
+set(gca, 'FontSize', 20)
+set(gca, 'YTickLabel', .1:.1:.4)
+
+% Subtractions
+subplot(1,2,2)
+color_plot = cbrewer2('Reds',8);
+color_plot = color_plot(2:2:8,:);
+xlim([1.5 3.2])
+ylim([-2 5.5])
+line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+
+for i=1:length(op2_fields_sub)
+    hold on
+    mean_gfp = zscore(squeeze(mean(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
+    sem_gfp = zscore(squeeze(sem(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
+    plot(times(times_idx), mean_gfp', 'Color', color_plot(i,:), 'LineWidth',2)
+end
+set(gca, 'FontSize', 20)
+set(gca, 'YTickLabel', .1:.1:.4)
+
 
 
 
