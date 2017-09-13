@@ -1,4 +1,4 @@
-function data_grandavg = globalFieldPower(sub_name_all, condition, chan_name)
+function data_grandavg = globalFieldPower_separate_channels(sub_name_all, chan_name)
 %% Initialize dirs
 InitDirsMEGcalc
 GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
@@ -10,20 +10,36 @@ channels = chan.(chan_name);
 data_all = {};
 for subj = 1:length(sub_name_all);
     load([data_dir sub_name_all{subj} '_calc_lp30.mat'])
-    data = filterData(data, condition);
-    
-    % Crop trials from -.2 4
-    [~,data] = timelock(data, 's01', 'A'); % subject info is irrelevant here
-    
-    % Baseline correction
-    cfg = [];
-    cfg.baseline = [-0.2 -0.01];
-    data_baseline = ft_timelockbaseline(cfg, data);
+    data = filterData(data, 'calc');
+            
+%     % Baseline correction
+%     cfg = [];
+%     cfg.baseline = [-0.5 -0.01];
+%     data_baseline = ft_timelockbaseline(cfg, data);
     
     % Average all trails
     cfg = [];
-    cfg.channel = channels;
-    data_tl = ft_timelockanalysis(cfg, data_baseline); % or data_baseline
+    cfg.channel = chan.Grad2_1;
+    data_G1 = ft_timelockanalysis(cfg, data); % or data_baseline
+    cfg.channel = chan.Grad2_2;
+    data_G2 = ft_timelockanalysis(cfg, data); % or data_baseline
+    cfg.channel = chan.Mag2;
+    data_M = ft_timelockanalysis(cfg, data); % or data_baseline
+    
+    cfg = [];
+    data_G1 = ft_globalmeanfield(cfg, data_G1);
+    data_G2 = ft_globalmeanfield(cfg, data_G2);
+    data_M = ft_globalmeanfield(cfg, data_M);
+    
+    cfg = [];
+    cfg.baseline = [-0.5 -0.01];
+    a = ft_timelockbaseline(cfg, data_G1)
+
+    data_G1_z = zscore(data_G1.avg);
+    data_G1_z = zscore(data_G1.avg);
+    data_G1_z = zscore(data_G1.avg);
+
+    
     
     %% GFP
     % 1. Scale GRAD and MAG
@@ -39,7 +55,7 @@ for subj = 1:length(sub_name_all);
     end
     
     % 3. Sum the trials
-    data_sum = mean(data_s,1);
+    data_sum = sum(data_s,1);
     
     % 4. Square root of all trails (put in the same scale)
     data_gfp = sqrt(data_sum);
@@ -61,7 +77,7 @@ cfg.keepindividual = 'no';
 
 
 %% Save
-save([GFP_result_dir 'gfp_' chan_name '_' condition '_RMS_baseline.mat'], 'data_grandavg')
+save([GFP_result_dir 'gfp_' chan_name '_baseline_nocorrect.mat'], 'data_grandavg')
 
 end
 

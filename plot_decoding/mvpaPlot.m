@@ -60,6 +60,15 @@ end
         
     %% Plot lines
     function y_lim = plotLines(chance,x_lim,y_lim, data_avg, data_sem, timelock)
+        % timing
+        t.A = 0;
+        t.sign = round(47*16.7)/1000;
+        t.B = 2*t.sign;
+        t.equal = 3*t.sign;
+        t.C = 4*t.sign;
+        t.Cd = 4.5*t.sign;
+        t.tC = t.C - 3.200;
+        
         LineWidthMark = 1;
         LineCol = [.5 .5 .5];
         % Plot
@@ -79,15 +88,15 @@ end
         if strcmp(timelock, 'A') == 1
             x_ticks = [x_lim(1) 0:.4:x_lim(end)];
             line(xlim,[chance chance], 'Color', LineCol, 'LineWidth', LineWidthMark);
-            line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-            line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-            line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-            line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-            line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+            line([t.A t.A], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+            line([t.sign t.sign], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+            line([t.B t.B], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+            line([t.equal t.equal], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+            line([t.C t.C], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
         elseif strcmp(timelock, 'C') == 1
             x_ticks = [x_lim(1) 0:.4:x_lim(end)];
             line(xlim,[chance chance], 'Color', LineCol, 'LineWidth', LineWidthMark);
-            line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+            line([t.tC t.tC], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 %             set(gca, 'YTickLabel', '');    
         elseif strcmp(timelock, 'RT') == 1
             x_ticks = [x_lim(1):.4:x_lim(end)];

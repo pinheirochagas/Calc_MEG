@@ -118,9 +118,8 @@ function [lost_trials, data] = timelock(data, subject, position)
         lost_trials = 0; 
         
  elseif strcmp(position, 'A')       
-        % Time-lock and concatenate to 2nd operand
         for i = 1:length(data.trial)
-            time_epoch = [-.2 3.2];
+            time_epoch = [-.2 4.2];
             
             timeStart = find(data.time{1} > time_epoch(1)); timeStart = timeStart(1);
             timeStop = find(data.time{1} > time_epoch(2)); timeStop = timeStop(1);

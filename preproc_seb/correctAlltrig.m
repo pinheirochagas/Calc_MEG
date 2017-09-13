@@ -1,10 +1,10 @@
 function [alltrig, exctrials, alltrigNew] = correctAlltrig(alltrig, trigger_bh)
 
 
-trigger_bh_reshape = reshape(trigger_bh,3,78);
+trigger_bh_reshape = reshape(trigger_bh,6,43); % 6 events in 43 trials
 
 % Organize behavior data in a cell array excluding "no responses" 
-for i=1:78
+for i=1:size(trigger_bh_reshape,2)
     idxNonZeros = trigger_bh_reshape(:,i) ~= 0;
     trigger_bh_trial{i} = trigger_bh_reshape(idxNonZeros,i);    
 end
@@ -23,7 +23,7 @@ end
 
 % Find the starting index of each trial present in behavioral data in the
 % MEG trigger data
-for i=1:78
+for i=1:size(trigger_bh_reshape,2)
     indexTrialMEG{i} = strfind(alltrig(:,2)', trigger_bh_trial{i}');
 end
 % Get the unique indices (some trials will repeat);
@@ -32,7 +32,7 @@ correctTrialidx = unique(horzcat(indexTrialMEG{:}));
 % Recover each trial based on the index of the first element in the
 % sequence
 for i=correctTrialidx
-    alltrigNew{i} = alltrig(i:i+2,:);
+    alltrigNew{i} = alltrig(i:i+5,:); % i+5 because there are 6 events
 end
 % Exclude empty cells
 alltrigNew = alltrigNew(~cellfun(@isempty,alltrigNew));
@@ -45,7 +45,7 @@ for i=1:length(alltrigNew)
     end
 end
 
-exctrials = 78-length(alltrigNew);
+exctrials = size(trigger_bh_reshape,2)-length(alltrigNew);
 
 % Concatenate MEG data back! 
 alltrig = vertcat(alltrigNew{:});

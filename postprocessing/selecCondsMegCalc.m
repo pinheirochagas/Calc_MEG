@@ -25,7 +25,7 @@ elseif strcmp(conds, 'add')
     labels(:,1) = trialinfo.corrResult(conds_idx);      
 
 elseif strcmp(conds, 'sub')
-    conds_idx = trialinfo.operator == 1;
+    conds_idx = trialinfo.operator == -1;
     labels(:,1) = trialinfo.corrResult(conds_idx);       
 end
     

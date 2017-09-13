@@ -7,6 +7,16 @@ InitDirsMEGcalc
 cd(cosmo_mvpa_dir)
 cosmo_set_path()
 
+%% Timing
+t.A = 0;
+t.sign = round(47*16.7)/1000;
+t.B = 2*t.sign;
+t.equal = 3*t.sign;
+t.C = 4*t.sign;
+t.Cd = 4.5*t.sign;
+t.tC = t.C - 3.200;
+
+
 %%  List subjects
 sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
 
@@ -42,11 +52,20 @@ GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
 % gfp_mag = globalFieldPower(sub_name_all, 'Mag2');
 % gfp_grad1 = globalFieldPower(sub_name_all, 'Grad2_1');
 % gfp_grad2 = globalFieldPower(sub_name_all, 'Grad2_2');
- gfp_all = globalFieldPower(sub_name_all, 'All2');
+gfp_all = globalFieldPower_separate_channels(sub_name_all, 'All2');
+
+gfp_all_add = globalFieldPower(sub_name_all, 'add', 'All2');
+gfp_all_sub = globalFieldPower(sub_name_all, 'sub', 'All2');
+gfp_all_addsub = globalFieldPower(sub_name_all, 'calc', 'All2');
+
+% Old
+% gfp_all = load([GFP_result_dir 'gfp_All2.mat'], 'data_grandavg');
+% gfp_all = gfp_all.data_grandavg; % work here
+
+gfp_all = load([GFP_result_dir 'gfp_' chan_name '_baseline_RMS_baseline.mat']);
 
 
-gfp_all = load([GFP_result_dir 'gfp_All2.mat'], 'data_grandavg');
-gfp_all = gfp_all.data_grandavg;
+gfp_all = gfp_all_add; % work here
 
 % Plot GFP
 figureDim = [0 0 .6 .3];
@@ -54,24 +73,26 @@ figure('units','normalized','outerposition',figureDim)
 LineCol = [.5 .5 .5];
 LineWidthMark = 1;
 hold on
-ylim([0 .4])
+ylim([0.5 2])
 %plot(gfp_mag.time, gfp_mag.avg, 'LineWidth', 3)
 %plot(gfp_grad1.time, gfp_grad1.avg, 'LineWidth', 3)
 %plot(gfp_grad2.time, gfp_grad2.avg, 'LineWidth', 3)
 line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([3.6 3.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-plot(gfp_all.time, gfp_all.avg, 'LineWidth', 2.5, 'Color', 'k')
+line([t.sign t.sign], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.B t.B], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.equal t.equal], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.C t.C], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.Cd t.Cd], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+plot(gfp_all.time, gfp_all.avg, 'LineWidth', 2.5, 'Color', 'b')
 xlabel('Time (s)')
 ylabel('GFP (z-score)')
+ylabel('GFP')
+
 set(gca, 'FontSize', 20)
-xlim([-.2 4.2])
-set(gca, 'XTick', 0:.4:4.2);
+xlim([-.2 4])
+set(gca, 'XTick', 0:.4:4);
 box on
-save2pdf([GFP_result_dir 'gfp_lp30_zscore' '_' 'All2' '.pdf'], gcf, 600)
+save2pdf([GFP_result_dir 'gfp_lp30_zscore' '_' 'All2' '_RMS.pdf'], gcf, 600)
 
 %% Behavior analysis
 beh_calc = behAnalysisCalcMEG(sub_name_all, 'calc');
@@ -178,6 +199,8 @@ ft_topoplotER(cfg, data)
 tpm = ft_combineplanar(cfg, ERF_diff);
 
 %% GFP problem-size effect operand 2
+
+
 gfp_op2_add = load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/calc_gfp_add_operand2.mat');
 gfp_op2_add = gfp_op2_add.GFPallGavg.add;
 gfp_op2_sub = load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/calc_gfp_sub_operand2.mat');
@@ -239,7 +262,88 @@ set(gca, 'YTickLabel', .1:.1:.4)
 
 
 %% Sources
+% Effect of operand 2
+source_result_dir = [data_root_dir 'results/sources/'];
+load('/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/sources/scouts_ts_add_sub_addsub_op2.mat');
 
+% Get times, from whatever condition
+time_window = [1.5 3.2];
+fsample = 250;
+times = roi.add.op2_0.Time;
+times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
+
+fieldnames_op2 = fieldnames(roi.add);
+op_names = {'add', 'sub', 'addsub'}
+
+
+color_plot = {cbrewer2('Reds',5), cbrewer2('Oranges',5), cbrewer2('Greens',5), cbrewer2('Blues',5)};
+% pITG, IPS, AG, pVC
+roi_order = [4,1,3,2];
+
+for o = 1:length(op_names)
+    figureDim = [0 0 .5 1];
+    figure('units','normalized','outerposition',figureDim)
+    for ii = 1:length(roi_order)
+        for i = 1:length(fieldnames_op2)
+            subplot(4,1,i)
+            hold on
+            plot(times(times_idx),roi.(op_names{o}).(fieldnames_op2{ii}).Value(roi_order(i),times_idx), 'Color', color_plot{i}(ii+1,:), 'LineWidth', 2)
+            xlim([1.5 3.2])
+            if i ~= 4
+                set(gca,'XtickLabel',[])
+            else
+                xlabel('Time (s)')
+            end
+            set(gca, 'FontSize', 14)
+            line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+            line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+            line(xlim, [0 0], 'Color', [.5 .5 .5], 'LineWidth', 1);
+            box on
+        end
+    end
+    save2pdf([source_result_dir 'roi_' op_names{o} '_op2.pdf'], gcf, 600)
+    close all
+end
+
+% All trials
+load([source_result_dir 'scouts_ts_addsub_all.mat'])
+
+time_window = [-.2 4];
+fsample = 250;
+times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
+
+color_plot = [cbrewer2('Reds',1); cbrewer2('Oranges',1)+.07; cbrewer2('Greens',1); cbrewer2('Blues',1)];
+roi_order = [4,1,3,2];
+
+figureDim = [0 0 .8 .3];
+figure('units','normalized','outerposition',figureDim)
+
+for i = 1:length(roi_order)
+    hold on
+    plot(times(times_idx),addsub_all.Value(roi_order(i),times_idx), 'Color', color_plot(i,:), 'LineWidth', 1)
+    xlim(time_window)
+    ylim([-1 7])
+    set(gca, 'FontSize', 18)
+    set(gca, 'Xtick', [time_window(1) 0:.4:time_window(end)])
+    xlabel('Time (s)')
+    ylabel('Amplitude (no units)')
+
+
+    line([0 0], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    line([.8 .8], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    line([3.2 3.2], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    line([3.6 3.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    line(xlim, [0 0], 'Color', [.5 .5 .5], 'LineWidth', 1);
+    
+    box on
+end
+
+save2pdf([source_result_dir 'roi_addsub_all.pdf'], gcf, 600)
+
+
+addsub_all
 
 
 %% Time-frequency
@@ -418,7 +522,7 @@ for i = 1:length(conditions_A)
     res.(dec_method).c.(conditions_C{i}) = load([dec_res_dir_group conditions_C{i} '/' conditions_C{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
     res.(dec_method).rt.(conditions_RT{i}) = load([dec_res_dir_group conditions_RT{i} '/' conditions_RT{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
 end
-
+res.(dec_method).a.op1_op1.p_values_diagonal_fdr = res.(dec_method).a.op1_op1.p_values_diagonal;
 
 % Add the cross-condition 
 conditions_C2 = {'op1_resultlock_pres', 'op1_resultlock_pres_i', 'op1_resultlock_pres_c'};
@@ -481,7 +585,7 @@ y_lims(7,:) = [0.46 .93];
 figureDim = [0 0 .6 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 3.2];
-for i=2:length(conditions_A)
+for i=1:length(conditions_A)
     subplot(length(conditions_A),1,i)
     y_lims(i,:) = mvpaPlot(res.(dec_method).a.(conditions_A{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'A');
     sub_pos = get(gca,'position'); % get subplot axis position
@@ -507,7 +611,8 @@ for i=1:length(conditions_C)
     set(gca,'FontSize',18) % stretch its width and height
     if i == length(conditions_A)
         set(gca,'XColor','k')
-        set(gca, 'XTickLabel', [x_lim(1) 0:.4:x_lim(end)])
+        set(gca, 'XTick', [t.tC .400 .800])
+        set(gca, 'XTickLabel', [0 .400 .800])
         xlabel('Time (s)')
     end
 end
@@ -610,7 +715,8 @@ for i=1:length(conditions_RT)
     set(gca,'FontSize',18) % stretch its width and height
     if i == length(conditions_A)
         set(gca,'XColor','k')
-        set(gca, 'XTickLabel', [x_lim(1):.4:x_lim(end)])
+        set(gca, 'XTick', [t.tC .400 .800])
+        set(gca, 'XTickLabel', [0 .400 .800])
         xlabel('Time (s)')
     end
 end
@@ -936,9 +1042,8 @@ save2pdf([rsa_result_dir 'plots/RDM_matrices_colorbar.pdf'], gcf, 600)
 
 
 %% Plot results - single regression
-fieldnames_RSA = {'op1_mag' 'op2_mag' 'op1_vis' 'op2_vis' 'op1_magregop1_vis' 'op2_magregop2_vis' 'op1_visregop1_mag' 'op2_visregop2_mag'};
-fieldnames_RSA = {'op1_vis' 'op1_mag' 'op1_magregop1_vis' 'op1_visregop1_mag'};
-fieldnames_RSA = {'op2_vis' 'op2_mag' 'op2_magregop2_vis' 'op2_visregop2_mag'};
+fieldnames_RSA = {'op1_vis' 'op1_visregop1_mag' 'op1_mag' 'op1_magregop1_vis' };
+fieldnames_RSA = {'op2_vis' 'op2_visregop2_mag' 'op2_mag' 'op2_magregop2_vis' };
 fieldnames_RSA = {'result_vis' 'result_mag' 'operator' 'result_mag_reg_operator'};
 
 colors = viridis(length(fieldnames_RSA)); % Or substitute it with 8
