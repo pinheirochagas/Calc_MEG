@@ -26,23 +26,19 @@ for subj = 1:length(sub_name_all);
     data_tl = ft_timelockanalysis(cfg, data_baseline); % or data_baseline
     
     %% GFP
-    % 1. Scale GRAD and MAG
-    data_z = zeros(size(data_tl.avg));
-    for ii = 1:size(data_tl.avg,1)
-        data_z(ii,:) = zscore(data_tl.avg(ii,:));
-    end
- 
-    % 2. Square zscores (bring all to positive)
-    data_s = zeros(size(data_z));
-    for ii = 1:size(data_z,1)
-        data_s(ii,:) = data_z(ii,:).^2;
+    data_tmp = data_tl.avg;
+
+    % 1. Square zscores (bring all to positive)
+    data_s = zeros(size(data_tmp));
+    for ii = 1:size(data_tmp,1)
+        data_s(ii,:) = data_tmp(ii,:).^2;
     end
     
-    % 3. Sum the trials
-    data_sum = mean(data_s,1);
+    % 2. Sum the trials
+    data_mean = mean(data_s,1);
     
-    % 4. Square root of all trails (put in the same scale)
-    data_gfp = sqrt(data_sum);
+    % 3. Square root of all trails
+    data_gfp = sqrt(data_mean);
     
     % Group subjects
     data_tl.avg = data_gfp;
@@ -51,13 +47,9 @@ for subj = 1:length(sub_name_all);
 end
 
 cfg = [];
-cfg.keepindividual = 'no';
+cfg.keepindividual = 'yes';
+cfg.keeptrials = 'yes';
 [data_grandavg] = ft_timelockgrandaverage(data_all{:});
-
-% cfg = [];
-% cfg.baseline = [-0.5 -0.01];
-% data_baseline_all = ft_timelockbaseline(cfg, data_grandavg);
-
 
 
 %% Save
@@ -65,3 +57,15 @@ save([GFP_result_dir 'gfp_' chan_name '_' condition '_RMS_baseline.mat'], 'data_
 
 end
 
+
+
+%%
+%     if strcmp(zscore_flag, 'zscore')
+%         % 1. Scale GRAD and MAG
+%         data_z = zeros(size(data_tl.avg));
+%         for ii = 1:size(data_tl.avg,1)
+%             data_z(ii,:) = zscore(data_tl.avg(ii,:));
+%         end
+%     else
+%         data_z = data_tl.avg;
+%     end

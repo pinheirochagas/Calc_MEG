@@ -47,25 +47,9 @@ for subj = 1:length(sub_name_all)
     timelock(data, sub_name_all{subj}, 'result')
 end
 
-%% Global field power
+%% Global field power - all trials
 GFP_result_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/results/GFP/';
-% gfp_mag = globalFieldPower(sub_name_all, 'Mag2');
-% gfp_grad1 = globalFieldPower(sub_name_all, 'Grad2_1');
-% gfp_grad2 = globalFieldPower(sub_name_all, 'Grad2_2');
-gfp_all = globalFieldPower_separate_channels(sub_name_all, 'All2');
-
-gfp_all_add = globalFieldPower(sub_name_all, 'add', 'All2');
-gfp_all_sub = globalFieldPower(sub_name_all, 'sub', 'All2');
-gfp_all_addsub = globalFieldPower(sub_name_all, 'calc', 'All2');
-
-% Old
-% gfp_all = load([GFP_result_dir 'gfp_All2.mat'], 'data_grandavg');
-% gfp_all = gfp_all.data_grandavg; % work here
-
-gfp_all = load([GFP_result_dir 'gfp_' chan_name '_baseline_RMS_baseline.mat']);
-
-
-gfp_all = gfp_all_add; % work here
+gfp_all_addsub_Grad = globalFieldPower(sub_name_all, 'calc', 'Grad2');
 
 % Plot GFP
 figureDim = [0 0 .6 .3];
@@ -73,26 +57,101 @@ figure('units','normalized','outerposition',figureDim)
 LineCol = [.5 .5 .5];
 LineWidthMark = 1;
 hold on
-ylim([0.5 2])
-%plot(gfp_mag.time, gfp_mag.avg, 'LineWidth', 3)
-%plot(gfp_grad1.time, gfp_grad1.avg, 'LineWidth', 3)
-%plot(gfp_grad2.time, gfp_grad2.avg, 'LineWidth', 3)
+ylim([0 2.5])
 line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([t.sign t.sign], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([t.B t.B], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([t.equal t.equal], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([t.C t.C], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 line([t.Cd t.Cd], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-plot(gfp_all.time, gfp_all.avg, 'LineWidth', 2.5, 'Color', 'b')
+plot(gfp_all_addsub_Grad.time, gfp_all_addsub_Grad.avg*10^12, 'LineWidth', 2.5, 'Color', 'k')
 xlabel('Time (s)')
 ylabel('GFP (z-score)')
 ylabel('GFP')
 
 set(gca, 'FontSize', 20)
-xlim([-.2 4])
+xlim([-.2 4.2])
 set(gca, 'XTick', 0:.4:4);
 box on
-save2pdf([GFP_result_dir 'gfp_lp30_zscore' '_' 'All2' '_RMS.pdf'], gcf, 600)
+save2pdf([GFP_result_dir 'gfp_lp30' '_' 'Grad2' '_RMS.pdf'], gcf, 600)
+
+%% GFP problem-size effect operand 2
+
+conditions_add_op1 = {'add_op1_3', 'add_op1_4', 'add_op1_5', 'add_op1_6'};
+conditions_add_op2 = {'add_op2_0', 'add_op2_1', 'add_op2_2', 'add_op2_3'};
+conditions_sub_op1 = {'sub_op1_3', 'sub_op1_4', 'sub_op1_5', 'sub_op1_6'};
+conditions_sub_op2 = {'sub_op2_0', 'sub_op2_1', 'sub_op2_2', 'sub_op2_3'};
+conditions_addsub_op1 = {'addsub_op1_3', 'addsub_op1_4', 'addsub_op1_5', 'addsub_op1_6'};
+conditions_addsub_op2 = {'addsub_op2_0', 'addsub_op2_1', 'addsub_op2_2', 'addsub_op2_3'};
+
+% Add
+for i = 1:length(conditions_add_op2)
+    gfp_add_op2.(conditions_add_op2{i}) = globalFieldPower(sub_name_all, conditions_add_op2{i}, 'Grad2');
+end
+save([GFP_result_dir 'gfp_add_op2.mat'],'gfp_add_op2')
+
+
+% Sub
+for i = 1:length(conditions_sub_op2)
+    gfp_sub_op2.(conditions_sub_op2{i}) = globalFieldPower(sub_name_all, conditions_sub_op2{i}, 'Grad2');
+end
+
+% AddSub
+for i = 1:length(conditions_addsub_op2)
+    gfp_addsub_op2.(conditions_addsub_op2{i}) = globalFieldPower(sub_name_all, conditions_addsub_op2{i}, 'Grad2');
+end
+
+
+% List fieldnames 
+op2_fields_add = fieldnames(gfp_add_op2);
+op2_fields_sub = fieldnames(gfp_sub_op2);
+
+% Get times, from whatever condition
+time_window = [1.5 3.2];
+fsample = 250;
+times = gfp_add_op2.add_op2_0.time;
+times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
+
+figureDim = [0 0 1 .3];
+figure('units','normalized','outerposition',figureDim)
+
+% Additions
+subplot(1,2,1)
+color_plot = cbrewer2('Blues',8);
+color_plot = color_plot(2:2:8,:);
+xlim([1.5 3.2])
+ylim([1 3])
+line([t.B t.B], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+line([t.equal t.equal], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+
+for i=1:length(conditions_add_op2)
+    hold on
+%     mean_gfp = gfp_add_op2.(conditions_add_op2{i}).avg(times_idx)*10^12;
+%     sem_gfp = gfp_add_op2.(conditions_add_op2{i}).avg(times_idx)*10^12/sqrt(2);
+%     plt = shadedErrorBar(times_plot,mean_gfp,sem_gfp, {'color', color_plot(i,:), 'LineWidth',1});
+%     plt.patch.FaceAlpha = .5;
+    plot(times(times_idx), gfp_add_op2.(conditions_add_op2{i}).avg(times_idx)*10^12, 'Color', color_plot(i,:), 'LineWidth',2)
+end
+set(gca, 'FontSize', 20)
+set(gca, 'YTickLabel', .1:.1:.4)
+
+% Subtractions
+subplot(1,2,2)
+color_plot = cbrewer2('Reds',8);
+color_plot = color_plot(2:2:8,:);
+xlim([1.5 3.2])
+ylim([1 3])
+line([t.B t.B], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+line([t.equal t.equal], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+
+for i=1:length(conditions_sub_op2)
+    hold on
+%     mean_gfp = zscore(squeeze(mean(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
+%     sem_gfp = zscore(squeeze(sem(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
+    plot(times(times_idx), gfp_sub_op2.(conditions_sub_op2{i}).avg(times_idx)*10^12, 'Color', color_plot(i,:), 'LineWidth',2)
+end
+set(gca, 'FontSize', 20)
+set(gca, 'YTickLabel', .1:.1:.4)
 
 %% Behavior analysis
 beh_calc = behAnalysisCalcMEG(sub_name_all, 'calc');
@@ -198,65 +257,7 @@ ft_topoplotER(cfg, data)
 
 tpm = ft_combineplanar(cfg, ERF_diff);
 
-%% GFP problem-size effect operand 2
 
-
-gfp_op2_add = load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/calc_gfp_add_operand2.mat');
-gfp_op2_add = gfp_op2_add.GFPallGavg.add;
-gfp_op2_sub = load('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/data/erf/calc_gfp_sub_operand2.mat');
-gfp_op2_sub = gfp_op2_sub.GFPallGavg.sub;
-
-% List fieldnames 
-op2_fields_add = fieldnames(gfp_op2_add.operand2);
-op2_fields_sub = fieldnames(gfp_op2_sub.operand2);
-
-% Get times, from whatever condition
-time_window = [1.5 3.2];
-fsample = 250;
-times = gfp_op2_add.operand2.operand20.time;
-times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
-
-
-figureDim = [0 0 1 .3];
-figure('units','normalized','outerposition',figureDim)
-
-% Additions
-subplot(1,2,1)
-color_plot = cbrewer2('Blues',8);
-color_plot = color_plot(2:2:8,:);
-xlim([1.5 3.2])
-ylim([-2 5.5])
-line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-
-for i=1:length(op2_fields_add)
-    hold on
-    mean_gfp = zscore(squeeze(mean(gfp_op2_add.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
-    sem_gfp = squeeze(sem(gfp_op2_add.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1));
-%     plt = shadedErrorBar(times_plot,mean_gfp,sem_gfp, {'color', color_plot(i,:), 'LineWidth',1});
-%     plt.patch.FaceAlpha = .5;
-    plot(times(times_idx), mean_gfp', 'Color', color_plot(i,:), 'LineWidth',2)
-end
-set(gca, 'FontSize', 20)
-set(gca, 'YTickLabel', .1:.1:.4)
-
-% Subtractions
-subplot(1,2,2)
-color_plot = cbrewer2('Reds',8);
-color_plot = color_plot(2:2:8,:);
-xlim([1.5 3.2])
-ylim([-2 5.5])
-line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-
-for i=1:length(op2_fields_sub)
-    hold on
-    mean_gfp = zscore(squeeze(mean(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
-    sem_gfp = zscore(squeeze(sem(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
-    plot(times(times_idx), mean_gfp', 'Color', color_plot(i,:), 'LineWidth',2)
-end
-set(gca, 'FontSize', 20)
-set(gca, 'YTickLabel', .1:.1:.4)
 
 
 
@@ -295,8 +296,8 @@ for o = 1:length(op_names)
                 xlabel('Time (s)')
             end
             set(gca, 'FontSize', 14)
-            line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-            line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+            line([t.B t.B], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+            line([t.equal t.equal], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
             line(xlim, [0 0], 'Color', [.5 .5 .5], 'LineWidth', 1);
             box on
         end
@@ -584,7 +585,7 @@ y_lims(7,:) = [0.46 .93];
 % Timelock to A
 figureDim = [0 0 .6 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
-x_lim = [-.2 3.2];
+x_lim = [-.2 t.C];
 for i=1:length(conditions_A)
     subplot(length(conditions_A),1,i)
     y_lims(i,:) = mvpaPlot(res.(dec_method).a.(conditions_A{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'A');
@@ -669,7 +670,7 @@ y_lims = zeros(length(conditions_A),2,1);
 % Timelock to A
 figureDim = [0 0 .6 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
-x_lim = [-.2 3.2];
+x_lim = [-.2 t.C];
 for i=1:length(conditions_A)
     subplot(length(conditions_A),1,i)
     y_lims(i,:) = mvpaPlot(res.(dec_method).a.(conditions_A{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'A');
@@ -724,16 +725,22 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_RT.pdf'], gcf, 600)
 
 
 %% GAT 
-gat_fields_plot = {'op1_op1', 'addsub_addsub', 'op2_op2', 'resultlock_pres_resultlock_pres'};
-time_lock = {'a', 'a', 'a', 'c'};
+% gat_fields_plot = {'op1_op1', 'addsub_addsub', 'op2_op2', 'resultlock_pres_resultlock_pres'};
+gat_fields_plot = {'op1_op1', 'addsub_addsub', 'op2_op2'};
 
-event_st = [0 .8 1.6 0];
+time_lock = {'a', 'a', 'a'};
+
+event_st = [0 .8 1.6];
 data_all = [];
 
-c_axis = [.25 .28; .50 .60; .25 .3; .25 .28];
+c_axis = [.25 .29; .50 .62; .25 .31;];
 
-figureDim = [0 0 .8 .5];
+figureDim = [0 0 .8 .6];
 figure('units','normalized','outerposition',figureDim)
+
+times_plot = res.class.a.addsub_addsub.times(1:end-1);
+
+
 for i = 1:length(gat_fields_plot)
     data_plot = res.(dec_method).(time_lock{i}).(gat_fields_plot{i});
 
@@ -744,42 +751,56 @@ for i = 1:length(gat_fields_plot)
     data(data_sig>0.05 | data<chance) = nan;
 %     data(data_sig>0.05) = nan;
 
-    % Crop data
-    windown = 0.8;
-    time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
-    time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
-    data = data(time_crop,time_crop);
-%     data = (data-chance)/chance;
+%     % Crop data
+%     windown = 0.8;
+%     time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
+%     time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
+%     data = data(time_crop,:);
+% %     data = (data-chance)/chance;
     
     % Plot
     subplot(1,length(gat_fields_plot), i)
     imagesc(data)
     axis square
+    xlim([0 426])
+    ylim([0 426])
     set(gca,'YDir','normal')
-    set(gca, 'XTick', 0:50:400);
-    set(gca, 'XTickLabel', 0:0.4:8);
-    set(gca, 'YTick', 0:50:100);
+    set(gca, 'XTick', [0:26:426]);
+    set(gca, 'XTickLabel', [-.2:0.2:3.2]);
+    set(gca, 'YTick', [0:26:426]);
     set(gca, 'FontSize', 18);
     %xlabel('Test times (s)')
     set(gca, 'YTickLabel', '');
 
     if i == 1
         ylabel('Train times (s)')
+        set(gca, 'YTickLabel', [-.2:0.2:3.2]);
+
     else
     end
     
     h = colorbar('Location', 'NorthOutside');
     set(h,'fontsize',14);
-    x_lim = xlim;
-    y_lim = ylim;
+    xlim([0 426]);
+    xlim([0 426]);
     caxis(c_axis(i,:))
-    line([x_lim(1) y_lim(2)], [x_lim(1) y_lim(2)], 'LineWidth', 1, 'Color', [.7 .7 .7])
+    line([26 26], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line(xlim, [26 26], 'Color', LineCol, 'LineWidth', LineWidthMark);
+
+    line([t.sign t.sign]*125+26, ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line(xlim, [t.sign t.sign]*125+26, 'Color', LineCol, 'LineWidth', LineWidthMark);
+
+    line([t.B t.B]*125+26, ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line(xlim, [t.B t.B]*125+26, 'Color', LineCol, 'LineWidth', LineWidthMark);
+
+    line([t.equal t.equal]*125+26, ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line(xlim, [t.equal t.equal]*125+26, 'Color', LineCol, 'LineWidth', LineWidthMark);
 
     sub_pos = get(gca,'position'); % get subplot axis position
     set(gca,'position',sub_pos.*[1 1 1.27 1]) % stretch its width and height
 
 end
-colormap(viridis_white)
+colormap(viridis)
 save2pdf([dec_res_dir_group 'decoding_gat_full_sep.pdf'], gcf, 600)
 
 
@@ -915,7 +936,7 @@ save2pdf([dec_res_dir_group 'decoding_ERPCov.pdf'], gcf, 600)
 %% Calculate RSA - single or multiple regression
 operation = 'calc';
 timesphere = 2;
-single_or_mr = 'mr';
+single_or_mr = 's';
 
 for subj = 1:length(sub_name_all)
     % Load data and convert to cosmo
@@ -1044,7 +1065,7 @@ save2pdf([rsa_result_dir 'plots/RDM_matrices_colorbar.pdf'], gcf, 600)
 %% Plot results - single regression
 fieldnames_RSA = {'op1_vis' 'op1_visregop1_mag' 'op1_mag' 'op1_magregop1_vis' };
 fieldnames_RSA = {'op2_vis' 'op2_visregop2_mag' 'op2_mag' 'op2_magregop2_vis' };
-fieldnames_RSA = {'result_vis' 'result_mag' 'operator' 'result_mag_reg_operator'};
+fieldnames_RSA = {'result_vis' 'result_mag' 'operator' 'result_mag_reg_operator' 'operator_reg_result_mag'};
 
 colors = viridis(length(fieldnames_RSA)); % Or substitute it with 8
 % Predefine some y_lim
@@ -1054,7 +1075,7 @@ y_lims = repmat([-0.05 .18], length(fieldnames_RSA),1);
 % Timelock to A
 figureDim = [0 0 .5 1*4/8];
 figure('units','normalized','outerposition',figureDim)
-x_lim = [-.2 3.2];
+x_lim = [-.2 t.C];
 for i=1:length(fieldnames_RSA)
     load([rsa_result_dir 'group_rsa/RSA_stats_model_', [operation '_' fieldnames_RSA{i}], '_all_DSM.mat'], 'RSAres');
     subplot(length(fieldnames_RSA),1,i)  
@@ -1068,7 +1089,7 @@ for i=1:length(fieldnames_RSA)
         xlabel('Time (s)')
     end
 end
-save2pdf([rsa_result_dir 'plots/calc_RSA_mr_op2.pdf'], gcf, 600)
+save2pdf([rsa_result_dir 'plots/calc_RSA_mr_op1.pdf'], gcf, 600)
 
 
 %% Plot empty matrix
@@ -1662,3 +1683,55 @@ end
 % 
 % ft_topoplotER(cfg, data_timelock)
 
+
+
+% COmpare z-score vs. no z-score
+subplot(3,2,1)
+box on
+hold on
+plot(gfp_all_addsub_Grad1.time, gfp_all_addsub_Grad1.avg)
+plot(gfp_all_addsub_Grad2.time, gfp_all_addsub_Grad2.avg)
+title('Grad 1 and Grad 2')
+subplot(3,2,2)
+box on
+plot(gfp_all_addsub_Mag.time, gfp_all_addsub_Mag.avg)
+title('Mag')
+subplot(3,2,3)
+box on
+hold on
+plot(gfp_all_addsub_Grad1_z.time, gfp_all_addsub_Grad1_z.avg)
+plot(gfp_all_addsub_Grad2_z.time, gfp_all_addsub_Grad2_z.avg)
+title('Grad 1 and Grad 2 (z-scored)')
+subplot(3,2,4)
+box on
+plot(gfp_all_addsub_Mag_z.time, gfp_all_addsub_Mag_z.avg)
+title('Mag (z-scored)')
+subplot(3,2,5)
+box on
+hold on
+plot(gfp_all_addsub_Grad1.time, zscore(gfp_all_addsub_Grad1.avg))
+plot(gfp_all_addsub_Grad2.time, zscore(gfp_all_addsub_Grad2.avg))
+plot(gfp_all_addsub_Mag.time, zscore(gfp_all_addsub_Mag.avg))
+title('zscore of Grad 1, Grad 2 and Mag')
+subplot(3,2,6)
+box on
+hold on
+plot(gfp_all_addsub_Grad1_z.time, zscore(gfp_all_addsub_Grad1_z.avg))
+plot(gfp_all_addsub_Grad2_z.time, zscore(gfp_all_addsub_Grad2_z.avg))
+plot(gfp_all_addsub_Mag_z.time, zscore(gfp_all_addsub_Mag_z.avg))
+title('zscore of Grad 1, Grad 2 and Mag z-scored')
+
+save2pdf([GFP_result_dir 'gfp_comparison.pdf'], gcf, 600)
+
+
+
+gfp_all_add = globalFieldPower(sub_name_all, 'add', 'All2');
+gfp_all_sub = globalFieldPower(sub_name_all, 'sub', 'All2');
+
+gfp_all_addsub_Grad1 = globalFieldPower(sub_name_all, 'calc', 'Grad2_1');
+gfp_all_addsub_Grad2 = globalFieldPower(sub_name_all, 'calc', 'Grad2_2');
+gfp_all_addsub_Mag = globalFieldPower(sub_name_all, 'calc', 'Mag2');
+
+
+gfp_all_addsub_Grad1 = load([GFP_result_dir 'gfp_' 'Grad2_1' '_' 'calc' '_RMS_baseline_no_zscore.mat'], 'data_grandavg');
+gfp_all_addsub_Grad2 = load([GFP_result_dir 'gfp_' 'Grad2_2' '_' 'calc' '_RMS_baseline_no_zscore.mat'], 'data_grandavg');
