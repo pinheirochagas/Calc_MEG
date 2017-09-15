@@ -932,6 +932,33 @@ end
 % Save
 save2pdf([dec_res_dir_group 'decoding_ERPCov.pdf'], gcf, 600)
 
+%% Decode operation and operands
+%% Train in operation and test in operand 1 and operand 2 and
+% Load data
+conditions_cross = {'addsub_op1', 'addsub_op2', 'op1_addsub', 'op2_addsub'};
+
+baselinecorr = 'nobaseline';
+dec_method = 'logreg'; % class reg classGeneral
+dec_scorer = 'accuracy'; % accuracy or kendall_score
+gatordiag = 'gat';
+
+for i = 1:length(conditions_cross)
+    res_cross.(dec_method).(conditions_cross{i}) = load([dec_res_dir_group conditions_cross{i} '/' conditions_cross{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
+end
+
+time_crop_sign = round((t.sign - 0.7) * 125);
+time_crop_B = round((t.B - 1.500) * 125);
+
+data = squeeze(res_cross.logreg.addsub_op2.group_scores);
+p_vals = squeeze(res_cross.logreg.addsub_op2.p_values_gat);
+
+data = data(time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
+p_vals = p_vals(time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
+
+diag_data = diag(data);
+diag_p_vals = diag(p_vals);
+
+imagesc()
 
 %% Calculate RSA - single or multiple regression
 operation = 'calc';
