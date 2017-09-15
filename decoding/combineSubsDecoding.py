@@ -9,6 +9,7 @@ from stats import _my_wilcoxon
 from initDirs import dirs
 from jr.stats import parallel_stats
 from jr.stats import stats_tfce
+from mne.stats import spatio_temporal_cluster_1samp_test
 
 
 
@@ -99,7 +100,8 @@ def combineSubsDecoding(subjects, baselinecorr, dec_method, dec_scorer, gatordia
         # p_values_gat[c, :, :] = stats_tfce(all_scores[c, :, :, :] - chance, n_jobs=-6)
         # p_values_diagonal[c, :] = stats_tfce(all_diagonals[c, :, :] - chance,  n_jobs=-6)
 
-
+        # p_values_gat[c, :, :] = spatio_temporal_cluster_1samp_test(all_scores[c, :, :, :], tail=1)
+        # p_values_diagonal[c, :] = spatio_temporal_cluster_1samp_test(all_diagonals[c, :, :], tail=1)
 
 
     if complete == 'no':

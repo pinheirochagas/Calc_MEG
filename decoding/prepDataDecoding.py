@@ -991,10 +991,10 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             X_train = epoch_calc[train_index]
             y_train = np.array(info_calc[train_index]['operand1'])
             # Match labels
-            y_train[y_train == 0] = -1
-            y_train[y_train == 1] = -1
-            y_train[y_train == 2] = 1
-            y_train[y_train == 3] = 1
+            y_train[y_train == 3] = -1
+            y_train[y_train == 4] = -1
+            y_train[y_train == 5] = 1
+            y_train[y_train == 6] = 1
             y_train = y_train.astype(np.float64)
             X_test = X_train
             y_test = np.array(info_calc[train_index]['operator'])

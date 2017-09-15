@@ -617,7 +617,7 @@ for i=1:length(conditions_C)
         xlabel('Time (s)')
     end
 end
-save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 700)
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
 
 
 % Timelock to RT
@@ -688,7 +688,7 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
 % Timelock to C
 figureDim = [0 0 .6*(.940/3.34) 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
-x_lim = [-.2 .8];
+x_lim = [-.2 .8+t.tC];
 for i=1:length(conditions_C)
     subplot(length(conditions_C),1,i)
     mvpaPlot(res.(dec_method).c.(conditions_C{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'C');
@@ -697,7 +697,8 @@ for i=1:length(conditions_C)
     set(gca,'FontSize',18) % stretch its width and height
     if i == length(conditions_A)
         set(gca,'XColor','k')
-        set(gca, 'XTickLabel', [x_lim(1) 0:.4:x_lim(end)])
+        set(gca, 'XTick', [t.tC t.tC+.400 t.tC+.800])
+        set(gca, 'XTickLabel', [0 .400 .800])
         xlabel('Time (s)')
     end
 end
@@ -716,8 +717,7 @@ for i=1:length(conditions_RT)
     set(gca,'FontSize',18) % stretch its width and height
     if i == length(conditions_A)
         set(gca,'XColor','k')
-        set(gca, 'XTick', [t.tC .400 .800])
-        set(gca, 'XTickLabel', [0 .400 .800])
+        set(gca, 'XTickLabel', [x_lim(1):.4:x_lim(end)])
         xlabel('Time (s)')
     end
 end
@@ -1215,29 +1215,29 @@ caxis([.24 .3])
 operand2_lf =  operand1_lf.searchlight_ft_allsub;
 operand2_lf.powspctrm(operand1_lf.powspctrm(:) < .25) = nan;
 
-%% Manually plot most interesting channels
+%% Manually plot
 cfg = [];
 cfg.layout       = 'neuromag306cmb.lay'; %neuromag306all.lay neuromag306mag
-cfg.xlim = [-.200 3.2];
-cfg.zlim = [.24 .28]; % 
+cfg.xlim = [-.200 t.C];
+cfg.zlim = [.48 .58]; % 
 cfg.showoutline = 'yes'
 cfg.colorbar = 'yes'
 cfg.colormap = viridis
 
-i = 4
+i = 2
 ft_multiplotTFR(cfg, sl.(names_sl{i}).searchlight_ft_allsub);
 save2pdf([searchlight_result_dir 'figures/' names_sl{i} '_allchan.pdf'], gcf, 600)   
 
 title('')
-xlim([-0.2 3.2])
+xlim([-0.2 t.C])
 set(gca, 'XTick', [-.200 0:0.4:3.2]);
-set(gca, 'FontSize', 20)
+set(gca, 'FontSize', 28)
 LineWidthMark = 2; LineCol = [1 1 1];
 line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([.8 .8], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([1.6 1.6], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([2.4 2.4], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
-line([3.2 3.2], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.sign t.sign], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.B t.B], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.equal t.equal], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+line([t.C t.C], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
 ylabel('Frequency (Hz)')
 xlabel('Time (s)')
 save2pdf([searchlight_result_dir 'figures/' names_sl{i} '_bestchan.pdf'], gcf, 600)   
