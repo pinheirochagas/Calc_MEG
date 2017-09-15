@@ -21,7 +21,7 @@ t.tC = t.C - 3.200;
 sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
 
 %% Add accuracy to all subjects
-addAccuracy(sub_name_all) % This also corrects the RT by the visual delay
+% addAccuracy(sub_name_all) % This also corrects the RT by the visual delay
 
 %% Low pass and downsample the data
 for subj = 1:length(sub_name_all)
@@ -601,9 +601,9 @@ end
 save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
 
 % Timelock to C
-figureDim = [0 0 .6/3.4 1*(7/8)];
+figureDim = [0 0 .6*(.940/3.34) 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
-x_lim = [-.2 .8];
+x_lim = [-.2 .8+t.tC];
 for i=1:length(conditions_C)
     subplot(length(conditions_C),1,i)
     mvpaPlot(res.(dec_method).c.(conditions_C{i}), 'diag', colors(i,:), x_lim, y_lims(i,:), 'C');
@@ -612,16 +612,16 @@ for i=1:length(conditions_C)
     set(gca,'FontSize',18) % stretch its width and height
     if i == length(conditions_A)
         set(gca,'XColor','k')
-        set(gca, 'XTick', [t.tC .400 .800])
+        set(gca, 'XTick', [t.tC t.tC+.400 t.tC+.800])
         set(gca, 'XTickLabel', [0 .400 .800])
         xlabel('Time (s)')
     end
 end
-save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
+save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 700)
 
 
 % Timelock to RT
-figureDim = [0 0 .6/3.5 1*(7/8)];
+figureDim = [0 0 .6*(.900/3.34) 1*(7/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.8 .1];
 for i=1:length(conditions_RT)
@@ -686,7 +686,7 @@ end
 save2pdf([dec_res_dir_group 'decoding_' dec_method '_A.pdf'], gcf, 600)
 
 % Timelock to C
-figureDim = [0 0 .6/3.4 1*(4/8)];
+figureDim = [0 0 .6*(.940/3.34) 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 .8];
 for i=1:length(conditions_C)
@@ -705,7 +705,7 @@ save2pdf([dec_res_dir_group 'decoding_' dec_method '_C.pdf'], gcf, 600)
 
 
 % Timelock to RT
-figureDim = [0 0 .6/3.5 1*(4/8)];
+figureDim = [0 0 .6*(.900/3.34) 1*(4/8)];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.8 .1];
 for i=1:length(conditions_RT)
