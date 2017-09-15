@@ -12,14 +12,12 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 
 #subjects = ['s03']
 
-conditions = [['resultlock_pres_c', 'resultlock_pres_c'], ['resultlock_pres_i', 'resultlock_pres_i']]
+conditions = [['addsub', 'op1'], ['addsub', 'op2'], ['op1', 'addsub'], ['op2', 'addsub']]
 
 
 baselinecorr = 'nobaseline'
-dec_method = 'class'
-dec_scorer = 'accuracy'
-# dec_method = 'reg'
-# dec_scorer = 'kendall_score'
+dec_method = 'logreg'  # reg logreg class
+dec_scorer = 'accuracy'  # accuracy kendall_score
 gatordiag = 'gat'
 decimate = 2
 

@@ -949,8 +949,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test[y_test == 3] = 1
             y_test = y_test.astype(np.float64)
             # Update params
-            train_times = {'start': 0.8, 'stop': 1.6}
-            test_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': 0.7, 'stop': 1.5}
+            test_times = {'start': 1.5, 'stop': 3.1}
 
         elif (train_set == 'addsub') & (test_set == 'op1'):
             train_index = info_calc['operator'] != 0
@@ -966,8 +966,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test[y_test == 6] = 1
             y_test = y_test.astype(np.float64)
             # Update params
-            train_times = {'start': 0.8, 'stop': 1.6}
-            test_times = {'start': 0, 'stop': 0.8}
+            train_times = {'start': 0.7, 'stop': 1.5}
+            test_times = {'start': -.1, 'stop': 0.7}
 
         elif (train_set == 'op2') & (test_set == 'addsub'):
             train_index = info_calc['operator'] != 0
@@ -983,8 +983,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = np.array(info_calc[train_index]['operator'])
             y_test = y_test.astype(np.float64)
             # Update params
-            train_times = {'start': 1.6, 'stop': 3.2}
-            test_times = {'start': 0.8, 'stop': 1.6}
+            train_times = {'start': 1.5, 'stop': 3.1}
+            test_times = {'start': 0.7, 'stop': 1.5}
 
         elif (train_set == 'op1') & (test_set == 'addsub'):
             train_index = info_calc['operator'] != 0
@@ -1000,8 +1000,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             y_test = np.array(info_calc[train_index]['operator'])
             y_test = y_test.astype(np.float64)
             # Update params
-            train_times = {'start': 0.8, 'stop': 1.6}
-            test_times = {'start': 1.6, 'stop': 3.2}
+            train_times = {'start': -.1, 'stop': 0.7}
+            test_times = {'start': 0.7, 'stop': 1.5}
 
         elif (train_set == 'op2_add') & (test_set == 'op2_sub'):
             train_index = info_calc['operator'] == 1

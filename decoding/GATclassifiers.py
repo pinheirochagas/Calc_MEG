@@ -223,7 +223,66 @@ def calcRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, param
 
     return y_true, y_pred, score, diagonal
 
+def calcLogRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
+        " Logistic Regression within or across conditions "
 
+        # Initialize output variable
+        score = []
+
+        # Learning machinery
+
+        # Scaler
+        scaler = StandardScaler()
+
+        # Model
+        model = linear_model.LogisticRegression(class_weight='balanced')
+
+        # Pipeline
+        clf = make_pipeline(scaler, model)
+
+        # Cross-validation
+        cv = StratifiedKFold(y_train, 8)
+
+        # Define scorer
+        if scorer is 'scorer_auc':
+            from jr.gat.scorers import scorer_auc
+            scorer = scorer_auc
+        elif scorer is 'kendall_score':
+            from jr.gat.scorers import kendall_score
+            scorer = kendall_score
+        elif scorer is 'accuracy':
+            scorer = None
+        else:
+            print('using accuracy as the scorer')
+
+        ###Learning process###
+        gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'],
+                                       test_times=params['test_times'], scorer=scorer, predict_mode=predict_mode,
+                                       n_jobs=6)
+
+        # Determine whether to generalize only across time or also across conditions
+        if predict_mode == 'cross-validation':
+            print('fitting')
+            gat.fit(X_train, y=y_train)
+            print('done fitting')
+            print('scoring')
+            gat.score(X_train, y=y_train)
+            print('done scoring')
+        elif predict_mode == 'mean-prediction':
+            print('fitting')
+            gat.fit(X_train, y=y_train)
+            print('done fitting')
+            print('scoring')
+            gat.score(X_test, y=y_test)
+            print('done scoring')
+
+        # Organize and save
+        score = np.array(gat.scores_)
+        diagonal = np.diagonal(score)
+        y_pred = np.array(gat.y_pred_)
+        y_true = np.array(gat.y_true_)
+
+        return y_true, y_pred, score, diagonal
 
     # print(gat)
     # results = ({'params': params, 'gat': gat})

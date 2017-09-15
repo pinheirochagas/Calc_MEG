@@ -113,7 +113,7 @@ else
 %     RSA.result_mag_reg_operator = cosmo_searchlight(ds,nbrhood,measure,measure_args);
 %     measure_args = rmfield(measure_args,'regress_dsm');
 %     
-    %% Operator model regressing out results magnitufe
+    %% Operator model regressing out results magnitude
     measure_args=struct();
     measure_args.type='Spearman'; %correlation type between target and MEG dsms
     measure_args.metric='Spearman'; %metric to use to compute MEG dsm % mahalanobis
@@ -126,7 +126,9 @@ else
     measure_args = rmfield(measure_args,'regress_dsm');
     
     %% Save
-    save([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' subject '.mat'], 'RSA')
+    save([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' subject '_operator_reg_result.mat'], 'RSA')
+
+%     save([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' subject '.mat'], 'RSA')
 end
 
 

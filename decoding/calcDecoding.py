@@ -4,7 +4,7 @@
 
 # Libraries
 import sys
-from GATclassifiers import (calcClassification, calcRegression, calcGeneral)
+from GATclassifiers import (calcClassification, calcRegression, calcLogRegression, calcGeneral)
 from initDirs import dirs
 import numpy as np
 import os
@@ -28,6 +28,10 @@ def calcDecoding(params, type, scorer, gatordiag):
         # Define scorer
         print('Decoding regression subject ' + params['subject'])
         y_true, y_pred, score, diagonal = calcRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+    elif type == 'logreg':
+        # Define scorer
+        print('Decoding regression subject ' + params['subject'])
+        y_true, y_pred, score, diagonal = calcLogRegression(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
     elif type == 'general':
         # Define scorer
         print('Decoding regression subject ' + params['subject'])

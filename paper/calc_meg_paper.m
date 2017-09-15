@@ -973,14 +973,18 @@ for p = 1:length(sub_name_all)
     end
 end
 
+load([rsa_result_dir '/group_rsa_mr/RSA_stats_model_', RSA_model, '_all_DSM_MR_operator_reg_result.mat']);
 % Calculate stats
 for f = 1:length(fieldnames_RSA);
     RSAstats(RSA_all.(operation).(fieldnames_RSA{f}), [operation '_' fieldnames_RSA{f}])
 end
 
+
 % Load all data single regression
+% load([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' subject '_operator_reg_result.mat'])
+
 for p = 1:length(sub_name_all)
-    load([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' sub_name_all{p} '.mat'])
+    load([rsa_result_dir 'RSA_all_DSM_' operation '_tbin' num2str(timesphere) '_' sub_name_all{p} '_operator_reg_result.mat'])
     fieldnames_RSA = fieldnames(RSA);
     for f = 1:length(fieldnames_RSA);
         RSA_all.(operation).(fieldnames_RSA{f}){p}=RSA.(fieldnames_RSA{f});
@@ -1068,18 +1072,19 @@ fieldnames_RSA = {'op2_vis' 'op2_visregop2_mag' 'op2_mag' 'op2_magregop2_vis' };
 fieldnames_RSA = {'result_vis' 'result_mag' 'operator' 'result_mag_reg_operator' 'operator_reg_result_mag'};
 
 colors = viridis(length(fieldnames_RSA)); % Or substitute it with 8
+colors = [colors(1:3,:); colors(5,:); colors(4,:)]
 % Predefine some y_lim
 y_lims = zeros(length(fieldnames_RSA),2,1);
-y_lims = repmat([-0.05 .18], length(fieldnames_RSA),1);
+y_lims = repmat([-0.05 .32], length(fieldnames_RSA),1);
 
 % Timelock to A
-figureDim = [0 0 .5 1*4/8];
+figureDim = [0 0 .5 1*5/8];
 figure('units','normalized','outerposition',figureDim)
 x_lim = [-.2 t.C];
 for i=1:length(fieldnames_RSA)
     load([rsa_result_dir 'group_rsa/RSA_stats_model_', [operation '_' fieldnames_RSA{i}], '_all_DSM.mat'], 'RSAres');
     subplot(length(fieldnames_RSA),1,i)  
-    y_lims(i,:) = mvpaPlot(RSAres, 'RSA', colors(i,:), x_lim, y_lims(i,:), 'A');
+    y_lims(i,:) = mvpaPlot(RSAres, 'RSA', colors(i,:), x_lim, y_lims(i,:), 'A');    
     sub_pos = get(gca,'position'); % get subplot axis position
     set(gca,'position',sub_pos.*[1 1 1 1.3]) % stretch its width and height
     set(gca,'FontSize',18) % stretch its width and height
@@ -1089,7 +1094,7 @@ for i=1:length(fieldnames_RSA)
         xlabel('Time (s)')
     end
 end
-save2pdf([rsa_result_dir 'plots/calc_RSA_mr_op1.pdf'], gcf, 600)
+save2pdf([rsa_result_dir 'plots/calc_RSA_result.pdf'], gcf, 600)
 
 
 %% Plot empty matrix
