@@ -33,73 +33,49 @@ def classifyGeneralCrossCond(X_train, X_test, y_train, y_test):
         UnsupervisedSpatialFilter(PCA(70), average=False),
         ERPCovariances(estimator='lwf'),
         TangentSpace('logeuclid'),
-        svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+        LogisticRegression(class_weight='balanced'))
 
-    # Define sliding window,
-    # offsets = np.arange(0,400, 100)  # if epoch size is 3,200 ms and sampling rate 125Hz
-    # window = 100
-
-    # offsets = np.arange(0,100, 50)  # if epoch size is 1.6 ms and sampling rate 125Hz
-    # window = 50
-
-    # offsets = np.arange(0,100, 100)
-    # window = 10
-
-    # offsets = np.arange(0,50, 12)
-    # window = 12
-
-    #columns = ['ERPCov_0-800', 'ERPCov_800-1600', 'ERPCov_1600-2400', 'ERPCov_2400-3200']
-    columns = ['ERPCov_0-400', 'ERPCov_400-800']  # these columns should be = len(offsets)
+    columns = ['ERPCov_0-700']
 
     # Prelocate results
-    results = pd.DataFrame(columns=columns)
-    # results = pd.DataFrame(index=offsets, columns=clfs.keys())
+    results_train = pd.DataFrame(columns=columns)
+    results_test = pd.DataFrame(columns=columns)
 
     #Prepare data
-    X_tmp = 1e12 * np.array(X)
+    X_train = 1e12 * np.array(X_train)
+    X_test = 1e12 * np.array(X_test)
 
     # Prelocade predictions
-    preds = np.zeros((X.shape[0], len(clfs), len(offsets)))
+    preds_train = np.zeros((X_train.shape[0], len(clfs)))
 
-    count_offset = 0
-    for offset in offsets:
-        X = X_tmp[:,:,offset:offset+window]
+    # Cross validation
+    cv = StratifiedKFold(y_train, 8)
 
-        cv = StratifiedKFold(y, 8)
+    # Train model - LEARNING
+    for jj, clf in enumerate(clfs):
+        print('fitting and scoring ' + clf)
+        count = 0
+        for train, test in cv:
+            print('cross-validation fold ' + str(count))
+            clfs[clf].fit(X_train[train], y_train[train])
+            # get the predictions
+            pr = clfs[clf].predict(X_train[test])
+            preds_train[test, jj] += pr
+            count = count + 1
 
-        # iterate over models and train/test partitions
-        for jj, clf in enumerate(clfs):
-            print('fitting and scoring ' + clf)
-            count = 0
-            for train, test in cv:
-                print('cross-validation fold ' + str(count))
-                clfs[clf].fit(X[train], y[train])
-                # get the predictions
-                pr = clfs[clf].predict(X[test])
-                preds[test, jj, count_offset] += pr
-                count = count + 1
+        results_train.loc[0, columns[0]] = accuracy_score(y_train, preds_train[:, jj])
+        print('done!')
 
-            results.loc[0,columns[count_offset]] = accuracy_score(y, preds[:, jj, count_offset])
-            count_offset = count_offset + 1
+    # Test model
+    print('scoring independent test set')
+    preds_test = np.zeros((X_train.shape[0], len(clfs)))
 
-    return results, preds, y
+    for jj, clf in enumerate(clfs):
+        clfs[clf].fit(X_train, y_train)
+        pr = clfs[clf].predict(X_test)
+        preds_test[:, jj] += pr
+        # Score
+        results_test.loc[0, columns[0]] = accuracy_score(y_test, preds_test[:, jj])
+    print('done!')
 
-    # define CV and prediction
-    # cv = KFold(len(y), n_folds=10, shuffle=False, random_state=4343)
-    # cv = StratifiedKFold(y, 8)
-
-# Other classifiers
-
-    # clfs['XdawnCov'] = make_pipeline(
-    #    UnsupervisedSpatialFilter(PCA(50), average=False),
-    #    XdawnCovariances(12, estimator='lwf', xdawn_estimator='lwf'),
-    #    TangentSpace('logeuclid'),
-    #    svm.SVC(C=1, kernel='linear', class_weight='balanced'))
-    #
-    # clfs['HankelCov'] = make_pipeline(
-    #     UnsupervisedSpatialFilter(PCA(70), average=False),
-    #     HankelCovariances(delays=[1, 8, 12, 64], estimator='oas'),
-    #     TangentSpace('logeuclid'),
-    #     LogisticRegression('l2'))
-    #
-    # clfs['SimpleSVM'] = make_pipeline(Vectorizer(), svm.SVC(C=1, kernel='linear', class_weight='balanced'))
+    return results_train, results_test, preds_train, preds_test, y_train, y_test

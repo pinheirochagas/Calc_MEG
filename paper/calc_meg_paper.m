@@ -804,61 +804,6 @@ colormap(viridis)
 save2pdf([dec_res_dir_group 'decoding_gat_full_sep.pdf'], gcf, 600)
 
 
-%% 
-gat_fields_plot = {'op1_resultlock_pres','op1_resultlock_pres_c', 'op1_resultlock_pres_i'};
-
-event_st = [0 0 0 0];
-
-c_axis = [.25 .29; .25 .29; .25 .29];
-
-figureDim = [0 0 .8 .6];
-figure('units','normalized','outerposition',figureDim)
-for i = 1:length(gat_fields_plot)
-    data_plot = res.class_mean_pred.c.(gat_fields_plot{i});
-
-    chance = double(data_plot.chance);    
-
-    data_sig = squeeze(data_plot.p_values_gat/2); % one tailed
-    data = squeeze(data_plot.group_scores);
-    data(data_sig>0.05 | data<chance) = nan;
-    
-    % Crop data
-    windown = 0.8;
-    time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
-    time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
-    data = data(time_crop,time_crop);
-    
-    % Plot
-    subplot(1,length(gat_fields_plot), i)
-    imagesc(data)
-    axis square
-    set(gca,'YDir','normal')
-    set(gca, 'XTick', 0:12.5:400);
-    set(gca, 'XTickLabel', 0:0.1:8);
-    set(gca, 'YTick', 0:12.5:100);
-    set(gca, 'FontSize', 18);
-    %xlabel('Test times (s)')
-    set(gca, 'YTickLabel', '');
-
-    if i == 1
-        ylabel('Train times (s)')
-    else
-    end
-    
-    h = colorbar('Location', 'NorthOutside');
-    set(h,'fontsize',14);
-    x_lim = xlim;
-    y_lim = ylim;
-    caxis(c_axis(i,:))
-    line([x_lim(1) y_lim(2)], [x_lim(1) y_lim(2)], 'LineWidth', 1, 'Color', [.7 .7 .7])
-
-    sub_pos = get(gca,'position'); % get subplot axis position
-    set(gca,'position',sub_pos.*[1 1 1.27 1]) % stretch its width and height
-
-end
-colormap(viridis_white)
-save2pdf([dec_res_dir_group 'decoding_gat_op1_pres_i_c.pdf'], gcf, 600)
-
 
 %% Get timings decoding
 times_sig = struct;
@@ -932,7 +877,7 @@ end
 % Save
 save2pdf([dec_res_dir_group 'decoding_ERPCov.pdf'], gcf, 600)
 
-%% Decode operation and operands
+%% Decode operation and operands 
 %% Train in operation and test in operand 1 and operand 2 and
 % Load data
 conditions_cross = {'addsub_op1', 'addsub_op2', 'op1_addsub', 'op2_addsub'};
@@ -946,19 +891,132 @@ for i = 1:length(conditions_cross)
     res_cross.(dec_method).(conditions_cross{i}) = load([dec_res_dir_group conditions_cross{i} '/' conditions_cross{i} '_' dec_method '_' dec_scorer '_' 'results.mat']);
 end
 
+%% AddSub op2
+% Prepare data 
 time_crop_sign = round((t.sign - 0.7) * 125);
 time_crop_B = round((t.B - 1.500) * 125);
 
-data = squeeze(res_cross.logreg.addsub_op2.group_scores);
+data = squeeze(res_cross.logreg.addsub_op2.all_scores);
 p_vals = squeeze(res_cross.logreg.addsub_op2.p_values_gat);
 
-data = data(time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
+data = data(:,time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
 p_vals = p_vals(time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
 
-diag_data = diag(data);
-diag_p_vals = diag(p_vals);
+for i = 1:size(data,1)
+    diag_data(i,:) = diag(squeeze(data(i,:,:)));
+end
+diag_p_vals = fdr(diag(p_vals));
 
-imagesc()
+% Gat
+figureDim = [0 0 .5 1];
+figure('units','normalized','outerposition',figureDim)
+
+data_tmp = squeeze(mean(data,1));
+data_tmp(p_vals>0.05 | data_tmp<.5) = nan;
+
+subplot(2,1,1)
+imagesc(data_tmp)
+axis square
+set(gca,'YDir','normal')
+caxis([.5 .58])
+set(gca, 'XTick', [0 find(round(res.times_plot*1000) == 400)]);
+set(gca, 'XTickLabel', [.4]);
+set(gca, 'YTick', [0 find(round(res.times_plot*1000) == 400)]);
+set(gca, 'YTickLabel', [.4]);
+set(gca, 'FontSize', 18);
+ylabel('Train times (s)')
+xlabel('Test times (s)')
+colormap(cbrewer2('Blues'))
+colorbar('Location', 'northoutside')
+
+% Plot diagonal 
+subplot(2,1,2)
+res.chance = .5;
+res.data = diag_data;
+res.times_plot = 0:0.008:.708;
+res.sig_plot = diag_p_vals'<0.05;
+mvpaPlot(res, 'diag_cross_cond', cdcol.ultramarine, [0 .7], [.47 .6], 'cross_cond');
+set(gca,'XColor','k')
+set(gca, 'XTickLabel', [0 .4])
+set(gca,'FontSize',18) % stretch its width and height
+
+save2pdf([dec_res_dir_group 'decoding_addsub_operand2_ERPCov_gat_diag.pdf'], gcf, 600)
+
+
+%% AddSub op1
+% Prepare data 
+time_crop_sign = round((t.sign - 0.7) * 125);
+time_crop_B = round((.1) * 125);
+
+data = squeeze(res_cross.logreg.addsub_op1.all_scores);
+p_vals = squeeze(res_cross.logreg.addsub_op1.p_values_gat);
+
+data = data(:,time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
+p_vals = p_vals(time_crop_sign:round(.7 * 125) + time_crop_sign, time_crop_B:round(.7 * 125) +time_crop_B);
+
+for i = 1:size(data,1)
+    diag_data(i,:) = diag(squeeze(data(i,:,:)));
+end
+diag_p_vals = fdr(diag(p_vals));
+
+% Gat
+figureDim = [0 0 .5 1];
+figure('units','normalized','outerposition',figureDim)
+
+data_tmp = squeeze(mean(data,1));
+data_tmp(p_vals>0.05 | data_tmp<.5) = nan;
+
+subplot(2,1,1)
+imagesc(data_tmp)
+axis square
+set(gca,'YDir','normal')
+caxis([.5 .58])
+set(gca, 'XTick', [0 find(round(res.times_plot*1000) == 400)]);
+set(gca, 'XTickLabel', [.4]);
+set(gca, 'YTick', [0 find(round(res.times_plot*1000) == 400)]);
+set(gca, 'YTickLabel', [.4]);
+set(gca, 'FontSize', 18);
+ylabel('Train times (s)')
+xlabel('Test times (s)')
+colormap(cbrewer2('Greens'))
+colorbar('Location', 'northoutside')
+
+% Plot diagonal 
+subplot(2,1,2)
+res.chance = .5;
+res.data = diag_data;
+res.times_plot = 0:0.008:.708;
+res.sig_plot = diag_p_vals'<0.05;
+mvpaPlot(res, 'diag_cross_cond', cdcol.emeraldgreen, [0 .7], [.47 .6], 'cross_cond');
+set(gca,'XColor','k')
+set(gca, 'XTickLabel', [0 .4])
+set(gca,'FontSize',18) % stretch its width and height
+save2pdf([dec_res_dir_group 'decoding_addsub_operand1_ERPCov_gat_diag.pdf'], gcf, 600)
+
+
+
+% Boxplots riemann
+riemann_dec = {'addsub_riemann_op1_riemann', 'addsub_riemann_op2_riemann'};
+colors_plot = viridis(7);
+load('cdcol.mat')
+colors_plot = [cdcol.ultramarine; cdcol.emeraldgreen];
+
+figureDim = [0 0 .6 .6];
+figure('units','normalized','outerposition',figureDim)
+% Import and combine data
+for i = 1:length(riemann_dec)
+    data_tmp(:,i) = csvread([dec_res_dir_ind riemann_dec{i} '/' riemann_dec{i} '_results_test_ERPcov.csv'], 1,1);
+end
+prettyBoxPlot(data_tmp, colors_plot,  {'Operand 1', 'Operand 2'}, '', 'Positions', [1,2])
+ylim([.42 .62])
+axis square
+all_axes = get(gcf,'Children');
+line(xlim, [.5 .5], 'Color', [.5 .5 .5], 'LineWidth', 1, 'Parent', all_axes(1));
+
+[H,P,CI,STATS] = ttest(data_tmp(:,2)-0.5);
+
+save2pdf([dec_res_dir_group 'decoding_addsub_operands_ERPCov_boxplot.pdf'], gcf, 600)
+
 
 %% Calculate RSA - single or multiple regression
 operation = 'calc';
@@ -1715,6 +1773,60 @@ end
 % 
 % ft_topoplotER(cfg, data_timelock)
 
+%% Train Op1 test on presented result 
+gat_fields_plot = {'op1_resultlock_pres','op1_resultlock_pres_c', 'op1_resultlock_pres_i'};
+
+event_st = [0 0 0 0];
+
+c_axis = [.25 .29; .25 .29; .25 .29];
+
+figureDim = [0 0 .8 .6];
+figure('units','normalized','outerposition',figureDim)
+for i = 1:length(gat_fields_plot)
+    data_plot = res.class_mean_pred.c.(gat_fields_plot{i});
+
+    chance = double(data_plot.chance);    
+
+    data_sig = squeeze(data_plot.p_values_gat/2); % one tailed
+    data = squeeze(data_plot.group_scores);
+    data(data_sig>0.05 | data<chance) = nan;
+    
+    % Crop data
+    windown = 0.8;
+    time_start = [(abs(data_plot.times(1))+event_st(i))*data_plot.sfreq];
+    time_crop = time_start:time_start+abs(data_plot.times(1))+windown*data_plot.sfreq;
+    data = data(time_crop,time_crop);
+    
+    % Plot
+    subplot(1,length(gat_fields_plot), i)
+    imagesc(data)
+    axis square
+    set(gca,'YDir','normal')
+    set(gca, 'XTick', 0:12.5:400);
+    set(gca, 'XTickLabel', 0:0.1:8);
+    set(gca, 'YTick', 0:12.5:100);
+    set(gca, 'FontSize', 18);
+    %xlabel('Test times (s)')
+    set(gca, 'YTickLabel', '');
+
+    if i == 1
+        ylabel('Train times (s)')
+    else
+    end
+    
+    h = colorbar('Location', 'NorthOutside');
+    set(h,'fontsize',14);
+    x_lim = xlim;
+    y_lim = ylim;
+    caxis(c_axis(i,:))
+    line([x_lim(1) y_lim(2)], [x_lim(1) y_lim(2)], 'LineWidth', 1, 'Color', [.7 .7 .7])
+
+    sub_pos = get(gca,'position'); % get subplot axis position
+    set(gca,'position',sub_pos.*[1 1 1.27 1]) % stretch its width and height
+
+end
+colormap(viridis_white)
+save2pdf([dec_res_dir_group 'decoding_gat_op1_pres_i_c.pdf'], gcf, 600)
 
 
 % COmpare z-score vs. no z-score

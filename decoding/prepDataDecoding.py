@@ -1003,6 +1003,91 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -.1, 'stop': 0.7}
             test_times = {'start': 0.7, 'stop': 1.5}
 
+        # Riemann
+        elif (train_set == 'addsub_riemann') & (test_set == 'op2_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[train_index]
+            y_test = np.array(info_calc[train_index]['operand2'])
+            # Match labels
+            y_test[y_test == 0] = -1
+            y_test[y_test == 1] = -1
+            y_test[y_test == 2] = 1
+            y_test[y_test == 3] = 1
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(.785, 1.485)
+            X_test.crop(1.570, 2.270)
+            # Update params
+            train_times = {'start': .785, 'stop': 1.485}
+            test_times = {'start': 1.570, 'stop': 2.270}
+
+        elif (train_set == 'addsub_riemann') & (test_set == 'op1_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[train_index]
+            y_test = np.array(info_calc[train_index]['operand1'])
+            # Match labels
+            y_test[y_test == 3] = -1
+            y_test[y_test == 4] = -1
+            y_test[y_test == 5] = 1
+            y_test[y_test == 6] = 1
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(.785, 1.485)
+            X_test.crop(0, .700)
+            # Update params
+            train_times = {'start': .785, 'stop': 1.485}
+            test_times = {'start': 0, 'stop': .700}
+
+        elif (train_set == 'op2_riemann') & (test_set == 'addsub_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand2'])
+            # Match labels
+            y_train[y_train == 0] = -1
+            y_train[y_train == 1] = -1
+            y_train[y_train == 2] = 1
+            y_train[y_train == 3] = 1
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[train_index]
+            y_test = np.array(info_calc[train_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(1.570, 2.270)
+            X_test.crop(.785, 1.485)
+            # Update params
+            train_times = {'start': 1.570, 'stop': 2.270}
+            test_times = {'start': .785, 'stop': 1.485}
+
+        elif (train_set == 'op1_riemann') & (test_set == 'addsub_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operand1'])
+            # Match labels
+            y_train[y_train == 3] = -1
+            y_train[y_train == 4] = -1
+            y_train[y_train == 5] = 1
+            y_train[y_train == 6] = 1
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[train_index]
+            y_test = np.array(info_calc[train_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(0, .700)
+            X_test.crop(.785, 1.485)
+            # Update params
+            train_times = {'start': 1.570, 'stop': 2.270}
+            test_times = {'start': .785, 'stop': 1.485}
+
         elif (train_set == 'op2_add') & (test_set == 'op2_sub'):
             train_index = info_calc['operator'] == 1
             X_train = epoch_calc[train_index]
