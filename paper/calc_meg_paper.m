@@ -88,8 +88,6 @@ conditions_addsub_op2 = {'addsub_op2_0', 'addsub_op2_1', 'addsub_op2_2', 'addsub
 for i = 1:length(conditions_add_op2)
     gfp_add_op2.(conditions_add_op2{i}) = globalFieldPower(sub_name_all, conditions_add_op2{i}, 'Grad2');
 end
-save([GFP_result_dir 'gfp_add_op2.mat'],'gfp_add_op2')
-
 
 % Sub
 for i = 1:length(conditions_sub_op2)
@@ -102,17 +100,33 @@ for i = 1:length(conditions_addsub_op2)
 end
 
 
-% List fieldnames 
+% Load data
+% Add
+for i = 1:length(conditions_add_op2)
+    gfp_add_op2.(conditions_add_op2{i}) = load([GFP_result_dir 'gfp_Grad2_' conditions_add_op2{i} '_RMS_baseline.mat']);
+end
+
+% Sub
+for i = 1:length(conditions_sub_op2)
+    gfp_sub_op2.(conditions_sub_op2{i}) = load([GFP_result_dir 'gfp_Grad2_' conditions_sub_op2{i} '_RMS_baseline.mat']);
+end
+
+% AddSub
+for i = 1:length(conditions_addsub_op2)
+    gfp_addsub_op2.(conditions_addsub_op2{i}) = load([GFP_result_dir 'gfp_Grad2_' conditions_addsub_op2{i} '_RMS_baseline.mat']);
+end
+
+% List fieldnames
 op2_fields_add = fieldnames(gfp_add_op2);
 op2_fields_sub = fieldnames(gfp_sub_op2);
 
 % Get times, from whatever condition
 time_window = [1.5 3.2];
 fsample = 250;
-times = gfp_add_op2.add_op2_0.time;
+times = gfp_add_op2.add_op2_0.data_grandavg.time;
 times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
 
-figureDim = [0 0 1 .3];
+figureDim = [0 0 1 .35];
 figure('units','normalized','outerposition',figureDim)
 
 % Additions
@@ -130,10 +144,14 @@ for i=1:length(conditions_add_op2)
 %     sem_gfp = gfp_add_op2.(conditions_add_op2{i}).avg(times_idx)*10^12/sqrt(2);
 %     plt = shadedErrorBar(times_plot,mean_gfp,sem_gfp, {'color', color_plot(i,:), 'LineWidth',1});
 %     plt.patch.FaceAlpha = .5;
-    plot(times(times_idx), gfp_add_op2.(conditions_add_op2{i}).avg(times_idx)*10^12, 'Color', color_plot(i,:), 'LineWidth',2)
+    plot(times(times_idx), gfp_add_op2.(conditions_add_op2{i}).data_grandavg.avg(times_idx)*10^12, 'Color', color_plot(i,:), 'LineWidth',2)
 end
 set(gca, 'FontSize', 20)
 set(gca, 'YTickLabel', .1:.1:.4)
+xlabel('Times (s)')
+ylabel('GFP (T)')
+title('Addition operand 2')
+box on
 
 % Subtractions
 subplot(1,2,2)
@@ -148,10 +166,16 @@ for i=1:length(conditions_sub_op2)
     hold on
 %     mean_gfp = zscore(squeeze(mean(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
 %     sem_gfp = zscore(squeeze(sem(gfp_op2_sub.operand2.(op2_fields_add{i}).individual(:,:,times_idx),1)));
-    plot(times(times_idx), gfp_sub_op2.(conditions_sub_op2{i}).avg(times_idx)*10^12, 'Color', color_plot(i,:), 'LineWidth',2)
+    plot(times(times_idx), gfp_sub_op2.(conditions_sub_op2{i}).data_grandavg.avg(times_idx)*10^12, 'Color', color_plot(i,:), 'LineWidth',2)
 end
 set(gca, 'FontSize', 20)
 set(gca, 'YTickLabel', .1:.1:.4)
+xlabel('Times (s)')
+title('Subtraction operand 2')
+box on
+
+save2pdf([GFP_result_dir 'gfp_add_sub_operand2.pdf'], gcf, 600)
+
 
 %% Behavior analysis
 beh_calc = behAnalysisCalcMEG(sub_name_all, 'calc');
@@ -313,6 +337,8 @@ time_window = [-.2 4];
 fsample = 250;
 times_idx = fsample*time_window(1)+fsample*abs(times(1)):fsample*time_window(2)+fsample*abs(times(1));
 
+LineCol = [.5 .5 .5];
+LineWidthMark = 1;
 color_plot = [cbrewer2('Reds',1); cbrewer2('Oranges',1)+.07; cbrewer2('Greens',1); cbrewer2('Blues',1)];
 roi_order = [4,1,3,2];
 
@@ -329,13 +355,13 @@ for i = 1:length(roi_order)
     xlabel('Time (s)')
     ylabel('Amplitude (no units)')
 
-
-    line([0 0], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-    line([.8 .8], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-    line([1.6 1.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-    line([2.4 2.4], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-    line([3.2 3.2], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
-    line([3.6 3.6], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
+    
+    line([0 0], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line([t.sign t.sign], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line([t.B t.B], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line([t.equal t.equal], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line([t.C t.C], ylim, 'Color', LineCol, 'LineWidth', LineWidthMark);
+    line([t.Cd t.Cd], ylim, 'Color', [.5 .5 .5], 'LineWidth', 1);
     line(xlim, [0 0], 'Color', [.5 .5 .5], 'LineWidth', 1);
     
     box on
@@ -343,8 +369,6 @@ end
 
 save2pdf([source_result_dir 'roi_addsub_all.pdf'], gcf, 600)
 
-
-addsub_all
 
 
 %% Time-frequency
@@ -978,7 +1002,7 @@ set(gca, 'YTickLabel', [.4]);
 set(gca, 'FontSize', 18);
 ylabel('Train times (s)')
 xlabel('Test times (s)')
-colormap(cbrewer2('Greens'))
+colormap(cbrewer2('Purples'))
 colorbar('Location', 'northoutside')
 
 % Plot diagonal 
@@ -987,19 +1011,18 @@ res.chance = .5;
 res.data = diag_data;
 res.times_plot = 0:0.008:.708;
 res.sig_plot = diag_p_vals'<0.05;
-mvpaPlot(res, 'diag_cross_cond', cdcol.emeraldgreen, [0 .7], [.47 .6], 'cross_cond');
+mvpaPlot(res, 'diag_cross_cond', cdcol.lilac, [0 .7], [.47 .6], 'cross_cond');
 set(gca,'XColor','k')
 set(gca, 'XTickLabel', [0 .4])
 set(gca,'FontSize',18) % stretch its width and height
 save2pdf([dec_res_dir_group 'decoding_addsub_operand1_ERPCov_gat_diag.pdf'], gcf, 600)
 
 
-
 % Boxplots riemann
 riemann_dec = {'addsub_riemann_op1_riemann', 'addsub_riemann_op2_riemann'};
 colors_plot = viridis(7);
 load('cdcol.mat')
-colors_plot = [cdcol.ultramarine; cdcol.emeraldgreen];
+colors_plot = [cdcol.ultramarine; cdcol.lilac];
 
 figureDim = [0 0 .6 .6];
 figure('units','normalized','outerposition',figureDim)
