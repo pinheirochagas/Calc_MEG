@@ -12,8 +12,7 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10',
 
 #subjects = ['s03']
 
-conditions = [['addsub', 'op1'], ['addsub', 'op2'], ['op1', 'addsub'], ['op2', 'addsub']]
-
+conditions = [['addsub', 'op2_0'], ['addsub', 'op2_1'], ['addsub', 'op2_2'], ['addsub', 'op2_3']]
 
 baselinecorr = 'nobaseline'
 dec_method = 'logreg'  # reg logreg class
