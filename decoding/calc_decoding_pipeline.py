@@ -16,7 +16,7 @@ subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11'
 subjects = ['s02']
 
 # Basic parameters
-conditions = [['addsub', 'op1']]
+conditions = [['addsub', 'op2_0']]
 baselinecorr = 'nobaseline'
 dec_method = 'logreg' # class reg logreg classGeneral
 dec_scorer = 'accuracy' # accuracy or kendall_score
@@ -34,7 +34,7 @@ for s, subject in enumerate(subjects):
     calcDecoding(params, dec_method, dec_scorer, gatordiag)     # or calcDecoding(params, dec_method, dec_scorer, gatordiag)
 
 
-## Save trialinfo pres - isso é uma gambiarra. Tenho que achar a maneira correta de salvar trialinfo para cada sujeito e deixar no output do classifier.
+# Save trialinfo pres  isso e uma gambiarra. Tenho que achar a maneira correta de salvar trialinfo para cada sujeito e deixar no output do classifier.
 for s, subject in enumerate(subjects):
     params = prepDataDecoding(dirs, conditions[0][0], conditions[0][1], subject, baselinecorr, decimate)
     fname = dirs['result'] + '/group_results/' + conditions[0][0] + '_' + conditions[0][1] + '/' + subject + '_' + conditions[0][0] + '_' + conditions[0][1] + '_trialinfo.csv'
@@ -50,7 +50,7 @@ for s, subject in enumerate(subjects):
     results.loc[s] = result['Accuracy'][0]
 
 
-prepDataDecTFA(train_set, test_set, subject):
+#prepDataDecTFA(train_set, test_set, subject):
 
 
 
