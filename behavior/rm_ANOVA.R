@@ -4,6 +4,7 @@ rm(list=ls())
 ### PACKAGES ###
 library(ez)
 library(ggplot2)
+library(doBy)
 
 
 ### INPUT DIRECTORY ###
@@ -15,7 +16,10 @@ beh_data <- read.csv("behavior_anova_rm.csv",header=T, sep=",", fill=T)
 beh_data <- beh_data[beh_data$absDeviant>0,c(1,2,5)]
 beh_data$absDeviant <- as.factor(beh_data$absDeviant)
 beh_data$subject <- as.factor(beh_data$subject)
-beh_data$correctness <- as.factor(beh_data$correctness)
+
+table_correctness <- read.csv("table_correctness.csv",header=T, sep=",", fill=T)
+table_correctness$correctness <- as.factor(table_correctness$correctness)	
+table_correctness$subject <- as.factor(table_correctness$subject)	
 
 table_operand1 <- read.csv("table_operand1.csv",header=T, sep=",", fill=T)
 table_operand2 <- read.csv("table_operand2.csv",header=T, sep=",", fill=T)
@@ -40,39 +44,52 @@ beh_data[1:12,]
 ### Run repeated measures ANOVA
 ANOVA_deviant <- ezANOVA(data = beh_data, dv = .(RT), wid = .(subject),  within = .(absDeviant), type = 3, detailed = TRUE)
 
-ANOVA_deviant_2 <- summary(aov(RT ~ absDeviant + Error(subject/absDeviant), data=beh_data))
+ANOVA_correctness <- ezANOVA(data = table_correctness, dv = .(RT), wid = .(subject),  within = .(correctness), type = 3, detailed = TRUE)
+summaryBy
+
+summaryBy(RT~correctness, data=table_correctness, FUN=c(mean,var), na.rm=TRUE, use="pair")  
 
 
 
-ANOVA_correctness <- ezANOVA(data = beh_data, dv = .(RT), wid = .(subject),  within = .(absDeviant,correctness), type = 3, detailed = TRUE)
+### Problem-size effect
+fit <- summary(lm(RT ~ operand2, data= table_operand2))
+fit <- summary(lm(RT ~ operand1, data= table_operand1))
 
-
-
-ANOVA_deviant_2 <- summary(aov(RT ~ absDeviant * parity + Error(subject/(absDeviant+ parity)), data=beh_data))
-
-
-rank * trial + Error(subj/(rank+trial))
-
-
-### ANOVA operand 1
+# Anova got significant for op2....
 ANOVA_operand1 <- ezANOVA(data = table_operand1_sep_op, dv = .(RT), wid = .(subject),  within = .(operand1,operation), type = 3, detailed = TRUE)
 
 ANOVA_operand2 <- ezANOVA(data = table_operand2_sep_op, dv = .(RT), wid = .(subject),  within = .(operand2,operation), type = 3, detailed = TRUE)
 
 ANOVA_operation <- ezANOVA(data = table_operation, dv = .(RT), wid = .(subject),  within = .(operation), type = 3, detailed = TRUE)
 
-table_operation
-
-
-
 # Basic box plot
-p <- ggplot(table_operand2_sep_op, aes(x=operand2, y=RT)) + geom_boxplot()
+p <- ggplot(table_correctness, aes(x=operand2, y=RT)) + geom_boxplot()
 p
 
-table_operand2_sep_op$operand2 - as.numeric(table_operand2_sep_op$operand2)
-fit <- summary(lm(RT ~ operand2, data= table_operand2))
-fit <- summary(lm(RT ~ operand1, data= table_operand1))
 
+### Decoding 
+table_op1_op2_0_400 <- read.csv("table_op1_op2_0-400.csv",header=T, sep=",", fill=T)
+table_op1_op2_0_400$operands <- as.factor(table_op1_op2_0_400$operands)
+table_op1_op2_0_400$subjects <- as.factor(table_op1_op2_0_400$subjects)
+
+table_op1_op2_400_800 <- read.csv("table_op1_op2_400-800.csv",header=T, sep=",", fill=T)
+table_op1_op2_400_800$operands <- as.factor(table_op1_op2_400_800$operands)
+table_op1_op2_400_800$subjects <- as.factor(table_op1_op2_400_800$subjects)
+
+table_op1_op2123_0_400 <- read.csv("table_op1_op2123_0-400.csv",header=T, sep=",", fill=T)
+table_op1_op2123_0_400$operands <- as.factor(table_op1_op2123_0_400$operands)
+table_op1_op2123_0_400$subjects <- as.factor(table_op1_op2123_0_400$subjects)
+
+table_op1_op2123_400_800 <- read.csv("table_op1_op2123_400-800.csv",header=T, sep=",", fill=T)
+table_op1_op2123_400_800$operands <- as.factor(table_op1_op2123_400_800$operands)
+table_op1_op2123_400_800$subjects <- as.factor(table_op1_op2123_400_800$subjects)
+
+
+
+
+ANOVA_op1_op2 <- ezANOVA(data = table_op1_op2123_0_400, dv = .(score), wid = .(subjects),  within = .(operands), type = 3, detailed = TRUE)
+
+summaryBy(score~operands, data=table_op1_op2_0_400, FUN=c(mean,var), na.rm=TRUE, use="pair")  
 
 
 
