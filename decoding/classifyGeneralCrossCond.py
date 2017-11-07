@@ -68,7 +68,7 @@ def classifyGeneralCrossCond(X_train, X_test, y_train, y_test):
 
     # Test model
     print('scoring independent test set')
-    preds_test = np.zeros((X_train.shape[0], len(clfs)))
+    preds_test = np.zeros((X_test.shape[0], len(clfs)))
 
     for jj, clf in enumerate(clfs):
         clfs[clf].fit(X_train, y_train)

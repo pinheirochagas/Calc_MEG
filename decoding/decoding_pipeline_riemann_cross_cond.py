@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 subjects = ['s02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11', 's12', 's13', 's14', 's15', 's16', 's17', 's18', 's19', 's21', 's22']
 
 # Basic parameters
-conditions = [['addsub_riemann', 'op2_riemann']]  # addsub_riemann op2_riemann op1_riemann cres_riemann
+conditions = [['addsub_riemann', 'op2_3_riemann']]  # addsub_riemann op2_riemann op1_riemann cres_riemann
 baselinecorr = 'nobaseline'
 dec_method = 'classifyGeneralCrossCond'  # class reg classGeneral
 dec_scorer = 'accuracy'  # accuracy or kendall_score

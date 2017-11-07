@@ -182,6 +182,21 @@ beh_calc = behAnalysisCalcMEG(sub_name_all, 'calc');
 beh_comp = behAnalysisCalcMEG(sub_name_all, 'comp');
 beh_add = behAnalysisCalcMEG(sub_name_all, 'add');
 beh_sub = behAnalysisCalcMEG(sub_name_all, 'sub');
+[trialinfoAll,table_deviant, table_correctness] = behAnalysisCalcMEG(sub_name_all, 'calc');
+[trialinfoAll,table_deviant, table_correctness, table_operand1, table_operand2, table_operation, table_operand1_sep_op, table_operand2_sep_op] = behAnalysisCalcMEG(sub_name_all, 'calc');
+
+
+save([beh_res_dir_group 'behavior_anova_rm.mat'], 'table_deviant', 'trialinfoAll', 'table_correctness')
+
+writetable(table_operand1,[beh_res_dir_group 'table_operand1.csv'])
+writetable(table_operand2,[beh_res_dir_group 'table_operand2.csv'])
+writetable(table_operation,[beh_res_dir_group 'table_operation.csv'])
+writetable(table_operand1_sep_op,[beh_res_dir_group 'table_operand1_sep_op.csv'])
+writetable(table_operand2_sep_op,[beh_res_dir_group 'table_operand2_sep_op.csv'])
+writetable(table_correctness,[beh_res_dir_group 'table_correctness.csv'])
+
+[trialinfoAll,table_deviant, table_correctness, table_operand1, table_operand2, table_operation, table_operand1_sep_op, table_operand2_sep_op] = behAnalysisCalcMEG(sub_name_all, 'calc');
+
 
 % Analyse deviant 
 condition = 'calc';
@@ -208,6 +223,52 @@ avg_deviant_cat_inc = avg_deviant_cat(:,2:end)
 
 parity_same = [[avg_deviant_cat_inc(:,1); avg_deviant_cat_inc(:,3)],[avg_deviant_cat_inc(:,2); avg_deviant_cat_inc(:,4)]]
 a = mes(parity_same(:,1),parity_same(:,2), 'hedgesg')
+
+
+%% Repeated measures anova
+% Load trial info all
+load([beh_res_dir_group 'behavior_anova_rm.mat'], 'trialinfoAll')
+
+% Get average results for each factor
+pred_names = {'operand1', 'operator', 'operand2', 'corrResult','absDeviant', 'RT','correctness'};
+pred_cols = (2,3,4,7,9,10,13};
+
+for i = 1:length(trialinfoAll)
+    bh_ 
+    
+end
+
+
+
+rm = fitrm(table_deviant,'RT~parity','WithinDesign')
+
+table_deviant_inc = table_deviant(table_deviant.correctness == 0,:);
+
+grpstats(table_deviant_all, 'correctness')
+groups
+
+anovan(table_deviant.RT, {table_deviant.parity table_deviant.subject}, 'random', 2)
+
+
+
+anovan(table_deviant_inc.RT, {table_deviant_inc.parity table_deviant_inc.subject}, 'random', 2)
+
+anovan(table_deviant_inc.RT, {table_deviant_inc.absDeviant table_deviant_inc.subject}, 'random', 2)
+
+table_deviant_inc
+
+
+d = table2array(table_deviant_inc)
+d = d(:,5)
+dt = reshape(d,4,20)'
+[efs,F,cdfs,p,eps,dfs,b,y2]=repanova2(dt,4)
+
+
+
+dt = reshape(d,2,40)'
+[efs,F,cdfs,p,eps,dfs,b,y2]=repanova2(dt,4)
+
+
 
 
 %% ERF - to complete
@@ -529,7 +590,7 @@ ft_databrowser(cfg, comp)
 %% Decoding from MNE-Python
 % Load data
 conditions_A = {'op1_op1', 'addsub_addsub', 'op2_op2', 'cres_cres', 'pres_pres', 'choice_choice', 'respside_respside'};
-% conditions_A = {'op1_op1', 'addsub_addsub', 'op2_123_op2_123', 'cres_cres', 'pres_pres', 'choice_choice', 'respside_respside'};
+%conditions_A = {'op1_op1', 'addsub_addsub', 'op2_123_op2_123', 'cres_cres', 'pres_pres', 'choice_choice', 'respside_respside'};
 
 conditions_C = {'resultlock_op1_resultlock_op1', 'resultlock_addsub_resultlock_addsub', 'resultlock_op2_resultlock_op2', 'resultlock_cres_resultlock_cres', ...
                 'resultlock_pres_resultlock_pres', 'resultlock_choice_resultlock_choice', 'resultlock_respside_resultlock_respside'};
@@ -565,10 +626,13 @@ end
 %% Compare decoding accuracies of operand 1 and operand 2
 res.class.a.op1_op1.times
 time_window = [.4, .800];
+time_window = [.0, .400];
+
 onsets = [0, 1.6];
 
 data_op1 = squeeze(res.class.a.op1_op1.all_diagonals)/.25;
 data_op2 = squeeze(res.class.a.op2_123_op2_123.all_diagonals)/.33;
+% data_op2 = squeeze(res.class.a.op2_op2.all_diagonals)/.25;
 
 times_op1 = find(res.class.a.op1_op1.times >= time_window(1)+onsets(1) & res.class.a.op1_op1.times <= time_window(2)+onsets(1));
 times_op2 = find(res.class.a.op1_op1.times >= time_window(1)+onsets(2) & res.class.a.op1_op1.times <= time_window(2)+onsets(2));
@@ -580,6 +644,16 @@ set(gca, 'FontSize', 20)
 line(xlim, [.25 .25], 'Color', [.5 .5 .5], 'LineWidth', 1);
 anova1([mean(data_op1(:,times_op1),2), mean(data_op2(:,times_op2),2)])
 [stats,varargout] = mes1way([mean(data_op1(:,times_op1),2), mean(data_op2(:,times_op2),2)], 'eta2');
+
+% Repeated measures
+subjects = [[1:20]';[1:20]'];
+operands = [repmat(1,20,1);repmat(2,20,1)];
+score = [mean(data_op1(:,times_op1),2);mean(data_op2(:,times_op2),2)];
+
+% THis is a sami automated procedue, that I manually changed each time.
+table_op1_op2123_0_400 = table(subjects,operands,score);
+writetable(table_op1_op2123_0_400,[beh_res_dir_group 'table_op1_op2123_0-400.csv'])
+
 
 
 % Plot time course
@@ -1039,6 +1113,21 @@ line(xlim, [.5 .5], 'Color', [.5 .5 .5], 'LineWidth', 1, 'Parent', all_axes(1));
 [H,P,CI,STATS] = ttest(data_tmp(:,2)-0.5);
 
 save2pdf([dec_res_dir_group 'decoding_addsub_operands_ERPCov_boxplot.pdf'], gcf, 600)
+
+%% AddSub op2 
+colors_plot = viridis(4);
+
+riemann_dec = {'addsub_riemann_op2_0_riemann', 'addsub_riemann_op2_1_riemann', 'addsub_riemann_op2_2_riemann', 'addsub_riemann_op2_3_riemann'};
+for i = 1:length(riemann_dec)
+    data_tmp(:,i) = csvread([dec_res_dir_ind riemann_dec{i} '/' riemann_dec{i} '_results_test_ERPcov.csv'], 1,1);
+end
+prettyBoxPlot(data_tmp, colors_plot,  {'0', '1', '2', '3'}, '', 'Positions', [1,2,3,4])
+ylim([.35 .65])
+axis square
+all_axes = get(gcf,'Children');
+line(xlim, [.5 .5], 'Color', [.5 .5 .5], 'LineWidth', 1, 'Parent', all_axes(1));
+save2pdf([dec_res_dir_group 'decoding_addsub_operand2_separately_ERPCov_boxplot.pdf'], gcf, 600)
+
 
 
 %% Calculate RSA - single or multiple regression

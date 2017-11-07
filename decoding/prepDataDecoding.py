@@ -341,6 +341,46 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': -.2, 'stop': 3.2, 'length': 0.2}
             test_times = train_times
 
+        elif train_set == 'addsub_op2_0':
+            train_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 0)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'addsub_op2_1':
+            train_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 1)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'addsub_op2_2':
+            train_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 2)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
+        elif train_set == 'addsub_op2_3':
+            train_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 3)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = X_train
+            y_test = y_train
+            train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            test_times = train_times
+
         elif train_set == 'op1_len50ms':
             train_index = info_calc['operator'] != 0
             X_train = epoch_calc[train_index]
@@ -1166,6 +1206,77 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             train_times = {'start': 0.7, 'stop': 1.5}
             test_times = {'start': 1.5, 'stop': 3.1}
 
+        # Riemann
+        elif (train_set == 'addsub_riemann') & (test_set == 'op2_0_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            test_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 0)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(.785, 1.485)
+            X_test.crop(1.570, 2.270)
+            # Update params
+            train_times = {'start': .785, 'stop': 1.485}
+            test_times = {'start': 1.570, 'stop': 2.270}
+
+        # Riemann
+        elif (train_set == 'addsub_riemann') & (test_set == 'op2_1_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            test_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 1)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(.785, 1.485)
+            X_test.crop(1.570, 2.270)
+            # Update params
+            train_times = {'start': .785, 'stop': 1.485}
+            test_times = {'start': 1.570, 'stop': 2.270}
+
+        # Riemann
+        elif (train_set == 'addsub_riemann') & (test_set == 'op2_2_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            test_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 2)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(.785, 1.485)
+            X_test.crop(1.570, 2.270)
+            # Update params
+            train_times = {'start': .785, 'stop': 1.485}
+            test_times = {'start': 1.570, 'stop': 2.270}
+
+        # Riemann
+        elif (train_set == 'addsub_riemann') & (test_set == 'op2_3_riemann'):
+            epoch_calc.pick_types(meg='grad')
+            train_index = info_calc['operator'] != 0
+            test_index = (info_calc['operator'] != 0) & (info_calc['operand2'] == 3)
+            X_train = epoch_calc[train_index]
+            y_train = np.array(info_calc[train_index]['operator'])
+            y_train = y_train.astype(np.float64)
+            X_test = epoch_calc[test_index]
+            y_test = np.array(info_calc[test_index]['operator'])
+            y_test = y_test.astype(np.float64)
+            # Cropping
+            X_train.crop(.785, 1.485)
+            X_test.crop(1.570, 2.270)
+            # Update params
+            train_times = {'start': .785, 'stop': 1.485}
+            test_times = {'start': 1.570, 'stop': 2.270}
 
 
 

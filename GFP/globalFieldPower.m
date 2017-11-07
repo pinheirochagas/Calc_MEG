@@ -28,16 +28,16 @@ for subj = 1:length(sub_name_all);
     %% GFP
     data_tmp = data_tl.avg;
 
-    % 1. Square zscores (bring all to positive)
+    % 1. Square data (bring all to positive)
     data_s = zeros(size(data_tmp));
     for ii = 1:size(data_tmp,1)
         data_s(ii,:) = data_tmp(ii,:).^2;
     end
     
-    % 2. Sum the trials
+    % 2. Average trials
     data_mean = mean(data_s,1);
     
-    % 3. Square root of all trails
+    % 3. Square root trails (bring back to the original unit)
     data_gfp = sqrt(data_mean);
     
     % Group subjects
@@ -56,16 +56,3 @@ cfg.keeptrials = 'yes';
 save([GFP_result_dir 'gfp_' chan_name '_' condition '_RMS_baseline.mat'], 'data_grandavg')
 
 end
-
-
-
-%%
-%     if strcmp(zscore_flag, 'zscore')
-%         % 1. Scale GRAD and MAG
-%         data_z = zeros(size(data_tl.avg));
-%         for ii = 1:size(data_tl.avg,1)
-%             data_z(ii,:) = zscore(data_tl.avg(ii,:));
-%         end
-%     else
-%         data_z = data_tl.avg;
-%     end
