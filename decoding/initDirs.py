@@ -11,6 +11,8 @@ mac_address = getnode()
 if mac_address == 119022279803690:
     # MAC with Lacie 4T
     root = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/'
+    root = '/Volumes/NeuroSpin2T/Calc_ECoG/analysis_ECoG/neuralData/SpecData/'
+
 else:
     # NeuroSpin workstation
     root = '/neurospin/meg/meg_tmp/Calculation_Pedro_2014/'

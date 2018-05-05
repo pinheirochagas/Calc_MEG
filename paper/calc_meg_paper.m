@@ -19,6 +19,59 @@ t.tC = t.C - 3.200;
 
 %%  List subjects
 sub_name_all = {'s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s21','s22'};
+sub_name_all = {'s03', 's17'};
+
+%% Check individual subjects data
+
+for i = 1:length(sub_name_all)
+    load([data_dir sub_name_all{i} '_calc_lp30.mat'])
+    operand2 = vertcat(data.trialinfo.operand2)';
+    data.trial = data.trial(operand2 ~= 33); % Exclude comparison trials
+    data_trials = permute(cell2mat(arrayfun(@(x)permute(x{:},[1 3 2]),data.trial,'UniformOutput',false)), [2 1 3]);
+    % check dir
+    dir_sub = [erf_result_dir 'check_erp_all_channels/' sub_name_all{i}];
+    if exist(dir_sub, 'dir')
+    else
+        mkdir(dir_sub)
+    end
+    for ii = 1:size(data_trials,2)
+        % Pick channel
+        trials = squeeze(data_trials(:,ii,:));
+        % Plot
+        figureDim = [0 0 .33 1];
+        figure('units','normalized','outerposition',figureDim)
+        subplot(5,1,1:4)
+        imagesc(data.time{1},[],trials)
+        title(data.label{ii})
+        caxis([prctile(trials(:),1) prctile(trials(:),99)] )
+        colormap((cbrewer2('BuRd')))
+        plotLinesCalc(t)
+        subplot(5,1,5)
+        shadedErrorBar(data.time{1},mean(trials),sem(trials), {'color', [0 0 0], 'LineWidth',1});
+        plotLinesCalc(t)
+        
+        % Save
+        savePNG(gcf,200, [dir_sub '/erp_channel_' data.label{ii} '.png'])
+        close all
+    end
+end
+
+
+cfg = [];
+cfg.layout = 'neuromag306all.lay'; %neuromag306all.lay neuromag306mag
+lay = ft_prepare_layout(cfg);
+
+cfg = [];
+cfg.layout = lay;   % this is the layout structure that you created with ft_prepare_layout
+ft_layoutplot(cfg);
+
+
+
+    ft_layoutplot(cfg)
+    ft_layoutplot(cfg)
+ ft_topoplotER(cfg,data)
+
+
 
 %% Add accuracy to all subjects
 % addAccuracy(sub_name_all) % This also corrects the RT by the visual delay

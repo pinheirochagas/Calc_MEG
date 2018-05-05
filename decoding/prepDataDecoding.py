@@ -236,6 +236,8 @@ def prepDataDecoding(dirs, train_set, test_set, subject, baselinecorr, decimate)
             X_test = X_train
             y_test = y_train
             train_times = {'start': -.2, 'stop': 3.2}  # 'length': 0.05 defonce memory!
+            train_times = {'start': 1.5, 'stop': 2}  # 'length': 0.05 defonce memory!
+
             test_times = train_times
 
         elif train_set == 'op2_add':

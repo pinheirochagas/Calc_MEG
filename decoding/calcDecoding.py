@@ -4,7 +4,7 @@
 
 # Libraries
 import sys
-from GATclassifiers import (calcClassification, calcRegression, calcLogRegression, calcGeneral)
+from GATclassifiers import (calcClassification, calcRegression, calcLogRegression, calcGeneral, calcNeuralNet)
 from initDirs import dirs
 import numpy as np
 import os
@@ -36,6 +36,11 @@ def calcDecoding(params, type, scorer, gatordiag):
         # Define scorer
         print('Decoding regression subject ' + params['subject'])
         y_true, y_pred, score, diagonal = calcGeneral(params['X_train'], params['y_train'], params['X_test'], params['y_test'], scorer, params['mode'], params)
+    elif type == 'neural_net':
+        # Define scorer
+        print('Decoding neural networks subject ' + params['subject'])
+        y_true, y_pred, score, diagonal = calcNeuralNet(params['X_train'], params['y_train'], params['X_test'],
+                                                      params['y_test'], scorer, params['mode'], params)
     print('decoding subject ' + params['subject'] + ' done!')
 
 

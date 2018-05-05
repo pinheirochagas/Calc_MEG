@@ -12,6 +12,8 @@ from sklearn.pipeline import make_pipeline
 #from sklearn.model_selection import StratifiedKFold
 from sklearn.cross_validation import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
+
 
 from sklearn.metrics import roc_auc_score
 from jr.gat.scorers import scorer_auc
@@ -116,7 +118,7 @@ def calcClassification(X_train, y_train, X_test, y_test, scorer, predict_mode, p
     elif scorer is 'accuracy':
         scorer = None
         predict_method = 'predict'
-        model = svm.SVC(C=1, kernel='linear', class_weight='balanced')
+        model = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes = (15,), random_state = 1)
     else:
         print('using accuracy as the scorer')
 
@@ -289,3 +291,74 @@ def calcLogRegression(X_train, y_train, X_test, y_test, scorer, predict_mode, pa
     # fname = dirs['result'] + 'individual_results/GAT'
     # np.save(fname, results)
     # print('GAT saved!')
+
+def calcNeuralNet(X_train, y_train, X_test, y_test, scorer, predict_mode, params):
+    " Multiclass classification within or across conditions "
+
+    # Learning machinery
+
+    # Initialize output variable
+    score = []
+
+    # Cross-validation
+    # cv = StratifiedKFold(y_train, 5)
+    cv = StratifiedKFold(y_train, 8)
+    #cv = StratifiedKFold(n_splits=8, random_state=0, shuffle=True)
+
+    # Scaler
+    scaler = StandardScaler()
+
+    # Model
+    # Define scorer
+    if scorer is 'scorer_auc':
+        scorer = 'roc_auc'
+        predict_method = 'predict_proba'
+        model = svm.SVC(C=1, kernel='linear', class_weight='balanced', probability='True')
+    elif scorer is 'accuracy':
+        scorer = None
+        predict_method = 'predict'
+        model = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes = (3,), random_state = 1)
+    else:
+        print('using accuracy as the scorer')
+
+    # model = svm.SVC(C=1, kernel='linear', probability='True', class_weight='balanced', decision_function_shape='ovo')
+    # probability='true' probably comes with pred label and probability
+
+    # Feature selection - HAVE TO DECIDE ON THAT!
+    # fs = SelectKBest(f_classif, k=153)
+
+
+    # Pipeline
+    clf = make_pipeline(scaler, model)
+
+
+    # clf = make_pipeline(fs, scaler, model)
+
+    # Learning process
+    gat = GeneralizationAcrossTime(clf=clf, cv=cv, train_times=params['train_times'], test_times=params['test_times'],
+                                   scorer=scorer, predict_mode=predict_mode, predict_method=predict_method, n_jobs=6)
+
+
+    # Determine whether to generalize only across time or also across conditions
+    if predict_mode == 'cross-validation':
+        print('fitting')
+        gat.fit(X_train, y=y_train)
+        print('done fitting')
+        print('scoring')
+        gat.score(X_train, y=y_train)
+        print('done scoring')
+    elif predict_mode == 'mean-prediction':
+        print('fitting')
+        gat.fit(X_train, y=y_train)
+        print('done fitting')
+        print('scoring')
+        gat.score(X_test, y=y_test)
+        print('done scoring')
+
+    # Organize and save
+    score = np.array(gat.scores_)
+    diagonal = np.diagonal(score)
+    y_pred = np.array(gat.y_pred_)
+    y_true = np.array(gat.y_true_)
+
+    return y_true, y_pred, score, diagonal

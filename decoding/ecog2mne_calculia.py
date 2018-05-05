@@ -47,7 +47,9 @@ def ecog2mne_calculia(filename, var, experiment):
 
     #Recover trialinfo
     matinfo = sio.loadmat(filename)
-    trialinfo = matinfo['data']['trialinfo']  
+    trialinfo = matinfo['data']['trialinfo']
+
+    run = np.expand_dims(ft_data.trialinfo.block, axis=0).T
 
     if experiment == 'context':
         run = trialinfo[0][0][0][0][0].T
