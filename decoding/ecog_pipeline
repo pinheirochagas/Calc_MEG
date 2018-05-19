@@ -17,7 +17,16 @@ from sklearn.cluster import KMeans
 from sklearn import metrics
 from sklearn.datasets.samples_generator import make_blobs
 
+from sklearn.preprocessing import StandardScaler
+
 import scipy.io as sio
+
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.neighbors import kneighbors_graph
+import time
+from sklearn import decomposition
+from mpl_toolkits.mplot3d import Axes3D
+
 
 
 ## Import data
@@ -26,22 +35,37 @@ sub_ID = ['S12_32_JTb','S12_38_LK','S12_42_NC','S13_47_JT2','S13_53_KS2','S13_57
 
 all_data = []
 for i in range(len(sub_ID)):
+    print('processing subject' + str(i))
     fname = dirs['root'] + sub_ID[i] + '/data_fieldtrip/' + sub_ID[i] + '_mmr_avg.mat'  # make this dynamic
     data_tmp = ecog2python(fname, 'data')
 
-    # Normalize each channel : devide by the norm separatly
-    #for i in range(data_tmp.shape[0]):
-        #data_tmp[i] /= np.linalg.norm(data_tmp[i])
+    # # Normalize each channel : devide by the norm separatly
+    for i in range(data_tmp.shape[0]):
+        data_tmp[i] /= np.linalg.norm(data_tmp[i])
     all_data.append(data_tmp)
 
 data = np.concatenate(all_data, 0)
 
+
+# data_smooth = np.empty((data.shape[0], data.shape[1] // 10))
+# for i in range(data.shape[0]):
+#     for j in range(data.shape[1] // 10):
+#         data_smooth[i, j] = data[i, j * 10:(j+1)*10].mean()
+
+plt.plot(data_smooth.T)
+plt.show()
+
+
+data_s = StandardScaler().fit_transform(data)
+
 # Vizualize
-#plt.plot(data.T)
-#plt.show()
+# plt.plot(data_s.T)
+# plt.show()
 
 
-af = AffinityPropagation().fit(data)
+
+
+af = AffinityPropagation(damping=0.9, max_iter=500).fit(data)
 #af = KMeans(n_clusters=10).fit(data)
 
 cluster_centers_indices = af.cluster_centers_indices_
@@ -49,14 +73,27 @@ labels = af.labels_
 n_clusters_ = len(cluster_centers_indices)
 
 for i in range(n_clusters_):
-    plt.plot(data[labels==i].T)
-    fname = dirs['root'] + 'cluster/' + 'cluster' + str(i) + 'no_norm.png'
+    plt.plot(data_smooth[labels==i].T)
+    fname = dirs['root'] + 'cluster/' + 'cluster' + str(i) + 'smooth.png'
     plt.savefig(fname)
     plt.close('all')
 
-fname_labels = dirs['root'] + 'cluster/' + 'cluster_labels.mat'
-fname_data = dirs['root'] + 'cluster/' + 'data.mat'
+fname_labels = dirs['root'] + 'cluster/' + 'cluster_labels_smooth.mat'
+fname_data = dirs['root'] + 'cluster/' + 'data_smooth.mat'
 
 sio.savemat(fname_labels, {'labels':labels})
 sio.savemat(fname_data, {'data':data})
 
+
+
+# PCA data to vizualize clusters
+X = data
+X_trans = decomposition.PCA(n_components=3).fit_transform(X)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+ax.scatter(X_trans[:, 0], X_trans[:, 1], X_trans[:, 2], c=labels,
+            cmap=plt.cm.spectral)
+plt.show()
+fname = dirs['root'] + 'cluster/' + 'cluster' + str(i) + 'scatter_3D.png'
+plt.savefig(fname)
