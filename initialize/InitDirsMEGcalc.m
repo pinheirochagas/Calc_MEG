@@ -4,7 +4,7 @@ comp = computer;
 
 % MAC + Hard Drive
 if strcmp(comp, 'MACI64') == 1
-    data_root_dir = '/Volumes/NeuroSpin4T/Calculation_Pedro_2014/';
+    data_root_dir = '/Volumes/NeuroSpin2T/Calculation_Pedro_2014/';
     cosmo_mvpa_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Methods/CoSMoMVPA/mvpa';
 % Linux
 elseif strcmp(comp, 'GLNXA64') == 1

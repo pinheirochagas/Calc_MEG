@@ -7,7 +7,7 @@ if strcmp(comp, 'MACI64') == 1
     % Paths
     scripts_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/scripts_git/Calc_MEG/';
     addpath(genpath(scripts_dir))
-    fieldtrip_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/fieldtrips/fieldtrip_testedversion/';   
+    fieldtrip_dir = '/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/fieldtrips/fieldtrip_lite/';   
     addpath(fieldtrip_dir)
     ft_defaults;
     addpath(genpath('/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calculia/scripts/Calc_ECoG/PedroMatlabCustom/'))

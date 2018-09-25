@@ -7,6 +7,7 @@ import numpy as np
 #from calc_classification import calc_classification
 import mne
 from scipy.stats import itemfreq
+import scipy
 import random
 import matplotlib.pyplot as plt
 from initDirs import dirs
