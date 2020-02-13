@@ -1,0 +1,67 @@
+    
+VSA MEG  
+	
+	Cues  
+	1 = 'left arrow'
+	2 = 'right arrow'
+
+	Targets
+	10 = 'left T'
+	11 = 'right T'
+	12 = 'left L'
+	13 = 'right L'
+
+	answ 1: Right = T; Left = L
+	answ 2: Right = L; Left = T
+
+
+CALC MEG 
+	
+	1 Event
+	4 = '3'
+	5 = '4'
+	6 = '5'
+	7 = '6'
+
+	2 Event
+	51 = '-'
+	53 = '+'
+	54 = '='
+	
+	3 Event 
+	21 = '0'
+	22 = '1'
+	23 = '2'
+	24 = '3'
+	54 = '='
+
+	4 event
+	55 = '='
+
+	5 Event NO Delay
+	31 = '0' 
+	32 = '1'
+	33 = '2'
+	34 = '3'
+	35 = '4'
+	36 = '5'
+	37 = '6'
+	38 = '7'
+	39 = '8'
+	40 = '9'
+
+
+	5 Event Delay
+	41 = '0' 
+	42 = '1'
+	43 = '2'
+	44 = '3'
+	45 = '4'
+	46 = '5'
+	47 = '6'
+	48 = '7'
+	49 = '8'
+	50 = '9'
+
+	answ 1: Right = TRUE; Left = FALSE
+	answ 2: Right = FALSE; Left = FALSE

@@ -1,0 +1,1078 @@
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/08_12_2014_meg-room/results/VSA/benoit/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')#
+#
+data <- rbind(data1, data2, data3, data4)#
+#
+data <- data[data$response!=99,]#
+data$response <- toupper(data$response)#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/08_12_2014_meg-room/stimuli/VSA/benoit/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency
+congruency
+data
+data$delay <- runs$Delay#
+#
+data <- data[data$delay!=1,]#
+data$congruency <- as.factor(data$congruency)#
+data_correct <- data[data$myEvent == data$response,]#
+#
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data_correct[data_correct$congruency ==0,5]#
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))
+mean_plot$congruency <- c('Valid', 'Invalid')
+mean_plot
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))#
+plot_data + geom_bar(position='dodge', stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("dodgerblue3", "orange")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4), position = position_dodge(width=0.5)))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data + geom_bar(position=position = position_dodge(width=0.5)), stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("dodgerblue3", "orange")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data + geom_bar(position = position_dodge(width=0.5)), stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("dodgerblue3", "orange")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data + geom_bar(position=position = position_dodge(width=0.5)
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data + geom_bar(position = position_dodge(width=0.5), stat='identity')
+plot_data + geom_bar(position = position_dodge(width=0.1), stat='identity')
+plot_data + geom_bar(position = position_dodge(width=1), stat='identity')
+plot_data + geom_bar(position = position_dodge(width=10), stat='identity')
+plot_data + geom_bar(position = position_dodge(width=0), stat='identity')
+plot_data + geom_bar(position = position_dodge(width=100), stat='identity')
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data + geom_bar(position ='identity' , stat='identity')
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data + geom_bar(position ='fill' , stat='identity')
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.4))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.3))
+plot_data + geom_bar(position ='identity' , stat='identity')
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.10))
+plot_data + geom_bar(position ='identity' , stat='identity')
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.8))
+plot_data + geom_bar(position ='identity' , stat='identity')
++ geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("dodgerblue3", "orange")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.8))#
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("dodgerblue3", "orange")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.8))#
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.7))#
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 1000, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.6))#
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(breaks=seq(0, 1000, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.6))
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + ylim(0,100) + scale_y_continuous(breaks=seq(0, 1000, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.6))
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,1000),breaks=seq(0, 1000, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.6))#
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,800),breaks=seq(0, 800, 50))
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5))#
+plot_data + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,800),breaks=seq(0, 800, 50))
+ggsave(file="plot_data.eps", plot= plot_data, width=3, height=3 )
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,800),breaks=seq(0, 800, 50))
+ggsave(file="plot_data.eps", plot= plot_data, width=3, height=3 )
+ggsave(file="plot_data.eps", plot= plot_data, width=6, height=6 )
+factor_cond <- c('space-space', 'time-time','space-time','time-space')
+factor_cond
+factor_cond <- data.frame(c('space-space', 'time-time','space-time','time-space'))
+factor_cond
+colnames(factor_cond) <- 'cond'
+factor_cond
+factor_cond$cond <- as.factor(factor_cond)
+factor_cond$cond <- as.factor(factor_cond$cond)
+factor_cond
+factor_cond$cond
+levels(factor_cond$cond)
+levels(factor_cond$cond == "space-space")
+levels(factor_cond$cond) == "space-space"
+levels(factor_cond$cond) == "space-space" <- 'pedro'
+factor_cond$cond(levels(factor_cond$cond) == "space-space") <- 'pedro'
+factor_cond$cond(levels(factor_cond$cond) == "space-space") <- 'pedro'
+length(data)
+data <- data_correct
+data
+dim(data)[1]
+RTdata <- as.matrix(data$rt)
+RTdata
+RTdata_b <- c()
+RTdata_trimmed <- c()
+datatrimming_factor = 3
+while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+RTdata_trimmed[i] <- RTdata_b#
+}
+while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}
+RTdata_b
+RTdata_b
+RTdata
+data$rt
+as.matrix(data$rt)
+is.nan(RTdata_b)
+RTdata_b
+is.nan(RTdata_b)
+is.na(RTdata_b)
+RTdata(is.na(RTdata_b))
+RTdata
+RTdata[is.na(RTdata_b)]
+RTdata[is.na(RTdata_b)==TRUE]
+is.na(RTdata_b)
+RTdata
+RTdata <- as.matrix(data$rt)
+RTdata
+RTdata[is.na(RTdata_b)]
+RTdata[!is.na(RTdata_b)]
+data[!is.na(RTdata_b),]
+by(data$rt, data$congruency, mean)
+data <- data[!is.na(RTdata_b),]
+by(data$rt, data$congruency, mean)
+by(data$rt, data$congruency, sd)
+rt_congruent <- data_correct[data_correct$congruency ==0,5]
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,800),breaks=seq(0, 800, 50))
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/08_12_2014_meg-room/results/VSA/benoit/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')#
+#
+data <- rbind(data1, data2, data3, data4)#
+#
+data <- data[data$response!=99,]#
+data$response <- toupper(data$response)#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/08_12_2014_meg-room/stimuli/VSA/benoit/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency#
+#
+data$delay <- runs$Delay#
+#
+data <- data[data$delay!=1,]#
+data$congruency <- as.factor(data$congruency)#
+#
+data_correct <- data[data$myEvent == data$response,]
+data <- data_correct
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}
+data$RTdata_b <- RTdata_b
+data
+data <- data[!is.na(RTdata_b),]
+by(data$rt, data$congruency, mean)
+boxplot(data$rt ~ data$congruency)
+rt_congruent <- data_correct[data_correct$congruency ==0,5]
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]
+rt_congruent
+rt_incongruent
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,800),breaks=seq(0, 800, 50))
+plot_data
+data
+by(data$rt, data$congruency, mean)
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))
+mean_plot
+data
+data$rt
+plot(data$rt)
+plot(data_correct$rt)
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,800),breaks=seq(0, 800, 50)) #
+#
+ggsave(file="plot_data_benoit.eps", plot= plot_data, width=6, height=6	 )
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50))
+plot_data
+ggsave(file="plot_data_benoit.eps", plot= plot_data, width=6, height=6	 )
+library(reshape)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin"#
+setwd(path)#
+#
+ntrials = 300#
+mean_trial_dur <- ((24+32+120+12)*16.777)/1000 # mean trial duration #
+(mean_trial_dur*300)/60#
+#
+pcinc = 0.15#
+pccon = 0.85#
+#
+incongruent <- ntrials*pcinc#
+congruent <- ntrials*pccon#
+ntrials_blocks <- ntrials/2 #
+#
+rml = 20 # rep of minimal list#
+rfl = ntrials_blocks%/%(rml*2) # rep of full list#
+rflr = ntrials_blocks%%(rml*2) # rest to be added#
+#
+rfllet = ntrials_blocks%/%rml # rep of full list#
+rflrlet = ntrials_blocks%%rml # rest to be added#
+#
+# Runs 1 and 2#
+Cue <- rep(c(rep('DodgerBlue', rml), rep('Orange', rml)))#
+Position <- c(rep(-6, rml*pccon), rep(6,rml*pcinc), rep(6,rml*pccon), rep(-6,rml*pcinc))#
+Congruency <- c(rep(0,rml*pccon), rep(1,rml*pcinc), rep(0,rml*pccon), rep(1,rml*pcinc))#
+#
+Cue <- c(rep(Cue,rfl),Cue[1:rflr])#
+Position <- c(rep(Position,rfl), Position[1:rflr])#
+Congruency <- c(rep(Congruency,rfl), Congruency[1:rflr])#
+#
+Letter <- c()#
+for(i in 1:rfllet){#
+Letter[[i]] <- c(rep(c('T', 'T'),8),sample(c('T', 'T', 'T', 'T')))#
+# Letter[[i]] <- c(rep(c('T', 'L'),8),sample(c('T', 'T', 'L', 'L')))#
+}#
+Letter <- melt.list(Letter)#
+Letter <- c(as.character(Letter$value), rep(c('T', 'T'), rflrlet/2))#
+# Letter <- c(as.character(Letter$value), rep(c('T', 'L'), rflrlet/2))#
+#
+Delay <- c(round(runif(ntrials_blocks*.9, 24, 48)),rep(1, ntrials_blocks -ntrials_blocks*.9))#
+#
+VSA_df <- data.frame(Cue, Letter, Position,Delay, Congruency)#
+as.factor(VSA_df$Congruency)#
+#
+VSA_shuffle <- VSA_df[sample(nrow(VSA_df)),]#
+#
+VSA_run1 <- VSA_shuffle[1:75,]#
+VSA_run2 <- VSA_shuffle[76:150,]#
+write.csv(VSA_run1, 'run1.csv',row.names = FALSE)#
+write.csv(VSA_run2, 'run2.csv',row.names = FALSE)#
+#
+# Runs 3 and 4#
+#
+Position <- c(rep(6, rml*pccon), rep(-6,rml*pcinc), rep(-6,rml*pccon), rep(6,rml*pcinc))#
+Position <- c(rep(Position,rfl), Position[1:rflr])#
+#
+Delay <- c(round(runif(ntrials_blocks*.9, 24, 48)),rep(1, ntrials_blocks -ntrials_blocks*.9))#
+#
+VSA_df <- data.frame(Cue, Letter, Position,Delay, Congruency)#
+as.factor(VSA_df$Congruency)#
+#
+VSA_shuffle <- VSA_df[sample(nrow(VSA_df)),]#
+#
+VSA_run3 <- VSA_shuffle[1:75,]#
+VSA_run4 <- VSA_shuffle[76:150,]#
+write.csv(VSA_run3, 'run3.csv',row.names = FALSE)#
+write.csv(VSA_run4, 'run4.csv',row.names = FALSE)#
+VSA_run1_scon <- summary(VSA_run1[VSA_run3$Congruency == 0,])#
+VSA_run2_scon <- summary(VSA_run2[VSA_run3$Congruency == 0,])#
+VSA_run3_scon <- summary(VSA_run3[VSA_run3$Congruency == 0,])#
+VSA_run4_scon <- summary(VSA_run4[VSA_run3$Congruency == 0,])#
+#
+VSA_run1_sicon <- summary(VSA_run1[VSA_run3$Congruency == 1,])#
+VSA_run2_sicon <- summary(VSA_run2[VSA_run3$Congruency == 1,])#
+VSA_run3_sicon <- summary(VSA_run3[VSA_run3$Congruency == 1,])#
+VSA_run4_sicon <- summary(VSA_run4[VSA_run3$Congruency == 1,])
+library(reshape)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin"#
+setwd(path)#
+#
+ntrials = 300#
+mean_trial_dur <- ((24+32+120+12)*16.777)/1000 # mean trial duration #
+(mean_trial_dur*300)/60#
+#
+pcinc = 0.15#
+pccon = 0.85#
+#
+incongruent <- ntrials*pcinc#
+congruent <- ntrials*pccon#
+ntrials_blocks <- ntrials/2 #
+#
+rml = 20 # rep of minimal list#
+rfl = ntrials_blocks%/%(rml*2) # rep of full list#
+rflr = ntrials_blocks%%(rml*2) # rest to be added#
+#
+rfllet = ntrials_blocks%/%rml # rep of full list#
+rflrlet = ntrials_blocks%%rml # rest to be added#
+#
+# Runs 1 and 2#
+Cue <- rep(c(rep('DodgerBlue', rml), rep('Orange', rml)))#
+Position <- c(rep(-6, rml*pccon), rep(6,rml*pcinc), rep(6,rml*pccon), rep(-6,rml*pcinc))#
+Congruency <- c(rep(0,rml*pccon), rep(1,rml*pcinc), rep(0,rml*pccon), rep(1,rml*pcinc))#
+#
+Cue <- c(rep(Cue,rfl),Cue[1:rflr])#
+Position <- c(rep(Position,rfl), Position[1:rflr])#
+Congruency <- c(rep(Congruency,rfl), Congruency[1:rflr])#
+#
+Letter <- c()#
+for(i in 1:rfllet){#
+Letter[[i]] <- c(rep(c('T', 'T'),8),sample(c('T', 'T', 'T', 'T')))#
+# Letter[[i]] <- c(rep(c('T', 'L'),8),sample(c('T', 'T', 'L', 'L')))#
+}#
+Letter <- melt.list(Letter)#
+Letter <- c(as.character(Letter$value), rep(c('T', 'T'), rflrlet/2))#
+# Letter <- c(as.character(Letter$value), rep(c('T', 'L'), rflrlet/2))#
+#
+Delay <- c(round(runif(ntrials_blocks*.9, 24, 48)),rep(1, ntrials_blocks -ntrials_blocks*.9))#
+#
+VSA_df <- data.frame(Cue, Letter, Position,Delay, Congruency)#
+as.factor(VSA_df$Congruency)#
+#
+VSA_shuffle <- VSA_df[sample(nrow(VSA_df)),]#
+#
+VSA_run1 <- VSA_shuffle[1:75,]#
+VSA_run2 <- VSA_shuffle[76:150,]#
+write.csv(VSA_run1, 'run1.csv',row.names = FALSE)#
+write.csv(VSA_run2, 'run2.csv',row.names = FALSE)#
+#
+# Runs 3 and 4#
+#
+Position <- c(rep(6, rml*pccon), rep(-6,rml*pcinc), rep(-6,rml*pccon), rep(6,rml*pcinc))#
+Position <- c(rep(Position,rfl), Position[1:rflr])#
+#
+Delay <- c(round(runif(ntrials_blocks*.9, 24, 48)),rep(1, ntrials_blocks -ntrials_blocks*.9))#
+#
+VSA_df <- data.frame(Cue, Letter, Position,Delay, Congruency)#
+as.factor(VSA_df$Congruency)#
+#
+VSA_shuffle <- VSA_df[sample(nrow(VSA_df)),]#
+#
+VSA_run3 <- VSA_shuffle[1:75,]#
+VSA_run4 <- VSA_shuffle[76:150,]#
+write.csv(VSA_run3, 'run3.csv',row.names = FALSE)#
+write.csv(VSA_run4, 'run4.csv',row.names = FALSE)#
+VSA_run1_scon <- summary(VSA_run1[VSA_run3$Congruency == 0,])#
+VSA_run2_scon <- summary(VSA_run2[VSA_run3$Congruency == 0,])#
+VSA_run3_scon <- summary(VSA_run3[VSA_run3$Congruency == 0,])#
+VSA_run4_scon <- summary(VSA_run4[VSA_run3$Congruency == 0,])#
+#
+VSA_run1_sicon <- summary(VSA_run1[VSA_run3$Congruency == 1,])#
+VSA_run2_sicon <- summary(VSA_run2[VSA_run3$Congruency == 1,])#
+VSA_run3_sicon <- summary(VSA_run3[VSA_run3$Congruency == 1,])#
+VSA_run4_sicon <- summary(VSA_run4[VSA_run3$Congruency == 1,])
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/08_12_2014_meg-room/results/VSA/karin/"#
+setwd(path)
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/results/VSA/karin/"
+setwd(path)
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')
+data <- rbind(data1, data2, data3, data4)
+data
+data <- data[data$response!=99,]
+data
+data$response <- toupper(data$response)
+data
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin/"
+setwd(path)
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')
+runs = rbind(run1, run2, run3, run4)
+data$congruency <- runs$Congruency
+data$delay <- runs$Delay
+data
+head(data)
+names(runs)
+data$position <- runs$Position
+data
+data_correct <- data[data$response == data$position,]
+data_correct
+dim(data_correct)
+dim(data)
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3#
+#
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}#
+data$RTdata_b <- RTdata_b
+data <- data[!is.na(RTdata_b),]
+boxplot(data$rt ~ data$congruency)
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data_correct[data_correct$congruency ==0,5]#
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50))
+plot_data
+data_correct
+dim(data_correct)
+dim(data_)
+dim(data)
+ggsave(file="plot_data_karin.eps", plot= plot_data, width=6, height=6	 )
+library(reshape)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/noa"#
+setwd(path)#
+#
+ntrials = 300#
+mean_trial_dur <- ((24+32+120+12)*16.777)/1000 # mean trial duration #
+(mean_trial_dur*300)/60#
+#
+pcinc = 0.15#
+pccon = 0.85#
+#
+incongruent <- ntrials*pcinc#
+congruent <- ntrials*pccon#
+ntrials_blocks <- ntrials/2 #
+#
+rml = 20 # rep of minimal list#
+rfl = ntrials_blocks%/%(rml*2) # rep of full list#
+rflr = ntrials_blocks%%(rml*2) # rest to be added#
+#
+rfllet = ntrials_blocks%/%rml # rep of full list#
+rflrlet = ntrials_blocks%%rml # rest to be added#
+#
+# Runs 1 and 2#
+Cue <- rep(c(rep('DodgerBlue', rml), rep('Orange', rml)))#
+Position <- c(rep(-6, rml*pccon), rep(6,rml*pcinc), rep(6,rml*pccon), rep(-6,rml*pcinc))#
+Congruency <- c(rep(0,rml*pccon), rep(1,rml*pcinc), rep(0,rml*pccon), rep(1,rml*pcinc))#
+#
+Cue <- c(rep(Cue,rfl),Cue[1:rflr])#
+Position <- c(rep(Position,rfl), Position[1:rflr])#
+Congruency <- c(rep(Congruency,rfl), Congruency[1:rflr])#
+#
+Letter <- c()#
+for(i in 1:rfllet){#
+Letter[[i]] <- c(rep(c('T', 'T'),8),sample(c('T', 'T', 'T', 'T')))#
+# Letter[[i]] <- c(rep(c('T', 'L'),8),sample(c('T', 'T', 'L', 'L')))#
+}#
+Letter <- melt.list(Letter)#
+Letter <- c(as.character(Letter$value), rep(c('T', 'T'), rflrlet/2))#
+# Letter <- c(as.character(Letter$value), rep(c('T', 'L'), rflrlet/2))#
+#
+Delay <- c(round(runif(ntrials_blocks*.9, 24, 48)),rep(1, ntrials_blocks -ntrials_blocks*.9))#
+#
+VSA_df <- data.frame(Cue, Letter, Position,Delay, Congruency)#
+as.factor(VSA_df$Congruency)#
+#
+VSA_shuffle <- VSA_df[sample(nrow(VSA_df)),]#
+#
+VSA_run1 <- VSA_shuffle[1:75,]#
+VSA_run2 <- VSA_shuffle[76:150,]#
+write.csv(VSA_run1, 'run1.csv',row.names = FALSE)#
+write.csv(VSA_run2, 'run2.csv',row.names = FALSE)#
+#
+# Runs 3 and 4#
+#
+Position <- c(rep(6, rml*pccon), rep(-6,rml*pcinc), rep(-6,rml*pccon), rep(6,rml*pcinc))#
+Position <- c(rep(Position,rfl), Position[1:rflr])#
+#
+Delay <- c(round(runif(ntrials_blocks*.9, 24, 48)),rep(1, ntrials_blocks -ntrials_blocks*.9))#
+#
+VSA_df <- data.frame(Cue, Letter, Position,Delay, Congruency)#
+as.factor(VSA_df$Congruency)#
+#
+VSA_shuffle <- VSA_df[sample(nrow(VSA_df)),]#
+#
+VSA_run3 <- VSA_shuffle[1:75,]#
+VSA_run4 <- VSA_shuffle[76:150,]#
+write.csv(VSA_run3, 'run3.csv',row.names = FALSE)#
+write.csv(VSA_run4, 'run4.csv',row.names = FALSE)#
+VSA_run1_scon <- summary(VSA_run1[VSA_run3$Congruency == 0,])#
+VSA_run2_scon <- summary(VSA_run2[VSA_run3$Congruency == 0,])#
+VSA_run3_scon <- summary(VSA_run3[VSA_run3$Congruency == 0,])#
+VSA_run4_scon <- summary(VSA_run4[VSA_run3$Congruency == 0,])#
+#
+VSA_run1_sicon <- summary(VSA_run1[VSA_run3$Congruency == 1,])#
+VSA_run2_sicon <- summary(VSA_run2[VSA_run3$Congruency == 1,])#
+VSA_run3_sicon <- summary(VSA_run3[VSA_run3$Congruency == 1,])#
+VSA_run4_sicon <- summary(VSA_run4[VSA_run3$Congruency == 1,])
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/results/VSA/noa/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')#
+#
+data <- rbind(data1, data2, data3, data4)#
+#
+data <- data[data$response!=99,]#
+data$response <- toupper(data$response)#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency#
+#
+data$delay <- runs$Delay#
+#
+data <- data[data$delay!=1,]#
+data$congruency <- as.factor(data$congruency)#
+data$position <- runs$Position
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/results/VSA/noa/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')
+data <- rbind(data1, data2, data3, data4)
+data
+data <- data[data$response!=99,]
+data
+data$response <- toupper(data$response)
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/noa/"
+setwd(path)
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')
+runs = rbind(run1, run2, run3, run4)
+data$congruency <- runs$Congruency
+data$delay <- runs$Delay
+data <- data[data$delay!=1,]
+data$congruency <- as.factor(data$congruency)
+data$position <- runs$Position
+runs
+runs$Position
+dim(dqtq)
+dim(data)
+runs(data)
+runs = rbind(run1, run2, run3, run4)
+runs(data)
+dim(runs)
+dim(data1)
+dim(data2)
+dim(data3)
+dim(data4)
+data <- rbind(data1, data2, data3, data4)
+data
+data <- data[data$myEvent='T',]
+data <- data[data$myEvent=='T',]
+dim(dqtq)
+dim(data)
+data$response <- toupper(data$response)
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/noa/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency#
+#
+data$delay <- runs$Delay#
+#
+data <- data[data$delay!=1,]#
+data$congruency <- as.factor(data$congruency)#
+data$position <- runs$Position
+dim(data)
+data <- rbind(data1, data2, data3, data4)
+data <- data[data$myEvent=='T',]
+dim(data)
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/noa/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency
+data$delay <- runs$Delay
+data$congruency <- as.factor(data$congruency)
+data$position <- runs$Position
+data <- data[data$delay!=1,]
+data
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3#
+#
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}#
+data$RTdata_b <- RTdata_b#
+data <- data[!is.na(RTdata_b),]#
+#
+boxplot(data$rt ~ data$congruency)#
+#
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data_correct[data_correct$congruency ==0,5]#
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) #
+#
+ggsave(file="plot_data_noa.eps", plot= plot_data, width=6, height=6	 )
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3#
+#
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}#
+data$RTdata_b <- RTdata_b#
+data <- data[!is.na(RTdata_b),]#
+#
+boxplot(data$rt ~ data$congruency)#
+#
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data[data$congruency ==0,5]#
+rt_incongruent <- data[data$congruency ==1,5]#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) #
+#
+ggsave(file="plot_data_noa.eps", plot= plot_data, width=6, height=6	 )
+plot_data
+rt_congruent
+t.test(rt_congruent, rt_incongruent)
+data
+data_correct <- data[data$response ˜= data$position,]
+data_correct <- data[data$response != data$position,]
+data_correct
+dim(data_correct)
+data <- data_correct
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3#
+#
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}#
+data$RTdata_b <- RTdata_b#
+data <- data[!is.na(RTdata_b),]#
+#
+boxplot(data$rt ~ data$congruency)#
+#
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data[data$congruency ==0,5]#
+rt_incongruent <- data[data$congruency ==1,5]#
+#
+t.test(rt_congruent, rt_incongruent)#
+#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) #
+#
+ggsave(file="plot_data_noa.eps", plot= plot_data, width=6, height=6	 )
+plot_data
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme(axis.title.x = element_blank()) + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50))
+plot_data
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) + theme(axis.title.x = element_blank())
+plot_data
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) + theme(axis.title.x = element_blank()) + theme(text = element_text(size=20))
+plot_data
+ggsave(file="plot_data_noa.eps", plot= plot_data, width=6, height=6	 )
+t.test(rt_congruent, rt_incongruent)
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/results/VSA/karin/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')#
+#
+data <- rbind(data1, data2, data3, data4)#
+#
+data <- data[data$response!=99,]#
+data$response <- toupper(data$response)#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency#
+#
+data$delay <- runs$Delay#
+#
+data <- data[data$delay!=1,]#
+data$congruency <- as.factor(data$congruency)#
+data$position <- runs$Position#
+#
+data_correct <- data[data$response == data$position,]#
+data <- data_correct #
+#
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3#
+#
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}#
+data$RTdata_b <- RTdata_b#
+data <- data[!is.na(RTdata_b),]#
+#
+boxplot(data$rt ~ data$congruency)#
+#
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data_correct[data_correct$congruency ==0,5]#
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) + theme(axis.title.x = element_blank()) + theme(text = element_text(size=20))#
+#
+ggsave(file="plot_data_karin.eps", plot= plot_data, width=6, height=6	 )
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/results/VSA/karin/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')
+data <- rbind(data1, data2, data3, data4)
+data
+data <- data[data$response!=99,]
+data
+data$response <- toupper(data$response)
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin/"
+setwd(path)
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)
+data$congruency <- runs$Congruency
+data$delay <- runs$Delay
+data <- data[data$delay!=1,]
+data$congruency <- as.factor(data$congruency)#
+data$position <- runs$Position
+library(reshape)#
+library(ggplot2)#
+library(plyr)#
+### CLEAN WORKSPACE ####
+rm(list=ls())#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/results/VSA/karin/"#
+setwd(path)#
+#
+data1 <- read.csv('1_results.csv')#
+data2 <- read.csv('2_results.csv')#
+data3 <- read.csv('3_results.csv')#
+data4 <- read.csv('4_results.csv')#
+#
+data <- rbind(data1, data2, data3, data4)#
+#
+data <- data[data$response!=99,]#
+data$response <- toupper(data$response)#
+#
+path <- "/Users/pinheirochagas/Pedro/NeuroSpin/Experiments/Calc_MEG/experiment/stimuli/VSA/karin/"#
+setwd(path)#
+#
+run1 <- read.csv('run1.csv')#
+run2 <- read.csv('run2.csv')#
+run3 <- read.csv('run3.csv')#
+run4 <- read.csv('run4.csv')#
+#
+runs = rbind(run1, run2, run3, run4)#
+#
+data$congruency <- runs$Congruency#
+#
+data$delay <- runs$Delay#
+#
+data$congruency <- as.factor(data$congruency)#
+data$position <- runs$Position#
+data <- data[data$delay!=1,]
+data_correct <- data[data$response == data$position,]#
+data <- data_correct #
+#
+### Data trimmig reaction times#
+## REACTION TIMES#
+# Data trimming#
+# Defifing objects for the loops#
+RTdata_b <- c()#
+RTdata_trimmed <- c()#
+# Defifing data trimming factor #
+datatrimming_factor = 3#
+#
+#for(i in 1:dim(data)[1]){#
+	RTdata <- as.matrix(data$rt)#
+	#RTdata[data[[i]]$answer == 0] <- NA#
+	while (!identical(RTdata_b, RTdata)) {#
+		meanRT <- apply(RTdata, 2, mean, na.rm=T)#
+		sdRT <- apply(RTdata, 2, sd, na.rm=T)#
+		interval_high <- meanRT+datatrimming_factor*sdRT#
+		interval_low <- meanRT-datatrimming_factor*sdRT#
+		obj <- mapply(function(i){as.matrix(as.numeric(RTdata[,i] <= interval_high[i]), nrow=dim(RTdata)[1])}, 1:dim(RTdata)[2])#
+		RTdata[obj==0] <- NA#
+		RTdata_b <- RTdata#
+		}#
+#RTdata_trimmed[i] <- RTdata_b#
+#}#
+data$RTdata_b <- RTdata_b#
+data <- data[!is.na(RTdata_b),]#
+#
+boxplot(data$rt ~ data$congruency)#
+#
+by(data$rt, data$congruency, mean)#
+by(data$rt, data$congruency, sd)#
+#
+rt_congruent <- data_correct[data_correct$congruency ==0,5]#
+rt_incongruent <- data_correct[data_correct$congruency ==1,5]#
+# Plot w congruent and incongruent#
+mean_plot <- ddply(data, "congruency", summarise, rt = mean(rt))#
+mean_plot$congruency <- c('Valid', 'Invalid')#
+sd_plot <- ddply(data, "congruency", summarise, std = sd(rt))#
+n_obs <- c(length(which(data$congruency=='0')),length(which(data$congruency=='1')))#
+data_plot <- data.frame(cbind(mean_plot, sd_plot[,2], n_obs, sd_plot[,2]/sqrt(n_obs)))#
+colnames(data_plot) <-  c('Congruency','mean','sd','n', 'se')#
+#
+plot_data <- ggplot(data_plot, aes(x=Congruency, y=mean,fill=Congruency, width=.5)) + geom_bar(position ='identity' , stat='identity') + geom_errorbar(aes(ymin=mean-se,ymax=mean+se),position=position_dodge(.5),width=.01) + scale_fill_manual(values=c("grey", "grey")) + labs(y = "RT") + theme_bw() + theme(legend.position="none") + scale_y_continuous(limits=c(0,700),breaks=seq(0, 800, 50)) + theme(axis.title.x = element_blank()) + theme(text = element_text(size=20))#
+#
+ggsave(file="plot_data_karin.eps", plot= plot_data, width=6, height=6	 )
+plot_data
